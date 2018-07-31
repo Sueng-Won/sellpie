@@ -8,7 +8,7 @@
 <title>메인페이지</title>
 <style>
 	div{
-		border:1px solid lightgray;
+		border:1px solid gray;
 	}
 	.wrap{
 		width:1000px;
@@ -26,7 +26,6 @@
 	}
 	.left{
 		text-align:center;
-		padding-top:100px;
 	}
 	.center{
 		width:530px;
@@ -40,6 +39,13 @@
 		margin:10px;
 	}
 	
+	.boardForm{
+		width:500px;
+		height:120px;
+		margin-left:auto;
+		margin-right:auto;
+		margin:10px;
+	}
 </style>
 </head>
 <body>
@@ -47,14 +53,16 @@
 
 <div class="wrap">
 	<div class="left side">
-		<div class="img-div" style="height:200px;">프로필 이미지</div>
+		<div class="img-div" style="height:200px; margin-top:100px;">프로필 이미지</div>
 		<p>회원 이름</p>
 		<button>개인정보수정</button><br><br>
 		<button>친구리스트</button>
 	</div>
 	
 	<div class="center">
-		<div class=""></div>
+		<div class="boardForm">
+			게시물 작성 폼
+		</div>
 		<div class="boardOne">게시물영역</div>
 	</div>
 	
