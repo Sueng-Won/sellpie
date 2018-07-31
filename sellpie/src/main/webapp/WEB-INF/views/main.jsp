@@ -50,9 +50,11 @@
 		cursor:pointer;
 	}
 </style>
+<!-- header에 jquery-min 선언 되있음 -->
+<c:import url="header.jsp"/>
+
 </head>
 <body>
-<c:import url="header.jsp"/>
 
 <div class="wrap">
 	<div class="left side">
