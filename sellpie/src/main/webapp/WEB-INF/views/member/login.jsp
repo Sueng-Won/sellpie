@@ -76,7 +76,7 @@
                   </div>
                </div>
                <div class="gr27e">
-               <p class="izU2O">계정이 없으신가요? <a href="#">가입하기</a></p>
+               <p class="izU2O">계정이 없으신가요? <a href="memberJoin.do">가입하기</a></p>
                </div>
             </div>
          </article>

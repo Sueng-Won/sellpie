@@ -1,0 +1,124 @@
+@CHARSET "UTF-8";
+
+
+.nav {
+    background-color: #d10869;
+    overflow: hidden;
+    display: block;
+    -webkit-box-ordinal-group: 2;
+    order: 1;
+    padding: 0 5px;
+}
+
+
+ /* .V5UBK {
+    animation: GradientRotation 12s steps(120) infinite;
+    margin-left: -25%;
+    margin-top: -75%;
+    min-height: 150%;
+    min-width: 150%;
+    padding-bottom: 75%;
+    padding-top: 75%;
+}
+.navStyle {
+   background: radial-gradient(ellipse at 70% 70%,#5EFCE8 8%,#736EFE 42%,#736EFE 58%);
+    height: 100%;
+    pointer-events: none;
+    position: absolute;
+    width: 100%;
+    position: relative;
+}  */
+
+.navInner {
+    z-index: 1;
+}
+
+
+.titleSt{
+    background: 0 0;
+    box-sizing: border-box;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    padding: 11px 13px 11px 11px;
+    position: relative;
+    width: 100%;
+    -webkit-box-ordinal-group: 2;
+    order: 1;
+}
+
+
+.title {
+    -webkit-box-flex: 1;
+    flex: 1 1 200px;
+    -webkit-box-pack: center;
+    justify-content: center;
+    min-width: 1px;
+    padding-right: 11px;
+     padding-left: 4px;
+}
+.homeTitle {
+	font-size: 15px;
+    font-weight: 600;
+    line-height: 15px;
+    margin: 0 0 2px;
+    color: #fff;
+}
+.subTitle{
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 12px;
+    margin: 0;
+}
+
+.emailTitle{
+	height: 58px;
+    font-size: 48px;
+    font-weight: 200;
+    line-height: 1.21;
+    text-align: center;
+    color: #1f2629;
+    padding-top:100px;
+	padding-bottom:50px;
+} 
+.container{
+	 align-items: center;
+	 text-align:center;
+}
+.emailForm{
+    align-items: center;
+    padding-top:20px;
+	padding-bottom:20px;
+}
+.inputEmail {
+	width:400px;
+	padding: 12px 20px; 
+	margin: 8px 0; 
+	border: 1px solid #ccc; 
+	border-radius: 4px;
+	 box-sizing: border-box;
+	 padding-top:20px;
+	padding-bottom:20px;
+}
+.emailImg{
+	display:inline-block;
+    background-size: 410px 400px;
+    width: 200px;
+    height: 200px;
+    
+}
+img{
+	width:200px;
+	height:200px;
+}
+.buttonWrapper{
+	height: 58px;
+    font-size: 48px;
+    font-weight: 200;
+    line-height: 1.21;
+    text-align: center;
+    color: #1f2629;
+}
+
