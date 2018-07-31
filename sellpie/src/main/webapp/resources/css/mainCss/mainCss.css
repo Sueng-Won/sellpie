@@ -87,12 +87,12 @@ article{
 
 .yOZjD {
     align-self: center;
-    background-image: url(/resources/images/mainImg/mainPage.png); 
+    background-image: url(/sellpie/resources/images/mainImg/mainPage.png); 
     background-position: 0 0;
     background-size: 850px 618px;
     flex-basis: 850px;
     height: 618px;
-    margin-left: -35px;
+    margin-left: -35px; 
     margin-right: -15px;
     background-color: black;
 }
