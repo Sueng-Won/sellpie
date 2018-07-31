@@ -65,9 +65,7 @@
 	<div class="center">
 		<div class="boardForm">
 			<form>
-				<textarea rows="5" cols="72">
-					content
-				</textarea>
+				<textarea rows="5" cols="72" placeholder="게시물을 올려보세요."></textarea>
 				<div class="uploadImg">
 <!-- 					업로드한 이미지 표시 영역 사진 선택시 표시 하기 위함.-->
 				</div>
