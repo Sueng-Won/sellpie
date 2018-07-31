@@ -7,15 +7,14 @@
 <title></title>
 <style>
 	div{
-		border:1px solid gray;
+		border:1px solid lightgray;
 	}
 	.topbar{
-		width:1550px;
+		width:1250px;
 		height:50px;
-		text-align:center;
 	}
 	.topbar>div{
-		display:inline-block;
+		float:left;
 		height:45px;
 	}
 	.logo{

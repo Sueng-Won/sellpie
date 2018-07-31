@@ -54,6 +54,7 @@
 	</div>
 	
 	<div class="center">
+		<div class=""></div>
 		<div class="boardOne">게시물영역</div>
 	</div>
 	
