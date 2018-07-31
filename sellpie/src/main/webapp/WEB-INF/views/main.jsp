@@ -70,9 +70,9 @@
 <!-- 					업로드한 이미지 표시 영역 사진 선택시 표시 하기 위함.-->
 				</div>
 				<div class="fileLInk">
-					<img src="resources/image/picture.JPG" width="30" height="30" onclick="pictureFile.click()"/>
+					<img src="resources/images/picture.JPG" width="30" height="30" onclick="pictureFile.click()"/>
 					<input type="file" name="pictureFile" id="inputFile" onchange="fileUpload();" accept="image/*" hidden/>
-					<img src="resources/image/video.JPG" width="30" height="30" onclick="videoFile.click()"/>
+					<img src="resources/images/video.JPG" width="30" height="30" onclick="videoFile.click()"/>
 					<input type="file" name="videoFile" id="inputFile" onchange="fileUpload();" accept="video/*" hidden/>
 				</div>
 			</form>
