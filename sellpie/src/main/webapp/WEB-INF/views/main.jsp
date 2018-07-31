@@ -46,7 +46,7 @@
 		margin-right:auto;
 		margin:10px;
 	}
-	.fileLInk{
+	.fileLInk>img{
 		cursor:pointer;
 	}
 </style>
