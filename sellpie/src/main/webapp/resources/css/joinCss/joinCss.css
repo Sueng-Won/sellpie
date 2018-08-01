@@ -73,14 +73,17 @@
     padding-top:20px;
 	padding-bottom:20px;
 }
+.buttonNext{
+	width:30px;
+}
 .inputEmail {
 	width:400px;
 	padding: 12px 20px; 
 	margin: 8px 0; 
-	border: 1px solid #ccc; 
+	border: 2px solid #ccc; 
 	border-radius: 4px;
-	 box-sizing: border-box;
-	 padding-top:20px;
+	box-sizing: border-box;
+	padding-top:20px;
 	padding-bottom:20px;
 }
 .emailImg{
@@ -91,8 +94,8 @@
     
 }
 img{
-	width:200px;
-	height:200px;
+	width:100px;
+	height:100px;
 }
 .buttonWrapper{
 	height: 58px;
