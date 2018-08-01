@@ -1,8 +1,8 @@
------------ï¿½ï¿½ï¿½ï¿½Ú»ï¿½ï¿½ï¿½(SYSTEM)---------------
+-----------»ç¿ëÀÚ»ý¼º(SYSTEM)---------------
 CREATE USER SELLPIE IDENTIFIED BY SELLPIE;
 GRANT CONNECT, RESOURCE TO SELLPIE;
 
------------ï¿½ï¿½ï¿½Ìºï¿½ï¿½ï¿½ï¿½(SELLPIE)--------------
+-----------Å×ÀÌºí»ý¼º(SELLPIE)--------------
 CREATE TABLE MEMBER(
 EMAIL VARCHAR2(30) PRIMARY KEY,
 PWD VARCHAR2(30),
@@ -78,6 +78,7 @@ REASON VARCHAR2(4000)
 
 CREATE TABLE PRODUCT(
 PNO NUMBER PRIMARY KEY,
+SNO NUMBER,
 PNAME VARCHAR2(100),
 SELTAG VARCHAR2(100),
 RNOLIST VARCHAR2(4000),
@@ -117,7 +118,7 @@ PNO NUMBER,
 ISDEC CHAR(1) CHECK(ISDEC IN ('Y','N'))
 );
 
----------ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½---------------
+---------½ÃÄö½º»ý¼º---------------
 
 CREATE SEQUENCE SEQ_QNA_QNA_NO
 INCREMENT BY 1
