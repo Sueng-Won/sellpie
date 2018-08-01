@@ -1,6 +1,5 @@
 @CHARSET "UTF-8";
 
-
 .nav {
     background-color: #d10869;
     overflow: hidden;
@@ -78,6 +77,16 @@
 }
 .inputEmail {
 	width:400px;
+	padding: 12px 20px; 
+	margin: 8px 0; 
+	border: 2px solid #ccc; 
+	border-radius: 4px;
+	box-sizing: border-box;
+	padding-top:20px;
+	padding-bottom:20px;
+}
+.auNum{
+	width:100px;
 	padding: 12px 20px; 
 	margin: 8px 0; 
 	border: 2px solid #ccc; 
