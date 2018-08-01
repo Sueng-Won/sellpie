@@ -28,10 +28,11 @@
     		<input type="text" class="inputEmail" placeholder="이메일을 입력해주세요 (vingle@vingle.net)" value="">
    		</div>
     	<div class="buttonWrapper">
-    		<button type="submit" class="buttonNext" disabled="" style="background-color: rgba(0, 0, 0, 0);">인증번호 발송</button>
+    		<button type="submit" class="buttonNext">인증번호 발송</button>
     	</div>
     </form>
     </div>
     </div>
+    <button class="test">Hover me !</button>
 </body>
 </html>
