@@ -1,8 +1,8 @@
------------»ç¿ëÀÚ»ý¼º(SYSTEM)---------------
+-----------ï¿½ï¿½ï¿½ï¿½Ú»ï¿½ï¿½ï¿½(SYSTEM)---------------
 CREATE USER SELLPIE IDENTIFIED BY SELLPIE;
 GRANT CONNECT, RESOURCE TO SELLPIE;
 
------------Å×ÀÌºí»ý¼º(SELLPIE)--------------
+-----------ï¿½ï¿½ï¿½Ìºï¿½ï¿½ï¿½ï¿½(SELLPIE)--------------
 CREATE TABLE MEMBER(
 EMAIL VARCHAR2(30) PRIMARY KEY,
 PWD VARCHAR2(30),
@@ -44,7 +44,6 @@ BCONTENT VARCHAR2(4000),
 GCOUNT NUMBER,
 LATITUDE FLOAT,
 LONGITUDE FLOAT,
-BCOMMENT VARCHAR2(4000),
 ISAD CHAR(1) CHECK(ISAD IN ('Y','N')),
 DELFLAG CHAR(1) CHECK(DELFLAG IN ('Y','N'))
 );
@@ -119,7 +118,7 @@ PNO NUMBER,
 ISDEC CHAR(1) CHECK(ISDEC IN ('Y','N'))
 );
 
----------½ÃÄö½º»ý¼º---------------
+---------ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½---------------
 
 CREATE SEQUENCE SEQ_QNA_QNA_NO
 INCREMENT BY 1
