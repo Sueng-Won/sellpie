@@ -18,18 +18,31 @@
 	}
 	.wrap>div{
 		float:left;
-		height:890px; 
+		height:auto;
+		background:white;
 	}
 	.side{
 		width:269px;
 		margin:5px;
+		padding:30px;
+		padding-top:65px;
+		position:fixed;
+		top:75px;
 	}
 	.left{
 		text-align:center;
+		left:130px;
+	}
+	
+	.right{
+		text-align:center;
+		left:1170px;
 	}
 	.center{
 		width:620px;
 		margin:10px;
+		position:relative;
+		left:280px;
 	}
 	.boardOne{
 		width:600px;
@@ -59,6 +72,7 @@
 		width:50px;
 		height:30px;
 	}
+	
 </style>
 <!-- header에 jquery-min 선언 되있음 -->
 <c:import url="header.jsp"/>
@@ -126,7 +140,7 @@
 <body>
 
 <div class="wrap">
-	<div class="left side">
+	<div class="left side" style="height:600px;">
 		<c:import url="sideLeft.jsp"/>
 	</div>
 	
@@ -162,11 +176,11 @@
 			<div class="boardOne rounded">
 
 		</div>
-</div>
 	</div>
+</div>
 	
-	<div class="right side">
-		
+	<div class="right side" style="height:600px;">
+		<c:import url="sideRight.jsp"/>
 	</div>
 	
 
