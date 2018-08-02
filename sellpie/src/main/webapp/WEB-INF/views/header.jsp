@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset=UTF-8">
+<meta charset="UTF-8">
 <title></title>
 <script src="resources/js/jquery-3.3.1.min.js"></script>
 <style>
