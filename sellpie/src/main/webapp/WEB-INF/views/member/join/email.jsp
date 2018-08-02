@@ -17,6 +17,26 @@
 	padding-top:20px;
 	padding-bottom:20px;
 }
+.wrap-loading{
+
+    position: fixed;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+    background-color: #5B6D75;
+}
+ .wrap-loading div{
+        position: fixed;
+        top:50%;
+        left:50%;
+        margin-left: -21px;
+        margin-top: -21px;
+ }
+.display-none{
+	
+	display:none;
+}
 </style>
 <script src="resources/js/jquery-3.3.1.min.js"></script>
 <script>
@@ -42,6 +62,7 @@
 		});
 		$(".test").hide();
 		$(".buttonNext1").click(function(){
+			// ㄹ로딩 화면?
 				$.ajax({
 					url : "checkEmail.do",
 					data : {email : $("#inputEmail").val()},
@@ -69,6 +90,12 @@
 							
 						}
 					},
+					beforeSend:function(){
+						$('.wrap-loading').removeClass('display-none');
+				    },
+				    complete:function(){
+				    	 $('.wrap-loading').addClass('display-none');
+				    },
 					error:function(e){
 						console.log(e);
 					}
@@ -101,6 +128,9 @@
 </script>
 </head>
 <body>
+	<div class="wrap-loading display-none">
+		 <div><img src="resources/images/join/loading2.gif" /></div>
+	</div>
 	<div class="joinWrapper">
 		<div class="nav">
        	  <div class="navStyle V5UBK"></div>
