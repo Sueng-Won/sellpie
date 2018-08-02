@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -70,6 +71,14 @@ public class MemberController {
 		}
 		
 		return member;
+	}
+	@RequestMapping("getPwd.do")
+	public String getPwd(){
+		return "member/join/pwd";
+	}
+	@RequestMapping("getName.do")
+	public String getName(){
+		return "member/join/test";
 	}
 	//이메일 보내기 메소드..
 	
