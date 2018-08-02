@@ -2,6 +2,7 @@ package com.teamnameled.sellpie.common;
 
 import java.util.Random;
 
+
 public class TempKey {
 
     private boolean lowerCheck;
