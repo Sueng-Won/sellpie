@@ -91,9 +91,12 @@
 					$(".buttonNext2").prop("disabled", false);
 			 }
 		});
+		$(document).on("click",".buttonNext2", function(){
+			//이메일 로 확인하고 누를경우 다음페이지로~
+		});
 	});
 	function sendEmail(email){
-		
+		//??
 	}
 </script>
 </head>
