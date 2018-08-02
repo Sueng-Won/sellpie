@@ -53,7 +53,7 @@
     margin: 0;
 }
 
-.emailTitle{
+.formTitle{
 	height: 58px;
     font-size: 48px;
     font-weight: 200;
@@ -67,7 +67,7 @@
 	 align-items: center;
 	 text-align:center;
 }
-.emailForm{
+.inputForm{
     align-items: center;
     padding-top:20px;
 	padding-bottom:20px;
@@ -75,7 +75,7 @@
 .buttonNext{
 	width:30px;
 }
-.inputEmail {
+.inputSt {
 	width:400px;
 	padding: 12px 20px; 
 	margin: 8px 0; 
@@ -150,4 +150,40 @@ img{
 .test:hover:before, .test:hover:after{
   width:100%;
   transition:800ms ease all;
+}
+
+.auNum{
+	width:200px;
+	padding: 12px 20px; 
+	margin: 8px 0; 
+	border: 2px solid #ccc; 
+	border-radius: 4px;
+	box-sizing: border-box;
+	padding-top:20px;
+	padding-bottom:20px;
+}
+
+.wrap-loading{
+
+  width: 100%;  
+ height: 100%;  
+ top: 0px;
+ left: 0px;
+ position: fixed;  
+ display: block;  
+ opacity: 0.7;  
+ background-color: #fff;  
+ z-index: 99;  
+ text-align: center;
+}
+ .wrap-loading div{
+        position: fixed;
+        top:50%;
+        left:50%;
+        margin-left: -21px;
+        margin-top: -21px;
+ }
+.display-none{
+	
+	display:none;
 }

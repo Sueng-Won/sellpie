@@ -6,39 +6,27 @@
 <link href="resources/css/joinCss/joinCss.css" rel="stylesheet" type="text/css">
 <meta charset="UTF-8">
 <title>회원가입-이메일</title>
+<script src="resources/js/jquery-3.3.1.min.js"></script>
 <style>
-	.auNum{
-	width:200px;
-	padding: 12px 20px; 
-	margin: 8px 0; 
-	border: 2px solid #ccc; 
-	border-radius: 4px;
-	box-sizing: border-box;
-	padding-top:20px;
-	padding-bottom:20px;
-}
 .wrap-loading{
 
-    position: fixed;
-    left:0;
-    right:0;
-    top:0;
-    bottom:0;
-    background-color: #5B6D75;
+  width: 100%;  
+ height: 100%;  
+ top: 0px;
+ left: 0px;
+ position: fixed;  
+ display: block;  
+ opacity: 0.7;  
+ background-color: #fff;  
+ z-index: 99;  
+ text-align: center;
+
 }
- .wrap-loading div{
-        position: fixed;
-        top:50%;
-        left:50%;
-        margin-left: -21px;
-        margin-top: -21px;
- }
 .display-none{
 	
 	display:none;
 }
 </style>
-<script src="resources/js/jquery-3.3.1.min.js"></script>
 <script>
 	$(function(){
 		$("#inputEmail").keyup(function(){
@@ -119,7 +107,9 @@
 			 }
 		});
 		$(document).on("click",".buttonNext2", function(){
-			//이메일 로 확인하고 누를경우 다음페이지로~
+			//이메일 로 확인하고 누를경우 다음페이지로~인증번호 확인 구현 안했음
+			location.href="/sellpie/getPwd.do";
+			
 		});
 	});
 	function sendEmail(email){
@@ -143,12 +133,12 @@
          	   </a>
         	 </div>
       	</div>
-    <div class="emailTitle">이메일로 회원가입</div>
+    <div class="formTitle">이메일로 회원가입</div>
     <div class="container">
     <img src="resources/images/mainImg/sample9.png" />
-    <form class="emailForm">
+    <form class="inputForm">
     	<div class="emailWrapper">
-    		<input type="text" id="inputEmail" class="inputEmail" placeholder="이메일을 입력해주세요 (sellpie@sellpie.net)" value="">
+    		<input type="text" id="inputEmail" class="inputSt" placeholder="이메일을 입력해주세요 (sellpie@sellpie.net)" value="">
     		<button type="button" class="buttonNext1" disabled>></button>
     		<div id="confirm"></div>
    		</div>
