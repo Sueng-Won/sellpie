@@ -76,7 +76,11 @@ public class MemberController {
 	}
 	@RequestMapping("getName.do")
 	public String getName(){
-		return "member/join/test";
+		return "member/join/name";
+	}
+	@RequestMapping("getGender.do")
+	public String getGender(){
+		return "member/join/gender";
 	}
 	//이메일 보내기 메소드..
 	

@@ -30,9 +30,11 @@
 		});
 		$(".buttonNext1").click(function(){
 			$(".joinWrapper").remove();
-			var $p = $("<p>아이고..</p>")
-			$("body").append($p);
-			
+			var $h1 = $("<h1>아이고..</h1>");
+			var $h4 = $("<h4>간단한 정보 부탁드려요~</h4>");
+			$("body").append($h1);
+			$("body").append($h4);
+			 setTimeout(function(){ location.href="/sellpie/getGender.do" }, 3000);
 		});
 		
 	});

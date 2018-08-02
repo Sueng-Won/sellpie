@@ -6,7 +6,6 @@
 <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.7.1/less.min.js" ></script> <!-- CSS Less cdn -->
 <style>
 body {
   width: 100%;
@@ -162,6 +161,9 @@ body {
 
 // You can define a value and calculate the other if you want change speed or the number of lines
 </style>
+<link rel="stylesheet/less" type="text/css" href="style.less">
+ <!-- CSS Less cdn -->
+<script src="resources/less/less-1.3.1.min.js" type="text/javascript" ></script>
 </head>
 <body>
 	<div class="content">
