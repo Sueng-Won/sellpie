@@ -48,7 +48,7 @@ public class MemberController {
 		Member member =  memberService.checkEmail(email);
 		
 		if(null==member){
-			String setfrom = "btod88@gmail.com";         
+			String setfrom = "whattoday2018@gmail.com";         
 		    String tomail  = email;    // 받는 사람 이메일
 		    String title   = "#Sellpie 인증 메일입니다.";      // 제목
 		    String content = "인증번호는1234입니다.";    // 내용
