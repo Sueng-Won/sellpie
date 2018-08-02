@@ -14,11 +14,12 @@
 	border: 3px solid black;
 	height: 36px;
 }
+
 </style>
 <link href="resources/css/bootstrap-4.0.0.css" rel="stylesheet" type="text/css">
 </head>
 
-<body style="padding-top: 70px">
+<body style="padding-top: 70px; background:lightgray;">
 <nav class="navbar fixed-top navbar-expand-xs navbar-light bg-warning">
 	<div style="margin-left: 35px;">
 		<a class="navbar-brand" href="#"><em><strong style="font-size: 30px;">Sellfie</strong></em></a>
