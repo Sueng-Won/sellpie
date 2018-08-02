@@ -27,6 +27,7 @@
 	<mappers>
 		<!-- <mapper resource="mybatis/sql/member-mapper.xml"/>
 		<mapper resource="mybatis/sql/notice-mapper.xml"/> -->
+		<mapper resource="mybatis/sql/boardMapper.xml"/>
 	</mappers>
 
 </configuration>

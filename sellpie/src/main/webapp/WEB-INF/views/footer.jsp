@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset=UTF-8">
 <title></title>
 </head>
 <body>
-<div style="background:lightgray; height:250px;">
+<div style="background:lightgray; height:250px;;">
 	footer영역
 </div>
 </body>
