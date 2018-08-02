@@ -7,7 +7,7 @@
 <title></title>
 </head>
 <body>
-<div style="background:lightgray; height:250px;">
+<div style="background:lightgray; height:250px;;">
 	footer영역
 </div>
 </body>
