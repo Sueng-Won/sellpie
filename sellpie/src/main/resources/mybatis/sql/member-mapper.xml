@@ -13,6 +13,9 @@
 		FROM MEMBER
 		WHERE EMAIL = #{email}
 	</select>
+	<insert id="insertMember">
+		INSERT INTO MEMBER VALUES(#{email},#{pwd},#{name},#{gender},#{phone},#{birth}, NULL)
+	</insert>
 </mapper>
 
 

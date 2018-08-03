@@ -29,9 +29,13 @@
 </style>
 <script src="resources/js/jquery-3.3.1.min.js"></script>
 <script>
-	$(function(){
+	function getGender(type){
+		sessionStorage.setItem("gender", type);
+		console.log(sessionStorage);
+		console.log(sessionStorage.getItem("gender")); 
+		location.href="/sellpie/getPhone.do";
 		
-	});
+	}
 	</script>
 </head>
 <body>
@@ -39,10 +43,11 @@
     <div class="formTitle">성별을 선택해주세요</div>
     <div class="container">
     <img src="resources/images/mainImg/sample9.png" />
-    <form class="inputForm">
+    <form class="inputForm" action="getPhone.do" method="get">
     	<div class="pwdWrapper">
-    		<p class="gender_m" >남</p>
-    		<p class="gender_f">여</p>
+    		<input type="hidden" name="gender" id="gender"/>
+    		<p class="gender_m" onclick="getGender('M')" >남</p>
+    		<p class="gender_f" onclick="getGender('F')">여</p>
     		<div id="confirm"></div>
    		</div>
     </form>

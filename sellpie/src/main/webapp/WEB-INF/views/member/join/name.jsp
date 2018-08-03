@@ -29,6 +29,9 @@
 			 
 		});
 		$(".buttonNext1").click(function(){
+			sessionStorage.setItem("name", $("#inputName").val());
+			console.log(sessionStorage);
+			console.log(sessionStorage.getItem("name")); 
 			$(".joinWrapper").remove();
 			var $h1 = $("<h1>아이고..</h1>");
 			var $h4 = $("<h4>간단한 정보 부탁드려요~</h4>");

@@ -3,6 +3,7 @@ package com.teamnameled.sellpie.member.controller;
 
 import javax.mail.internet.MimeMessage;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -81,6 +82,22 @@ public class MemberController {
 	@RequestMapping("getGender.do")
 	public String getGender(){
 		return "member/join/gender";
+	}
+	@RequestMapping("getPhone.do")
+	public String getPhone(){
+		return "member/join/phone";
+	}
+	@RequestMapping("birth.do")
+	public String getBirth(){
+		return "member/join/birth";
+	}
+
+	@RequestMapping("signUp.do")
+	public String memberJoin(Member member){
+		
+		int result =  memberService.insertMember(member);
+		System.out.println(member);
+		return "redirect:main.do";
 	}
 	//이메일 보내기 메소드..
 	
