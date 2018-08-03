@@ -37,13 +37,49 @@
 			var $h4 = $("<h4>간단한 정보 부탁드려요~</h4>");
 			$("body").append($h1);
 			$("body").append($h4);
-			 setTimeout(function(){ location.href="/sellpie/getGender.do" }, 3000);
+			var contentDiv = $("<div class='content'>");
+			var welcomeTextDiv = $("<div class='welcomeText'>");
+			var welcomeDiv = $("<div class='welcome'>");
+			var greetH1 = $("<h1 class='greet'>");
+			greetH1.text("반갑습니다!");
+			var subTextDiv = $("<div class='subText'>");
+			var subTextsDiv = $("<div class='subTexts'>");
+			var p1 = $("<p class='inform'>");
+			var p2 = $("<p class='user'>");
+			p1.text("간단한 정보입력 부탁드려요");
+			p2.text("반가워요"+console.log(sessionStorage.getItem("name"))+"님" );
+			
+			welcomeDiv.append(greetH1);
+			welcomeTextDiv.append(welcomeDiv);
+			subTextsDiv.append(p1);
+			subTextsDiv.append(p2);
+			subTextDiv.append(subTextsDiv);
+			welcomeDiv.append(subTextDiv);
+			contentDiv.append(welcomeTextDiv);
+			$("body").append(welcomeTextDiv);
+			
+			
+			
+			 /* setTimeout(function(){ location.href="/sellpie/getGender.do" }, 3000); */
 		});
 		
 	});
 	</script>
 </head>
 <body>
+<div class="content">
+			  <div class="welcomeText">
+			    <div class="welcome">
+			      <h1 class="greet">WELCOME</h1>
+			    </div>
+			    <div class="subText">
+			      <div class="subTexts">
+			        <p class="inform">Subscribe to our newsletter</p>
+			        <p class="soon">We are launching soon</p>
+			       </div>
+			    </div>
+			  </div>
+			</div>
 	<div class="joinWrapper">
 		<div class="nav">
        	  <div class="navStyle V5UBK"></div>
@@ -68,5 +104,6 @@
     </form>
     </div>
     </div>
+    
 </body>
 </html>
