@@ -21,20 +21,16 @@
 <body>
 <div class="profileBar">
 	<div class="text-center">
-	  <img src="resources/images/mrlee.jpg" class="rounded-circle img-fluid" alt="Placeholder image" style="width:200px; height:200px;">
+	  <img src="resources/images/mrlee.jpg" class="rounded-circle img-fluid" alt="Placeholder image" style="width:180px; height:180px;">
 	</div>
 	<div class="text-center">
 <strong>memberName</strong>
 	</div>
 	<br>
 	<div class="text-center">
-		  <button type="button" class="btn btn-light">Light Button</button>
-	</div>
-	<div class="text-center">
-		<button type="button" class="btn btn-light">Light Button</button>
-	</div>
-	<div class="text-center">
-	  <button type="button" class="btn btn-light">Light Button</button>
+	   <button type="button" class="btn btn-light">개인정보수정</button><br><br>
+	   <button type="button" class="btn btn-light">친구리스트</button><br><br>
+	   <button type="button" class="btn btn-light">주문 현황</button>
 	</div>
 </div>
 </body>

@@ -16,6 +16,7 @@
 	<typeAliases>
 		<!-- <typeAlias type="com.kh.firstSpring.member.model.vo.Member" alias="Member"/>
 		<typeAlias type="com.kh.firstSpring.notice.model.vo.Notice" alias="Notice" /> -->
+		<typeAlias type="com.teamnameled.sellpie.board.model.vo.BoardVo" alias="Board" />
 	</typeAliases>
 	
 	
@@ -27,6 +28,7 @@
 	<mappers>
 		<!-- <mapper resource="mybatis/sql/member-mapper.xml"/>
 		<mapper resource="mybatis/sql/notice-mapper.xml"/> -->
+		<mapper resource="mybatis/sql/boardMapper.xml"/>
 	</mappers>
 
 </configuration>

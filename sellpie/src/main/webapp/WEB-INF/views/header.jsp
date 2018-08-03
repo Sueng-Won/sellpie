@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page session="false" %>
 <html>
 <head>
@@ -16,10 +17,23 @@
 }
 
 </style>
+
 <link href="resources/css/bootstrap-4.0.0.css" rel="stylesheet" type="text/css">
+<script src="resources/js/jquery-3.3.1.min.js"></script>
+<script src="resources/js/popper.min.js"></script>
+<script src="resources/js/bootstrap-4.0.0.js"></script>
+<script>
+$(function(){
+	var msg = "<c:out value='${msg }'/>";
+	if(msg.length!=0 && msg!=""){
+		alert(msg);
+	}
+});
+</script>
 </head>
 
 <body style="padding-top: 70px; background:lightgray;">
+
 <nav class="navbar fixed-top navbar-expand-xs navbar-light bg-warning">
 	<div style="margin-left: 35px;">
 		<a class="navbar-brand" href="#"><em><strong style="font-size: 30px;">Sellfie</strong></em></a>
@@ -34,8 +48,6 @@
 	</nav>
 	<div></div><div></div>
 </nav>
-<script src="resources/js/jquery-3.3.1.min.js"></script>
-<script src="resources/js/popper.min.js"></script>
-<script src="resources/js/bootstrap-4.0.0.js"></script>
+
 </body>
 </html>
