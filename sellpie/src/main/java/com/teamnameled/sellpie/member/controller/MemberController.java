@@ -9,6 +9,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.teamnameled.sellpie.member.model.service.MemberService;
@@ -87,17 +88,22 @@ public class MemberController {
 	public String getPhone(){
 		return "member/join/phone";
 	}
-	@RequestMapping("birth.do")
+	@RequestMapping("getBirth.do")
 	public String getBirth(){
 		return "member/join/birth";
 	}
 
-	@RequestMapping("signUp.do")
+	@RequestMapping(value = "signUp.do", method = RequestMethod.POST)
 	public String memberJoin(Member member){
 		
 		int result =  memberService.insertMember(member);
 		System.out.println(member);
 		return "redirect:main.do";
+	}
+	//테스트
+	@RequestMapping("test.do")
+	public String test(){
+		return "member/join/test";
 	}
 	//이메일 보내기 메소드..
 	
