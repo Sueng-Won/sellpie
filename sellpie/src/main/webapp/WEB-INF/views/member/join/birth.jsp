@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE>
 <html>
 <head>
@@ -455,6 +456,9 @@
 </style>
 <script>
 	$(function(){
+		<c:if test="${not empty sessionScope.user}">
+		 location.href="/sellpie/main.do";
+		</c:if>
 		$(".birth__birthInput__syT").keyup(function(){
 			var regExp = /^(?:[0-9]{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[1,2][0-9]|3[0,1]))/;
 			var birth = $(this).val();

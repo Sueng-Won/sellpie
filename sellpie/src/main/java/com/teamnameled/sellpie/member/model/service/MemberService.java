@@ -30,6 +30,7 @@ public class MemberService {
 		String userEncPassword = null;
 		String email = member.getEmail();
 		Member result = dao.selectByEmail(email);
+		System.out.println(result);
 		
 		if(null!=result){
 			userEncPassword = result.getPwd();			
