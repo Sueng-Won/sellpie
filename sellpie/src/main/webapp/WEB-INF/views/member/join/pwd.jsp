@@ -25,10 +25,14 @@
 				 $("confirm").css("font-color","red");
 					$("#confirm").text("멋지네요!");
 					$(".buttonNext1").prop("disabled", false);
+					
 			 }
 			 
 		});
 		$(".buttonNext1").click(function(){
+			sessionStorage.setItem("pwd", $("#inputPwd").val());
+			console.log(sessionStorage);
+			console.log(sessionStorage.getItem("pwd")); 
 			location.href="/sellpie/getName.do";
 		});
 		
