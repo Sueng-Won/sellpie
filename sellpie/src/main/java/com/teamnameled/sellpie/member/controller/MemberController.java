@@ -2,7 +2,7 @@ package com.teamnameled.sellpie.member.controller;
 
 
 import javax.mail.internet.MimeMessage;
-
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -38,13 +38,6 @@ public class MemberController {
 	}
 	@RequestMapping("checkEmail.do")
 	public @ResponseBody Member checkEmail(String email){
-//		@RequestMapping(value="idCheck.do", produces="application/text; charset=utf-8")
-//		public @ResponseBody String checkMemberId(String userId){
-//			MemberVo member = new MemberVo();
-//			member.setUserId(userId);
-//			member = memberService.selectMember(member);
-//			return member==null?"사용가능합니다.":"중복아이디입니다.";
-//		}
 		//이메일 조건으로 회원정보 검색하기
 		Member member =  memberService.checkEmail(email);
 		
@@ -105,7 +98,25 @@ public class MemberController {
 	public String test(){
 		return "member/join/test";
 	}
-	//이메일 보내기 메소드..
+	//signIn 테스트
+	@RequestMapping("signIn.do")
+	public String signIn(){
+		return "signIn/signIn";
+	}
+	//로그인하기
+	@RequestMapping(value="userLogin.do", method= RequestMethod.POST)
+	public @ResponseBody String loginUser(Member member, HttpSession session){
+		String url = "";
+		Member user = memberService.userLogin(member);
+		
+		if(null!=user){
+			session.setAttribute("user", user);
+			return "redirect:main.do";
+		}else{
+			url="re";
+		}
+		return "redirect:main.do";
+	}
 	
 	
 }
