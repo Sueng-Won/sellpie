@@ -33,15 +33,15 @@
    .left{
       text-align:center;
       left:70px;
-      top:68px;
+      top:40px;
       background:rgba(0, 0, 0, 0.5);
    }
    
    .right{
       text-align:center;
-      left:910px;
-      top:84px;
-      position:absolute;
+      left: 317px;
+   	  top: 17px;
+      position:relative;
       width:240px;
       margin:5px;
       padding:30px;
@@ -230,22 +230,37 @@
 </style>
 <!-- header에 jquery-min 선언 되있음 -->
 <!-- 게시물 클릭시 상세보기창 뜨는 메소드 -->
-<script>
-$(function(){
-	$("#detailContent").click(function(){
-		var maskHeight = $(document).height();  
-	    var maskWidth = $(window).width(); 
-	    console.log("width: "+maskWidth+", height: "+maskHeight);
-	    var wrapDiv = $("<div>").css({"position":"fixed","left":"0px","top":"0px","z-index":"5"});
-	    wrapDiv.css({"background":"rgba(0, 0, 0, 0.5)", "width":maskHeight, "height":maskWidth });
-	    var contentDiv = $("div").css({"display":"inline-block","background":"white","width":"400px", "height":"430px"});
-	    var infoDiv = $("div").css({"display":"inline-block","background":"white","width":"300px", "height":"430px"});
-// 	    wrapDiv.append(contentDiv);
-// 	    wrapDiv.append(infoDiv);
-	    wrapDiv.show();
-	})
-});
-</script>
+<style>
+.white_content {
+    position: fixed;
+    z-index:3;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.7);
+    opacity:0;
+    -webkit-transition: opacity 400ms ease-in;
+    -moz-transition: opacity 400ms ease-in;
+    transition: opacity 400ms ease-in;
+    pointer-events: none;
+}
+.white_content:target {
+    opacity:1;
+    pointer-events: auto;
+}
+.white_content > div {
+	position: absolute;
+	top: 25%;
+	left: 25%;
+	width: 630px;
+	height: 400px;
+	padding: 16px;
+	border: 16px solid orange;
+	background-color: white;
+	overflow: auto;	
+}
+</style>
 
 
 <script>
@@ -392,6 +407,18 @@ function fileUpload(inputFiles, condition){
          </div>
          
          <div class="boardList">
+<!--          	// 상세보기 창(1개만 존재, hidden) -->
+         	<div class="white_content" id="open">
+         		<div>
+         			<div style="text-align:right;">
+    					<a href="#close">
+    						<img src="resources/images/closeBtn.png" class="rounded-circle img-fluid" alt="Placeholder image" width="20" height="20">
+    					</a>
+    				</div>
+			        <div class="d-inline-block" style="width:60%; height:90%; border-right:1px solid lightgray;"></div>
+					<div class="d-inline-block" style="width:39%; height:90%;"></div>
+				</div>
+		    </div>
       <div class="boardOne rounded background-white">
 			<div class="bInfo padding-15 border-b">
 				<img src="resources/images/mrlee.jpg" class="rounded-circle img-fluid" alt="Placeholder image" style="width:45px; height:45px;">
@@ -405,7 +432,8 @@ function fileUpload(inputFiles, condition){
 			엔터값 br태그로 바꿔서 DB에 저장하기
 			<br><br>
 			~~~
-			<div id="detailContent"><u>더보기</u></div>
+			<div id="detailContent"><a href="#open" style="decoration:none;">더보기</a></div>
+			
 			</div>
 			<div class="bBtndiv border-t border-b">
 			  	<div class="d-inline-block padding-15">
@@ -455,7 +483,7 @@ function fileUpload(inputFiles, condition){
 			</div>
       </div>
       <div class="boardOne rounded background-white">
-
+<div id="detailContent"><a href="#open" style="decoration:none;">더보기</a></div>
       </div>
          <div class="boardOne rounded background-white">
 
