@@ -26,13 +26,12 @@ public class BoardController {
 	@RequestMapping("insertBoard.do")
 	public String insertBoard(MultipartHttpServletRequest multipartHttpServletRequest, BoardVo board){
 		Date today = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("YYYYMMDDhhmmss");
-		sdf.format(today);
-		
-		String email = board.getEmail();
-		
-		//파일경로
-		String filePath ="C:\\Upload\\"+email+"\\"+today;
+	      SimpleDateFormat sdf = new SimpleDateFormat("yyMMddHHmmssZ");
+	      System.out.println("format : "+sdf.format(today));
+	      String email = board.getEmail();
+	      
+	      //파일경로
+	      String filePath ="C:\\Upload\\"+email+"\\"+sdf.format(today).toString();
 		//파일들을 List형식으로 보관
 		List<MultipartFile> files = multipartHttpServletRequest.getFiles("file");
 		
