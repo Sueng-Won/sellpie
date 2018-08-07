@@ -25,14 +25,8 @@
 	    미처 완성되지 못한 Mapper를 등록할 경우
 	    에러가 발생한다. -->
 	<mappers>
-<<<<<<< HEAD
-		<!-- <mapper resource="mybatis/sql/member-mapper.xml"/>
-		<mapper resource="mybatis/sql/notice-mapper.xml"/> -->
-		<mapper resource="mybatis/sql/boardMapper.xml"/>
-=======
 		<mapper resource="mybatis/sql/product-mapper.xml"/>
 		 <mapper resource="mybatis/sql/member-mapper.xml"/>
->>>>>>> refs/heads/master
 	</mappers>
 
 </configuration>

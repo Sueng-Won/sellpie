@@ -2,7 +2,6 @@ package com.teamnameled.sellpie.board.controller;
 
 import java.io.File;
 import java.io.IOException;
-<<<<<<< HEAD
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
@@ -33,29 +32,6 @@ public class BoardController {
 	      
 	      //파일경로
 	      String filePath ="C:\\Upload\\"+email+"\\"+sdf.format(today).toString();
-=======
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-
-@Controller
-public class BoardController {
-	
-	@RequestMapping("insertBoard.do")
-	public String insertBoard(MultipartHttpServletRequest multipartHttpServletRequest){
-		//파일경로
-		String filePath ="C:\\Upload";
->>>>>>> refs/heads/master
 		//파일들을 List형식으로 보관
 		List<MultipartFile> files = multipartHttpServletRequest.getFiles("file");
 		

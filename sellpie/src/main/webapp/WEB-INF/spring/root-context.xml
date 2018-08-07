@@ -28,8 +28,7 @@
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="maxUploadSize" value="1000000000" />
 		<property name="maxInMemorySize" value="1000000000" />
-<<<<<<< HEAD
-=======
+
 	</bean>
 	<!-- 메일 보내기 -->
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
@@ -48,6 +47,5 @@
 				<prop key="mail.debug">true</prop>
 			</props>
 		</property>
->>>>>>> refs/heads/master
 	</bean>
 </beans>
