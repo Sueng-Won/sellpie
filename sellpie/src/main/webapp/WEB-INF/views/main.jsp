@@ -5,233 +5,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-<c:import url="header.jsp"/>
-<meta charset=UTF-8">
+<c:import url="header.jsp"></c:import>
+<meta charset="UTF-8">
 <title>메인페이지</title>
 <style>
-/*    div{ */
-/*       border:1px solid gray; */
-/*    } */
-   .wrap{
-      width:1200px;
-      height:auto;
-      margin-left:auto;
-      margin-right:auto;
-   }
-   .wrap>div{
-      float:left;
-      height:auto;
-   }
-   .side{
-      width:240px;
-      margin:5px;
-      padding:30px;
-      padding-top:65px;
-      position:fixed;
-/*       background:white; */
-   }
-   .left{
-      text-align:center;
-      left:70px;
-      top:40px;
-      background:rgba(0, 0, 0, 0.5);
-   }
-   
-   .right{
-      text-align:center;
-      left: 317px;
-   	  top: 17px;
-      position:relative;
-      width:240px;
-      margin:5px;
-      padding:30px;
-   }
-   .center{
-      width:540px;
-      margin:10px;
-      position:relative;
-      left:300px;
-      background:lightgray;
-   }
-	
-	.background-white{
-		background:white;
-	}
-	
-   .boardOne{
-      width:530px;
-      height:auto;
-      min-height:350px;
-      margin-left:auto;
-      margin-right:auto;
-      margin:10px;
-   }
-   
-   .boardForm{
-      width:530px;
-      height:auto;
-      margin-left:auto;
-      margin-right:auto;
-      margin:10px;
-   }
-   .fileLink{
-      height:34px;
-   }
-   .fileLInk>img{
-      cursor:pointer;
-   }
-   .uploadFile{
-      padding-left:5px;
-   }
-	
-	.padding-15 {
-		padding:15px;
-	}
-	
-	.border-t{
-		border-top:1px solid lightgray;
-	}
-	
-	.border-b{
-		border-bottom:1px solid lightgray;
-	}
-	
- 	.bInfo{ 
- 		height:70px; 
- 		overflow:hidden; 
- 	} 
-	
-	.bBtndiv{
-		text-align:center;
-	}
-	
-	.bBtndiv>div{
-		width:32%;
-		height:50px;
-	}
 
-	.bBtndiv>div:hover{
-		cursor:pointer;
- 		background:lightgray; 
-	}
-	.repleBtn{
-		border-left:1px solid lightgray;
-		border-right:1px solid lightgray;
-	}
-	
-	.repleOne{
-		padding:5px;
-	}
-	
-   .insertBtn{
-      width:50px;
-      height:30px;
-   }
-   
-   #detailContent:hover{
-   	cursor:pointer;
-   }
-   
-   
-   
-   /*  [role="button"] {
-      padding:3px;
-      border: 1px solid #CCC;
-        }  */
-     
-     [class="boardFormO"] {
-           width: 530px;
-          height: 250px;
-          margin-left: auto;
-          margin-right: auto;
-          margin: 10px;
-     }
-
-   #content{
-          width: 530px;
-          height: 80px;
-          color: rgb(73, 73, 73);
-          padding: 10px;
-            font: 14px 맑은고딕, "Malgun Gothic", Dotum, 돋움, sans-serif;
-          resize: none;
-   } 
-   
-   .boardForm .board .btnA{
-       visibility: hidden;
-       display: none !important;
-   }
-   
-   .boardForm .board .btnC{
-       visibility: hidden;
-       display: none !important;
-   }
-   
-   .btnA{
-       display: inline-block;
-       width: 195px;
-       height: 25px;
-       text-align: center;
-       vertical-align: middle;
-       font: bold 16px/20px 맑은고딕, "Malgun Gothic", Dotum, 돋움, sans-serif;
-       border-width: 1px;
-       border-style: solid;
-       border-image: initial;
-       border-radius: 2px;
-       text-decoration: none;
-       background-color: #4267b2;
-       border-color: #4267b2;
-       -webkit-margin-before: 0.3em;
-       -webkit-margin-after: 0.5em;
-       -webkit-margin-start: 40px;
-       -webkit-margin-end: 10px;
-       cursor: pointer;
-   }
-   
-   .btnC{
-       display: inline-block;
-       width: 195px;
-       height: 25px;
-       text-align: center;
-       vertical-align: middle;
-       font: bold 16px/20px 맑은고딕, "Malgun Gothic", Dotum, 돋움, sans-serif;
-       border-width: 1px;
-       border-style: solid;
-       border-image: initial;
-       border-radius: 2px;
-       text-decoration: none;
-       background: rgb(245, 248, 250);
-       border-color: rgb(221, 221, 221);
-       -webkit-margin-before: 0.3em;
-       -webkit-margin-after: 0.5em;
-       -webkit-margin-start: 70px;
-       -webkit-margin-end: 10px;
-       cursor: pointer;
-   }
-   
-/*    #mask {  
-     position:absolute;  
-     z-index:9000;  
-     background-color:#000;  
-     display:none;  
-     left:0;
-     top:0;
-   }
-   .window{
-     display: none;
-     position:absolute;  
-     left:100px;
-     top:100px;
-     z-index:10000;
-   }    */
-   
-   /* ---------------------------------- */
-   
-   
+    #bcontent{
+        width:100%;
+        height:70px;
+        overflow-y: scroll;
+    }
+    
+    #fileTb{
+        width:98%;
+        height:98%;
+    }
+    
 </style>
-<!-- header에 jquery-min 선언 되있음 -->
-<!-- 게시물 클릭시 상세보기창 뜨는 메소드 -->
 <style>
-.white_content {
+.detail_content {
     position: fixed;
     z-index:3;
     top: 0;
@@ -245,263 +37,235 @@
     transition: opacity 400ms ease-in;
     pointer-events: none;
 }
-.white_content:target {
+.detail_content:target {
     opacity:1;
     pointer-events: auto;
 }
-.white_content > div {
+.detail_content > div {
 	position: absolute;
-	top: 25%;
-	left: 25%;
-	width: 630px;
-	height: 400px;
+	top: 9%;
+	left: 15%;
+	width: 890px;
+	height: 520px;
 	padding: 16px;
-	border: 16px solid orange;
-	background-color: white;
+	background-color: rgba(0, 0, 0, 0.8);
 	overflow: auto;	
 }
 </style>
 
-
 <script>
-var imgIdx = 0;
-var videoIdx = 0;
+$(function(){
+  $("#insertForm").click(function(){
+    location.href="#open2";  
+  });
+});   
 
-function fileUpload(inputFiles, condition){
-   var files = inputFiles.files; //선택된 파일들
-   var filesArr = Array.prototype.slice.call(files); //files 배열로 담음
-   
-   if(files!=null && filesArr.length!=0){//선택된 파일이 없거나 , 배열에 담긴 파일이 없을 때
-         
-         filesArr.forEach(function(f){//배열에 담긴 파일 하나씩 올리기
-            var reader = new FileReader();
-   			console.log(f);
-            reader.onload = function (e) {
-               var fileTag;//이미지나 비디오 태그 생성할 변수
-               var newTag;//새로운 input file태그 생성할 변수
-               
-               if(condition == 0){//이미지버튼 클릭 후  파일 선택시 이미지 파일인지 확인
-                  if(!(f.type.match("image.*"))){
-                     alert('이미지파일을 선택해 주세요.');
-                     return;
-                  }
-                  fileTag = $("<img/>");
-                  imgIdx = imgIdx+1;
-                  $("#imageFile").attr("id","img"+imgIdx);
-                  newTag = '<input type="file" name="file" id="imageFile" onchange="fileUpload(this,0);" accept="image/*" hidden multiple/>';
-               }else{
-                  if(!(f.type.match("video.*"))){//동영상버튼 클릭 후  파일 선택시 동영상 파일인지 확인
-                     alert('동영상파일을 선택해 주세요.');
-                     return;
-                  }
-                  fileTag = $("<video/>");
-                  fileTag.attr("controll","true");
-                  videoIdx = videoIdx+1;
-                  $("#videoFile").attr("id","video"+videoIdx);
-                  newTag = '<input type="file" name="file" id="videoFile" onchange="fileUpload(this,1);" accept="video/*" hidden/>';
-               }            
-               fileTag.css({"width":"100%","height":"100%"});
-               fileTag.attr('src', e.target.result); //image or video 담긴 태그 생성
-               //크기 같은 div에 담음
-               var div = $("<div>").css({"width":"80","height":"80","display":"inline-block","background":"black"});
-               div.append(fileTag);
-               $('#uploadFile').append(div); 
-               
-               $("#board").append(newTag);
-            }
-            //이미지를 data URL형태로 onload이벤트 콜백을 통해 생성한 파일태그의 src에 넣어줌
-            reader.readAsDataURL(f); //file내용을 읽어 data URL형식의 문자열로 저장
-         });
-      }
-   }
-   
-   function wrapWindowByMask(){
-      //화면의 높이와 너비를 구한다.
-      var maskHeight = $(document).height();  
-      var maskWidth = $(window).width();  
+var slideIndex = 1;
 
-      //마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채운다.
-      $('#mask').css({'width':maskWidth,'height':maskHeight});  
+function plusDivs(n) {
+  showDivs(slideIndex += n);
+}
 
-      //애니메이션 효과 - 일단 1초동안 까맣게 됐다가 80% 불투명도로 간다.
-      $('#mask').fadeIn(1000);      
-      $('#mask').fadeTo("slow",0.8);    
-
-      //윈도우 같은 거 띄운다.
-      $('.window').show();
-      
-   }
-   
-    //게시물 
-      function board_view() {
-         if($("#board").hasClass("hide")) {
-            $("#board").removeClass("hide");
-            
-           //클릭시 설정해 둿던 아이디 값에 hide 값 삭제
-            $("#board_area").attr("class","boardFormO");
-           //초기값 hide로 만든 boardFormO 값 띄워줌
-           
-           $("#uploadFile").css("height","90px");
-         }
-         
-         if($("#btnH").hasClass("hide")){
-            $("#btnH").removeClass("hide");
-         }/* else{
-            $("#btnH").addClass("hide");
-         } */
-         
-         if($("#btnC").hasClass("hide")){
-            $("#btnC").removeClass("hide");
-         }/* else{
-            $("#btnC").addClass("hide");
-         } */
-         
-      }
-
-      /* $(function () {
-           $('.boardForm').on("click", function () {
-              
-               $(this).toggleClass('on');
-               // .boardForm 클래스를 클릭 했을때 .boardForm 옆에 on을 붙임
-               $(this).siblings().removeClass('on');
-               // .boardForm 클래스가 닫힐때 on을 뗌
-           });
-       });  */
-       
-     
+function showDivs(n) {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  if (n > x.length) {slideIndex = 1}    
+  if (n < 1) {slideIndex = x.length}
+  
+  var src = x[slideIndex-1].src;
+  $("#fileview>img").attr("src",src);
+}
 </script>
-</head>
-<body>
-
-<div>
+</head><body class="w3-theme-l5">
 
 
-<!-- <button role="button" onclick="handleBtnClick(event)" onKeyUp="handleBtnKeyUp(event)" aria-pressed="false"> 안녕</button> -->
-   <div class="wrap">
-      <div class="left side" style="height:600px;">
-      <c:import url="sideLeft.jsp"/>
-      </div>
-      
-      <div class="center">
-         <div class="boardForm background-white" id="board_area" onclick="board_view()" >
-            <form class="board hide" id="board" action="/sellpie/insertBoard.do" method="post" enctype="multipart/form-data">
-<!--              //sample data -->
-            <input type="hidden" name="email" value="test@email.com"/>
-            <textarea name="bcontent" id="content" maxlength="3000" ></textarea>
-               <div class="uploadFile background-white" id="uploadFile">
-               
-            <!-- 업로드한 이미지 표시 영역 사진 선택시 표시 하기 위함.-->
-               </div>
-               <div class="fileLInk background-white">
-                  <img src="resources/images/picture.JPG" width="30" height="30" onclick="imageFile.click()"/>
-                  <input type="file" name="file" id="imageFile" onchange="fileUpload(this,0);" accept="image/*" hidden multiple/>
-                  <img src="resources/images/video.JPG" width="30" height="30" onclick="videoFile.click()"/>
-                  <input type="file" name="file" id="videoFile" onchange="fileUpload(this,1);" accept="video/*" hidden/>
-               </div>
-               
-               <div class="background-white">
-                  <input type="submit" id="btnH" class="btnA hide" value="등록"/>
-                  <input type="button" id="btnC" class="btnC hide" value="취소" onclick="board_view2()"/>
-               </div>
-            </form>
-         </div>
-         
-         <div class="boardList">
-<!--          	// 상세보기 창(1개만 존재, hidden) -->
-         	<div class="white_content" id="open">
+<!-- Page Container -->
+<div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">    
+  <!-- The Grid -->
+  <div class="w3-row">
+    <!-- Left Column -->
+    	<c:import url="sideLeft.jsp"></c:import>
+    <!-- End Left Column -->
+    
+    <!--    입력폼 포커스온-->
+    <div class="detail_content" id="open2" >
          		<div>
          			<div style="text-align:right;">
     					<a href="#close">
-    						<img src="resources/images/closeBtn.png" class="rounded-circle img-fluid" alt="Placeholder image" width="20" height="20">
+    						<i class="fa fa-close w3-text-white"></i>
     					</a>
     				</div>
-			        <div class="d-inline-block" style="width:60%; height:90%; border-right:1px solid lightgray;"></div>
-					<div class="d-inline-block" style="width:39%; height:90%;"></div>
+    				<div>입력폼!!</div>
+				</div>
+	</div>
+	<!--   입력폼 끝-->
+    
+    <!-- Middle Column -->
+    <div class="w3-col m7" style="margin-left:25%;">
+    
+      <div class="w3-row-padding">
+        <div class="w3-col m12">
+          <div class="w3-card w3-round w3-white">
+            <div class="w3-container w3-padding">
+              <h6 class="w3-opacity">게시물 작성</h6>
+              <div contenteditable="true" class="w3-border w3-padding" name="bcontent" id="bcontent"> 
+              </div>
+              <button type="button" class="w3-button w3-theme" onclick="javascript:location.href='#open2'"><i class="fa fa-pencil"></i> &nbsp;Post</button> 
+            </div>
+          </div>
+        </div>
+      </div>
+      
+<!--                	// 상세보기 창(1개만 존재, hidden) -->
+         	<div class="detail_content" id="open" >
+         		<div>
+         			<div style="text-align:right;">
+    					<a href="#close">
+    						<i class="fa fa-close w3-text-white"></i>
+    					</a>
+    				</div>
+                    <div class="w3-row" style="height:90%;">
+                        <div class="w3-col m7" style="height:94%;">
+	                        <div class="w3-row" style="text-align:center; width:98%; height:98%;" >
+	                        	<div class="w3-col" style="width:10%; height:95%;" onclick="plusDivs(-1);">
+	                        		<br><br><br><br><br>
+	                        		<img src="resources/images/header/nextLeft.png" style="width:28%; height:23%;">
+	                        	</div>
+	                        	<div class="w3-col" style="width:77%; height:95%; text-align:center;" id="fileview">
+		                        	 <img src="resources/images/header/twice2.png" style="width:90%; height:95%;" class="w3-margin-bottom mySlides">
+	                        	</div>
+	                        	<div class="w3-col" style="width:10%; height:95%;" onclick="plusDivs(1);">
+	                        		<br><br><br><br><br>
+	                        		<img src="resources/images/header/nextRight.png" style="width:28%; height:23%;">
+	                        	</div>
+	                        </div>                             
+	                        <div style="text-align:center">
+	                                <img src="resources/images/header/twice1.png" style="width:7%; height:6%;" class="w3-margin-bottom mySlides">
+	                                <img src="resources/images/header/twice2.JPG" style="width:7%; height:6%;" class="w3-margin-bottom mySlides">
+	                                <img src="resources/images/header/twice2.png" style="width:7%; height:6%;" class="w3-margin-bottom mySlides">
+	                        </div>
+                        </div>
+                        <div class="w3-col m4" style="width:36%;">
+                            <div class="w3-container w3-card w3-white w3-round"><br>
+                              <div class="w3-border-bottom" style="height:10%;">
+                                   <img src="resources/images/header/twice2.png" alt="Avatar" class="w3-left w3-circle w3-margin-right rounded-circle" style="width:40px; height:40px;">
+                                    <span class="w3-right w3-opacity">32 min</span>
+                                    <h4>Angie Jane</h4><br>
+                              </div>
+                               <div class="w3-margin-bottom" style="height:27%; overflow-y:scroll;"> 
+                                    <p>Have you seen this?</p>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                               </div>
+                               <div>
+                                  <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom w3-align-right"><i class="fa fa-thumbs-up"></i> &nbsp;600</button>
+                                   <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom w3-align-right" onclick="javascript:location.href='#open'"><i class="fa fa-comment"></i> &nbsp;128</button>  
+                               </div>
+                               <div style="height:30%; width:100%; overflow-y:scroll;">
+                                   <div style="height:10%;">
+                                       <img src="resources/images/header/twice2.png" alt="Avatar" class="w3-left w3-circle rounded-circle" style="width:20px; height:20px;">
+    <!--                                    <span class="w3-right w3-opacity">32 min</span>-->
+                                        &nbsp;<b style="font-size: 12px;">Angie Jane</b>
+                                        <span style="font-size:12px;">정연이 등록한 댓글</span>
+                                  </div>
+                               </div>
+                               <div class="w3-row w3-cell-bottom w3-margin-bottom">
+                                       <div class="w3-col m1">
+                                        <img src="resources/images/header/twice2.png" alt="Avatar" class="w3-left w3-circle rounded-circle w3-block" style="width:20px; height:20px;">
+                                       </div>
+                                       <div contenteditable="true" class="w3-border w3-col m9 w3-round">
+                                      </div>
+                                      <div class="w3-col m1" style="border-radius: 17px;  width:22px; height:22px; text-align: center;">
+                                           <img src="resources/images/header/submitImg.jpg" alt="Avatar" class="w3-left w3-circle rounded-circle w3-block" style="width:22px; height:22px;">
+                                      </div>
+                               </div>
+                            </div>
+                        </div>
+					</div>
 				</div>
 		    </div>
-      <div class="boardOne rounded background-white">
-			<div class="bInfo padding-15 border-b">
-				<img src="resources/images/mrlee.jpg" class="rounded-circle img-fluid" alt="Placeholder image" style="width:45px; height:45px;">
-				<div class="d-inline-block align-top rounded" style="margin:5px;">
-					memberName
-				</div>
-			</div>
-			<div class="bContent padding-15">
-			게시물 출력하는 div<br>
-			textarea에서 받은 string<br>
-			엔터값 br태그로 바꿔서 DB에 저장하기
-			<br><br>
-			~~~
-			<div id="detailContent"><a href="#open" style="decoration:none;">더보기</a></div>
-			
-			</div>
-			<div class="bBtndiv border-t border-b">
-			  	<div class="d-inline-block padding-15">
-			  		<span>좋아요</span>
-			  	</div>
-				<div class="d-inline-block repleBtn padding-15">
-					<span>댓글달기</span>
-				</div>
-				<div class="d-inline-block padding-15">
-					<span>신고하기</span>
-				</div>
-			</div>
-			<div class="padding-15" style="overflow:visible;">
-				<div class="repleOne">
-					<div class="d-inline-block">
-						<img src="resources/images/mrlee.jpg" class="rounded-circle img-fluid" alt="Placeholder image" style="width:36px; height:36px;"> 
-					</div>
-					<div class="d-inline-block align-top" style="background-color: lightgray; margin:7px; height:25px; font-size: 13px; border-radius:18px; padding:3px 0;">
-						&nbsp;&nbsp;&nbsp;
-						<span class="align-top" style="font-size:12px;"><b>이름</b></span>&nbsp;
-						 댓글 다는 영역
-						 &nbsp;&nbsp;&nbsp;
-					</div>
-				</div>
-				<div class="repleOne">
-					<div class="d-inline-block">
-						<img src="resources/images/mrlee.jpg" class="rounded-circle img-fluid" alt="Placeholder image" style="width:36px; height:36px;"> 
-					</div>
-					<div class="d-inline-block align-top" style="background-color: lightgray; margin:7px; height:25px; font-size: 13px; border-radius:18px; padding:3px 0;">
-						&nbsp;&nbsp;&nbsp;
-						<span class="align-top" style="font-size:12px;"><b>이름</b></span>&nbsp;
-						 댓글 다는 영역
-						 &nbsp;&nbsp;&nbsp;
-					</div>
-				</div>
-				<div class="repleOne">
-					<div class="d-inline-block">
-						<img src="resources/images/mrlee.jpg" class="rounded-circle img-fluid" alt="Placeholder image" style="width:36px; height:36px;"> 
-					</div>
-					<div class="d-inline-block align-top" style="background-color: lightgray; margin:7px; height:25px; font-size: 13px; border-radius:18px; padding:3px 0;">
-						&nbsp;&nbsp;&nbsp;
-						<span class="align-top" style="font-size:12px;"><b>이름</b></span>&nbsp;
-						 댓글 다는 영역
-						 &nbsp;&nbsp;&nbsp;
-					</div>
-				</div>
-			</div>
-      </div>
-      <div class="boardOne rounded background-white">
-<div id="detailContent"><a href="#open" style="decoration:none;">더보기</a></div>
-      </div>
-         <div class="boardOne rounded background-white">
-
-      </div>
-         <div class="boardOne rounded background-white">
-
-      </div>
-         <div class="boardOne rounded background-white">
-
-      </div>
-      </div>
-      </div>
-      <div class="right background-white" style="height:auto;">
-      <div>주문 현황</div>
-      <c:import url="sideRight.jsp"/>
-   </div>
-   </div>
-
+<!--		    상세보기창 끝-->
+		    
+      
+      <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+        <img src="resources/images/header/twice2.png" alt="Avatar" class="w3-left w3-circle w3-margin-right rounded-circle" style="width:60px; height:60px;">
+        <span class="w3-right w3-opacity">32 min</span>
+        <h4>Angie Jane</h4><br>
+        <hr class="w3-clear">
+        <p>Have you seen this?</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+<!--        <img src="image/twice2.png" style="width:100%; height:500px;" class="w3-margin-bottom">-->
+        <table id="fileTb" cellspacing="0" align="center" class="w3-margin-bottom">
+            <tr>
+                <td>
+                    <img src="resources/images/header/twice2.png" style="width:100%; height:35%;">
+                </td>
+                <td>
+                    <img src="resources/images/header/twice2.png" style="width:100%; height:35%;">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <img src="resources/images/header/twice2.png" style="width:100%; height:35%;">
+                </td>
+                <td>
+                    <img src="resources/images/header/twice2.png" style="width:100%; height:35%;">
+                </td>
+            </tr>
+        </table>
+        &nbsp;
+        <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i> &nbsp;600</button> 
+          <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom" onclick="javascript:location.href='#open'"><i class="fa fa-comment"></i> &nbsp;128</button> 
+      </div>  
+      
+    <!-- End Middle Column -->
+    </div>
+    
+    <!-- Right Column -->
+    
+      <c:import url="sideRight.jsp"></c:import>
+    <!-- End Right Column -->
+    
+  <!-- End Grid -->
+  </div>
+  
+<!-- End Page Container -->
 </div>
-</body>
-</html>
+<br>
+
+<!-- Footer -->
+<footer class="w3-container w3-theme-d3 w3-padding-16">
+  <h5>Footer</h5>
+</footer>
+
+<footer class="w3-container w3-theme-d5">
+  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+</footer>
+ 
+<script>
+// Accordion
+function myFunction(id) {
+    var x = document.getElementById(id);
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+        x.previousElementSibling.className += " w3-theme-d1";
+    } else { 
+        x.className = x.className.replace("w3-show", "");
+        x.previousElementSibling.className = 
+        x.previousElementSibling.className.replace(" w3-theme-d1", "");
+    }
+}
+
+// Used to toggle the menu on smaller screens when clicking on the menu button
+function openNav() {
+    var x = document.getElementById("navDemo");
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+    } else { 
+        x.className = x.className.replace(" w3-show", "");
+    }
+}
+</script>
+
+
+ 
+</body></html>
