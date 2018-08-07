@@ -9,7 +9,7 @@ public class Product {
 		SNO	NUMBER
 		PNAME	VARCHAR2(100 BYTE)
 		SELTAG	VARCHAR2(100 BYTE)
-		RNOLIST	VARCHAR2(4000 BYTE)
+		rUrl	VARCHAR2(4000 BYTE)
 		PQUANTITY	NUMBER
 		ISCRAFT	CHAR(1 BYTE)
 		PRICE	NUMBER
@@ -20,7 +20,7 @@ public class Product {
 	private int sNo;
 	private String pName;
 	private String selTag;
-	private String rNoList;
+	private String rUrl;
 	private int pQuantity;
 	private char isCraft;
 	private int price;
@@ -31,14 +31,14 @@ public class Product {
 		
 	}
 
-	public Product(int pNo, int sNo, String pName, String selTag, String rNoList, int pQuantity, char isCraft,
+	public Product(int pNo, int sNo, String pName, String selTag, String rUrl, int pQuantity, char isCraft,
 			int price, String pDetail, char delFlag) {
 		super();
 		this.pNo = pNo;
 		this.sNo = sNo;
 		this.pName = pName;
 		this.selTag = selTag;
-		this.rNoList = rNoList;
+		this.rUrl = rUrl;
 		this.pQuantity = pQuantity;
 		this.isCraft = isCraft;
 		this.price = price;
@@ -78,12 +78,12 @@ public class Product {
 		this.selTag = selTag;
 	}
 
-	public String getrNoList() {
-		return rNoList;
+	public String getrUrl() {
+		return rUrl;
 	}
 
-	public void setrNoList(String rNoList) {
-		this.rNoList = rNoList;
+	public void setrUrl(String rUrl) {
+		this.rUrl = rUrl;
 	}
 
 	public int getpQuantity() {
@@ -128,8 +128,8 @@ public class Product {
 
 	@Override
 	public String toString() {
-		return "Product [pNo=" + pNo + ", sNo=" + sNo + ", pName=" + pName + ", selTag=" + selTag + ", rNoList="
-				+ rNoList + ", pQuantity=" + pQuantity + ", isCraft=" + isCraft + ", price=" + price + ", pDetail="
+		return "Product [pNo=" + pNo + ", sNo=" + sNo + ", pName=" + pName + ", selTag=" + selTag + ", rUrl="
+				+ rUrl + ", pQuantity=" + pQuantity + ", isCraft=" + isCraft + ", price=" + price + ", pDetail="
 				+ pDetail + ", delFlag=" + delFlag + "]";
 	}
 	
