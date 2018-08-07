@@ -14,9 +14,8 @@
 	<!-- 마이바티스에서 사용하기 위한 
 	    VO 클래스의 별칭을 정의하는 태그 -->
 	<typeAliases>
-		<!-- <typeAlias type="com.kh.firstSpring.member.model.vo.Member" alias="Member"/>
-		<typeAlias type="com.kh.firstSpring.notice.model.vo.Notice" alias="Notice" /> -->
-		<typeAlias type="com.teamnameled.sellpie.board.model.vo.BoardVo" alias="Board" />
+		<typeAlias type="com.teamnameled.sellpie.product.model.vo.Product" alias="Product"/>
+		<typeAlias type="com.teamnameled.sellpie.member.model.vo.Member" alias="Member"/>
 	</typeAliases>
 	
 	
