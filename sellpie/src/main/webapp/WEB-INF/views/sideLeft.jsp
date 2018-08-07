@@ -12,7 +12,7 @@
 </head>
 
 <body>
-<div class="w3-col m3 w3-sidebar" style="width:25%">
+<div class="w3-col m3 w3-sidebar" style="width:15%">
       <!-- Profile -->
       <div class="w3-card w3-round w3-white">
         <div class="w3-container">

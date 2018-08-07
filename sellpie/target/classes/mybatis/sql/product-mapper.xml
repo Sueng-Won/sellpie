@@ -13,5 +13,10 @@
 		FROM PRODUCT
 		WHERE SNO = #{sNo}
 	</select>
+	<select id="selectProduct" parameterType="int" resultType="Product">
+		SELECT PNO, SNO, PNAME, SELTAG, RURL, PQUANTITY, ISCRAFT, PRICE, PDETAIL, DELFLAG
+		FROM PRODUCT
+		WHERE PNO = #{pNo}
+	</select>
 </mapper>
 

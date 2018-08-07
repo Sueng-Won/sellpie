@@ -10,7 +10,7 @@
 </head>
 
 <body>
-<div class="w3-col m2 w3-sidebar" style="margin-left: 82%;">
+<div class="w3-col m2 w3-sidebar" style="margin-left: 70%;">
       <div class="w3-card w3-round w3-white w3-center">
         <div class="w3-container">
           <p>Upcoming Events:</p>
