@@ -45,7 +45,7 @@
 }
 </style>
 
-<script>
+<script type="text/javascript">
 	function productDetail(int pNo){
 		location.href="sellpie/productDetail.do?pNo="+pNo;
 	}
@@ -77,7 +77,7 @@
 
 									<div class="sellList">
 										<c:forEach var="product" items="${productList}" varStatus="status">
-											<div class="card" onClick="productDeatil(${product.pNo});">
+											<div class="card" onclick="productDetail('${product.pNo}');">
 												<img class="sellImg" src="#" alt="${product.pName}" >
 												<div class="container">
 													<h4>
