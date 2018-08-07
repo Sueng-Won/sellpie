@@ -7,7 +7,7 @@ public class BoardVo {
 	private String email;
 	private String bcontent;
 	private int gcount;
-	private String rnoList;
+	private String rurl;
 	private double latitude;
 	private double longitude;
 	private char isad;
@@ -41,12 +41,12 @@ public class BoardVo {
 		this.gcount = gcount;
 	}
 
-	public String getRnoList() {
-		return rnoList;
+	public String getRurl() {
+		return rurl;
 	}
 
-	public void setRnoList(String rnoList) {
-		this.rnoList = rnoList;
+	public void setRurl(String rurl) {
+		this.rurl = rurl;
 	}
 
 	public double getLatitude() {

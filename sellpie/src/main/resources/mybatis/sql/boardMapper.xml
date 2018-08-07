@@ -4,5 +4,8 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="boardMapper">
-	
+	<insert id="insertBoard" parameterType="Board">
+		INSERT INTO BOARD VALUES(
+		SEQ_BOARD_BNO.NEXTVAL, #{email}, #{bcontent}, #{gcount}, #{rurl}, #{latitude}, #{longitude}, #{isad},'N')
+	</insert>
 </mapper>
