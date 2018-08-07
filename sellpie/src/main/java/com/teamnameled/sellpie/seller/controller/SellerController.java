@@ -10,7 +10,7 @@ import com.teamnameled.sellpie.seller.model.vo.Seller;
 @Controller
 public class SellerController {
 	@Autowired
-	SellerService sellerServcie;
+	SellerService sellerService;
 	@RequestMapping("seller.do")
 	public String sellerDetail() {
 		Seller seller = sellerService.selectSeller();
