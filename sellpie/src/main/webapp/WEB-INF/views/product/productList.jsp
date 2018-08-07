@@ -102,6 +102,11 @@
     	border-radius: 5px 5px 0 0;
 	}
 </style>
+<script>
+	function productDetail(int pNo){
+		location.href="sellpie/productDetail.do?pNo="+pNo;
+	}
+</script>
 </head>
 <body>
 <div class="wrap">
@@ -117,7 +122,7 @@
 		<div class="sellList">
 			<c:forEach var="product" items="${productList}" varStatus="status">
 			<div class="card">
-  				<img class="sellImg" src="#" alt="${product.pName}">
+  				<img class="sellImg" src="#" alt="${product.pName}" onclick="productDeatil(${product.pNo});">
   				<div class="container">
     				<h4><b>${product.pName}</b></h4> 
     				<p>${product.pDetail }</p> 

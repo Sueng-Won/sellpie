@@ -9,9 +9,14 @@
     연결의 착오를 줄인다. -->
 <mapper namespace="ProductMapper">
 	<select id="selectProductList" parameterType="int" resultType="Product">
-		SELECT PNO, SNO, PNAME, SELTAG, RNOLIST, PQUANTITY, ISCRAFT, PRICE, PDETAIL, DELFLAG
+		SELECT PNO, SNO, PNAME, SELTAG, RURL, PQUANTITY, ISCRAFT, PRICE, PDETAIL, DELFLAG
 		FROM PRODUCT
 		WHERE SNO = #{sNo}
+	</select>
+	<select id="selectProduct" parameterType="int" resultType="Product">
+		SELECT PNO, SNO, PNAME, SELTAG, RURL, PQUANTITY, ISCRAFT, PRICE, PDETAIL, DELFLAG
+		FROM PRODUCT
+		WHERE PNO = #{pNo}
 	</select>
 </mapper>
 
