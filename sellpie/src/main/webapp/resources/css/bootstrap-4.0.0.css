@@ -206,7 +206,11 @@ figure {
 }
 
 img {
+<<<<<<< HEAD
 
+=======
+  vertical-align: middle;
+>>>>>>> refs/heads/master
   border-style: none;
 }
 

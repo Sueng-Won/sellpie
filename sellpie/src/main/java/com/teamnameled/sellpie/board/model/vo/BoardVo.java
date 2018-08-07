@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class BoardVo {
+<<<<<<< HEAD
 	private String email;
 	private String bcontent;
 	private int gcount;
@@ -85,5 +86,7 @@ public class BoardVo {
 	
 	
 	
+=======
+>>>>>>> refs/heads/master
 
 }

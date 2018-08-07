@@ -34,7 +34,11 @@
 		<button type="button" class="btn btn-light">Light Button</button>
 	</div>
 	<div class="text-center">
+<<<<<<< HEAD
 	  <button type="button" class="btn btn-light" onclick="javascript: location.href = 'sellerForm.do'">판매자등록</button>
+=======
+	  <button type="button" class="btn btn-light">Light Button</button>
+>>>>>>> refs/heads/master
 	</div>
 </div>
 </body>
