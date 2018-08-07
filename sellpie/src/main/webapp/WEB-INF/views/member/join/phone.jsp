@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE>
 <html>
 <head>
@@ -265,6 +266,9 @@
 </style>
 <script>
 	$(function(){
+		<c:if test="${not empty sessionScope.user}">
+		 location.href="/sellpie/main.do";
+		</c:if>
 		$("input[id*='phoneNum']").keyup(function(){
 			var phoneNum = new Array();
 			$("input[id*='phoneNum']").each(function(value, index){

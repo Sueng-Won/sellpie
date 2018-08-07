@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE>
  <html>
 <!-- Mirrored from www.vingle.net/users/sign_up/email by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 04 Aug 2018 19:30:58 GMT -->
@@ -359,6 +360,9 @@ span + .signupNavbar__vingleLogo__3Ob {
 </style>
 <script>
 	$(function(){
+		<c:if test="${not empty sessionScope.user}">
+		 location.href="/sellpie/main.do";
+		</c:if>
 		$(".solidReasonInput__textInput__ZZr").keyup(function(){
 			var $msgEmail = $("<div class='solidReasonInput__rightItemsWrapper__Email'><span></span></div>");
 			var $msgPwd = $("<div class='solidReasonInput__rightItemsWrapper__Pwd'><span></span></div>");
@@ -437,7 +441,8 @@ span + .signupNavbar__vingleLogo__3Ob {
 					data : {email : $("#email").val()},
 					type : "get",
 					success:function(data){
-						if(data){
+						console.log(data.result);
+						if( data.result == "2" ){
 							alert("이미 가입한 이메일 입니다..");
 							/* var $auNum_wrapper = $("<div class='auNum_wrapper'></div>");
 							 var $solidReasonInput_wrapper = $("<div class='solidReasonInput__wrapper__auNum undefined'></div>");

@@ -26,5 +26,22 @@ public class MemberService {
 		return dao.insertMember(member);
 	}
 
+	public Member userLogin(Member member) {
+		String userEncPassword = null;
+		String email = member.getEmail();
+		Member result = dao.selectByEmail(email);
+		System.out.println(result);
+		
+		if(null!=result){
+			userEncPassword = result.getPwd();			
+			if(bpe.matches(member.getPwd(), userEncPassword)){
+				System.out.println(result);
+			}else{
+				result = null;
+			}
+		}
+		return result;
+	}
+
 
 }

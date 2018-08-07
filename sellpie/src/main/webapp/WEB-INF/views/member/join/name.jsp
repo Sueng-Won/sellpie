@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE>
 <html>
 <head>
@@ -414,6 +415,9 @@ span + .signupNavbar__vingleLogo__3Ob {
 <script src="resources/js/jquery-3.3.1.min.js"></script>
 <script>
 	$(function(){
+		<c:if test="${not empty sessionScope.user}">
+		 location.href="/sellpie/main.do";
+		</c:if>
 		$("#name").keyup(function(){
 			var name = $(this).val();
 			 var regex= /^[가-힣]{2,4}$/;
