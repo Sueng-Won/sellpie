@@ -8,14 +8,26 @@
     보통 서비스의 이름과 같게 설정하여
     연결의 착오를 줄인다. -->
 <mapper namespace="SellerMapper">
-	<select id="selectSellerList" parameterType="String" resultType="Product">
+	<select id="selectSellerList" parameterType="String" resultType="Member">
+		SELECT EMAIL, PWD, NAME, GENDER, PHONE, BIRTH, PROFILE_IMG
+		FROM MEMBER
+		WHERE EMAIL = (
+			SELECT EMAIL
+			FROM SELLER
+			WHERE SNO = (
+				SELECT SNO
+				FROM PRODUCT
+				WHERE SELTAG LIKE '%'||#{selTag}||'%'
+			)
+		)
+	</select>
+	<select id="selectSellersInfo" parameterType="java.util.List" resultType="Seller">
 		SELECT SNO, EMAIL, ACNUM, BANK, ZIPCODE, ADDR, ADDRDETAIL, PCATEGORY, REASON
 		FROM SELLER
-		WHERE SNO = (
-			SELECT SNO
-			FROM PRODUCT
-			WHERE SELTAG LIKE '%'||#{selTag}||'%'
-		)
+		WHERE EMAIL = 
+		<foreach collection="list" item="seller" open="(" close=")">
+			#{seller.email}
+		</foreach>
 	</select>
 </mapper>
 
