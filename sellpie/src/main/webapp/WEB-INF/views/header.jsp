@@ -14,6 +14,24 @@
 <style>
 html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 </style>
+<script type="text/javascript">
+	function searchContent(){
+		
+		var searchContentStr = $("#searchText").val();
+		if(searchContentStr == ""){
+			alert("검색어를 입력해주세요.");
+		}
+		else{
+			if(searchContentStr.charAt(0)=="#"){
+				$("#searchFrm").action = "sellpie/tagSearch.do";
+				$("#searchFrm").submit();
+			}
+			else{
+				alert("넌 사람검색을 하고있어 친구");
+			}
+		}
+	}
+</script>
 </head>
 
 <body class="w3-theme-l5">
@@ -41,12 +59,15 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
   </a>
   <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-center top_search" style="margin-top:10px; margin-bottom:0px;">
                 <div class="input-group">
-                  <input type="text" class="form-control" placeholder="Search for...">
+                	<form action="#" method="get" id="searchFrm">
+                  <input type="text" class="form-control" placeholder="Search for..." name="searchText" id="searchText">
+                  </form>
                   <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">
+                            <button class="btn btn-default" type="button" onclick="searchContent();">
                             <span class="glyphicon glyphicon-search"></span>
                             </button>
                         </span>
+                      
                 </div>
      </div>
  </div>
