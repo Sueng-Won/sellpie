@@ -6,6 +6,6 @@
 <mapper namespace="boardMapper">
 	<insert id="insertBoard" parameterType="Board">
 		INSERT INTO BOARD VALUES(
-		SEQ_BOARD_BNO.NEXTVAL, #{email}, #{bcontent}, #{gcount}, #{rurl}, #{latitude}, #{longitude}, #{isad},'N')
+		SEQ_BOARD_BNO.NEXTVAL, #{email}, #{bcontent}, #{gcount}, #{rurl}, #{isad},'N')
 	</insert>
 </mapper>

@@ -17,6 +17,7 @@
 		<typeAlias type="com.teamnameled.sellpie.product.model.vo.Product" alias="Product"/>
 		<typeAlias type="com.teamnameled.sellpie.member.model.vo.Member" alias="Member"/>
 		<typeAlias type="com.teamnameled.sellpie.board.model.vo.BoardVo" alias="Board"/>
+		<typeAlias type="com.teamnameled.sellpie.resource.model.vo.ResourceVo" alias="Resource"/>
 	</typeAliases>
 	
 	
@@ -29,6 +30,7 @@
 		<mapper resource="mybatis/sql/member-mapper.xml"/>
 		<mapper resource="mybatis/sql/product-mapper.xml"/>
 		<mapper resource="mybatis/sql/boardMapper.xml"/>
+		<mapper resource="mybatis/sql/resourceMapper.xml"/>
 	</mappers>
 
 </configuration>

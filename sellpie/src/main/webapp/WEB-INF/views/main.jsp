@@ -51,14 +51,47 @@
 	background-color: rgba(0, 0, 0, 0.8);
 	overflow: auto;	
 }
-</style>
 
+.detail_content2 {
+    position: fixed;
+    z-index:3;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.7);
+    opacity:0;
+    -webkit-transition: opacity 400ms ease-in;
+    -moz-transition: opacity 400ms ease-in;
+    transition: opacity 400ms ease-in;
+    pointer-events: none;
+}
+
+.detail_content2:target {
+    opacity:1;
+    pointer-events: auto;
+}
+
+.detail_content2 > div {
+	position: absolute;
+	top: 13%;
+	left: 22%;
+	width: 800px;
+	height: 400px;
+	padding: 16px;
+	background-color: white;
+	overflow: auto;	
+}
+</style>
 <script>
 $(function(){
-  $("#insertForm").click(function(){
-    location.href="#open2";  
-  });
-});   
+	var msg = '<c:out value="${msg}"/>';
+	if(msg.length!=0&&msg!=""){
+		alert(msg);
+	}
+});
+</script>
+<script>  
 
 var slideIndex = 1;
 
@@ -75,9 +108,96 @@ function showDivs(n) {
   var src = x[slideIndex-1].src;
   $("#fileview>img").attr("src",src);
 }
+
+var imgIdx = 0;
+var videoIdx = 0;
+
+function fileUpload(inputFiles, condition){
+   var files = inputFiles.files; //선택된 파일들
+   var filesArr = Array.prototype.slice.call(files); //files 배열로 담음
+   
+   if(files!=null && filesArr.length!=0){//선택된 파일이 없거나 , 배열에 담긴 파일이 없을 때
+         
+         filesArr.forEach(function(f){//배열에 담긴 파일 하나씩 올리기
+            var reader = new FileReader();
+   			console.log(f);
+            reader.onload = function (e) {
+               var fileTag;//이미지나 비디오 태그 생성할 변수
+               var newTag;//새로운 input file태그 생성할 변수
+               
+               if(condition == 0){//이미지버튼 클릭 후  파일 선택시 이미지 파일인지 확인
+                  if(!(f.type.match("image.*"))){
+                     alert('이미지파일을 선택해 주세요.');
+                     return;
+                  }
+                  fileTag = $("<img/>");
+                  imgIdx = imgIdx+1;
+                  $("#imageFile").attr("id","img"+imgIdx);
+                  newTag = '<input type="file" name="file" id="imageFile" onchange="fileUpload(this,0);" accept="image/*" hidden multiple/>';
+                  
+               }else{
+                  if(!(f.type.match("video.*"))){//동영상버튼 클릭 후  파일 선택시 동영상 파일인지 확인
+                     alert('동영상파일을 선택해 주세요.');
+                     return;
+                  }
+                  fileTag = $("<video/>");
+                  fileTag.attr("controll","true");
+                  videoIdx = videoIdx+1;
+                  $("#videoFile").attr("id","video"+videoIdx);
+                  newTag = '<input type="file" name="file" id="videoFile" onchange="fileUpload(this,1);" accept="video/*" hidden/>';
+               }            
+               fileTag.css({"width":"100%","height":"100%"});
+               fileTag.attr('src', e.target.result); //image or video 담긴 태그 생성
+               //크기 같은 div에 담음
+               var div = $("<div>").css({"width":"80","height":"80","display":"inline-block","background":"black"});
+               div.append(fileTag);
+               $('#uploadFile').append(div); 
+               
+               $("#board").append(newTag); 
+            }
+            //이미지를 data URL형태로 onload이벤트 콜백을 통해 생성한 파일태그의 src에 넣어줌
+            reader.readAsDataURL(f); //file내용을 읽어 data URL형식의 문자열로 저장
+         });
+      }
+   }
+   
+	$(document).ready(function(){
+        //취소버튼
+	    $(".divC").click(function(){
+	          $("#uploadFile").empty();
+	          $("#content").html("");
+	    });
+	});
+	
+	// Accordion
+	function myFunction(id) {
+	    var x = document.getElementById(id);
+	    if (x.className.indexOf("w3-show") == -1) {
+	        x.className += " w3-show";
+	        x.previousElementSibling.className += " w3-theme-d1";
+	    } else { 
+	        x.className = x.className.replace("w3-show", "");
+	        x.previousElementSibling.className = 
+	        x.previousElementSibling.className.replace(" w3-theme-d1", "");
+	    }
+	}
+
+	// Used to toggle the menu on smaller screens when clicking on the menu button
+	function openNav() {
+	    var x = document.getElementById("navDemo");
+	    if (x.className.indexOf("w3-show") == -1) {
+	        x.className += " w3-show";
+	    } else { 
+	        x.className = x.className.replace(" w3-show", "");
+	    }
+	}
+	
+function validate(){
+	var str = $("#bcontent").text();
+	$("#hiddenContent").val(str);
+}
 </script>
 </head><body class="w3-theme-l5">
-
 
 <!-- Page Container -->
 <div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">    
@@ -87,34 +207,78 @@ function showDivs(n) {
     	<c:import url="sideLeft.jsp"></c:import>
     <!-- End Left Column -->
     
-    <!--    입력폼 포커스온-->
-    <div class="detail_content" id="open2" >
-         		<div>
-         			<div style="text-align:right;">
-    					<a href="#close">
-    						<i class="fa fa-close w3-text-white"></i>
-    					</a>
-    				</div>
-    				<div>입력폼!!</div>
-				</div>
-	</div>
-	<!--   입력폼 끝-->
+
     
     <!-- Middle Column -->
     <div class="w3-col m7" style="margin-left:25%;">
     
       <div class="w3-row-padding">
         <div class="w3-col m12">
-          <div class="w3-card w3-round w3-white">
+          <div class="w3-card w3-round w3-white" onclick="javascript:location.href='#contentOpen'">
             <div class="w3-container w3-padding">
               <h6 class="w3-opacity">게시물 작성</h6>
-              <div contenteditable="true" class="w3-border w3-padding" name="bcontent" id="bcontent"> 
+              <div contenteditable="true" class="w3-border w3-padding-16"> 
+              
               </div>
-              <button type="button" class="w3-button w3-theme" onclick="javascript:location.href='#open2'"><i class="fa fa-pencil"></i> &nbsp;Post</button> 
+              <button type="button" class="w3-button w3-theme"><i class="fa fa-pencil"></i> &nbsp; 게시</button> 
             </div>
           </div>
         </div>
       </div>
+      
+<!--게시글보기 창 -->
+			<form id="board" method="post"  action="/sellpie/insertBoard.do" onsubmit="validate();" enctype="multipart/form-data">
+	         	<div class="detail_content2" id="contentOpen" >
+	         	<input type="hidden" name="email" value="test@naver.com"/>
+	         	<input type="hidden" name="bcontent" id="hiddenContent"/>
+	         		<div>
+	         			<div style="text-align:right;">
+	         				<a class="divC" href="#close"> 
+	    						<i class="fa fa-close w3-text-black"></i>
+	    					</a>
+	    				</div>
+	    				
+	    				
+					      <div class="w3-row-padding">
+					        <div class="w3-col m12">
+					          <div class="w3-card w3-round w3-white">
+					            <div class="w3-container w3-padding">
+						             <ul class="w3-ul" style="-webkit-margin-before: 0em; -webkit-margin-after: 0em; -webkit-margin-start: -30px; -webkit-margin-end: 0px;">
+										   <li class="w3-bar">
+											    <img src="resources/images/header/twice1.png" width="70" height="70" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
+												    <div class="w3-bar-item w3-padding-24">
+													    <span class="w3-large">트와이스</span><br>
+												    </div>
+											</li>
+		    					      </ul>
+	    					      	  <br>
+	    					      	  
+						              <div>
+							              <div class="w3-padding-16" id="bcontent" aria-autocomplete="list" aria-controls="js_2ne" aria-describedby="placeholder-a0ec5" aria-multiline="true"  contenteditable="true" data-testid="status-attachment-mentions-input" role="textbox" spellcheck="true" style="/* outline: none; */ user-select: text; /* white-space: pre-wrap; */ word-wrap: break-word;">
+							              </div>
+						              </div>
+							              <div class="uploadFile background-white" id="uploadFile">
+							            	<!-- 업로드한 이미지 표시 영역 사진 선택시 표시 하기 위함.-->
+							              </div>
+						              <hr>
+						              
+						              <div class="fileLInk background-white">
+						                  <img src="resources/images/picture.JPG" width="30" height="30" onclick="imageFile.click()"/>
+						                  <input type="file" name="file" id="imageFile" onchange="fileUpload(this,0);" accept="image/*" hidden multiple/>
+						                  <img src="resources/images/video.JPG" width="30" height="30" onclick="videoFile.click()"/>
+						                  <input type="file" name="file" id="videoFile" onchange="fileUpload(this,1);" accept="video/*" hidden/>
+		               				  </div>
+		               				  <br>
+		               				  
+					              <button type="submit" class="w3-button w3-theme"><i class="fa fa-pencil"></i> &nbsp; 게시</button> 
+					            </div>
+					          </div>
+					        </div>
+					      </div>
+					</div>
+			    </div>
+		    </form>
+<!--게시글 보기창 끝-->
       
 <!--                	// 상세보기 창(1개만 존재, hidden) -->
          	<div class="detail_content" id="open" >
@@ -241,30 +405,7 @@ function showDivs(n) {
   <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
 </footer>
  
-<script>
-// Accordion
-function myFunction(id) {
-    var x = document.getElementById(id);
-    if (x.className.indexOf("w3-show") == -1) {
-        x.className += " w3-show";
-        x.previousElementSibling.className += " w3-theme-d1";
-    } else { 
-        x.className = x.className.replace("w3-show", "");
-        x.previousElementSibling.className = 
-        x.previousElementSibling.className.replace(" w3-theme-d1", "");
-    }
-}
 
-// Used to toggle the menu on smaller screens when clicking on the menu button
-function openNav() {
-    var x = document.getElementById("navDemo");
-    if (x.className.indexOf("w3-show") == -1) {
-        x.className += " w3-show";
-    } else { 
-        x.className = x.className.replace(" w3-show", "");
-    }
-}
-</script>
 
 
  

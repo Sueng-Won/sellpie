@@ -8,7 +8,15 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>무제 문서</title>
+<script src="resources/js/jquery-3.3.1.min.js"></script>
+<script src="resources/js/popper.min.js"></script>
+<script>
 
+function frientForm(){
+	location.href="friendForm.do";
+}
+
+</script>
 </head>
 
 <body>
@@ -37,7 +45,7 @@
           <div id="Demo2" class="w3-hide w3-container">
             <p>Some other text..</p>
           </div>
-          <button onclick="myFunction('Demo3')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-users fa-fw w3-margin-right"></i> My Photos</button>
+          <button onclick="frientForm();" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-users fa-fw w3-margin-right"></i>친구</button>
           <div id="Demo3" class="w3-hide w3-container">
          <div class="w3-row-padding">
          <br>
