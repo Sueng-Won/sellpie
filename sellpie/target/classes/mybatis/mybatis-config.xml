@@ -32,6 +32,7 @@
 		<mapper resource="mybatis/sql/product-mapper.xml"/>
 		<mapper resource="mybatis/sql/boardMapper.xml"/>
 		<mapper resource="mybatis/sql/resourceMapper.xml"/>
+		<mapper resource="mybatis/sql/seller-mapper.xml"/>
 	</mappers>
 
 </configuration>
