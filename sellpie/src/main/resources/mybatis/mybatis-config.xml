@@ -18,6 +18,7 @@
 		<typeAlias type="com.teamnameled.sellpie.member.model.vo.Member" alias="Member"/>
 		<typeAlias type="com.teamnameled.sellpie.board.model.vo.BoardVo" alias="Board"/>
 		<typeAlias type="com.teamnameled.sellpie.resource.model.vo.ResourceVo" alias="Resource"/>
+		<typeAlias type="com.teamnameled.sellpie.seller.model.vo.Seller" alias="Seller"/>
 	</typeAliases>
 	
 	

@@ -1,5 +1,9 @@
 package com.teamnameled.sellpie.seller.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,10 +15,11 @@ import com.teamnameled.sellpie.seller.model.vo.Seller;
 public class SellerController {
 	@Autowired
 	SellerService sellerService;
-	@RequestMapping("seller.do")
-	public String sellerDetail() {
-		Seller seller = sellerService.selectSeller();
-		
-		return "seller/sellerDetail";
+	@RequestMapping("tagSearch")
+	public String tagSearch(String searchContentStr,HttpServletRequest request) {
+		String selTag = searchContentStr;
+		List<Seller> sellerList = sellerService.selectSellerList(selTag);
+		request.setAttribute("sellerList", sellerList);
+		return "seller/sellerList";
 	}
 }
