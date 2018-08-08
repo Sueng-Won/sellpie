@@ -15,7 +15,7 @@ import com.teamnameled.sellpie.seller.model.vo.Seller;
 public class SellerController {
 	@Autowired
 	SellerService sellerService;
-	@RequestMapping("tagSearch")
+	@RequestMapping("tagSearch.do")
 	public String tagSearch(String searchContentStr,HttpServletRequest request) {
 		String selTag = searchContentStr;
 		List<Seller> sellerList = sellerService.selectSellerList(selTag);
