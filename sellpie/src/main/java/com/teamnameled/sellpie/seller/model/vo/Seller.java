@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class Seller {
 	/*
-		SNO	NUMBER
+		sNo	NUMBER
 		EMAIL	VARCHAR2(100 BYTE)
 		ACNUM	VARCHAR2(100 BYTE)
 		BANK	VARCHAR2(30 BYTE)
@@ -15,40 +15,40 @@ public class Seller {
 		PCATEGORY	VARCHAR2(100 BYTE)
 		REASON	VARCHAR2(4000 BYTE)
 	*/
-	private int sno;
+	private int sNo;
 	private String email;
 	private String acNum;
 	private String bank;
 	private String zipcode;
 	private String addr;
 	private String addrDetail;
-	private String pCategroy;
+	private String pCategory;
 	private String reason;
 	
 	public Seller() {
 		
 	}
 
-	public Seller(int sno, String email, String acNum, String bank, String zipcode, String addr, String addrDetail,
-			String pCategroy, String reason) {
+	public Seller(int sNo, String email, String acNum, String bank, String zipcode, String addr, String addrDetail,
+			String pCategory, String reason) {
 		super();
-		this.sno = sno;
+		this.sNo = sNo;
 		this.email = email;
 		this.acNum = acNum;
 		this.bank = bank;
 		this.zipcode = zipcode;
 		this.addr = addr;
 		this.addrDetail = addrDetail;
-		this.pCategroy = pCategroy;
+		this.pCategory = pCategory;
 		this.reason = reason;
 	}
 
-	public int getSno() {
-		return sno;
+	public int getsNo() {
+		return sNo;
 	}
 
-	public void setSno(int sno) {
-		this.sno = sno;
+	public void setsNo(int sNo) {
+		this.sNo = sNo;
 	}
 
 	public String getEmail() {
@@ -99,12 +99,12 @@ public class Seller {
 		this.addrDetail = addrDetail;
 	}
 
-	public String getpCategroy() {
-		return pCategroy;
+	public String getpCategory() {
+		return pCategory;
 	}
 
-	public void setpCategroy(String pCategroy) {
-		this.pCategroy = pCategroy;
+	public void setpCategory(String pCategory) {
+		this.pCategory = pCategory;
 	}
 
 	public String getReason() {
@@ -117,8 +117,8 @@ public class Seller {
 
 	@Override
 	public String toString() {
-		return "Seller [sno=" + sno + ", email=" + email + ", acNum=" + acNum + ", bank=" + bank + ", zipcode="
-				+ zipcode + ", addr=" + addr + ", addrDetail=" + addrDetail + ", pCategroy=" + pCategroy + ", reason="
+		return "Seller [sNo=" + sNo + ", email=" + email + ", acNum=" + acNum + ", bank=" + bank + ", zipcode="
+				+ zipcode + ", addr=" + addr + ", addrDetail=" + addrDetail + ", pCategory=" + pCategory + ", reason="
 				+ reason + "]";
 	}
 	

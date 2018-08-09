@@ -7,7 +7,6 @@
 <head>
 <c:import url="header.jsp"></c:import>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <title>메인페이지</title>
 <style>
 
