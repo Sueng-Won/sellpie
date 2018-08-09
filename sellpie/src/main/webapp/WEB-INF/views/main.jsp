@@ -133,7 +133,7 @@ function fileUpload(inputFiles, condition){
                   fileTag = $("<img/>");
                   imgIdx = imgIdx+1;
                   $("#imageFile").attr("id","img"+imgIdx);
-                  newTag = '<input type="file" name="file" id="imageFile" onchange="fileUpload(this,0);" accept="image/*" hidden multiple/>';
+                  newTag = '<input type="file" name="file" id="imageFile" onchange="fileUpload(this,0);" accept="image/*" style="display:none" multiple/>';
                   
                }else{
                   if(!(f.type.match("video.*"))){//동영상버튼 클릭 후  파일 선택시 동영상 파일인지 확인
@@ -172,51 +172,6 @@ function fileUpload(inputFiles, condition){
               location.href = "selectBoardList.do";
               }, 180000); // 3000ms(3초)가 경과하면 이 함수가 실행됩니다.
 
-        /*  $.ajax({
-         url : "/sellpie/selectBoardList.do", 
-         type : "post",
-         success : function(data){
-            
-               console.log(data);
-               
-               var str = "";
-               for(index in data){
-                  str += '<div class="w3-container w3-card w3-white w3-round w3-margin"><br>'+
-                       '<img src="resources/images/header/twice2.png" alt="Avatar" class="w3-left w3-circle w3-margin-right rounded-circle" style="width:60px; height:60px;">'+
-                    '<span class="w3-right w3-opacity">32 min</span>'+
-                    '<h4>'+ data[index].bcontent +'</h4><br>'+
-                    
-                    '<hr class="w3-clear">'+
-                    '<p>Have you seen this?</p>'+
-                    '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>'+
-                    '<table id="fileTb" cellspacing="0" align="center" class="w3-margin-bottom">'+
-                    '    <tr>'+
-                    '        <td>'+
-                    '            <img src="resources/images/header/twice2.png" style="width:100%; height:35%;">'+
-                    '        </td>'+
-                    '        <td>'+
-                    '            <img src="resources/images/header/twice2.png" style="width:100%; height:35%;">'+
-                    '        </td>'+
-                    '    </tr>'+
-                    '    <tr>'+
-                    '        <td>'+
-                    '            <img src="resources/images/header/twice2.png" style="width:100%; height:35%;">'+
-                    '        </td>'+
-                    '        <td>'+
-                    '            <img src="resources/images/header/twice2.png" style="width:100%; height:35%;">'+
-                    '        </td>'+
-                    '    </tr>'+
-                    '</table>'+
-                    '&nbsp;'+
-                    '<button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i> &nbsp;600</button> '+
-                    '<button type="button" class="w3-button w3-theme-d2 w3-margin-bottom" onclick="javascript:location.href="><i class="fa fa-comment"></i> &nbsp;128</button> '+
-                '</div>';
-               }
-               $("#contentDiv").append($(str));
-         },error : function(e){
-            console.log("요청 실패!!");
-         }
-      });  */
    }); 
       
    // Accordion
@@ -314,9 +269,9 @@ function fileUpload(inputFiles, condition){
                                 
                                 <div class="fileLInk background-white">
                                     <img src="resources/images/picture.JPG" width="30" height="30" onclick="imageFile.click()"/>
-                                    <input type="file" name="file" id="imageFile" onchange="fileUpload(this,0);" accept="image/*" hidden multiple/>
+                                    <input type="file" name="file" id="imageFile" onchange="fileUpload(this,0);" accept="image/*" style="display:none" multiple/>
                                     <img src="resources/images/video.JPG" width="30" height="30" onclick="videoFile.click()"/>
-                                    <input type="file" name="file" id="videoFile" onchange="fileUpload(this,1);" accept="video/*" hidden/>
+                                    <input type="file" name="file" id="videoFile" onchange="fileUpload(this,1);" accept="video/*" style="display:none"/>
                                    </div>
                                    <br>
                                    
