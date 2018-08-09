@@ -14,5 +14,4 @@
 		FROM BOARD
 		ORDER BY BNO DESC
 	</select>
-	
 </mapper>

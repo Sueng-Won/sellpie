@@ -62,5 +62,11 @@ public class BoardVo {
 	public void setDelflag(char delflag) {
 		this.delflag = delflag;
 	}
+
+	@Override
+	public String toString() {
+		return "BoardVo [email=" + email + ", bcontent=" + bcontent + ", gcount=" + gcount + ", rurl=" + rurl
+				+ ", isad=" + isad + ", delflag=" + delflag + "]";
+	}
 	
 }

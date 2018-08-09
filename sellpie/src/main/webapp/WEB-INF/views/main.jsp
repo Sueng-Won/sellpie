@@ -162,7 +162,11 @@ function fileUpload(inputFiles, condition){
 	          $("#content").html("");
 	    });
         
-/* 	     $.ajax({
+	    setTimeout(function() {
+	        	location.href = "main.do";
+	        	}, 180000); // 3000ms(3초)가 경과하면 이 함수가 실행됩니다.
+
+ 	    /*  $.ajax({
 			url : "/sellpie/selectBoardList.do", 
 			type : "post",
 			success : function(data){
@@ -206,8 +210,8 @@ function fileUpload(inputFiles, condition){
 			},error : function(e){
 				console.log("요청 실패!!");
 			}
-		}); 
-	}); */
+		});  */
+	}); 
 		
 	// Accordion
 	function myFunction(id) {
@@ -389,12 +393,12 @@ function fileUpload(inputFiles, condition){
 		    </div>
 <!--		    상세보기창 끝-->
 		    
-    
+    <c:forEach var="board" items="${boardList }">
 	<div class="w3-container w3-card w3-white w3-round w3-margin"><br>
         <img src="resources/images/header/twice2.png" alt="Avatar" class="w3-left w3-circle w3-margin-right rounded-circle" style="width:60px; height:60px;">
         <span class="w3-right w3-opacity">32 min</span>
         
-        <h4>Angie Jane</h4><br>
+        <h4><c:out value="${board.email }"></c:out></h4><br>
         
         <hr class="w3-clear">
         <p>Have you seen this?</p>
@@ -421,10 +425,10 @@ function fileUpload(inputFiles, condition){
         <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i> &nbsp;600</button> 
         <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom" onclick="javascript:location.href='#open'"><i class="fa fa-comment"></i> &nbsp;128</button> 
     </div>
-      
+    </c:forEach>
     <!-- End Middle Column -->
     </div>
-    
+   
     <!-- Right Column -->
     
       <c:import url="sideRight.jsp"></c:import>

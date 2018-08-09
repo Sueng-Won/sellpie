@@ -123,7 +123,7 @@ public class BoardController {
 		return list;
 	}*/
 	
-	@RequestMapping(value="selectBoardList.do")
+	/*@RequestMapping(value="selectBoardList.do")
 	public ModelAndView selectBoardList(ModelAndView mv) {
 		List<BoardVo> list = boardService.selectBoardList();
 		
@@ -132,5 +132,5 @@ public class BoardController {
 		mv.setViewName("main");
 		
 		return mv;
-	}
+	}*/
 }
