@@ -229,7 +229,7 @@ function validate(){
 <!--게시글보기 창 -->
 			<form id="board" method="post"  action="/sellpie/insertBoard.do" onsubmit="validate();" enctype="multipart/form-data">
 	         	<div class="detail_content2" id="contentOpen" >
-	         	<input type="hidden" name="email" value="test4@naver.com"/>
+	         	<input type="hidden" name="email" value="test@naver.com"/>
 	         	<input type="hidden" name="bcontent" id="hiddenContent"/>
 	         		<div>
 	         			<div style="text-align:right;">

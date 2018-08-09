@@ -18,6 +18,8 @@ public class BoardVo {
 	private char delflag;
 	private char likeflag = 'F';
 	private List<ResourceVo> resource;
+	private String name;
+	
 	
 	public BoardVo() {
 		super();
@@ -101,22 +103,25 @@ public class BoardVo {
 		this.resource = resource;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 
 
 	@Override
 	public String toString() {
 		return "BoardVo [bno=" + bno + ", email=" + email + ", bcontent=" + bcontent + ", gcount=" + gcount + ", rurl="
 				+ rurl + ", isad=" + isad + ", delflag=" + delflag + ", likeflag=" + likeflag + ", resource=" + resource
-				+ "]";
+				+ ", name=" + name + "]";
 	}
 
-	
-	
-
-	
-	
-	
-	
-	
+ 
 
 }
