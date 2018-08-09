@@ -10,12 +10,14 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.teamnameled.sellpie.board.model.service.BoardService;
 import com.teamnameled.sellpie.board.model.vo.BoardVo;
@@ -68,6 +70,7 @@ public class BoardController {
 				UUID uuid = UUID.randomUUID();
 	
 				if(null!=files.get(i).getOriginalFilename()&&!files.get(i).getOriginalFilename().equals("")){
+					board.setRurl(filePath);
 					file = new File(filePath+"\\"+uuid+files.get(i).getOriginalFilename());
 					ResourceVo resource = new ResourceVo();
 					resource.setRsrc(filePath+"\\"+uuid+files.get(i).getOriginalFilename());
@@ -89,7 +92,7 @@ public class BoardController {
 			
 			
 			if(resourceResult==fileLength){
-				board.setRurl(filePath);
+				
 				
 				boardResult = boardService.insertBoard(board);
 				
@@ -108,6 +111,49 @@ public class BoardController {
 		request.setAttribute("msg", errorMsg);
 		
 		return "main";
+	}
+	
+	@RequestMapping("selectBoardList.do")
+	public ModelAndView selectBoardList(HttpSession session, ModelAndView mv){
+//		String email = session.getAttribute("member").getEmail();
+		String email = "test2@naver.com";
+		
+		//친구리스트
+		List<String> fList1 = boardService.selectfList1(email); //응답자일 때
+		List<String> fList2 = boardService.selectfList2(email); //요청자일 때
+		if(null!=fList2){
+			for(int i=0; i<fList2.size(); i++){
+				fList1.add(fList2.get(i));
+			}
+		}
+		fList1.add(email); //내 게시물도 포함하기 위함.
+		
+		List<BoardVo> bList = boardService.selectbList(fList1);
+		
+		for(int i=0; i<bList.size(); i++){
+			BoardVo b = bList.get(i);
+			List<String> lList = boardService.selectlList(b.getBno());
+			if(null!=lList && lList.size()!=0){
+				for(int j=0; j<lList.size(); j++){
+					String str = lList.get(j);
+					if(str.equals(email)){
+						b.setLikeflag('T');
+					}
+				}
+				
+			}
+		}
+		
+		
+		for(BoardVo b:bList){
+			System.out.println(b.toString());
+		}
+		
+		
+		
+		mv.setViewName("main");
+		
+		return mv;
 	}
 
 }
