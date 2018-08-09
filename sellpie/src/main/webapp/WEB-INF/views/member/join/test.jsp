@@ -836,6 +836,591 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
     opacity: 1; }
   100% {
     opacity: 0; } }
+    
+ /* The Modal (background) */
+   * {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+html, body {
+	min-height: 100%;
+	height: 100%;
+	font-family: helvetica neue, helvetica, arial, sans-serif;
+}
+
+.content {
+	min-height: 100%;
+	height: 100%;
+	background: #fff;
+	position: relative;
+	z-index: 0;
+}
+.content h1 {
+	padding: 75px 0 30px 0;
+	text-align: center;
+	font-size: 30px;
+	line-height: 30px;
+}
+.content .buttons {
+	max-width: 800px;
+	margin: 0 auto;
+	text-align: center;
+}
+.content .buttons .button {
+	display: inline-block;
+	text-align: center;
+	text-decoration: none;
+	background: #efefef;
+	padding: 10px 15px;
+	margin: 10px;
+	border-radius: 3px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, .3);
+	color: #333;
+	font-weight: bold;
+}
+.content .buttons .button:hover {
+	color: #fff;
+	background: #009bd5;
+}
+
+/* modal style */
+html.modal-active,
+body.modal-active {
+	overflow: hidden;
+}
+#modal-container {
+	position: fixed;
+	left: 0;
+	top: 0;
+	display: table;
+	height: 100%;
+	width: 100%;
+	z-index: 1;
+	/* hidden 처리 */
+	transform: scale(0);
+}
+#modal-container .modal-background {
+	display: table-cell;
+	background: rgba(0, 0, 0, .8);
+	text-align: center;
+	vertical-align: middle;
+}
+#modal-container .modal-background .modal {
+	background: #fff;
+	padding: 50px;
+	display: inline-block;
+	border-radius: 3px;
+	position: relative;
+}
+#modal-container .modal-background .modal h2 {
+	font-size: 25px;
+	line-height: 25px;
+	margin-bottom: 15px;
+	
+}
+#modal-container .modal-background .modal p {
+	font-size: 18px;
+	line-height: 22px;
+}
+
+
+/*
+ * ------------------------------
+ * Unfolding Animation
+ * ------------------------------
+ */
+#modal-container.one {
+	/*transform: scaleX(0) scaleY(1);*/
+	animation: unfoldIn 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+#modal-container.one .modal-background .modal {
+	/* 초기 display: none 처럼 크기를 0 으로 하여 보여주지 않음*/
+	transform: scale(0);
+	/* 0.5 초 동안 애니메이션을 실행, 단 0.8초 지연시켜 0.8초 후에 애니메이션을 실행 */
+	animation: zoomIn .5s .8s  cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+#modal-container.one.out {
+	transform: scale(1);
+	animation: unfoldOut 1s .3s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+#modal-container.one.out .modal-background .modal {
+	animation: zoomOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+/* Dimmed showing */
+@keyframes unfoldIn {
+	0% {
+		transform: scaleX(0) scaleY(0.005);
+	}
+	50% {
+		/* 0.5 초간 세로 크기는 작은상태로 가로 너비만 확대  */
+		transform: scaleX(1) scaleY(0.005);
+	}
+	100% {
+		/* 0.5 초간 세로 크기를 확대 */
+		transform: scaleY(1) scaleX(1);
+	}
+}
+/* Show modal content  */
+@keyframes zoomIn {
+	from {
+		transform: scale(0);
+	}
+	to {
+		transform: scale(1);
+	}
+}
+/* Hide modal content */
+@keyframes zoomOut {
+	from {
+		transform: scale(1);
+	}
+	to {
+		transform: scale(0);
+	}
+}
+/* Dimmed hiding */
+@keyframes unfoldOut {
+	0% {
+		transform: scale(1)
+	}
+	50% {
+		transform: scaleX(1) scaleY(0.005);
+	}
+	100% {
+		transform: scaleX(0) scaleY(0.005);
+	}
+}
+
+
+/*
+ * ------------------------------
+ * Revealing Animation
+ * ------------------------------
+ */
+#modal-container.two {
+	transform: scale(1);
+}
+#modal-container.two .modal-background {
+	background: transparent;
+	animation: fadeIn .5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+#modal-container.two .modal-background .modal {
+	/* 콘텐츠를 초기에 보여주지 않음 */
+	opacity: 0;
+	animation: scaleUp 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+.content.two {
+	/* 콘텐츠 크기를 줄임 */
+	animation: scaleBack 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+#modal-container.two.out {
+	/* 전체 모달 컨테이너를 숨김 처리(다른 애니메이션이 모두 끝난 0.5초 후에 처리하기 위해 0.5초 지연시킴 */
+	animation: quickScaleDown 0s .5s linear forwards;
+}
+#modal-container.two.out .modal-background {
+	animation: fadeOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+#modal-container.two.out .modal-background .modal {
+	animation: scaleDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+.content.two.out {
+	animation: scaleForward 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+/* Dimmed showing */
+@keyframes fadeIn {
+	0% {
+		background: transparent;
+	}
+	100% {
+		background: rgba(0, 0, 0, .7);
+	}
+}
+/* Show modal content from bottom to top */
+@keyframes scaleUp {
+	0% {
+		/* 모달 콘텐츠를 하단에 위치시킴 */
+		transform: scale(.8) translateY(1000px);
+		opacity: 0;
+	}
+	100% {
+		/* 모달 콘텐츠를 본래 위치로 돌려놓음 */
+		transform: scale(1) translateY(0);
+		opacity: 1;
+	}
+}
+/* Shrink content */
+@keyframes scaleBack {
+	0% {
+		transform: scale(1);
+	}
+	100% {
+		transform: scale(.8);
+	}
+}
+/* Hide modal container*/
+@keyframes quickScaleDown {
+	0% {
+		transform: scale(1);
+	}
+	99.9% {
+		transform: scale(1);
+	}
+	100% {
+		transform: scale(0);
+	}
+}
+/* Dimmed hiding */
+@keyframes fadeOut {
+	0% {
+		background: rgba(0, 0, 0, .7);
+	}
+	100% {
+		background: transparent;
+	}
+}
+/* modal content from top to bottom */
+@keyframes scaleDown {
+	0% {
+		transform: scale(1) translateY(0);
+		opacity: 1;
+	}
+	100% {
+		transform: scale(.8) translateY(1000px);
+		opacity: 0;
+	}
+}
+
+@keyframes scaleBack {
+	0% {
+		transform: scale(1);
+	}
+	100% {
+		transform: scale(.85);
+	}
+}
+@keyframes scaleForward {
+	0% {
+		transform: scale(0.85);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+
+/*
+ * ------------------------------
+ * Uncovering Animation
+ * ------------------------------
+ */
+#modal-container.three {
+	z-index: 0;
+	transform: scale(1);
+}
+#modal-container.three .modal-background {
+	background: rgba(0, 0, 0, .9);
+}
+#modal-container.three .modal-background .modal {
+	animation: moveUp 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+.content.three {
+	z-index: 1;
+	animation: slideUpLarge 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+#modal-container.three.out .modal-background .modal {
+	animation: moveDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+.content.three.out {
+	animation: slideDownLarge 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+/* Show Modal content*/
+@keyframes moveUp {
+	/* 하단에서 */
+	0% {
+		transform: translateY(200px);
+	}
+	/* 중앙으로 위치 */
+	100% {
+		transform: translateY(0);
+	}
+}
+/* Slide up Content */
+@keyframes slideUpLarge {
+	0% {
+		transform: translateY(0);
+	}
+	100% {
+		transform: translateY(-100%);
+	}
+}
+/* Hide Modal content */
+@keyframes moveDown {
+	/* 중앙에 있는 모달 콘텐츠를 */
+	0% {
+		transform: translateY(0);
+	}
+	/* 하단으로 위치 */
+	100% {
+		transform: translateY(200px);
+	}
+}
+/* Slide down content */
+@keyframes slideDownLarge {
+	0% {
+		transform: translateY(-100%);
+	}
+	100% {
+		transform: translateY(0);
+	}
+}
+
+/*
+ * ------------------------------
+ * Blow Up Animation
+ * ------------------------------
+ */
+#modal-container.four {
+	z-index: 0;
+	transform: scale(1);
+}
+#modal-container.four .modal-background {
+	background: rgba(0, 0, 0, 0.9);
+}
+#modal-container.four .modal-background .modal {
+	animation: blowUpModal 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+.content.four {
+	z-index: 1;
+	animation: blowUpContent 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+#modal-container.four.out .modal-background .modal {
+	animation: blowUpModalTwo 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+.content.four.out {
+	animation: blowUpContentTwo 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+/* Show modal content */
+@keyframes blowUpModal {
+	0% {
+		transform: scale(0);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+/* Hide content */
+@keyframes blowUpContent {
+	0% {
+		transform: scale(1);
+		opacity: 1;
+	}
+	/* 원본 크기에서 2배로 커지면서 투명도를 서서히 낮춤 */
+	99.9% {
+		transform: scale(2);
+		opacity: 0;
+	}
+	/* 마지막에 숨김 처리 */
+	100% {
+		transform: scale(0);
+	}
+}
+/* Hide modal content */
+@keyframes blowUpModalTwo {
+	0% {
+		transform: scale(1);
+		opacity: 1;
+	}
+	100% {
+		transform: scale(0);
+		opacity: 0;
+	}
+}
+/* Show content */
+@keyframes blowUpContentTwo {
+	0% {
+		transform: scale(2);
+		opacity: 0;
+	}
+	100% {
+		transform: scale(1);
+		opacity: 1;
+	}
+}
+
+/*
+ * ------------------------------
+ * Meep Meep Animation
+ * ------------------------------
+ */
+#modal-container.five {
+	transform: scale(1);
+}
+#modal-container.five .modal-background {
+	background: transparent;
+	animation: fadeIn 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+#modal-container.five .modal-background .modal {
+	transform: translateX(-1500px);
+	animation: roadRunnerIn 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+#modal-container.five.out {
+	animation: quickScaleDown 0s .5s linear forwards;
+}
+#modal-container.five.out .modal-background {
+	animation: fadeOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+#modal-container.five.out .modal-background .modal {
+	animation: roadRunnerOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+/* 모달 콘텐츠 반동 효과로 나타나기 */
+@keyframes roadRunnerIn {
+	0% {
+		transform: translateX(-1500px) skewX(30deg) scaleX(1.3);
+	}
+	70% {
+		transform: translateX(50px) skewX(0deg) scaleX(0.9);
+	}
+	100% {
+		transform: translateX(0px) skewX(0deg) scaleX(1);
+	}
+}
+/* 모달 콘텐츠 반동 효과로 숨기기 */
+@keyframes roadRunnerOut {
+	0% {
+		transform: translateX(0px) skewX(0deg) scaleX(1);
+	}
+	30% {
+		transform: translateX(-100px) skewX(-5deg) scaleX(0.9);
+	}
+	100% {
+		transform: translateX(1500px) skewX(30deg) scaleX(1.3);
+	}
+}
+
+/*
+ * ------------------------------
+ * James Bond Animation
+ * ------------------------------
+ */
+#modal-container.six {
+	transform: scale(1);
+}
+#modal-container.six .modal-background {
+	background: transparent;
+	animation: fadeIn 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+#modal-container.six .modal-background .modal {
+	/* 초기 모달 콘텐츠 크기 및 라운드 정의 */
+	width: 200px;
+	height: 200px;
+	border-radius: 100%;
+	overflow: hidden;
+	animation: JamesBond 1.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+#modal-container.six .modal-background .modal h2,
+#modal-container.six .modal-background .modal p {
+	/* 콘텐츠 내용 숨김 */
+	opacity: 0;
+	position: relative;
+	/* 원형 모달이 본래 모양을 완성된 후 1.4 지연후에 보여줌 */
+	animation: modalContentFadeIn .5s 1.4s linear forwards;
+}
+#modal-container.six.out {
+	animation: slowFade .5s 1.5s linear forwards;
+}
+#modal-container.six.out .modal-background {
+	background-color: rgba(0, 0, 0, 0.7);
+	animation: fadeToRed 2s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+#modal-container.six.out .modal-background .modal {
+	border-radius: 3px;
+	height: 162px;
+	width: 227px;
+	animation: killShot 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+#modal-container.six.out .modal-background .modal h2,
+#modal-container.six.out .modal-background .modal p {
+	animation: modalContentFadeOut 0.5s 0.5 cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+/* Show modal content : round shape */
+@keyframes JamesBond {
+	0% {
+		transform: translateX(1000px);
+	}
+	80% {
+		transform: translateX(0px);
+		width: 150px;
+		height: 150px;
+		border-radius: 100%;
+	}
+	90% {
+		border-radius: 3px;
+		width: 340px;
+		height: 240px;
+	}
+	100% {
+		border-radius: 3px;
+		width: 300px;
+		height: 200px;
+	}
+}
+/* 모달 콘텐츠 내의 요소 효과 처리 */
+@keyframes modalContentFadeIn {
+	0% {
+		opacity: 0;
+		top: -20px;
+	}
+	100% {
+		opacity: 1;
+		top: 0;
+	}
+}
+/* 전체 모달 컨테이너 숨김처리 */
+@keyframes slowFade {
+	0% {
+		opacity: 1;
+	}
+	99.9% {
+		opacity: 0;
+		transform: scale(1);
+	}
+	100% {
+		transform: scale(0);
+	}
+}
+/* 박스 그림자를 이용한 효과 */
+@keyframes fadeToRed {
+	0% {
+		box-shadow: inset 0 0 0 rgba(201, 24, 24, 0.8);
+	}
+	100% {
+		/* y 축 박스 그림자를 위에서부터 아래로 내리는 효과 */
+		box-shadow: inset 0 2000px 0 rgba(201, 24, 24, 0.8);
+	}
+}
+/* 모달 콘텐츠 비스듬히 하단으로 떨어뜨림 */
+@keyframes killShot {
+	0% {
+		transform: translateY(0) rotate(0deg);
+		opacity: 1;
+	}
+	100% {
+		/* 하단으로 회전시켜 떨어뜨림 */
+		transform: translateY(400px) rotate(45deg);
+		opacity: 0;
+	}
+}
+/* 모달 콘텐츠가 떨어질 때 효과처리 */
+@keyframes modalContentFadeOut {
+	0% {
+		opacity: 1;
+		top: 0;
+	}
+	100% {
+		opacity: 0;
+		top: -20px;
+	}
+}   
 </style>
 <script>
   $(function(){
@@ -858,6 +1443,41 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
     	location.href="/sellpie/signIn.do"; 
      });
         
+     var $button         = $('.button'),
+     $modalContainer = $('#modal-container'),
+     $body           = $('body'),
+     $content        = $('.content'),
+     btnId;
+
+ $("#one").on('click', function(){
+ 	console.log("ㅁㄷ");
+	 btnId = $(this).attr('id');
+ 	
+ 	$modalContainer
+ 			.removeAttr('class')
+ 			.addClass(btnId);
+ 	$content
+ 			.removeAttr('class')
+ 			.addClass('content');
+ 	
+ 	$body.addClass('modal-active');
+ 	
+ 	if (btnId == 'two' || btnId == 'three'|| btnId == 'four') {
+ 		$content.addClass(btnId);
+ 	}
+ 	
+ });
+// 모달 끄기 펑션
+/*  $modalContainer.on('click', function () {
+ 	$(this).addClass('out');
+ 	$body.removeClass('modal-active');
+ 	if ($(this).hasClass(btnId)) {
+ 		
+ 		$content.addClass('out');
+ 		
+ 	}
+ }); */
+     
      });
 </script>
 </head>
@@ -900,11 +1520,8 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
                             </div>
                             <div class="signUpComponent__footer__DSK">
                                 <div class="solidButton__buttonWrapper__tkE">
-                                    <button type="submit" class="solidButton__button__15V   signUpComponent__btnFB__1uM">페이스북으로 시작하기</button>
+                                    <button type="submit"  id="one"  class="solidButton__button__15V   signUpComponent__btnFB__1uM">페이스북으로 시작하기</button>
                                 </div>
-                            <div class="solidButton__buttonWrapper__tkE">
-                                <button type="submit" class="solidButton__button__15V   signUpComponent__btnEmail__25y">이메일로 시작하기</button>
-                            </div>
                             <div class="signUpComponent__hadAccount__gtQ"><span>이미 빙글을 사용하고 있나요? </span>
                                 <span class="signUpComponent__login__3Iz"><a href="/sellpie/login.do"><span>로그인</span></a></span>
                             </div>
@@ -914,6 +1531,42 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
                 </div>
             </div>
         </div>
+        	<div id="modal-container">
+				<div class="modal-background">
+				<div class="signUpBody__emailBodyWrapper__20z modal">
+<nav class="signupNavbar__navWrapper__186">
+         				 <div class="signupNavbar__titleWrapper__4Iq">
+          					<span>Welcome to </span>
+          					<i class="icons__icon__2cq signupNavbar__vingleLogo__3Ob">
+    							<img id="logo_img" src="resources/images/join/logo_sellpie2.png"/>
+    						</i>
+    						<hr>
+    					</div>
+    				</nav>
+    				
+    					    <div class="signUpBody__emailHeader__TiN">
+    							<div class="titleWithVerify__head__3gv">
+    								<div class="titleWithVerify__title__1ix">이메일로 회원가입</div>
+    						   </div>
+    						</div>
+    						<div class="signUpBody__content__1PG"> <!--  form -> div  -->
+    							<div class="signUpBody__formInput__1yh">
+    								<div class="solidReasonInput__wrapper__28f undefined " >
+    									<input type="text" id="email" autofocus="" class="solidReasonInput__textInput__ZZr " placeholder="이메일 주소를 입력해주세요. (sellpie@sellpie.net)" value=""  autocomplete="off"/>
+    								</div>
+    							</div>
+    						<div class="signUpBody__formInput__1yh">
+    							<div class="solidReasonInput__wrapper__28f undefined " >
+    								<input type="password"  id="pwd" class="solidReasonInput__textInput__ZZr " placeholder="비밀번호를 입력해주세요." value=""/>
+    							</div>
+    						</div>
+    						<div class="solidButton__buttonWrapper__tkE">
+    							<button type="button" class="solidButton__button__15V  solidButton__disabled__15i signUpBody__nextButton__wU3" disabled style="background-color:rgba(0,0,0,0)">Next</button>
+    						</div>
+    						</div> <!-- button end (form) -->
+    					</div> 
+  </div>
+</div>
     </div>
   </body>
 </html>

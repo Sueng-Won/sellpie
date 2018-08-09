@@ -442,7 +442,7 @@ span + .signupNavbar__vingleLogo__3Ob {
 					type : "get",
 					success:function(data){
 						console.log(data.result);
-						if( data.result == "2" ){
+						if( data.result == "1" ){
 							alert("이미 가입한 이메일 입니다..");
 							/* var $auNum_wrapper = $("<div class='auNum_wrapper'></div>");
 							 var $solidReasonInput_wrapper = $("<div class='solidReasonInput__wrapper__auNum undefined'></div>");
