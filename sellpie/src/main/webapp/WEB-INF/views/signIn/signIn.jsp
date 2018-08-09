@@ -868,7 +868,10 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
                         <div class="commonView__container__2RU">
                             <nav class="navbar__navWrapper__2mJ">
                                 <div class="navbar__container__3tL clearfix">
-                                	<ul class="navbar__left__2RB"><li><a href="mailto:ads@vingle.net"><span>관리자 페이지</span></a></li><li></ul>
+                                	<ul class="navbar__left__2RB">
+                                		<li><a href="mailto:ads@vingle.net"><span>관리자 페이지</span></a></li><li>
+                                		<li><a href="/sellpie/test.do"><span>로그인 TEST</span></a></li><li>
+                                	</ul>
                                     <ul class="navbar__right__2FE">
                                         <a href="/users/sign_in">
                                             <li class="navbar__login__3ct"><a href="/sellpie/login.do"><span>로그인</span></a></li>

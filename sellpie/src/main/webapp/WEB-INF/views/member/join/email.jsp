@@ -530,7 +530,9 @@ span + .signupNavbar__vingleLogo__3Ob {
 </script>
       </head>
       <body>
-      	<div id="loading"><img id="loading-image" src="resources/images/join/loading2.gif" /></div>
+      	<div id="loading">
+      		<img id="loading-image" src="resources/images/join/loading2.gif" />
+      	</div>
         <div id="sellpie-web">
           <div data-reactroot=""><div class="root__rootWrapper__1So">
           	<div class="commonView__container__2RU">
@@ -567,7 +569,7 @@ span + .signupNavbar__vingleLogo__3Ob {
     						</div> <!-- button end (form) -->
     					</div>
     				</div>
-    				</div>
+    			</div>
     		</div>
     	</div>
     </div>
