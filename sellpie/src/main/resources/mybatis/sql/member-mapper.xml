@@ -7,26 +7,15 @@
     SQL에 접근할 때 사용하는 매퍼 파일의 별칭이다. 
     보통 서비스의 이름과 같게 설정하여
     연결의 착오를 줄인다. -->
-<mapper namespace="MemberMapper">
-	<select id="selectMemberId" parameterType="Member" resultType="Member">
-		SELECT USERID, PASSWORD, USERNAME, GENDER, AGE, EMAIL, PHONE, ADDRESS, HOBBY, ENROLLDATE
+<mapper namespace="memberMapper">
+	<select id="selectEmail" parameterType="String"  resultType="Member">
+		SELECT EMAIL, PWD, NAME, GENDER, PHONE, BIRTH, PROFILE_IMG
 		FROM MEMBER
-		WHERE USERID = #{userId}
+		WHERE EMAIL = #{email}
 	</select>
 	<insert id="insertMember" parameterType="Member">
-		INSERT INTO MEMBER
-		VALUES(#{userId},#{password},#{userName},#{gender},#{age},#{email},#{phone},#{address},#{hobby},SYSDATE)
+		INSERT INTO MEMBER VALUES(#{email},#{pwd},#{name},#{gender},#{phone},#{birth}, NULL)
 	</insert>
-	<update id="updateMember" parameterType="Member">
-		UPDATE MEMBER SET
-		PASSWORD = #{password},
-		GENDER = #{gender},
-		EMAIL = #{email},
-		PHONE = #{phone},
-		ADDRESS = #{address},
-		HOBBY = #{hobby}
-		WHERE USERID = #{userId}
-	</update>
 </mapper>
 
 
