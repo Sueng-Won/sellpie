@@ -78,8 +78,12 @@
 </style>
 
 <script type="text/javascript">
-	function productDetail(int pNo){
+	function productDetail(pNo){
 		location.href="sellpie/productDetail.do?pNo="+pNo;
+	}
+	
+	function insertContract(pNo,email){
+		location.href="sellpie/insertContract.do?pNo="+pNo+"&email="+email;
 	}
 </script>
 </head>
@@ -160,7 +164,7 @@
                                	<label>수량 : <input type="number"/>개</label>
                                </div>
                                <div>
-                                  <button type="button">구매하기</button>
+                                  <button type="button" onclick="addContract(${product.pNo},${member.email})">구매하기</button>
                                </div>
                                <div style="height:30%; width:100%; overflow-y:scroll;">
                                    <div style="height:10%;">
