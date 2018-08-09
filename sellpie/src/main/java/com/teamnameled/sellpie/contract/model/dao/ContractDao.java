@@ -16,4 +16,8 @@ public class ContractDao {
 	public List<Contract> selectContractList(String email) {
 		return sqlSession.selectList("ContractMapper.selectContractList", email);
 	}
+
+	public int insertContract(Contract contract) {
+		return sqlSession.insert("ContractMapper.insertContract", contract);
+	}
 }

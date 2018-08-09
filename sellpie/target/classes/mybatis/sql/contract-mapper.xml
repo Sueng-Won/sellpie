@@ -13,5 +13,17 @@
 		FROM CONTRACT
 		WHERE EMAIL = #{email}
 	</select>
+	<insert id="insertContract" parameterType="Contract">
+		INSERT INTO CONTRACT
+		VALUES(
+			SEQ_CONTRACT_CNO.NEXTVAL,
+			#{email},
+			#{sNo},
+			#{pNo},
+			#{quantity},
+			null,
+			null
+		)
+	</insert>
 </mapper>
 

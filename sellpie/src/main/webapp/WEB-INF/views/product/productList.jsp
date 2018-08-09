@@ -82,8 +82,8 @@
 		location.href="sellpie/productDetail.do?pNo="+pNo;
 	}
 	
-	function insertContract(pNo,email){
-		location.href="sellpie/insertContract.do?pNo="+pNo+"&email="+email;
+	function insertContract(){
+		$("#contractFrm").submit();
 	}
 </script>
 </head>
@@ -160,12 +160,20 @@
                                <div class="w3-margin-bottom" style="height:27%; overflow-y:scroll;"> 
                                     <p>${product.pDetail}</p>
                                </div>
+                               
                                <div>
-                               	<label>수량 : <input type="number"/>개</label>
+                               	<form id="contractFrm" action="insertContract.do" method="get">
+                               	<label>수량 : <input type="number" id="quantity" name="quantity"/>개</label>
+                               	<input type="hidden" id="pNo" name="pNo" value="${product.pNo}"/>
+                               	<input type="hidden" id="sNo" name="sNo" value="${product.sNo}"/>
+                               	<!-- <input type="hidden" id="email" name="email" value="${sessionScope.member.email}"/> -->
+                               	<input type="hidden" id="email" name="email" value="aaa@aaa.com"/>
+                               	</form>
                                </div>
                                <div>
-                                  <button type="button" onclick="addContract(${product.pNo},${member.email})">구매하기</button>
+                                  <button type="button" onclick="insertContract()">구매하기</button>
                                </div>
+                               
                                <div style="height:30%; width:100%; overflow-y:scroll;">
                                    <div style="height:10%;">
                                        <img src="resources/images/header/twice2.png" alt="Avatar" class="w3-left w3-circle rounded-circle" style="width:20px; height:20px;">

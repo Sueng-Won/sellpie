@@ -16,4 +16,8 @@ public class ContractService {
 	public List<Contract> selectContractList(String email) {
 		return contractDao.selectContractList(email);
 	}
+
+	public int insertContract(Contract contract) {
+		return contractDao.insertContract(contract);
+	}
 }
