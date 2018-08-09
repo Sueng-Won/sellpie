@@ -1546,7 +1546,7 @@ body.modal-active {
     				
     					    <div class="signUpBody__emailHeader__TiN">
     							<div class="titleWithVerify__head__3gv">
-    								<div class="titleWithVerify__title__1ix">이메일로 회원가입</div>
+    								<div class="titleWithVerify__title__1ix">이메일로 시작하기</div>
     						   </div>
     						</div>
     						<div class="signUpBody__content__1PG"> <!--  form -> div  -->
