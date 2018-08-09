@@ -42,14 +42,14 @@
     pointer-events: auto;
 }
 .detail_content > div {
-   position: absolute;
-   top: 9%;
-   left: 15%;
-   width: 890px;
-   height: 520px;
-   padding: 16px;
-   background-color: rgba(0, 0, 0, 0.8);
-   overflow: auto;   
+	position: absolute;
+	top: 9%;
+	left: 15%;
+	width: 890px;
+	height: 520px;
+	padding: 16px;
+	background-color: rgba(0, 0, 0, 0.8);
+	overflow: auto;	
 }
 
 .detail_content2 {
@@ -79,7 +79,6 @@
    width: 800px;
    height: 400px;
    padding: 16px;
-/*   border: 16px solid;*/
    background-color: white;
    overflow: auto;   
 }

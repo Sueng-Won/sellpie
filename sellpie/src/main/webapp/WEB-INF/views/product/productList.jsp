@@ -78,8 +78,12 @@
 </style>
 
 <script type="text/javascript">
-	function productDetail(int pNo){
+	function productDetail(pNo){
 		location.href="sellpie/productDetail.do?pNo="+pNo;
+	}
+	
+	function insertContract(){
+		$("#contractFrm").submit();
 	}
 </script>
 </head>
@@ -156,12 +160,20 @@
                                <div class="w3-margin-bottom" style="height:27%; overflow-y:scroll;"> 
                                     <p>${product.pDetail}</p>
                                </div>
+                               
                                <div>
-                               	<label>수량 : <input type="number"/>개</label>
+                               	<form id="contractFrm" action="insertContract.do" method="get">
+                               	<label>수량 : <input type="number" id="quantity" name="quantity"/>개</label>
+                               	<input type="hidden" id="pNo" name="pNo" value="${product.pNo}"/>
+                               	<input type="hidden" id="sNo" name="sNo" value="${product.sNo}"/>
+                               	<!-- <input type="hidden" id="email" name="email" value="${sessionScope.member.email}"/> -->
+                               	<input type="hidden" id="email" name="email" value="aaa@aaa.com"/>
+                               	</form>
                                </div>
                                <div>
-                                  <button type="button">구매하기</button>
+                                  <button type="button" onclick="insertContract()">구매하기</button>
                                </div>
+                               
                                <div style="height:30%; width:100%; overflow-y:scroll;">
                                    <div style="height:10%;">
                                        <img src="resources/images/header/twice2.png" alt="Avatar" class="w3-left w3-circle rounded-circle" style="width:20px; height:20px;">
@@ -210,7 +222,7 @@
 	<br>
 
 	<!-- Footer -->
-	<footer class="w3-container w3-theme-d3 w3-padding-16">
+	<!-- <footer class="w3-container w3-theme-d3 w3-padding-16">
 		<h5>Footer</h5>
 	</footer>
 
@@ -219,7 +231,7 @@
 			Powered by <a href="https://www.w3schools.com/w3css/default.asp"
 				target="_blank">w3.css</a>
 		</p>
-	</footer>
+	</footer> -->
 </body>
 <script>
 // Accordion

@@ -1,7 +1,10 @@
 package com.teamnameled.sellpie.member.controller;
 
 
+import java.util.List;
+
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -117,6 +120,12 @@ public class MemberController {
 		}
 		return "redirect:main.do";
 	}
-	
+	@RequestMapping(value="memberSearch.do")
+	public String searchMember(String searchText,HttpServletRequest request) {
+		List<Member> memberList = memberService.searchMemberList(searchText);
+		request.setAttribute("memberList", memberList);
+		request.setAttribute("searchText", searchText);
+		return "member/searchMemberList";
+	}
 	
 }

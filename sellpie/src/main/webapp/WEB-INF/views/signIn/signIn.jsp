@@ -10,8 +10,6 @@
 * {
   font-family: "Noto Sans KR", "Noto Sans", Helvetica, Arial, "Malgun Gothic", sans-serif; }
 
-       
-      
 @-webkit-keyframes root__bounceIn__3s4 {
   from, 20%, 40%, 60%, 80%, to {
     -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
