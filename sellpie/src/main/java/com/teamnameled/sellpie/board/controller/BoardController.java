@@ -74,7 +74,7 @@ public class BoardController {
 				UUID uuid = UUID.randomUUID();
 	
 				if(null!=files.get(i).getOriginalFilename()&&!files.get(i).getOriginalFilename().equals("")){
-					board.setRurl(filePath);
+					board.setRurl(savePath);
 					file = new File(filePath+"\\"+uuid+files.get(i).getOriginalFilename());
 					ResourceVo resource = new ResourceVo();
 					resource.setRsrc(savePath+"/"+uuid+files.get(i).getOriginalFilename());
@@ -154,7 +154,7 @@ public class BoardController {
 		}
 		
 		
-		
+		mv.addObject("bList", bList);
 		mv.setViewName("main");
 		
 		return mv;
