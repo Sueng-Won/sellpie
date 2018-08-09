@@ -83,7 +83,14 @@
    overflow: auto;   
 }
 </style>
-
+<script>
+$(function(){
+	var msg = '<c:out value="${msg}"/>';
+	if(msg.length!=0&&msg!=""){
+		alert(msg);
+	}
+});
+</script>
 <script>  
 
 var slideIndex = 1;
@@ -524,5 +531,5 @@ function fileUpload(inputFiles, condition){
 
 
 
- 
 </body></html>
+ 
