@@ -7,18 +7,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script type="text/javascript">
-$(function () {
-	$('#sellerForm').click(function() {
-		$('#midContent *').remove();
-		$.ajax({
-			url:""
-		});
-	});
-});
-</script>
-<title>무제 문서</title>
 
+<title>무제 문서</title>
+<script type="text/javascript">
+
+
+</script>
 </head>
 
 <body>
@@ -41,7 +35,7 @@ $(function () {
         <div class="w3-white">
           <button onclick="myFunction('Demo1')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-circle-o-notch fa-fw w3-margin-right"></i> My Groups</button>
           <div id="Demo1" class="w3-hide w3-container">
-            <a class="w3-button w3-theme" id="sellerForm">판매등록</a>
+            <a class="w3-button w3-theme" onclick="javascript: location.href = 'productForm.do'">물품등록</a>
           </div>
           <button onclick="myFunction('Demo2')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i> My Events</button>
           <div id="Demo2" class="w3-hide w3-container">
