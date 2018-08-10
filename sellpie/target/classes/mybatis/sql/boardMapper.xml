@@ -12,6 +12,7 @@
 	  	<result property="rurl" column="RURL"/>
 	  	<result property="isad" column="ISAD"/>
 	  	<result property="delflag" column="DELFLAG"/>
+	  	<result property="name" column="NAME"/>
 	  	<collection property="resource" column="BNO" ofType="Resource" resultMap="resourceMap"/> 
 	 </resultMap>
   
