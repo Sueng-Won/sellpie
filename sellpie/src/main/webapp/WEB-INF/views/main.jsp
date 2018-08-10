@@ -203,7 +203,7 @@ function fileUpload(inputFiles, condition){
    }
 </script>
 <script>
-	function openDetail(bno){
+	function openDetail(board){
 		
 	}
 </script>
@@ -313,7 +313,7 @@ function fileUpload(inputFiles, condition){
                                  <img src="resources/images/header/nextRight.png" style="width:28%; height:23%;">
                               </div>
                            </div>                             
-                           <div style="text-align:center">
+                           <div style="text-align:center" id="subView">
                                    <img src="resources/images/header/twice1.png" style="width:7%; height:6%;" class="w3-margin-bottom mySlides">
                                    <img src="resources/images/header/twice2.JPG" style="width:7%; height:6%;" class="w3-margin-bottom mySlides">
                                    <img src="resources/images/header/twice2.png" style="width:7%; height:6%;" class="w3-margin-bottom mySlides">
