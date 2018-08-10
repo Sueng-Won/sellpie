@@ -16,6 +16,10 @@
 	<insert id="insertMember" parameterType="Member">
 		INSERT INTO MEMBER VALUES(#{email},#{pwd},#{name},#{gender},#{phone},#{birth}, NULL)
 	</insert>
+	<update id="updateMemberPwd" parameterType="Member">
+		UPDATE MEMBER SET PWD = #{pwd}
+		WHERE EMAIL = #{email}
+	</update>
 </mapper>
 
 

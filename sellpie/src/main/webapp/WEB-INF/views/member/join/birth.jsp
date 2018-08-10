@@ -31,7 +31,6 @@
           align-items: center;
   height: calc(100% - 70px); }
 
-<style type="text/css" id="s1956-0">
  {
   }
   html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video {
@@ -455,6 +454,10 @@
     height: 20px; }
 </style>
 <script>
+history.pushState(null, null, location.href);
+window.onpopstate = function(event) {
+	history.go(1);
+};
 	$(function(){
 		<c:if test="${not empty sessionScope.user}">
 		 location.href="/sellpie/main.do";

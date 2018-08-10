@@ -745,9 +745,6 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
     @media (max-height: 740px) {
       .signUpComponent__bodyWrapper__3ND .signUpComponent__container__6PN {
         top: 124px; } }
-    .signUpComponent__bodyWrapper__3ND .signUpComponent__container__6PN .signUpComponent__logo__3Im {
-      width: 210px;
-      height: 78px; }
       .signUpComponent__bodyWrapper__3ND .signUpComponent__container__6PN .signUpComponent__logo__3Im svg {
         width: 210px;
         height: 78px; }
@@ -856,7 +853,10 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
      $("._5f5mN").click(function(){
     	location.href="/sellpie/signIn.do"; 
      });
-        
+      $(".signUpComponent__btnFB__1uM").click(function(){
+    		location.href="/sellpie/memberJoin.do"; 
+      });  
+      
      });
 </script>
 </head>
@@ -870,13 +870,7 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
                                 <div class="navbar__container__3tL clearfix">
                                 	<ul class="navbar__left__2RB">
                                 		<li><a href="mailto:ads@vingle.net"><span>관리자 페이지</span></a></li><li>
-                                		<li><a href="/sellpie/test.do"><span>로그인 TEST</span></a></li><li>
                                 	</ul>
-                                    <ul class="navbar__right__2FE">
-                                        <a href="/users/sign_in">
-                                            <li class="navbar__login__3ct"><a href="/sellpie/login.do"><span>로그인</span></a></li>
-                                        </a>
-                                    </ul>
                                 </div>
                             </nav>
                         <div class="signUpComponent__bodyWrapper__3ND">
@@ -892,19 +886,16 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
                             </div>
                             <div class="signUpComponent__container__6PN">
                                 <div class="signUpComponent__logo__3Im">
-                                    <img src="resources/images/mainImg/sellpie.png" class="icons__icon__2cq"/>
+                                    <img src="resources/images/join/logo_sellpie.png "/>
                                 </div>
                                     <div class="signUpComponent__comment__1Pa">내 친구가 좋아하는 것이 아닌<br><b>"내"</b>가 좋아하는 것을 즐기세요
                                     </div>
                             </div>
                             <div class="signUpComponent__footer__DSK">
                                 <div class="solidButton__buttonWrapper__tkE">
-                                    <button type="submit" class="solidButton__button__15V   signUpComponent__btnFB__1uM">페이스북으로 시작하기</button>
+                                    <button type="submit" class="solidButton__button__15V   signUpComponent__btnFB__1uM">이메일로 시작하기</button>
                                 </div>
-                            <div class="solidButton__buttonWrapper__tkE">
-                                <button type="submit" class="solidButton__button__15V   signUpComponent__btnEmail__25y">이메일로 시작하기</button>
-                            </div>
-                            <div class="signUpComponent__hadAccount__gtQ"><span>이미 빙글을 사용하고 있나요? </span>
+                            <div class="signUpComponent__hadAccount__gtQ"><span>이미 SellPie를 사용하고 있나요? </span>
                                 <span class="signUpComponent__login__3Iz"><a href="/sellpie/login.do"><span>로그인</span></a></span>
                             </div>
                             </div>

@@ -20,4 +20,8 @@ public class MemberDao {
 		return sqlSession.insert("memberMapper.insertMember", member);
 	}
 
+	public int updateUserPwd(Member member) {
+		return sqlSession.update("memberMapper.updateMemberPwd", member);
+	}
+
 }

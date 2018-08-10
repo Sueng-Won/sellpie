@@ -16,6 +16,7 @@
 
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <style type="text/css">
 * {
   font-family: "Noto Sans KR", "Noto Sans", Helvetica, Arial, "Malgun Gothic", sans-serif; }
@@ -150,7 +151,7 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
 .signupNavbar__titleWrapper__4Iq {
   font-size: 16px;
   height: 26px;
-  line-height: 34px;
+  line-height: 50px;
   text-align: left;
   color: #fb2942; }
 
@@ -161,7 +162,6 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
   width: 70px;
   height: 26px; }
   .signupNavbar__vingleLogo__3Ob img {
-    padding-left:10px;
     height: 26px; }
 
 .signupNavbar__vingleLogo__3Ob + span {
@@ -443,7 +443,7 @@ span + .signupNavbar__vingleLogo__3Ob {
 					success:function(data){
 						console.log(data.result);
 						if( data.result == "1" ){
-							alert("이미 가입한 이메일 입니다..");
+							swal("중복 된 아이디 입니다!", "이메일이 중복 되었습니다..", "error");
 							/* var $auNum_wrapper = $("<div class='auNum_wrapper'></div>");
 							 var $solidReasonInput_wrapper = $("<div class='solidReasonInput__wrapper__auNum undefined'></div>");
 							 var $auNumInput = $("<input type='text' id='auNum' autofocus='' class='solidReasonInput__textInput__auNum' placeholder='인증번호 6자리를 입력해주세요.' value='''/>");
@@ -458,10 +458,8 @@ span + .signupNavbar__vingleLogo__3Ob {
 							
 							
 						}else{
-							alert("인증 번호를 확인해 주세요!");
-							//이벤트 지워야한다..
-						 //인증번호 보내기 찾아보기
-						 //세션에 이메일 저장..
+							swal("인증번호 발송!", "이메일을 확인 해주세요", "success");
+							$(".solidReasonInput__textInput__ZZr").off();
 						 $(".solidButton__button__15V").addClass("solidButton__disabled__15i");
 						sessionStorage.setItem("email", $("#email").val());
 						sessionStorage.setItem("pwd", $("#pwd").val());
@@ -481,7 +479,8 @@ span + .signupNavbar__vingleLogo__3Ob {
 						$auNum_wrapper.append($solidButton);
 						$(".signUpBody__content__1PG").append($auNum_wrapper);
 						 
-							
+						console.log();
+						sessionStorage.setItem("randomNum", data.randomNum);
 						}
 					},
 					beforeSend:function(){
@@ -522,8 +521,17 @@ span + .signupNavbar__vingleLogo__3Ob {
 			 }
 		});
 		$(document).on("click",".solidButton__button__auNum", function(){
-			//이메일 로 확인하고 누를경우 다음페이지로~인증번호 확인 구현 안했음
-			location.href="/sellpie/getName.do";
+			
+			var auNum = $("#auNum").val();
+			var randomNum = sessionStorage.getItem("randomNum");
+			console.log("auNum타입"+typeof(auNum), auNum);
+			console.log("randomNum타입"+typeof(randomNum), randomNum);
+			if(auNum==randomNum){
+			 location.href="/sellpie/getName.do"; 
+				
+			}else{
+				swal ( "인증번호 오류" ,  "인증 번호를 확인 해주세요.." ,  "error" );
+			}
 			
 		});
 	});
@@ -541,7 +549,7 @@ span + .signupNavbar__vingleLogo__3Ob {
          				 <div class="signupNavbar__titleWrapper__4Iq">
           					<span>Welcome to </span>
           					<i class="icons__icon__2cq signupNavbar__vingleLogo__3Ob">
-    							<img id="logo_img" src="resources/images/join/logo_sellpie2.png"/>
+    							<img style="width:120px; height:30px;"src="resources/images/join/logo_sellpie.png"/>
     						</i>
     					</div>
     				</nav>
