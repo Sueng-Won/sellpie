@@ -22,11 +22,4 @@ public class ProductController {
 		request.setAttribute("productList", productList);
 		return "product/productList";
 	}
-	
-	@RequestMapping("productDetail.do")
-	public String selectProduct(int pNo, HttpServletRequest request) {
-		Product product = productService.selectProduct(pNo);
-		request.setAttribute("product", product);
-		return "product/productDeatil";
-	}
 }
