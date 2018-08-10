@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="friendMapper">
+	<select id="selectfList3" parameterType="string" resultType="Member">
+		SELECT M.EMAIL , M.NAME , M.PROFILE_IMG
+		FROM ADDFRIEND F
+		JOIN MEMBER M ON (F.APPLICANT_EMAIL = M.EMAIL)
+		WHERE F.SUBJECT_EMAIL = #{email} AND ISAPPLY = 'Y'
+	</select>
+	
+	<select id="selectfList4" parameterType="string" resultType="Member">
+		SELECT M.EMAIL , M.NAME , M.PROFILE_IMG
+		FROM ADDFRIEND F
+		JOIN MEMBER M ON (F.SUBJECT_EMAIL = M.EMAIL)
+		WHERE F.APPLICANT_EMAIL = #{email} AND ISAPPLY = 'Y'
+	</select>
+</mapper>

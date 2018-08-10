@@ -1,5 +1,6 @@
 package com.teamnameled.sellpie.board.model.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -18,8 +19,20 @@ public class BoardDao {
 		return sqlSession.insert("boardMapper.insertBoard", board);
 	}
 
-	public List<BoardVo> selectBoardList() {
-		return sqlSession.selectList("boardMapper.selectNoticeList");
+	public List<String> selectfList1(String email) {
+		return sqlSession.selectList("boardMapper.selectfList1",email);
+	}
+
+	public List<String> selectfList2(String email) {
+		return sqlSession.selectList("boardMapper.selectfList2",email);
+	}
+
+	public List<BoardVo> selectbList(List<String> fList1) {
+		return sqlSession.selectList("boardMapper.selectbList", fList1);
+	}
+
+	public List<String> selectlList(int bno) {
+		return sqlSession.selectList("boardMapper.selectlList", bno);
 	}
 
 }

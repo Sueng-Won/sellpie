@@ -18,8 +18,22 @@ public class BoardService {
 		return dao.insertBoard(board);
 	}
 
-	public List<BoardVo> selectBoardList() {
-		return dao.selectBoardList();
+	public List<String> selectfList1(String email) {
+		return dao.selectfList1(email);
 	}
+
+	public List<String> selectfList2(String email) {
+		return dao.selectfList2(email);
+	}
+
+	public List<BoardVo> selectbList(List<String> fList1) {
+		return dao.selectbList(fList1);
+	}
+
+	public List<String> selectlList(int bno) {
+		return dao.selectlList(bno);
+	}
+
+	
 
 }

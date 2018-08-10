@@ -163,7 +163,7 @@ function fileUpload(inputFiles, condition){
 	    });
         
 	    setTimeout(function() {
-	        	location.href = "main.do";
+	        	location.href = "selectBoardList.do";
 	        	}, 180000); // 3000ms(3초)가 경과하면 이 함수가 실행됩니다.
 
  	    /*  $.ajax({
@@ -273,7 +273,7 @@ function fileUpload(inputFiles, condition){
 <!--게시글보기 창 -->
 			<form id="board" method="post"  action="/sellpie/insertBoard.do" onsubmit="validate();" enctype="multipart/form-data">
 	         	<div class="detail_content2" id="contentOpen" >
-	         	<input type="hidden" name="email" value="test@naver.com"/>
+	         	<input type="hidden" name="email" value="test2@naver.com"/>
 	         	<input type="hidden" name="bcontent" id="hiddenContent"/>
 	         		<div>
 	         			<div style="text-align:right;">
@@ -393,33 +393,106 @@ function fileUpload(inputFiles, condition){
 		    </div>
 <!--		    상세보기창 끝-->
 		    
-    <c:forEach var="board" items="${boardList }">
+		
+    <c:forEach var="board" items="${bList }">
 	<div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+		<input type="hidden" name="bno" />
+		
         <img src="resources/images/header/twice2.png" alt="Avatar" class="w3-left w3-circle w3-margin-right rounded-circle" style="width:60px; height:60px;">
         <span class="w3-right w3-opacity">32 min</span>
         
-        <h4><c:out value="${board.email }"></c:out></h4><br>
-        
+        <h4><c:out value="${board.name }"></c:out></h4><br>
         <hr class="w3-clear">
-        <p>Have you seen this?</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        <table id="fileTb" cellspacing="0" align="center" class="w3-margin-bottom">
-            <tr>
-                <td>
-                    <img src="resources/images/header/twice2.png" style="width:100%; height:35%;">
-                </td>
-                <td>
-                    <img src="resources/images/header/twice2.png" style="width:100%; height:35%;">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <img src="resources/images/header/twice2.png" style="width:100%; height:35%;">
-                </td>
-                <td>
-                    <img src="resources/images/header/twice2.png" style="width:100%; height:35%;">
-                </td>
-            </tr>
+        <p><c:out value="${board.bcontent }"></c:out></p>
+        <p> veniam</p>
+        
+        <table id="fileTb" cellspacing="0" class="w3-margin-bottom">
+	        <c:forEach var="resource" items="${board.resource }" varStatus="st">
+	        		
+	        		<c:if test="${board.resource.size() eq 1}">
+		        		<c:if test="${st.count eq 1}">
+			        		<tr>
+				                <td>
+				                    <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:720px; height:500px;" >
+				                </td>
+				            </tr>
+			            </c:if>
+		            </c:if>
+		            
+		            <c:if test="${board.resource.size() eq 2}">
+		            	
+		            	<c:if test="${st.count eq 1}">
+		            	<tr>
+				             <td>
+				                  <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:500px;">
+				              </td>
+		            	</c:if>
+		            	<c:if test="${st.count eq 2}">
+				             <td>
+				                  <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:500px;">
+				              </td>
+				        </tr>
+		            	</c:if>
+			            
+		            </c:if>
+		            <c:if test="${board.resource.size() eq 3}">
+		            <c:if test="${st.count eq 1}">
+			            	<tr>
+						         <td colspan="2">
+						             <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:720px; height:240px;">
+						         </td>
+				            </tr>
+			         </c:if> 
+			         <c:if test="${st.count >= 2}">
+			    			<c:if test="${st.count eq 2}">
+			    			<tr>
+						            <td>
+						               <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
+						           </td>
+					         </c:if>
+					         <c:if test="${st.count eq 3}">
+					                <td>
+					                    <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
+					                </td>
+					         </tr>
+			                </c:if>
+			         </c:if>
+			            
+		            </c:if>
+		            
+		            <c:if test="${board.resource.size() eq 4}">
+		            <c:if test="${st.count < 3}">
+			    			<c:if test="${st.count eq 1}">
+			    			<tr>
+						            <td>
+						               <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
+						           </td>
+					         </c:if>
+					         <c:if test="${st.count eq 2}">
+					                <td>
+					                    <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
+					                </td>
+					         </tr>
+			                </c:if>
+			         </c:if>
+			         <c:if test="${st.count >= 3}">
+			    			<c:if test="${st.count eq 3}">
+			    			<tr>
+						            <td>
+						               <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
+						           </td>
+					         </c:if>
+					         <c:if test="${st.count eq 4}">
+					                <td>
+					                    <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
+					                </td>
+					         </tr>
+			                </c:if>
+			         </c:if>
+			            
+		            </c:if>
+		    
+	        </c:forEach>
         </table>
         &nbsp;
         <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i> &nbsp;600</button> 

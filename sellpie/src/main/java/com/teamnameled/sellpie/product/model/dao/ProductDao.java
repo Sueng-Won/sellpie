@@ -18,4 +18,9 @@ public class ProductDao {
 		return sqlSession.selectList("ProductMapper.selectProductList",sNo);
 	}
 
+	public Product selectProduct(int pNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("ProductMapper.selectProduct", pNo);
+	}
+
 }

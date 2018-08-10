@@ -35,70 +35,13 @@
 			<h4 class="w3-margin-left" >친구</h4>
 			<hr>          
 		        <div class="w3-container w3-padding-16 w3-row">
-				    <div class="w3-col m6 w3-container" >
-				    	<img src="resources/images/header/twice2.png" alt="Avatar" class="w3-left w3-circle w3-margin-right rounded-circle" style="width:60px; height:60px;">
-				        <button class="w3-btn w3-white w3-border w3-border-blue w3-round w3-right" style="margin-top:10px;">친구 삭제</button>
-				        <br><h5>정인1</h5>
-				    </div>
-				     
-				    <div class="w3-col m6 w3-container">
-				    	<img src="resources/images/header/twice2.png" alt="Avatar" class="w3-left w3-circle w3-margin-right rounded-circle" style="width:60px; height:60px;">
-				        <button class="w3-btn w3-white w3-border w3-border-blue w3-round w3-right" style="margin-top:10px;">친구 삭제</button>
-				        <br><h5>정인2</h5>
-				    </div> 
-		        </div>	
-	          	
-	          	<div class="w3-container w3-padding-16 w3-row">
-				    <div class="w3-col m6 w3-container" >
-				    	<img src="resources/images/header/twice2.png" alt="Avatar" class="w3-left w3-circle w3-margin-right rounded-circle" style="width:60px; height:60px;">
-				        <button class="w3-btn w3-white w3-border w3-border-blue w3-round w3-right" style="margin-top:10px;">친구 삭제</button>
-				        <br><h5>정인3</h5>
-				    </div>
-				     
-				    <div class="w3-col m6 w3-container">
-				    	<img src="resources/images/header/twice2.png" alt="Avatar" class="w3-left w3-circle w3-margin-right rounded-circle" style="width:60px; height:60px;">
-				        <button class="w3-btn w3-white w3-border w3-border-blue w3-round w3-right" style="margin-top:10px;">친구 삭제</button>
-				        <br><h5>정인4</h5>
-				    </div> 
-		        </div>	
-	          	<div class="w3-container w3-padding-16 w3-row">
-				    <div class="w3-col m6 w3-container" >
-				    	<img src="resources/images/header/twice2.png" alt="Avatar" class="w3-left w3-circle w3-margin-right rounded-circle" style="width:60px; height:60px;">
-				        <button class="w3-btn w3-white w3-border w3-border-blue w3-round w3-right" style="margin-top:10px;">친구 삭제</button>
-				        <br><h5>정인5</h5>
-				    </div>
-				     
-				    <div class="w3-col m6 w3-container">
-				    	<img src="resources/images/header/twice2.png" alt="Avatar" class="w3-left w3-circle w3-margin-right rounded-circle" style="width:60px; height:60px;">
-				        <button class="w3-btn w3-white w3-border w3-border-blue w3-round w3-right" style="margin-top:10px;">친구 삭제</button>
-				        <br><h5>정인6</h5>
-				    </div> 
-		        </div>	
-	          	<div class="w3-container w3-padding-16 w3-row">
-				    <div class="w3-col m6 w3-container" >
-				    	<img src="resources/images/header/twice2.png" alt="Avatar" class="w3-left w3-circle w3-margin-right rounded-circle" style="width:60px; height:60px;">
-				        <button class="w3-btn w3-white w3-border w3-border-blue w3-round w3-right" style="margin-top:10px;">친구 삭제</button>
-				        <br><h5>정인7</h5>
-				    </div>
-				     
-				    <div class="w3-col m6 w3-container">
-				    	<img src="resources/images/header/twice2.png" alt="Avatar" class="w3-left w3-circle w3-margin-right rounded-circle" style="width:60px; height:60px;">
-				        <button class="w3-btn w3-white w3-border w3-border-blue w3-round w3-right" style="margin-top:10px;">친구 삭제</button>
-				        <br><h5>정인8</h5>
-				    </div> 
-		        </div>	
-	          	<div class="w3-container w3-padding-16 w3-row">
-				    <div class="w3-col m6 w3-container" >
-				    	<img src="resources/images/header/twice2.png" alt="Avatar" class="w3-left w3-circle w3-margin-right rounded-circle" style="width:60px; height:60px;">
-				        <button class="w3-btn w3-white w3-border w3-border-blue w3-round w3-right" style="margin-top:10px;">친구 삭제</button>
-				        <br><h5>정인9</h5>
-				    </div>
-				     
-				    <div class="w3-col m6 w3-container">
-				    	<img src="resources/images/header/twice2.png" alt="Avatar" class="w3-left w3-circle w3-margin-right rounded-circle" style="width:60px; height:60px;">
-				        <button class="w3-btn w3-white w3-border w3-border-blue w3-round w3-right" style="margin-top:10px;">친구 삭제</button>
-				        <br><h5>정인10</h5>
-				    </div> 
+		           <c:forEach var="fList" items="${fList }">
+					    <div class="w3-col m6 w3-container" >
+					    	<img src="resources/images/header/twice2.png" alt="Avatar" class="w3-left w3-circle w3-margin-right rounded-circle" style="width:60px; height:60px;">
+					        <button class="w3-btn w3-white w3-border w3-border-blue w3-round w3-right" style="margin-top:10px;">친구 삭제</button>
+					        <br><h5><c:out value="${fList.name }"></c:out></h5>
+					    </div>
+				    </c:forEach>
 		        </div>	
           </div>
         </div>
@@ -113,7 +56,8 @@
 		        <div class="w3-container w3-padding-16 w3-row">
 				    <div class="w3-col m6 w3-container" >
 				    	<img src="resources/images/header/twice2.png" alt="Avatar" class="w3-left w3-circle w3-margin-right rounded-circle" style="width:60px; height:60px;">
-				        <button class="w3-btn w3-white w3-border w3-border-blue w3-round w3-right" style="margin-top:10px;">친구 삭제</button>
+				        <button class="w3-btn w3-white w3-border w3-border-blue w3-round w3-right" style="margin-top:10px;">수락</button>
+				        <button class="w3-btn w3-white w3-border w3-border-blue w3-round w3-right" style="margin-top:10px;">거절</button>
 				        <br><h5>정인1</h5>
 				    </div>
 				     

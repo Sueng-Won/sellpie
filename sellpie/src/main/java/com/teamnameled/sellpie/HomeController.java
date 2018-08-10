@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.teamnameled.sellpie.board.model.service.BoardService;
 import com.teamnameled.sellpie.board.model.vo.BoardVo;
-import com.teamnameled.sellpie.member.model.vo.Member;
-import com.teamnameled.sellpie.seller.model.vo.Seller;
 
 /**
  * Handles requests for the application home page.
@@ -34,6 +32,7 @@ public class HomeController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
+	
 	@RequestMapping(value = "main.do", method = RequestMethod.GET)
 	public String home(Locale locale, Model model, HttpServletRequest request) {
 		logger.info("Welcome home! The client locale is {}.", locale);
@@ -45,12 +44,8 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		List<BoardVo> boardList = boardService.selectBoardList();
-		request.setAttribute("boardList", boardList);
-		
 		return "main";
 	}
-	
 	
 	
 }

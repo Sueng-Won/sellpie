@@ -15,5 +15,9 @@ public class ProductService {
 	public List<Product> selectProductList(int sNo) {
 		return productDao.selectProductList(sNo);
 	}
+	public Product selectProduct(int pNo) {
+		// TODO Auto-generated method stub
+		return productDao.selectProduct(pNo);
+	}
 
 }
