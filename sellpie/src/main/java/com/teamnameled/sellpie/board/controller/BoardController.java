@@ -149,11 +149,6 @@ public class BoardController {
 		}
 		
 		
-		for(BoardVo b:bList){
-			System.out.println(b.toString());
-		}
-		
-		
 		mv.addObject("bList", bList);
 		mv.setViewName("main");
 		

@@ -144,7 +144,7 @@ function fileUpload(inputFiles, condition){
                   fileTag.attr("controll","true");
                   videoIdx = videoIdx+1;
                   $("#videoFile").attr("id","video"+videoIdx);
-                  newTag = '<input type="file" name="file" id="videoFile" onchange="fileUpload(this,1);" accept="video/*" hidden/>';
+                  newTag = '<input type="file" name="file" id="videoFile" onchange="fileUpload(this,1);" accept="video/*" style="display:none"/>';
                }            
                fileTag.css({"width":"100%","height":"100%"});
                fileTag.attr('src', e.target.result); //image or video 담긴 태그 생성
@@ -201,6 +201,11 @@ function fileUpload(inputFiles, condition){
       var str = $("#bcontent").text();
       $("#hiddenContent").val(str);
    }
+</script>
+<script>
+	function openDetail(bno){
+		
+	}
 </script>
 </head><body class="w3-theme-l5">
 
@@ -457,7 +462,9 @@ function fileUpload(inputFiles, condition){
         </table>
         &nbsp;
         <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i> &nbsp;600</button> 
-        <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom" onclick="javascript:location.href='#open'"><i class="fa fa-comment"></i> &nbsp;128</button> 
+        <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom" onclick="openDetail('<c:out value="${board }"/>')"><i class="fa fa-comment"></i> &nbsp;
+<%-- 			<c:out value=""/> --%>128
+		</button> 
     </div>
     </c:forEach>
     <!-- End Middle Column -->
