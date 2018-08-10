@@ -21,11 +21,15 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.teamnameled.sellpie.board.model.vo.BoardVo;
 import com.teamnameled.sellpie.product.model.service.ProductService;
 import com.teamnameled.sellpie.product.model.vo.Product;
+import com.teamnameled.sellpie.resource.model.service.ResourceService;
+import com.teamnameled.sellpie.resource.model.vo.ResourceVo;
 
 @Controller
 public class ProductController {
 	@Autowired
 	ProductService productService;
+	@Autowired
+	ResourceService resourceService;
 	
 	@RequestMapping("productList.do")
 	public String selectProductList(int sNo,HttpServletRequest request) {
@@ -34,14 +38,6 @@ public class ProductController {
 		return "product/productList";
 	}
 	
-<<<<<<< HEAD
-	@RequestMapping("productDetail.do")
-	public String selectProduct(int pNo, HttpServletRequest request) {
-		Product product = productService.selectProduct(pNo);
-		request.setAttribute("product", product);
-		return "product/productDeatil";
-	}
-=======
 	@RequestMapping("productForm.do")
 	public String productForm() {
 		
@@ -49,16 +45,23 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value = "productApply.do", method=RequestMethod.POST)
-	public String productApply(MultipartHttpServletRequest multipartHttpServletRequest,
+	public String productApply(MultipartHttpServletRequest multipartHttpServletRequest, String email,
 			Product product, HttpServletRequest request) {
-		int result = -1;
+		
+		int productResult = -1;
+		int resourceResult = 0;
 		Date today = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyMMddHHmmssZ");
-		System.out.println("format : "+sdf.format(today));
-		String pName = product.get;
+		String bcontent = product.getpDetail();
+		if(product.getIsCraft() != 'Y'){
+			product.setIsCraft('N');
+		}
 		
+		// 웹서버 컨테이너 경로 추출함
+		String root = request.getSession().getServletContext().getRealPath("resources");
 		//파일경로
-		String filePath ="C:\\Upload\\"+pName+"\\"+sdf.format(today).toString();
+		String filePath = root+"\\product\\"+email+"\\"+sdf.format(today).toString();
+		String savePath = "resources/product/"+email+"/"+sdf.format(today).toString();
 		//파일들을 List형식으로 보관
 		List<MultipartFile> files = multipartHttpServletRequest.getFiles("file");
 		
@@ -70,42 +73,53 @@ public class ProductController {
 		
 		//insert form 넘어올 때 멤버 이메일,게시물 내용은 입력받은 내용 들어있음.
 		
-		String bcontent = board.getBcontent();
 		String errorMsg = "";
-		if(pName==null||pName.length()==0||pName.equals("")){
+		
+		if(email==null||email.length()==0||email.equals("")){
 			errorMsg = "로그인이 필요한 기능입니다.";
-		}else if(bcontent==null||bcontent.length()==0||bcontent.equals("")){
+		}else if(bcontent==null||bcontent.length()==0||bcontent.trim().equals("")){
 			errorMsg = "내용을 입력해주세요.";
 		}else{
-			result = boardService.insertBoard(board);
-		}
-		
-		request.setAttribute("msg", errorMsg);
-		
-		
-		if(0<result){
-		//랜덤 이름 생성하면서 파일 업로드 소스
+			int fileLength = 0;
 			for (int i = 0; i < files.size(); i++) {
+					
 				UUID uuid = UUID.randomUUID();
 	
 				if(null!=files.get(i).getOriginalFilename()&&!files.get(i).getOriginalFilename().equals("")){
+					product.setrUrl(savePath);
 					file = new File(filePath+"\\"+uuid+files.get(i).getOriginalFilename());
-					
+					ResourceVo resource = new ResourceVo();
+					resource.setRsrc(savePath+"/"+uuid+files.get(i).getOriginalFilename());
+					resourceResult += resourceService.insertResource(resource);
+					if(fileLength<resourceResult){
+						fileLength++;
+					}
 					try {
 						files.get(i).transferTo(file);
 					} catch (IllegalStateException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					} 
 				}
-			}   
-		
-		}else{
-			errorMsg="insertBoard.do에서 에러 발생!!";//에러페이지 만들면 대체
+			}
+			
+			
+			if(resourceResult==fileLength){
+				
+				productResult = productService.insertProduct(product);
+				System.out.println(product+"/"+email);
+				if(0<productResult){
+				}else{
+					errorMsg="insertProduct에서 에러 발생!!";//에러페이지 만들면 대체
+				}
+			}else{
+				errorMsg="db에 file insert중 에러";
+			}
 		}
+	
+		request.setAttribute("msg", errorMsg);
+		
 		System.out.println(product.toString());
 		
 		
@@ -113,5 +127,4 @@ public class ProductController {
 		return "redirect:main.do";
 	}
 	
->>>>>>> branch 'ppororo' of https://github.com/Sueng-Won/sellpie.git
 }

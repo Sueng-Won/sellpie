@@ -7,24 +7,36 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD
 <title>무제 문서</title>
 <script src="resources/js/jquery-3.3.1.min.js"></script>
 <script src="resources/js/popper.min.js"></script>
 <script>
-=======
->>>>>>> branch 'ppororo' of https://github.com/Sueng-Won/sellpie.git
 
-<<<<<<< HEAD
 function frientForm(){
 	location.href="friendForm.do";
 }
-=======
-<title>무제 문서</title>
-<script type="text/javascript">
+//Accordion
+function myFunction(id) {
+    var x = document.getElementById(id);
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+        x.previousElementSibling.className += " w3-theme-d1";
+    } else { 
+        x.className = x.className.replace("w3-show", "");
+        x.previousElementSibling.className = 
+        x.previousElementSibling.className.replace(" w3-theme-d1", "");
+    }
+}
 
->>>>>>> branch 'ppororo' of https://github.com/Sueng-Won/sellpie.git
-
+// Used to toggle the menu on smaller screens when clicking on the menu button
+function openNav() {
+    var x = document.getElementById("navDemo");
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+    } else { 
+        x.className = x.className.replace(" w3-show", "");
+    }
+}
 </script>
 </head>
 
@@ -46,7 +58,7 @@ function frientForm(){
       <!-- Accordion -->
       <div class="w3-card w3-round">
         <div class="w3-white">
-          <button onclick="myFunction('Demo1')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-circle-o-notch fa-fw w3-margin-right"></i> My Groups</button>
+          <button onclick="myFunction('Demo1')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-circle-o-notch fa-fw w3-margin-right"></i> My Page</button>
           <div id="Demo1" class="w3-hide w3-container">
             <a class="w3-button w3-theme" onclick="javascript: location.href = 'productForm.do'">물품등록</a>
           </div>

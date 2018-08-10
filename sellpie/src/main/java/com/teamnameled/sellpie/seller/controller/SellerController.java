@@ -16,7 +16,7 @@ import com.teamnameled.sellpie.seller.model.vo.Seller;
 public class SellerController {
 	@Autowired
 	SellerService sellerService;
-<<<<<<< HEAD
+	
 	@RequestMapping("tagSearch.do")
 	public String tagSearch(String searchText,HttpServletRequest request) {
 		String selTag = searchText;
@@ -27,12 +27,12 @@ public class SellerController {
 		request.setAttribute("sellerList", sellerList);
 		request.setAttribute("sellerInfo", sellerInfo);
 		return "seller/sellerList";
-=======
+	}
+	
 	@RequestMapping("applySeller.do")
 	public String sellerDetail() {
 		
 		return "seller/sellerDetail";
->>>>>>> branch 'ppororo' of https://github.com/Sueng-Won/sellpie.git
 	}
 	
 	
