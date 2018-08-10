@@ -7,14 +7,23 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
 <title>무제 문서</title>
 <script src="resources/js/jquery-3.3.1.min.js"></script>
 <script src="resources/js/popper.min.js"></script>
 <script>
+=======
+>>>>>>> branch 'ppororo' of https://github.com/Sueng-Won/sellpie.git
 
+<<<<<<< HEAD
 function frientForm(){
 	location.href="friendForm.do";
 }
+=======
+<title>무제 문서</title>
+<script type="text/javascript">
+
+>>>>>>> branch 'ppororo' of https://github.com/Sueng-Won/sellpie.git
 
 </script>
 </head>
@@ -39,7 +48,7 @@ function frientForm(){
         <div class="w3-white">
           <button onclick="myFunction('Demo1')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-circle-o-notch fa-fw w3-margin-right"></i> My Groups</button>
           <div id="Demo1" class="w3-hide w3-container">
-            <p>Some text..</p>
+            <a class="w3-button w3-theme" onclick="javascript: location.href = 'productForm.do'">물품등록</a>
           </div>
           <button onclick="myFunction('Demo2')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i> My Events</button>
           <div id="Demo2" class="w3-hide w3-container">

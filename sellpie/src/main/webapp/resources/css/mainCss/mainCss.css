@@ -92,7 +92,11 @@ article{
     background-size: 850px 618px;
     flex-basis: 850px;
     height: 618px;
+<<<<<<< HEAD
+    margin-left: -35px; 
+=======
     margin-left: -35px;
+>>>>>>> refs/heads/master
     margin-right: -15px;
     background-color: black;
 }
