@@ -20,6 +20,7 @@
 		<typeAlias type="com.teamnameled.sellpie.resource.model.vo.ResourceVo" alias="Resource"/>
 		<typeAlias type="com.teamnameled.sellpie.seller.model.vo.Seller" alias="Seller"/>
 		<typeAlias type="com.teamnameled.sellpie.contract.model.vo.Contract" alias="Contract"/>
+		<typeAlias type="com.teamnameled.sellpie.review.model.vo.Review" alias="Review"/>
 	</typeAliases>
 	
 	
@@ -35,6 +36,7 @@
 		<mapper resource="mybatis/sql/resourceMapper.xml"/>
 		<mapper resource="mybatis/sql/seller-mapper.xml"/>
 		<mapper resource="mybatis/sql/contract-mapper.xml"/>
+		<mapper resource="mybatis/sql/review-mapper.xml"/>
 	</mappers>
 
 </configuration>
