@@ -17,4 +17,12 @@
       JOIN MEMBER M ON (F.SUBJECT_EMAIL = M.EMAIL)
       WHERE F.APPLICANT_EMAIL = #{email} AND ISAPPLY = 'Y'
    </select>
+   
+   <select id="selectfList6" parameterType="string" resultType="string">
+		SELECT REPLACE(APPLICANT_EMAIL||SUBJECT_EMAIL, #{email2}, '') 
+        FROM ADDFRIEND
+		WHERE ISAPPLY='Y' AND 
+		APPLICANT_EMAIL||SUBJECT_EMAIL LIKE '%'||#{email2}||'%'
+   </select>
+  
 </mapper>

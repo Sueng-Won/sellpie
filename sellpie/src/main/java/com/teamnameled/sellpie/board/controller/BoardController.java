@@ -3,10 +3,10 @@ package com.teamnameled.sellpie.board.controller;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,12 +15,14 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.teamnameled.sellpie.board.model.service.BoardService;
 import com.teamnameled.sellpie.board.model.vo.BoardVo;
+import com.teamnameled.sellpie.reply.model.service.ReplyService;
 import com.teamnameled.sellpie.resource.model.service.ResourceService;
 import com.teamnameled.sellpie.resource.model.vo.ResourceVo;
 
@@ -32,6 +34,9 @@ public class BoardController {
 	
 	@Autowired
 	ResourceService resourceService;
+	
+	@Autowired
+	ReplyService replyService;
 	
 	@RequestMapping("insertBoard.do")
 	public String insertBoard(MultipartHttpServletRequest multipartHttpServletRequest, BoardVo board, HttpServletRequest request){
@@ -97,7 +102,6 @@ public class BoardController {
 			
 			if(resourceResult==fileLength){
 				
-				
 				boardResult = boardService.insertBoard(board);
 				
 				if(0<boardResult){
@@ -144,15 +148,61 @@ public class BoardController {
 						b.setLikeflag('T');
 					}
 				}
-				
 			}
+			
+			int rcount = replyService.selectRcount(b.getBno());
+			bList.get(i).setRcount(rcount);
 		}
-		
 		
 		mv.addObject("bList", bList);
 		mv.setViewName("main");
 		
 		return mv;
+	}
+	
+	@RequestMapping("selectBoard.do")
+	public @ResponseBody BoardVo selectBoard(String bno){
+		BoardVo b = boardService.selectBoard(bno);
+		
+		return b;
+	}
+	
+	@RequestMapping("updateLike.do")
+	public @ResponseBody String subLike(String bno, String condition){
+		
+//		String mEmail = session.getAttribute("user");
+		String mEmail = "test2@naver.com";
+		
+		Map<String, String> likeMap = new HashMap<String, String>();
+		likeMap.put("email", mEmail);
+		likeMap.put("bno", bno);
+		
+		int result = -1;
+		int signNum = 0;
+		if(condition.equals("sub")){
+			result = boardService.deleteBlike(likeMap);
+			signNum = -1;
+		}else{
+			result = boardService.insertBlike(likeMap);
+			signNum = 1;
+		}
+		 
+		BoardVo board =null;
+		if(0<result){
+			Map<String, Integer> bmap = new HashMap<String, Integer>();
+			bmap.put("bno", Integer.parseInt(bno));
+			bmap.put("signNum", signNum);
+			int updateResult = boardService.updateGcount(bmap);
+			if(0<updateResult){
+				board = boardService.selectBoard(bno);
+			}else{
+				System.out.println("좋아요수 업데이트 중 에러");
+			}
+		}else{
+			System.out.println("좋아요테이블에 insert중 에러");
+		}
+		
+		return String.valueOf(board.getGcount());
 	}
 
 }

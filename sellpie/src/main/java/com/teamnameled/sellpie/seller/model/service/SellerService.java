@@ -19,5 +19,8 @@ public class SellerService {
 	public List<Seller> selectSellersInfo(List<Member> sellerList) {
 		return sellerDao.selectSellersInfo(sellerList);
 	}
+	public Seller selectSeller(String email) {
+		return sellerDao.selectSeller(email);
+	}
 	
 }
