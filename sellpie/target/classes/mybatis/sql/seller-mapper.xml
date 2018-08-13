@@ -11,10 +11,10 @@
 	<select id="selectSellerList" parameterType="String" resultType="Member">
 		SELECT EMAIL, PWD, NAME, GENDER, PHONE, BIRTH, PROFILE_IMG
 		FROM MEMBER
-		WHERE EMAIL = (
+		WHERE EMAIL IN (
 			SELECT EMAIL
 			FROM SELLER
-			WHERE SNO = (
+			WHERE SNO IN (
 				SELECT SNO
 				FROM PRODUCT
 				WHERE SELTAG LIKE '%'||#{selTag}||'%'
@@ -24,7 +24,7 @@
 	<select id="selectSellersInfo" parameterType="java.util.List" resultType="Seller">
 		SELECT SNO, EMAIL, ACNUM, BANK, ZIPCODE, ADDR, ADDRDETAIL, PCATEGORY, REASON
 		FROM SELLER
-		WHERE EMAIL = 
+		WHERE EMAIL IN 
 		<foreach collection="list" item="seller" open="(" close=")">
 			#{seller.email}
 		</foreach>
