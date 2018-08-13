@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="replyMapper">
+	<select id="selectReplyList" parameterType="string" resultType="Reply">
+		SELECT R.RNO, R.BNO, R.WRITER, R.CONTENT, R.WRITEDATE, R.DELFLAG, M.NAME, M.PROFILE_IMG FROM REPLY R
+		JOIN MEMBER M ON(R.WRITER = M.EMAIL)
+		WHERE BNO=#{bno}
+		ORDER BY BNO DESC
+	</select>
+	
+	<select id="selectRcount" parameterType="_int" resultType="_int">
+		SELECT count(*)
+		FROM REPLY
+		WHERE BNO=#{bno}
+	</select>
+	
+	<insert id="insertReply" parameterType="Reply">
+		INSERT INTO REPLY
+		VALUES(SEQ_REPLY_RNO.NEXTVAL, #{bno}, #{writer}, #{content}, SYSDATE, 'N')
+	</insert>
+
+</mapper>

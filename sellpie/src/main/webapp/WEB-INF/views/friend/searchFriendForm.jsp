@@ -2,12 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
 <!DOCTYPE html>
 <html>
 <head>
-<c:import url="header.jsp"></c:import>
-<script src="resources/js/jquery-3.3.1.min.js"></script>
+<c:import url="../header.jsp"></c:import>
 <meta charset="UTF-8">
 <title>메인페이지</title>
 <style>
@@ -51,7 +49,7 @@
 	height: 520px;
 	padding: 16px;
 	background-color: rgba(0, 0, 0, 0.8);
-	overflow: hidden;	
+	overflow: auto;	
 }
 
 .detail_content2 {
@@ -146,7 +144,7 @@ function fileUpload(inputFiles, condition){
                   fileTag.attr("controll","true");
                   videoIdx = videoIdx+1;
                   $("#videoFile").attr("id","video"+videoIdx);
-                  newTag = '<input type="file" name="file" id="videoFile" onchange="fileUpload(this,1);" accept="video/*" style="display:none"/>';
+                  newTag = '<input type="file" name="file" id="videoFile" onchange="fileUpload(this,1);" accept="video/*" hidden/>';
                }            
                fileTag.css({"width":"100%","height":"100%"});
                fileTag.attr('src', e.target.result); //image or video 담긴 태그 생성
@@ -162,85 +160,6 @@ function fileUpload(inputFiles, condition){
          });
       }
    }
-
-	function getReply(bno){
-		$.ajax({
-			url:"selectReply.do",
-			type:"get",
-			data:{"bno":bno},
-			success:function(data){
-				for(var i=0; i<data.length; i++){
-					var div = $("<div>");
-					div.css({"height":"auto","width":"100%","margin-top":"5px"});
-					var innerDiv1 = $("<div>");
-					innerDiv1.css({"display":"inline-block","width":"28%"});	
-					var img = '<img src="'+data[i].profileImg+'" alt="Avatar" class="w3-left w3-circle rounded-circle" style="width:20px; height:20px;">';
-					innerDiv1.append(img);
-					innerDiv1.append('&nbsp;<b style="font-size: 11px;">'+data[i].name+'</b>');
-					div.append(innerDiv1);
-					
-					var innerDiv2 = $("<div>");
-					innerDiv2.css({"background":"lightgray","display":"inline-block","padding":"3px","border-radius":"10px","margin-left":"6px","width":"70%"});
-					
-					innerDiv2.append('<span style="font-size:11px;">&nbsp;'+data[i].content+'&nbsp;</span>');
-					div.append(innerDiv2);
-					$("#replyInfo").append(div);
-				}
-				$("#rcount").text(data.length);
-				
-				if(data==null || data.length==0){
-					$("#replyInfo").append("등록된 댓글이 없습니다.");
-				}
-					
-			},error:function(e){
-				console.log(e);
-			}
-		});
-	}
-	
-	function openDetail(bno){
-		$.ajax({
-			url:"selectBoard.do",
-			type:"get",
-			data:{"bno":bno},
-			success:function(data){
-				var srcArr = data.resource;
-				for(var i=0; i<srcArr.length; i++){
-					if(i==0){
-						$("#fileview").append("<img src='"+srcArr[i].rsrc+"' style='width:90%; height:95%;' class='w3-margin-bottom mySlides'>");
-					}
-					$("#subView").append("<img src='"+srcArr[i].rsrc+"' style='width:7%; height:6%;' class='w3-margin-bottom mySlides'>");
-				}
-				
-				var profile = '<img src="'+data.profileImg+'" alt="Avatar" class="w3-left w3-circle w3-margin-right rounded-circle" style="width:50px; height:50px;">';
-				var name = '<span class="w3-large w3-margin-top">'+data.name+'</span><br>';
-				$("#detailInfo").append(profile);
-				$("#detailInfo").append(name);
-				$("#detailBno").val(data.bno);
-				
-				var content = data.bcontent;
-				$("#detailContent").append(content);
-				
-				
-			},error:function(e){
-				console.log(e);
-			}
-		});
-		
-		getReply(bno);
-	
-		location.href="#open";
-	}
-
-	function closeDetail(){
-		$("#fileview").html('');
-		$("#subView").html('');
-		$("#replyInfo").html('');
-		$("#detailInfo").html('');
-		$("#detailContent").html('');
-		location.href="#close";
-	}
-
    
    $(document).ready(function(){
         //취소버튼
@@ -252,51 +171,6 @@ function fileUpload(inputFiles, condition){
        setTimeout(function() {
               location.href = "selectBoardList.do";
               }, 180000); // 3000ms(3초)가 경과하면 이 함수가 실행됩니다.
-              
-              
-       //댓글 쓰고 엔터키 누를시 댓글 등록
-       $("#inputReply").keyup(function(key) {
-    	   if (key.keyCode == 13) {
-    		   var content = $("#inputReply").text();
-    		   $("#inputReply").text("");
-        	   $("#inputReply").focus();
-				$.ajax({
-					url:"insertReply.do",
-					type:"get",
-					data:{"bno":$("#detailBno").val(), "content":content},
-					success:function(data){
-						if(data != null){
-							$("#replyInfo").html("");
-							getReply(data);
-						}
-					},error:function(e){
-						console.log("댓글 입력 에러",e);
-					}
-				});
-    	   }
-
-    	});
-              
-       $("#inputReplyBtn").click(function(){
-    	   var content = $("#inputReply").text();
-		   $("#inputReply").text("");
-    	   $("#inputReply").focus();
-			$.ajax({
-				url:"insertReply.do",
-				type:"get",
-				data:{"bno":$("#detailBno").val(), "content":content},
-				success:function(data){
-					if(data != null){
-						$("#replyInfo").html("");
-						getReply(data);
-					}
-				},error:function(e){
-					console.log("댓글 입력 에러",e);
-				}
-			});
-       });
-       
-       
 
    }); 
       
@@ -327,33 +201,7 @@ function fileUpload(inputFiles, condition){
       var str = $("#bcontent").text();
       $("#hiddenContent").val(str);
    }
-   
-   function likeCheck(b){
-	   var likeBtn = b;
-	   var condition = "";
-	   var bno = $(likeBtn).next().val();
-	   if($(likeBtn).hasClass("w3-theme-d2")){
-		   $(likeBtn).removeClass("w3-theme-d2");
-		   condition = "sub"
-	   }else{
-		   $(likeBtn).addClass("w3-theme-d2");
-		   condition = "add"
-	   }
-	   
-	   $.ajax({
-		   url:"updateLike.do",
-		   type:"get",
-		   data:{"bno":bno,"condition":condition},
-		   success:function(data){
-			   var span = $(likeBtn).children()[1];
-			   console.log($(span).text(data));
-		   },error:function(e){
-			   console.log("에러 : "+e);
-		   }
-	   });
-   }
 </script>
-
 </head><body class="w3-theme-l5">
 
 
@@ -362,38 +210,53 @@ function fileUpload(inputFiles, condition){
   <!-- The Grid -->
   <div class="w3-row">
     <!-- Left Column -->
-<<<<<<< HEAD
-    	<c:import url="sideLeft.jsp"/>
-=======
-       <c:import url="sideLeft.jsp"></c:import>
->>>>>>> refs/heads/HaSungMi
+       <c:import url="../sideLeft.jsp"></c:import>
     <!-- End Left Column -->
     
     <!-- Middle Column -->
     <div class="w3-col m7" style="margin-left:25%;" id="contentDiv">
-    
-      <div class="w3-row-padding">
-        <div class="w3-col m12">
-          <div class="w3-card w3-round w3-white" onclick="javascript:location.href='#contentOpen'">
-            <div class="w3-container w3-padding">
-              <h6 class="w3-opacity">게시물 작성</h6>
-              <div contenteditable="true" class="w3-border w3-padding-16"> 
-              </div>
-              <button type="button" class="w3-button w3-theme"><i class="fa fa-pencil"></i> &nbsp; 게시</button> 
-            </div>
-          </div>
-        </div>
-      </div>
-      
+    		
+				<div class="w3-row-padding">
+			        <div class="w3-col m12">
+			          <div class="w3-card w3-round w3-white">
+			            <div class="w3-container w3-padding" id="memberInfoDiv">
+			                  <img src="" alt="Avatar" class="w3-left w3-margin-right w3-circle" style="width:55px; height:55px;">
+			                  	 
+			                  	 <c:if test="${member.email eq sellerInfo.email}">
+			                  	 	
+									<button type="button" class="btn btn-default btn-lg w3-right w3-opacity" style="margin-top:10px;">
+									       <span class="glyphicon glyphicon-shopping-cart"></span>
+									</button>
+								 </c:if>
+								 
+								 
+								 <c:if test="${applyflag eq 'Y'  }">
+									 	<button type="button" class="btn btn-default btn-lg w3-right w3-opacity" style="margin-top:10px;">
+												       <span class="glyphicon glyphicon-user"></span>
+										</button>
+								 </c:if>
+								 			
+								 <c:if test="${applyflag ne 'Y'  }">
+									 	<button type="button" class="btn btn-default btn-lg w3-right w3-opacity" style="margin-top:10px;">
+											<span class="glyphicon glyphicon-user">+</span>
+										</button>
+								 </c:if>
+								 
+								 	
+			                  <h4><c:out value="${member.name }"></c:out></h4><br>
+			            </div>
+			          </div>
+			        </div>
+			      </div>
+
 <!--게시글보기 창 -->
          <form id="board" method="post"  action="/sellpie/insertBoard.do" onsubmit="validate();" enctype="multipart/form-data">
                <div class="detail_content2" id="contentOpen" >
-<!--                나중에 세션정보로 바꾸기 -->
-               <input type="hidden" name="email" value="test2@naver.com"/> 
+               <input type="hidden" name="email" value="test2@naver.com"/>
                <input type="hidden" name="bcontent" id="hiddenContent"/>
                   <div>
                      <div style="text-align:right;">
-                        <a class="divC" onclick="#close"> 
+                        <a class="divC" href="#close"> 
                          <i class="fa fa-close w3-text-black"></i>
                       </a>
                    </div>
@@ -442,14 +305,13 @@ function fileUpload(inputFiles, condition){
       
 <!-- // 상세보기 창(1개만 존재, hidden) -->
             <div class="detail_content" id="open" >
-            <input type='hidden' id='detailBno'/>
                <div>
                   <div style="text-align:right;">
-                   <a onclick="closeDetail()">
+                   <a href="#close">
                       <i class="fa fa-close w3-text-white"></i>
                    </a>
                 </div>
-                    <div class="w3-row" style="height:440px; overflow: hidden;">
+                    <div class="w3-row" style="height:90%;">
                         <div class="w3-col m7" style="height:94%;">
                            <div class="w3-row" style="text-align:center; width:98%; height:98%;" >
                               <div class="w3-col" style="width:10%; height:95%;" onclick="plusDivs(-1);">
@@ -457,44 +319,53 @@ function fileUpload(inputFiles, condition){
                                  <img src="resources/images/header/nextLeft.png" style="width:28%; height:23%;">
                               </div>
                               <div class="w3-col" style="width:77%; height:95%; text-align:center;" id="fileview">
+                                  <img src="resources/images/header/twice2.png" style="width:90%; height:95%;" class="w3-margin-bottom mySlides">
                               </div>
                               <div class="w3-col" style="width:10%; height:95%;" onclick="plusDivs(1);">
                                  <br><br><br><br><br>
                                  <img src="resources/images/header/nextRight.png" style="width:28%; height:23%;">
                               </div>
                            </div>                             
-                           <div style="text-align:center" id="subView">
+                           <div style="text-align:center">
+                                   <img src="resources/images/header/twice1.png" style="width:7%; height:6%;" class="w3-margin-bottom mySlides">
+                                   <img src="resources/images/header/twice2.JPG" style="width:7%; height:6%;" class="w3-margin-bottom mySlides">
+                                   <img src="resources/images/header/twice2.png" style="width:7%; height:6%;" class="w3-margin-bottom mySlides">
                            </div>
                         </div>
-                        <div class="w3-col m4" style="width:36%; height:98%;">
+                        <div class="w3-col m4" style="width:36%;">
                             <div class="w3-container w3-card w3-white w3-round"><br>
-	                              <div class="w3-border-bottom" style="height:60px;" id="detailInfo">
-	<!--                               	ajax에서 프로필 정보 가져옴 -->
-	                              </div>
-	                               <div class="w3-margin-bottom" style="height:130px; overflow-y:scroll;" id="detailContent"> 
-	<!--                                     ajax에서 내용 가져옴 -->
-	                               </div>
-	                               <div>
-	                                  <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom w3-align-right"><i class="fa fa-thumbs-up"></i> &nbsp;600</button>
-	                                   <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom w3-align-right" onclick="javascript:$('#inputReply').focus();"><i class="fa fa-comment"></i> &nbsp;
-	                                   		<span id="rcount"></span>
-	                                   </button>  
-	                               </div>
-	                           
-	                            <div style="height:120px; width:100%; overflow-y:scroll;" id="replyInfo">
-	<!--                             	getReply에서 댓글 가져옴 -->
-	                            </div>
-	                            <div class="w3-row w3-cell-bottom w3-margin-bottom">
-		                             <div class="w3-col m1">
-		                                     <img src="resources/images/header/twice2.png" alt="Avatar" class="w3-left w3-circle rounded-circle w3-block" style="width:20px; height:20px;">
-	<!-- 	       세션에 정보 생기면 이걸로 바꾸기                              <img src="<c:out value='${user.profileImg}'/>" alt="Avatar" class="w3-left w3-circle rounded-circle w3-block" style="width:20px; height:20px;"> -->
-		                             </div>
-		                             <div contenteditable="true" class="w3-border w3-col m9 w3-round" id="inputReply"></div>
-		                             <div class="w3-col m1" style="border-radius: 17px;  width:22px; height:22px; text-align: center;">
-		                                  <img src="resources/images/header/submitImg.jpg" alt="Avatar" class="w3-left w3-circle rounded-circle w3-block" style="width:22px; height:22px;" id="inputReplyBtn">
-		                             </div>
-	                            </div>
-                             </div>
+                              <div class="w3-border-bottom" style="height:10%;">
+                                   <img src="resources/images/header/twice2.png" alt="Avatar" class="w3-left w3-circle w3-margin-right rounded-circle" style="width:40px; height:40px;">
+                                    <span class="w3-right w3-opacity">32 min</span>
+                                    <h4>Angie Jane</h4><br>
+                              </div>
+                               <div class="w3-margin-bottom" style="height:27%; overflow-y:scroll;"> 
+                                    <p>Have you seen this?</p>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                               </div>
+                               <div>
+                                  <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom w3-align-right"><i class="fa fa-thumbs-up"></i> &nbsp;600</button>
+                                   <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom w3-align-right" onclick="javascript:location.href='#open'"><i class="fa fa-comment"></i> &nbsp;128</button>  
+                               </div>
+                               <div style="height:30%; width:100%; overflow-y:scroll;">
+                                   <div style="height:10%;">
+                                       <img src="resources/images/header/twice2.png" alt="Avatar" class="w3-left w3-circle rounded-circle" style="width:20px; height:20px;">
+    <!--                                    <span class="w3-right w3-opacity">32 min</span>-->
+                                        &nbsp;<b style="font-size: 12px;">Angie Jane</b>
+                                        <span style="font-size:12px;">정연이 등록한 댓글</span>
+                                  </div>
+                               </div>
+                               <div class="w3-row w3-cell-bottom w3-margin-bottom">
+                                       <div class="w3-col m1">
+                                        <img src="resources/images/header/twice2.png" alt="Avatar" class="w3-left w3-circle rounded-circle w3-block" style="width:20px; height:20px;">
+                                       </div>
+                                       <div contenteditable="true" class="w3-border w3-col m9 w3-round">
+                                      </div>
+                                      <div class="w3-col m1" style="border-radius: 17px;  width:22px; height:22px; text-align: center;">
+                                           <img src="resources/images/header/submitImg.jpg" alt="Avatar" class="w3-left w3-circle rounded-circle w3-block" style="width:22px; height:22px;">
+                                      </div>
+                               </div>
+                            </div>
                         </div>
                </div>
             </div>
@@ -502,14 +373,17 @@ function fileUpload(inputFiles, condition){
 <!--          상세보기창 끝-->
           
       
-    <c:forEach var="board" items="${bList }">
+   <c:forEach var="board" items="${fblist }">
    <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-        <img src="<c:out value='${board.profileImg }'/>" alt="Avatar" class="w3-left w3-circle w3-margin-right rounded-circle" style="width:60px; height:60px;">
+      <input type="hidden" name="bno" />
+      
+        <img src="resources/images/header/twice2.png" alt="Avatar" class="w3-left w3-circle w3-margin-right rounded-circle" style="width:60px; height:60px;">
         <span class="w3-right w3-opacity">32 min</span>
         
         <h4><c:out value="${board.name }"></c:out></h4><br>
         <hr class="w3-clear">
         <p><c:out value="${board.bcontent }"></c:out></p>
+        <p> veniam</p>
         
         <table id="fileTb" cellspacing="0" class="w3-margin-bottom">
            <c:forEach var="resource" items="${board.resource }" varStatus="st">
@@ -537,7 +411,7 @@ function fileUpload(inputFiles, condition){
                               <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:500px;">
                           </td>
                     </tr>
-                     </c:if>
+                    </c:if>
                      
                   </c:if>
                   <c:if test="${board.resource.size() eq 3}">
@@ -592,7 +466,7 @@ function fileUpload(inputFiles, condition){
                                    <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
                                </td>
                         </tr>
-                         </c:if>
+                        </c:if>
                   </c:if>
                      
                   </c:if>
@@ -600,25 +474,16 @@ function fileUpload(inputFiles, condition){
            </c:forEach>
         </table>
         &nbsp;
-        <button type="button" class="w3-button w3-margin-bottom w3-border  
-        <c:if test="${fn:contains(board.likeflag, 'T') }">
-         	w3-theme-d2 
-         </c:if>
-         " onclick="likeCheck(this);"><i class="fa fa-thumbs-up"></i> &nbsp;       	
-        	<span><c:out value="${board.gcount }"></c:out></span>
-        </button>
-        <input type="hidden" name="bno" value="<c:out value='${board.bno }'/>"/>
-        <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom w3-border" onclick="openDetail('<c:out value="${board.bno }"/>')"><i class="fa fa-comment"></i> &nbsp;
-			<c:out value="${board.rcount }"/>
-		</button> 
+        <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i> &nbsp;600</button> 
+        <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom" onclick="javascript:location.href='#open'"><i class="fa fa-comment"></i> &nbsp;128</button> 
     </div>
-    </c:forEach>
+    </c:forEach> 
     <!-- End Middle Column -->
     </div>
    
     <!-- Right Column -->
     
-      <c:import url="sideRight.jsp"></c:import>
+      <c:import url="../sideRight.jsp"></c:import>
     <!-- End Right Column -->
   <!-- End Grid -->
   </div>
@@ -626,17 +491,6 @@ function fileUpload(inputFiles, condition){
 <!-- End Page Container -->
 </div>
 <br>
-
-<!-- Footer -->
-<footer class="w3-container w3-theme-d3 w3-padding-16">
-  <h5>Footer</h5>
-</footer>
-
-<footer class="w3-container w3-theme-d5">
-  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
-</footer>
- 
-
 
 
 </body></html>

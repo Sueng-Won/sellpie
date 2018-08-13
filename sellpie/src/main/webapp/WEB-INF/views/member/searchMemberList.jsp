@@ -29,8 +29,8 @@
 							"${searchText}" 로 검색한 사용자 결과입니다.
 							<div class="list-group">
 									<c:forEach var="member" items="${memberList}">
-  											<a href="#" class="list-group-item">
-  												<img src="resources/images/header/red1.jpg" class="w3-circle" style="height:50px;width:50px" alt="Avatar">
+  											<a onclick="searchFriendForm('${member.email}');" class="list-group-item">
+  												<img src="resources/images/header/red1.jpg" class="w3-circle " style="height:50px;width:50px" alt="Avatar">
     											<b>${member.name}</b>
   											</a>
   									</c:forEach>
@@ -88,6 +88,10 @@ function openNav() {
     } else { 
         x.className = x.className.replace(" w3-show", "");
     }
+}
+
+function searchFriendForm(email){
+	 location.href = "searchFriendForm.do?email="+email;
 }
 </script>
 </body>
