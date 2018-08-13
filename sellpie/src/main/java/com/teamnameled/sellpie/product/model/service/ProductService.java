@@ -19,5 +19,8 @@ public class ProductService {
 		// TODO Auto-generated method stub
 		return productDao.selectProduct(pNo);
 	}
+	public int insertProduct(Product product) {
+		return productDao.insertProduct(product);
+	}
 
 }

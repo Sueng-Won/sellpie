@@ -18,5 +18,10 @@
 		FROM PRODUCT
 		WHERE PNO = #{pNo}
 	</select>
+	<!-- -->
+	<insert id="insertProduct" parameterType="Product">
+		INSERT INTO PRODUCT VALUES(
+		SEQ_PRODUCT_PNO.NEXTVAL, #{sNo}, #{pName}, #{selTag}, #{rUrl}, #{pQuantity}, #{isCraft},#{price}, #{pDetail}, 'N')
+	</insert>
 </mapper>
 

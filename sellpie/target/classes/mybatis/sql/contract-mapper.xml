@@ -8,7 +8,7 @@
     보통 서비스의 이름과 같게 설정하여
     연결의 착오를 줄인다. -->
 <mapper namespace="ContractMapper">
-	<select id="selectContractList" parameterType="String" resultType="list">
+	<select id="selectContractList" parameterType="String" resultType="Contract">
 		SELECT CNO, EMAIL, SNO, PNO, QUANTITY, DELIVCODE, INVNUM
 		FROM CONTRACT
 		WHERE EMAIL = #{email}
