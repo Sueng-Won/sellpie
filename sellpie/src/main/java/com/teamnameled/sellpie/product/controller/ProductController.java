@@ -21,27 +21,50 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.teamnameled.sellpie.board.model.vo.BoardVo;
 import com.teamnameled.sellpie.product.model.service.ProductService;
 import com.teamnameled.sellpie.product.model.vo.Product;
+<<<<<<< HEAD
 import com.teamnameled.sellpie.resource.model.service.ResourceService;
 import com.teamnameled.sellpie.resource.model.vo.ResourceVo;
+=======
+import com.teamnameled.sellpie.review.controller.ReviewController;
+import com.teamnameled.sellpie.review.model.vo.Review;
+>>>>>>> refs/heads/master
 
 @Controller
 public class ProductController {
 	@Autowired
 	ProductService productService;
 	@Autowired
+<<<<<<< HEAD
 	ResourceService resourceService;
+=======
+	ReviewController reviewController;
+>>>>>>> refs/heads/master
 	
 	@RequestMapping("productList.do")
 	public String selectProductList(int sNo,HttpServletRequest request) {
 		List<Product> productList = productService.selectProductList(sNo);
+		List<Review> reviewList = reviewController.selectReviewList(productList);
+		double starAvg = 0;
+		int flooredStarAvg = 0;
+		int reviewerCount = reviewList.size();
+		for(int i = 0; i<reviewList.size(); i++) {
+			starAvg += reviewList.get(i).getReviewStar();
+		}
+		starAvg /= reviewList.size();
+		flooredStarAvg = (int)Math.round(starAvg);
 		request.setAttribute("productList", productList);
+		request.setAttribute("star", flooredStarAvg);
+		request.setAttribute("count", reviewerCount);
 		return "product/productList";
+<<<<<<< HEAD
 	}
 	
 	@RequestMapping("productForm.do")
 	public String productForm() {
 		
 		return "product/productForm";
+=======
+>>>>>>> refs/heads/master
 	}
 	
 	@RequestMapping(value = "productApply.do", method=RequestMethod.POST)

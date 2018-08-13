@@ -154,16 +154,15 @@
                             <div class="w3-container w3-card w3-white w3-round"><br>
                               <div class="w3-border-bottom" style="height:10%;">
                                    <img src="resources/images/header/twice2.png" alt="Avatar" class="w3-left w3-circle w3-margin-right rounded-circle" style="width:40px; height:40px;">
-                                    <span class="w3-right w3-opacity">32 min</span>
                                     <h4>${product.pName}</h4><br>
                               </div>
                                <div class="w3-margin-bottom" style="height:27%; overflow-y:scroll;"> 
                                     <p>${product.pDetail}</p>
                                </div>
                                
-                               <div>
+                               <div style="text-align:center;">
                                	<form id="contractFrm" action="insertContract.do" method="get">
-                               	<label>수량 : <input type="number" id="quantity" name="quantity"/>개</label>
+                               	<label>수량 : <input type="number" id="quantity" name="quantity" min="1" max="${product.pQuantity}"/>개 / ${product.pQuantity}</label>
                                	<input type="hidden" id="pNo" name="pNo" value="${product.pNo}"/>
                                	<input type="hidden" id="sNo" name="sNo" value="${product.sNo}"/>
                                	<!-- <input type="hidden" id="email" name="email" value="${sessionScope.member.email}"/> -->
@@ -171,23 +170,23 @@
                                	</form>
                                </div>
                                <div>
-                                  <button type="button" onclick="insertContract()">구매하기</button>
+                                  <button class="btn btn-primary btn-lg btn-block" type="button" onclick="insertContract()">구매하기</button>
                                </div>
                                
-                               <div style="height:30%; width:100%; overflow-y:scroll;">
-                                   <div style="height:10%;">
-                                       <img src="resources/images/header/twice2.png" alt="Avatar" class="w3-left w3-circle rounded-circle" style="width:20px; height:20px;">
-    <!--                                    <span class="w3-right w3-opacity">32 min</span>-->
-                                        &nbsp;
-                                        <b style="font-size: 12px;">Angie Jane</b>
+                               <div style="height:30%; width:100%; text-align:center;">
+                               	<h3>해당 제품의 총 평점은?</h3>
+                               		<h3>
+                               			<c:forEach begin="1" end="5" step="1" var="i">
                                         <!-- 별 추가할 곳 -->
-	                                        <span class = "glyphicon glyphicon-star-empty" id="s1"></span>
-	                                        <span class = "glyphicon glyphicon-star-empty"></span>
-	                                        <span class = "glyphicon glyphicon-star-empty"></span>
-	                                        <span class = "glyphicon glyphicon-star-empty"></span>
-	                                        <span class = "glyphicon glyphicon-star-empty"></span>
-										<br>
-                                        <span style="font-size:12px;">여태 사용한 탈곡기중 최고입니다.</span>
+                                        <c:if test="${i <= star }">
+	                                        <span class = "glyphicon glyphicon-star" style="color:#f49d46"></span>
+	                                    </c:if>
+	                                    <c:if test="${i > star }">
+	                                        <span class = "glyphicon glyphicon-star-empty " style="color:#f49d46"></span>
+	                                    </c:if>
+	                                    </c:forEach>
+	                                </h3>
+	                                <h6>(총 <c:out value="${count}"/>명의 평균을 반올림 한 값입니다.)</h6>
                                   </div>
                                </div>
                             </div>
