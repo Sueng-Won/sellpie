@@ -107,7 +107,7 @@
 						<div class="w3-card w3-round w3-white">
 							<div class="w3-container w3-padding">
 									<div class="sellerBtn">
-										<button>판매 등록</button>
+										<button class="w3-button w3-theme" onclick="javascript: location.href = 'productForm.do'">판매 등록</button>
 									</div>
 
 									<div class="sellList">
