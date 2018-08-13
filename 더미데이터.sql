@@ -45,7 +45,7 @@ VALUES(SEQ_REPLY_RNO.NEXTVAL,1,'더미','와 끝이 보인다','18/08/01','N');
 
 ----------REVIEW DUMMY DATA-----------------------
 INSERT INTO REVIEW
-VALUES(SEQ_REVIEW_RNO.NEXTVAL,1,1,'세기말 아이템입니다.');
+VALUES(SEQ_REVIEW_RNO.NEXTVAL,1,1);
 
 ----------STATS DUMMY DATA------------------------
 INSERT INTO STATS
