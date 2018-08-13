@@ -2492,7 +2492,7 @@ span + .signupNavbar__vingleLogo__3Ob {
         						</div>
         					</div>
         					<div class="signIn__divider__sz8">또는</div>
-        						<form class="signIn__form__2cu" action="/sellpie/userLogin.do">
+        						<form class="signIn__form__2cu" action="/sellpie/userLogin.do" method="post">
         							<div class="signIn__formControl__35V">
         								<div class="solidReasonInput__wrapper__28f undefined ">
         									<input type="text"  name="email" class="solidReasonInput__textInput__ZZr " placeholder="이메일" value="">
