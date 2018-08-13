@@ -2,6 +2,7 @@ package com.teamnameled.sellpie.member.controller;
 
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
@@ -11,12 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.teamnameled.sellpie.common.GenerateCertNumber;
 import com.teamnameled.sellpie.member.model.service.MemberService;
@@ -151,8 +149,12 @@ public class MemberController {
 		int result = 0;
 		try {
 			result =  memberService.insertMember(member);
-			session.setAttribute("user", member);
-			url ="redirect:main.do";
+			if(result>0){
+				session.setAttribute("user", member);
+				url ="redirect:main.do";				
+			}else{
+				url = "redirect:signIn.do";
+			}
 			
 		} catch (Exception e) {
 			
@@ -216,5 +218,9 @@ public class MemberController {
 		request.setAttribute("memberList", memberList);
 		request.setAttribute("searchText", searchText);
 		return "member/searchMemberList";
+	}
+	@RequestMapping("updateMember.do")
+	public String updateMember(){
+		return "member/memberUpdate";
 	}
 }

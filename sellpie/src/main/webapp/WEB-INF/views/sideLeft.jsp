@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <html>
 <head>
 <meta charset="utf-8">
@@ -15,6 +15,8 @@
 function frientForm(){
 	location.href="friendForm.do";
 }
+	
+
 
 </script>
 </head>
@@ -24,12 +26,29 @@ function frientForm(){
       <!-- Profile -->
       <div class="w3-card w3-round w3-white">
         <div class="w3-container">
-         <h4 class="w3-center">My Profile</h4>
-         <p class="w3-center"><img src="resources/images/header/red1.jpg" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
-         <hr>
-         <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> Designer, UI</p>
-         <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> London, UK</p>
-         <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> April 1, 1988</p>
+	         <h4 class="w3-center">My Profile</h4>
+	         
+        	<c:choose>
+        	
+        	<c:when test="${!empty sessionScope.user}">
+         	 <p class="w3-center"><img src="resources/images/userImg/${(sessionScope.user.profile_img ne null)?'profile.png':sessionScope.user.profile_img}" class="w3-circle" style="height:106px;width:106px" alt="Avatar"/></p>
+         	 <hr>
+        	 <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i><c:out value="${sessionScope.user.email}"/></p>
+       		 <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> 주 소</p>
+        	 <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i><c:out value="${sessionScope.user.age}"/> </p>
+         	</c:when>
+         	<c:otherwise>
+         		<p class="w3-center"><img src="resources/images/header/red1.jpg" class="w3-circle" style="height:106px;width:106px" alt="Avatar"/></p>
+         	<hr>
+         	<p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> Designer, UI</p>
+        	<p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> London, UK</p>
+            <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> April 1, 1988</p>
+         	
+         	</c:otherwise>
+        	</c:choose>
+         	
+         	
+         
         </div>
       </div>
       <br>
