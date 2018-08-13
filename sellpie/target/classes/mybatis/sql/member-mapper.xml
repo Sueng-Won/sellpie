@@ -9,13 +9,26 @@
     연결의 착오를 줄인다. -->
 <mapper namespace="memberMapper">
 	<select id="selectEmail" parameterType="String"  resultType="Member">
-		SELECT EMAIL, PWD, NAME, GENDER, PHONE, BIRTH, PROFILE_IMG
+		SELECT EMAIL, PWD, NAME, GENDER, PHONE, BIRTH, PROFILE_IMG,
+			CASE WHEN SUBSTR(BIRTH,1,2) >= '50' 
+           		 THEN EXTRACT (YEAR FROM SYSDATE) -  EXTRACT(YEAR FROM (TO_DATE(SUBSTR('19'||BIRTH, 1,8))))
+           		 ELSE EXTRACT (YEAR FROM SYSDATE) -  EXTRACT(YEAR FROM (TO_DATE(SUBSTR('20'||BIRTH, 1,8))))
+            END AS AGE
 		FROM MEMBER
 		WHERE EMAIL = #{email}
 	</select>
 	<insert id="insertMember" parameterType="Member">
 		INSERT INTO MEMBER VALUES(#{email},#{pwd},#{name},#{gender},#{phone},#{birth}, NULL)
 	</insert>
+	<update id="updateMemberPwd" parameterType="Member">
+		UPDATE MEMBER SET PWD = #{pwd}
+		WHERE EMAIL = #{email}
+	</update>
+	<select id="searchMemberList" parameterType="String" resultType="Member">
+		SELECT EMAIL, PWD, NAME, GENDER, PHONE, BIRTH, PROFILE_IMG
+		FROM MEMBER
+		WHERE NAME LIKE '%'||#{searchText}||'%'
+	</select>
 </mapper>
 
 

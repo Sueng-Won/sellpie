@@ -149,7 +149,7 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
 .signupNavbar__titleWrapper__4Iq {
   font-size: 16px;
   height: 26px;
-  line-height: 34px;
+  line-height: 50px;
   text-align: left;
   color: #fb2942; }
 
@@ -160,7 +160,6 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
   width: 70px;
   height: 26px; }
   .signupNavbar__vingleLogo__3Ob img {
-    padding-left:10px;
     height: 26px; }
 
 .signupNavbar__vingleLogo__3Ob + span {
@@ -414,6 +413,10 @@ span + .signupNavbar__vingleLogo__3Ob {
 </style>
 <script src="resources/js/jquery-3.3.1.min.js"></script>
 <script>
+history.pushState(null, null, location.href);
+window.onpopstate = function(event) {
+	history.go(1);
+};
 	$(function(){
 		<c:if test="${not empty sessionScope.user}">
 		 location.href="/sellpie/main.do";
@@ -508,7 +511,7 @@ span + .signupNavbar__vingleLogo__3Ob {
          				 <div class="signupNavbar__titleWrapper__4Iq">
           					<span>Welcome to </span>
           					<i class="icons__icon__2cq signupNavbar__vingleLogo__3Ob">
-    							<img id="logo_img" src="resources/images/join/logo_sellpie2.png"/>
+    							<img style="width:120px; height:30px;"src="resources/images/join/logo_sellpie.png"/>
     						</i>
     					</div>
     				</nav>

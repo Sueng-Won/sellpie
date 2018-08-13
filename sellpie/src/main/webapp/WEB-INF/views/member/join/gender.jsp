@@ -145,6 +145,10 @@ button::-moz-focus-inner {
 
 </style>
 <script>
+history.pushState(null, null, location.href);
+window.onpopstate = function(event) {
+	history.go(1);
+};
 $(function(){
 	<c:if test="${not empty sessionScope.user}">
 	 location.href="/sellpie/main.do";

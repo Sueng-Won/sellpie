@@ -1,5 +1,7 @@
 package com.teamnameled.sellpie.member.model.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -18,6 +20,14 @@ public class MemberDao {
 
 	public int insertMember(Member member) {
 		return sqlSession.insert("memberMapper.insertMember", member);
+	}
+
+	public int updateUserPwd(Member member) {
+		return sqlSession.update("memberMapper.updateMemberPwd", member);
+	}
+
+	public List<Member> searchMemberList(String searchText) {
+		return sqlSession.selectList("memberMapper.searchMemberList", searchText);
 	}
 
 }

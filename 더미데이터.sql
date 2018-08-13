@@ -4,7 +4,7 @@ VALUES('aaa@aaa.com', 'aaa', 'aaa', 'M', '010-1111-1111', '18/08/01', '/resource
 
 ----------BOARD DUMMY DATA----------------------
 INSERT INTO BOARD
-VALUES(SEQ_BOARD_BNO.NEXTVAL, 'aaa@aaa.com', '╧ы╢ы╟║╟М╫м╢ы', '2','1, 2', '128.33333', '128.33333', 'N', 'N');
+VALUES(SEQ_BOARD_BNO.NEXTVAL, 'aaa@aaa.com', 'К╟■К▀╓Й╟─ЙЁ═Л▀╤К▀╓', '2','1, 2', '128.33333', '128.33333', 'N', 'N');
 
 ----------BOARD_LIKE DUMMY DATA----------------------
 INSERT INTO BOARD_LIKE
@@ -12,7 +12,7 @@ VALUES(SEQ_BOARD_LIKE_BLNO.NEXTVAL, 'aaa@aaa.com',1);
 
 ----------AD_LIST DUMMY DATA----------------------
 INSERT INTO AD_LIST
-VALUES(SEQ_AD_LIST_ADNO.NEXTVAL, 1, 'aaa','18/08/01','18/08/10','Y','Ёй╧╚ ЁКюКюл╤С╪╜');
+VALUES(SEQ_AD_LIST_ADNO.NEXTVAL, 1, 'aaa','18/08/01','18/08/10','Y','К└┬К╛╢ К┘╦Л·╪Л²╢К²╪Л└°');
 
 ----------RESOURCES DUMMY DATA--------------------
 
@@ -21,15 +21,15 @@ VALUES(SEQ_RESOURCES_RNO.NEXTVAL, '/resource/aaa@aaa.com/board/aaa.png');
 
 ----------QNA DUMMY DATA--------------------------
 INSERT INTO QNA
-VALUES(SEQ_QNA_QNA_NO.NEXTVAL,'aaa@aaa.com','18/08/01','╩Г╤В╩Л╥а','╠вЁи ╣╔юлем╢б ╬к╬ф╪╜ цъ╟║го╟т гр╡╛ ╠в╥╗╬Н','N');
+VALUES(SEQ_QNA_QNA_NO.NEXTVAL,'aaa@aaa.com','18/08/01','Л┌╛К·▄Л┌╢К═╓','Й╥╦К┐╔ К█╟Л²╢М└╟К┼■ Л∙▄Л∙└Л└° Л╤■Й╟─М∙≤Й╡▄ М∙═Й╩└ Й╥╦К·╛Л√╢','N');
 
 ----------SELLER DUMMY DATA-----------------------
 INSERT INTO SELLER
-VALUES(SEQ_SELLER_SNO.NEXTVAL, 'aaa@aaa.com', '111-1111-1111-11','NHц╓©Р','05143','╪╜©О╫ц XX╠╦ XX╣©','XX╬ффдф╝ X╣© Xхё','авц╒','авц╒ю╩ фх╟М╫м╫ю╢о╢ы.');
+VALUES(SEQ_SELLER_SNO.NEXTVAL, 'aaa@aaa.com', '111-1111-1111-11','NHЛ╠└Л⌡─','05143','Л└°Л ╦Л▀° XXЙ╣╛ XXК▐≥','XXЛ∙└М▄▄М┼╦ XК▐≥ XМ≤╦','Лё╫Л╟╫','Лё╫Л╟╫Л²└ М▄■ЙЁ═Л▀╤Л┼╣К▀┬К▀╓.');
 
 ----------PRODUCT DUMMY DATA----------------------
 INSERT INTO PRODUCT
-VALUES(SEQ_PRODUCT_PNO.NEXTVAL,1, 'е╩╟Н╠Б','╟╜Ёцюл╦╕, е╩е╩е╩, еп╬Н╣Е╦╝ар!','3, 4',100,'N',300000,'╟╜Ёцюл╦╕ еп╬Наж╢б ааю╨ е╩╟Н╠Бют╢о╢ы.','N');
+VALUES(SEQ_PRODUCT_PNO.NEXTVAL,1, 'М┐┬ЙЁ║Й╦╟','Й╟∙К┐┴Л²╢К╔╪, М┐┬М┐┬М┐┬, М└╦Л√╢К⌠°К╕╛Лё═!','3, 4',100,'N',300000,'Й╟∙К┐┴Л²╢К╔╪ М└╦Л√╢Лё╪К┼■ Л╒▀Л²─ М┐┬ЙЁ║Й╦╟Л·┘К▀┬К▀╓.','N');
 
 ----------CONTRACT DUMMY DATA---------------------
 INSERT INTO CONTRACT
@@ -41,11 +41,11 @@ VALUES(SEQ_DECLARATION_DNO.NEXTVAL,null,1,'N');
 
 ----------REPLY DUMMY DATA------------------------
 INSERT INTO REPLY
-VALUES(SEQ_REPLY_RNO.NEXTVAL,1,'╢У╧л','©м Ё║юл ╨╦юн╢ы','18/08/01','N');
+VALUES(SEQ_REPLY_RNO.NEXTVAL,1,'К█■К╞╦','Л≥─ К│²Л²╢ КЁ╢Л²╦К▀╓','18/08/01','N');
 
 ----------REVIEW DUMMY DATA-----------------------
 INSERT INTO REVIEW
-VALUES(SEQ_REVIEW_RNO.NEXTVAL,1,1,'╪╪╠Б╦╩ ╬фюлешют╢о╢ы.');
+VALUES(SEQ_REVIEW_RNO.NEXTVAL,1,1);
 
 ----------STATS DUMMY DATA------------------------
 INSERT INTO STATS

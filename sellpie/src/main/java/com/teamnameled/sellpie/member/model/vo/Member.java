@@ -11,7 +11,16 @@ public class Member {
 	 private String phone;
 	 private String birth;
 	 private String profile_img;
+	 private String age;
 	 
+	public String getAge() {
+		return age;
+	}
+
+	public void setAge(String age) {
+		this.age = age;
+	}
+
 	public Member() {
 	}
 

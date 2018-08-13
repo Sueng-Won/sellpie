@@ -2183,7 +2183,7 @@ input::-ms-clear {
 .signupNavbar__titleWrapper__4Iq {
   font-size: 16px;
   height: 26px;
-  line-height: 26px;
+  line-height: 50px;
   text-align: left;
   color: #fb2942; }
 
@@ -2482,7 +2482,7 @@ span + .signupNavbar__vingleLogo__3Ob {
     height: 22px; }
 </style>
 <script>
-
+	
 	$(function(){
 		<c:if test="${not empty sessionScope.user}">
 		 location.href="/sellpie/main.do";
@@ -2517,7 +2517,7 @@ span + .signupNavbar__vingleLogo__3Ob {
         			<div>
         				<nav class="signupNavbar__navWrapper__186">
         					<div class="signupNavbar__titleWrapper__4Iq">
-        						<span>Welcome to</span> <i class="icons__icon__2cq signupNavbar__vingleLogo__3Ob">로고 이미지</i>
+        						<span>Welcome to</span> <i class="icons__icon__2cq signupNavbar__vingleLogo__3Ob"><img style="width:120px; height:30px;"src="resources/images/join/logo_sellpie.png"/></i>
         					</div></nav>
         					<div class="signIn__signInWrapper__1Wg">
         					<h1 class="signIn__headLine__SGa">로그인</h1>
@@ -2543,7 +2543,7 @@ span + .signupNavbar__vingleLogo__3Ob {
         								<button type="button" class="solidButton__button__15V  signIn__loginButton__1dS" style="background-color: rgba(0, 0, 0, 0);">로그인</button>
         							</div>
         							<div class="signIn__bottomLinkWrapper__ndb">
-        								<a href="/users/password/new">비밀번호 찾기</a><a>|</a><a href="/sellpie/memberJoin.do">회원가입</a>
+        								<a href="/sellpie/changePwd.do">비밀번호 찾기</a><a>|</a><a href="/sellpie/memberJoin.do">회원가입</a>
         							</div>
         						</div><!-- div 00form -->
         					</div>

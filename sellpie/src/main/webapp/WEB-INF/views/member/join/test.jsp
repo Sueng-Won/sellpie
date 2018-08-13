@@ -6,14 +6,6 @@
 <meta charset="utf-8">
 <title>SellPie</title>
 <script src="resources/js/jquery-3.3.1.min.js"></script>
-<!-- 합쳐지고 최소화된 최신 CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-
-<!-- 부가적인 테마 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-
-<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <style type="text/css">
 * {
   font-family: "Noto Sans KR", "Noto Sans", Helvetica, Arial, "Malgun Gothic", sans-serif; }
@@ -618,13 +610,6 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
     opacity: 0.4;
     pointer-events: none;
     cursor: not-allowed; }
-    .solidButton__button__auNum.solidButton__disabled__15i{
-    	background-color: #aeb8bd;
-    opacity: 0.4;
-    pointer-events: none;
-    cursor: not-allowed; 
-    }
-    
 
 .solidButton__gray__3Zy {
   background-color: #aeb8bd; }
@@ -644,20 +629,61 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
     background-color: #d52238; }
   .solidButton__red__3k6:active {
     background-color: #ad1326; }
+</style>
+<style type="text/css" id="s2126-0">
 
-.imageBrochure__brochureWrapper__LYY {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: #fafafa;
-  z-index: 99999;
-  visibility: hidden; }
-  .imageBrochure__brochureWrapper__LYY.imageBrochure__show__2Ah {
-    visibility: visible; }
+.navbar__navWrapper__2mJ {
+  position: absolute;
+  width: 100%;
+  height: 84px;
+  z-index: 500;
+  text-transform: uppercase;
+  color: #fff;
+  font-size: 14px;
+  line-height: 24px;
+  margin-top: 40px; }
+  .navbar__navWrapper__2mJ button {
+    color: #fff; }
+  .navbar__navWrapper__2mJ a {
+    color: #fff;
+    cursor: pointer; }
+  .navbar__navWrapper__2mJ .navbar__container__3tL {
+    position: relative;
+    height: 35px;
+    line-height: 33px; }
+    .navbar__navWrapper__2mJ .navbar__container__3tL .navbar__left__2RB {
+      display: inline-block;
+      vertical-align: top;
+      list-style: none;
+      padding-left: 0;
+      float: left; }
+      .navbar__navWrapper__2mJ .navbar__container__3tL .navbar__left__2RB li {
+        display: inline-block;
+        margin-left: 60px;
+        line-height: 36px; }
+    .navbar__navWrapper__2mJ .navbar__container__3tL .navbar__right__2FE {
+      display: inline-block;
+      vertical-align: top;
+      list-style: none;
+      padding-left: 0;
+      float: right; }
+      .navbar__navWrapper__2mJ .navbar__container__3tL .navbar__right__2FE li {
+        margin-right: 40px;
+        display: inline-block;
+        cursor: pointer;
+        text-align: center;
+        line-height: 36px; }
+        .navbar__navWrapper__2mJ .navbar__container__3tL .navbar__right__2FE li.navbar__login__3ct {
+          height: 40px;
+          width: 80px;
+          border-radius: 100px;
+          border: 1px solid #fff; }
+          .navbar__navWrapper__2mJ .navbar__container__3tL .navbar__right__2FE li.navbar__login__3ct:hover {
+            background-color: rgba(255, 255, 255, 0.1); }
+</style>
 
 <style type="text/css" id="s2726-0">/* New Vingle */
+<<<<<<< HEAD
 /* Old Vingle */
 /* Component Specific colors */
 /* font weights */
@@ -873,281 +899,805 @@ span + .signupNavbar__vingleLogo__3Ob {
     width: 18px;
     height: 26px; }
 /* New Vingle */
+=======
+>>>>>>> branch 's2jun' of https://github.com/Sueng-Won/sellpie.git
 /* Old Vingle */
 /* Component Specific colors */
 /* font weights */
 /* Element Sizes */
 /* Z-indexs */
 /* Animations */
-.solidReasonInput__failedWrapper__2fu {
-    background-color: #ffe6e9;
-    border: solid 1px #f82d47;
-}
 
-.solidReasonInput__wrapper__28f {
+.signUpComponent__footer__DSK .signUpComponent__btnFB__1uM, .signUpComponent__footer__DSK .signUpComponent__btnEmail__25y {
+  width: 350px;
+  height: 55px;
+  border-radius: 100px; }
+
+.signUpComponent__bodyWrapper__3ND {
+  background-repeat: no-repeat;
+  height: 100%;
+  position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  position: relative;
-  width: 100%;
-  height: 55px;
-  border-radius: 6px;
-  border: 1px solid #aeb8bd; }
-  
-  .solidReasonInput__wrapper__auNum{
-  	display: -webkit-box;
-  display: -ms-flexbox;
-  display: inline-block;
-  position: relative;
-  width: 50%;
-  height: 55px;
-  border-radius: 6px;
-  border: 1px solid #aeb8bd;
-  margin-left:14px;
-  }
-  .solidReasonInput__wrapper__28f:hover, .solidReasonInput__wrapper__28f:active, .solidReasonInput__wrapper__28f:focus {
-    border: solid 1px #394247; }
-
-.solidReasonInput__textInput__ZZr {
-  width: 100%;
-  height: 100%;
-  font-size: 14px;
-  font-weight: 300;
-  border-radius: 6px;
-  padding-left: 20px;
-  outline: none;
-  border: none; }
-  .solidReasonInput__textInput__auNum{
-  	width: 100%;
-  	height: 100%;
-  	font-size: 14px;
-  	font-weight: 300;
- 	 border-radius: 6px;
-  	padding-left: 20px;
-  	outline: none;
-  	border: none;
-  	display:inline-block;
-  }
-  
-  .solidReasonInput__textInput__ZZr::-webkit-input-placeholder {
-    color: #aeb8bd; }
-
-#logo_img{
-	display:inline-block;
-}
-.solidReasonInput__rightItemsWrapper__Email, .solidReasonInput__rightItemsWrapper__Pwd, .solidReasonInput__rightItemsWrapper__AuNum {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  overflow: scroll; }
+  .signUpComponent__bodyWrapper__3ND .signUpComponent__backgroundImage__3VS {
+    position: absolute;
+    width: 100%;
+    height: 100%;}
+  .signUpComponent__bodyWrapper__3ND .signUpComponent__backgroundImagesWrapper__VTf {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1; }
+    .signUpComponent__bodyWrapper__3ND .signUpComponent__backgroundImagesWrapper__VTf::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.2);
+      z-index: 1; }
+  .signUpComponent__bodyWrapper__3ND .signUpComponent__container__6PN {
+    position: absolute;
+    top: 200px;
+    left: 0;
+    right: 0;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    height: 100%;
-    right: 10px;
-    position: absolute;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column; }
+    @media (max-height: 740px) {
+      .signUpComponent__bodyWrapper__3ND .signUpComponent__container__6PN {
+        top: 124px; } }
+    .signUpComponent__bodyWrapper__3ND .signUpComponent__container__6PN .signUpComponent__logo__3Im {
+      width: 210px;
+      height: 78px; }
+      .signUpComponent__bodyWrapper__3ND .signUpComponent__container__6PN .signUpComponent__logo__3Im svg {
+        width: 210px;
+        height: 78px; }
+    .signUpComponent__bodyWrapper__3ND .signUpComponent__container__6PN .signUpComponent__comment__1Pa {
+      width: 780px;
+      height: 117px;
+      font-weight: 200;
+      font-size: 32px;
+      line-height: 1.5;
+      text-align: center;
+      color: #fff;
+      margin-top: 20px;
+      -webkit-animation: signUpComponent__fade__2ze 3s infinite;
+              animation: signUpComponent__fade__2ze 3s infinite; }
+      .signUpComponent__bodyWrapper__3ND .signUpComponent__container__6PN .signUpComponent__comment__1Pa .signUpComponent__title__xzN {
+        font-size: 48px;
+        line-height: 1.21;
+        margin-bottom: 14px; }
+      .signUpComponent__bodyWrapper__3ND .signUpComponent__container__6PN .signUpComponent__comment__1Pa .signUpComponent__subTitle__135 {
+        font-size: 26px;
+        line-height: 1.38; }
+      .signUpComponent__bodyWrapper__3ND .signUpComponent__container__6PN .signUpComponent__comment__1Pa .signUpComponent__small__bDV {
+        font-size: 29px;
+        line-height: 1.34; }
+      .signUpComponent__bodyWrapper__3ND .signUpComponent__container__6PN .signUpComponent__comment__1Pa b {
+        font-weight: 400; }
+
+.signUpComponent__footer__DSK {
+  position: absolute;
+  bottom: 130px;
+  left: 0;
+  right: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column; }
+  @media (max-height: 740px) {
+    .signUpComponent__footer__DSK {
+      top: 400px; } }
+  .signUpComponent__footer__DSK .signUpComponent__btnFB__1uM {
+    background-color: #3b559d;
+    margin-bottom: 12px; }
+    .signUpComponent__footer__DSK .signUpComponent__btnFB__1uM:hover {
+      background-color: #314a90; }
+  .signUpComponent__footer__DSK .signUpComponent__btnEmail__25y {
+    border: solid 1px #fff;
+    background-color: #fff;
+    color: #394247; }
+  .signUpComponent__footer__DSK .signUpComponent__hadAccount__gtQ {
+    width: 350px;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+    color: #fff;
+    margin-top: 40px; }
+    .signUpComponent__footer__DSK .signUpComponent__hadAccount__gtQ .signUpComponent__login__3Iz {
+      text-decoration: underline; }
+
+@-webkit-keyframes signUpComponent__fade__2ze {
+  0% {
+    opacity: 0; }
+  25% {
+    opacity: 1; }
+  50% {
+    opacity: 1; }
+  75% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
+
+@keyframes signUpComponent__fade__2ze {
+  0% {
+    opacity: 0; }
+  25% {
+    opacity: 1; }
+  50% {
+    opacity: 1; }
+  75% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
+    
+ /* The Modal (background) */
+   * {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
 }
-.solidReasonInput__rightItemsWrapper__Email span, .solidReasonInput__rightItemsWrapper__Pwd span {
-    height: 20px;
-    font-size: 10px;
-    line-height: 2;
-    text-align: right;
-    margin-right: 6px;
-    color: #fb2942;
+html, body {
+	min-height: 100%;
+	height: 100%;
+	font-family: helvetica neue, helvetica, arial, sans-serif;
 }
-#loading {
- width: 100%;  
- height: 100%;  
- top: 0px;
- left: 0px;
- position: fixed;  
- display: none;  
- opacity: 0.7;  
- background-color: #fff;  
- z-index: 99;  
- text-align: center; 
- } 
-  
-#loading-image {  
- position: absolute;  
- top: 50%;  
- left: 50%; 
- z-index: 100; }
- 
- .auNum_wrapper{
-    width:100%;
- 	display:inline-block;
- 	padding-top:30px;
- }
+
+.content {
+	min-height: 100%;
+	height: 100%;
+	background: #fff;
+	position: relative;
+	z-index: 0;
+}
+.content h1 {
+	padding: 75px 0 30px 0;
+	text-align: center;
+	font-size: 30px;
+	line-height: 30px;
+}
+.content .buttons {
+	max-width: 800px;
+	margin: 0 auto;
+	text-align: center;
+}
+.content .buttons .button {
+	display: inline-block;
+	text-align: center;
+	text-decoration: none;
+	background: #efefef;
+	padding: 10px 15px;
+	margin: 10px;
+	border-radius: 3px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, .3);
+	color: #333;
+	font-weight: bold;
+}
+.content .buttons .button:hover {
+	color: #fff;
+	background: #009bd5;
+}
+
+/* modal style */
+html.modal-active,
+body.modal-active {
+	overflow: hidden;
+}
+#modal-container {
+	position: fixed;
+	left: 0;
+	top: 0;
+	display: table;
+	height: 100%;
+	width: 100%;
+	z-index: 1;
+	/* hidden 처리 */
+	transform: scale(0);
+}
+#modal-container .modal-background {
+	display: table-cell;
+	background: rgba(0, 0, 0, .8);
+	text-align: center;
+	vertical-align: middle;
+}
+#modal-container .modal-background .modal {
+	background: #fff;
+	padding: 50px;
+	display: inline-block;
+	border-radius: 3px;
+	position: relative;
+}
+#modal-container .modal-background .modal h2 {
+	font-size: 25px;
+	line-height: 25px;
+	margin-bottom: 15px;
+	
+}
+#modal-container .modal-background .modal p {
+	font-size: 18px;
+	line-height: 22px;
+}
+
+
+/*
+ * ------------------------------
+ * Unfolding Animation
+ * ------------------------------
+ */
+#modal-container.one {
+	/*transform: scaleX(0) scaleY(1);*/
+	animation: unfoldIn 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+#modal-container.one .modal-background .modal {
+	/* 초기 display: none 처럼 크기를 0 으로 하여 보여주지 않음*/
+	transform: scale(0);
+	/* 0.5 초 동안 애니메이션을 실행, 단 0.8초 지연시켜 0.8초 후에 애니메이션을 실행 */
+	animation: zoomIn .5s .8s  cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+#modal-container.one.out {
+	transform: scale(1);
+	animation: unfoldOut 1s .3s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+#modal-container.one.out .modal-background .modal {
+	animation: zoomOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+/* Dimmed showing */
+@keyframes unfoldIn {
+	0% {
+		transform: scaleX(0) scaleY(0.005);
+	}
+	50% {
+		/* 0.5 초간 세로 크기는 작은상태로 가로 너비만 확대  */
+		transform: scaleX(1) scaleY(0.005);
+	}
+	100% {
+		/* 0.5 초간 세로 크기를 확대 */
+		transform: scaleY(1) scaleX(1);
+	}
+}
+/* Show modal content  */
+@keyframes zoomIn {
+	from {
+		transform: scale(0);
+	}
+	to {
+		transform: scale(1);
+	}
+}
+/* Hide modal content */
+@keyframes zoomOut {
+	from {
+		transform: scale(1);
+	}
+	to {
+		transform: scale(0);
+	}
+}
+/* Dimmed hiding */
+@keyframes unfoldOut {
+	0% {
+		transform: scale(1)
+	}
+	50% {
+		transform: scaleX(1) scaleY(0.005);
+	}
+	100% {
+		transform: scaleX(0) scaleY(0.005);
+	}
+}
+
+
+/*
+ * ------------------------------
+ * Revealing Animation
+ * ------------------------------
+ */
+#modal-container.two {
+	transform: scale(1);
+}
+#modal-container.two .modal-background {
+	background: transparent;
+	animation: fadeIn .5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+#modal-container.two .modal-background .modal {
+	/* 콘텐츠를 초기에 보여주지 않음 */
+	opacity: 0;
+	animation: scaleUp 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+.content.two {
+	/* 콘텐츠 크기를 줄임 */
+	animation: scaleBack 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+#modal-container.two.out {
+	/* 전체 모달 컨테이너를 숨김 처리(다른 애니메이션이 모두 끝난 0.5초 후에 처리하기 위해 0.5초 지연시킴 */
+	animation: quickScaleDown 0s .5s linear forwards;
+}
+#modal-container.two.out .modal-background {
+	animation: fadeOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+#modal-container.two.out .modal-background .modal {
+	animation: scaleDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+.content.two.out {
+	animation: scaleForward 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+/* Dimmed showing */
+@keyframes fadeIn {
+	0% {
+		background: transparent;
+	}
+	100% {
+		background: rgba(0, 0, 0, .7);
+	}
+}
+/* Show modal content from bottom to top */
+@keyframes scaleUp {
+	0% {
+		/* 모달 콘텐츠를 하단에 위치시킴 */
+		transform: scale(.8) translateY(1000px);
+		opacity: 0;
+	}
+	100% {
+		/* 모달 콘텐츠를 본래 위치로 돌려놓음 */
+		transform: scale(1) translateY(0);
+		opacity: 1;
+	}
+}
+/* Shrink content */
+@keyframes scaleBack {
+	0% {
+		transform: scale(1);
+	}
+	100% {
+		transform: scale(.8);
+	}
+}
+/* Hide modal container*/
+@keyframes quickScaleDown {
+	0% {
+		transform: scale(1);
+	}
+	99.9% {
+		transform: scale(1);
+	}
+	100% {
+		transform: scale(0);
+	}
+}
+/* Dimmed hiding */
+@keyframes fadeOut {
+	0% {
+		background: rgba(0, 0, 0, .7);
+	}
+	100% {
+		background: transparent;
+	}
+}
+/* modal content from top to bottom */
+@keyframes scaleDown {
+	0% {
+		transform: scale(1) translateY(0);
+		opacity: 1;
+	}
+	100% {
+		transform: scale(.8) translateY(1000px);
+		opacity: 0;
+	}
+}
+
+@keyframes scaleBack {
+	0% {
+		transform: scale(1);
+	}
+	100% {
+		transform: scale(.85);
+	}
+}
+@keyframes scaleForward {
+	0% {
+		transform: scale(0.85);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+
+/*
+ * ------------------------------
+ * Uncovering Animation
+ * ------------------------------
+ */
+#modal-container.three {
+	z-index: 0;
+	transform: scale(1);
+}
+#modal-container.three .modal-background {
+	background: rgba(0, 0, 0, .9);
+}
+#modal-container.three .modal-background .modal {
+	animation: moveUp 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+.content.three {
+	z-index: 1;
+	animation: slideUpLarge 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+#modal-container.three.out .modal-background .modal {
+	animation: moveDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+.content.three.out {
+	animation: slideDownLarge 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+/* Show Modal content*/
+@keyframes moveUp {
+	/* 하단에서 */
+	0% {
+		transform: translateY(200px);
+	}
+	/* 중앙으로 위치 */
+	100% {
+		transform: translateY(0);
+	}
+}
+/* Slide up Content */
+@keyframes slideUpLarge {
+	0% {
+		transform: translateY(0);
+	}
+	100% {
+		transform: translateY(-100%);
+	}
+}
+/* Hide Modal content */
+@keyframes moveDown {
+	/* 중앙에 있는 모달 콘텐츠를 */
+	0% {
+		transform: translateY(0);
+	}
+	/* 하단으로 위치 */
+	100% {
+		transform: translateY(200px);
+	}
+}
+/* Slide down content */
+@keyframes slideDownLarge {
+	0% {
+		transform: translateY(-100%);
+	}
+	100% {
+		transform: translateY(0);
+	}
+}
+
+/*
+ * ------------------------------
+ * Blow Up Animation
+ * ------------------------------
+ */
+#modal-container.four {
+	z-index: 0;
+	transform: scale(1);
+}
+#modal-container.four .modal-background {
+	background: rgba(0, 0, 0, 0.9);
+}
+#modal-container.four .modal-background .modal {
+	animation: blowUpModal 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+.content.four {
+	z-index: 1;
+	animation: blowUpContent 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+#modal-container.four.out .modal-background .modal {
+	animation: blowUpModalTwo 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+.content.four.out {
+	animation: blowUpContentTwo 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+/* Show modal content */
+@keyframes blowUpModal {
+	0% {
+		transform: scale(0);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+/* Hide content */
+@keyframes blowUpContent {
+	0% {
+		transform: scale(1);
+		opacity: 1;
+	}
+	/* 원본 크기에서 2배로 커지면서 투명도를 서서히 낮춤 */
+	99.9% {
+		transform: scale(2);
+		opacity: 0;
+	}
+	/* 마지막에 숨김 처리 */
+	100% {
+		transform: scale(0);
+	}
+}
+/* Hide modal content */
+@keyframes blowUpModalTwo {
+	0% {
+		transform: scale(1);
+		opacity: 1;
+	}
+	100% {
+		transform: scale(0);
+		opacity: 0;
+	}
+}
+/* Show content */
+@keyframes blowUpContentTwo {
+	0% {
+		transform: scale(2);
+		opacity: 0;
+	}
+	100% {
+		transform: scale(1);
+		opacity: 1;
+	}
+}
+
+/*
+ * ------------------------------
+ * Meep Meep Animation
+ * ------------------------------
+ */
+#modal-container.five {
+	transform: scale(1);
+}
+#modal-container.five .modal-background {
+	background: transparent;
+	animation: fadeIn 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+#modal-container.five .modal-background .modal {
+	transform: translateX(-1500px);
+	animation: roadRunnerIn 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+#modal-container.five.out {
+	animation: quickScaleDown 0s .5s linear forwards;
+}
+#modal-container.five.out .modal-background {
+	animation: fadeOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+#modal-container.five.out .modal-background .modal {
+	animation: roadRunnerOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+/* 모달 콘텐츠 반동 효과로 나타나기 */
+@keyframes roadRunnerIn {
+	0% {
+		transform: translateX(-1500px) skewX(30deg) scaleX(1.3);
+	}
+	70% {
+		transform: translateX(50px) skewX(0deg) scaleX(0.9);
+	}
+	100% {
+		transform: translateX(0px) skewX(0deg) scaleX(1);
+	}
+}
+/* 모달 콘텐츠 반동 효과로 숨기기 */
+@keyframes roadRunnerOut {
+	0% {
+		transform: translateX(0px) skewX(0deg) scaleX(1);
+	}
+	30% {
+		transform: translateX(-100px) skewX(-5deg) scaleX(0.9);
+	}
+	100% {
+		transform: translateX(1500px) skewX(30deg) scaleX(1.3);
+	}
+}
+
+/*
+ * ------------------------------
+ * James Bond Animation
+ * ------------------------------
+ */
+#modal-container.six {
+	transform: scale(1);
+}
+#modal-container.six .modal-background {
+	background: transparent;
+	animation: fadeIn 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+#modal-container.six .modal-background .modal {
+	/* 초기 모달 콘텐츠 크기 및 라운드 정의 */
+	width: 200px;
+	height: 200px;
+	border-radius: 100%;
+	overflow: hidden;
+	animation: JamesBond 1.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+#modal-container.six .modal-background .modal h2,
+#modal-container.six .modal-background .modal p {
+	/* 콘텐츠 내용 숨김 */
+	opacity: 0;
+	position: relative;
+	/* 원형 모달이 본래 모양을 완성된 후 1.4 지연후에 보여줌 */
+	animation: modalContentFadeIn .5s 1.4s linear forwards;
+}
+#modal-container.six.out {
+	animation: slowFade .5s 1.5s linear forwards;
+}
+#modal-container.six.out .modal-background {
+	background-color: rgba(0, 0, 0, 0.7);
+	animation: fadeToRed 2s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+#modal-container.six.out .modal-background .modal {
+	border-radius: 3px;
+	height: 162px;
+	width: 227px;
+	animation: killShot 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+#modal-container.six.out .modal-background .modal h2,
+#modal-container.six.out .modal-background .modal p {
+	animation: modalContentFadeOut 0.5s 0.5 cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+/* Show modal content : round shape */
+@keyframes JamesBond {
+	0% {
+		transform: translateX(1000px);
+	}
+	80% {
+		transform: translateX(0px);
+		width: 150px;
+		height: 150px;
+		border-radius: 100%;
+	}
+	90% {
+		border-radius: 3px;
+		width: 340px;
+		height: 240px;
+	}
+	100% {
+		border-radius: 3px;
+		width: 300px;
+		height: 200px;
+	}
+}
+/* 모달 콘텐츠 내의 요소 효과 처리 */
+@keyframes modalContentFadeIn {
+	0% {
+		opacity: 0;
+		top: -20px;
+	}
+	100% {
+		opacity: 1;
+		top: 0;
+	}
+}
+/* 전체 모달 컨테이너 숨김처리 */
+@keyframes slowFade {
+	0% {
+		opacity: 1;
+	}
+	99.9% {
+		opacity: 0;
+		transform: scale(1);
+	}
+	100% {
+		transform: scale(0);
+	}
+}
+/* 박스 그림자를 이용한 효과 */
+@keyframes fadeToRed {
+	0% {
+		box-shadow: inset 0 0 0 rgba(201, 24, 24, 0.8);
+	}
+	100% {
+		/* y 축 박스 그림자를 위에서부터 아래로 내리는 효과 */
+		box-shadow: inset 0 2000px 0 rgba(201, 24, 24, 0.8);
+	}
+}
+/* 모달 콘텐츠 비스듬히 하단으로 떨어뜨림 */
+@keyframes killShot {
+	0% {
+		transform: translateY(0) rotate(0deg);
+		opacity: 1;
+	}
+	100% {
+		/* 하단으로 회전시켜 떨어뜨림 */
+		transform: translateY(400px) rotate(45deg);
+		opacity: 0;
+	}
+}
+/* 모달 콘텐츠가 떨어질 때 효과처리 */
+@keyframes modalContentFadeOut {
+	0% {
+		opacity: 1;
+		top: 0;
+	}
+	100% {
+		opacity: 0;
+		top: -20px;
+	}
+}   
 </style>
 <script>
-	$(function(){
-		$(".solidReasonInput__textInput__ZZr").keyup(function(){
-			var $msgEmail = $("<div class='solidReasonInput__rightItemsWrapper__Email'><span></span></div>");
-			var $msgPwd = $("<div class='solidReasonInput__rightItemsWrapper__Pwd'><span></span></div>");
-			
-			var regexEmail =/([a-z0-9]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-z-]+\.)+))([a-z]{2,4}|[0-9]{1,3})(\]?)$/;
-			var regexPwd =/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
-			 
-			if($(this).prop("id")=='email'){
-				var email = $(this).val();
-				var flagEmail = (email != '' && email != 'undefined' && regexEmail.test(email));
-				
-				
-				if(!flagEmail){
-					
-						$(this).addClass("solidReasonInput__failedWrapper__2fu");
-						if($(this).parent().children().length<2){
-							$(this).parent().append($msgEmail);
-							
-						}
-						$(".solidReasonInput__rightItemsWrapper__Email").children().css("color", "#fb2942");
-						$(".solidReasonInput__rightItemsWrapper__Email").children().text("이메일 형식이 맞지 않습니다.");
-						$(".solidButton__button__15V").prop("disabled", true);
-					
-				 }else{
-							$(this).removeClass("solidReasonInput__failedWrapper__2fu");
-							$(".solidReasonInput__rightItemsWrapper__Email").children().text("멋지네요!");
-							$(".solidReasonInput__rightItemsWrapper__Email").children().css("color", "black");
-					
-				 }
-				
-			}else{
-				var pwd = $(this).val();
-				 var flagPwd = (pwd != '' && pwd != 'undefined' && regexPwd.test(pwd));
-				
-				 if(!flagPwd){
-						$(this).addClass("solidReasonInput__failedWrapper__2fu");
-						
-						if($(this).parent().children().length<2){
-							$(this).parent().append($msgPwd);
-						}
-						$(".solidReasonInput__rightItemsWrapper__Pwd").children().css("color", "#fb2942");
-						$(".solidReasonInput__rightItemsWrapper__Pwd").children().text("특수문자, 영문, 숫자를 포함해야 합니다.");
-						$(".solidButton__button__15V").prop("disabled", true);
-					
-				 }else{
-							$(this).removeClass("solidReasonInput__failedWrapper__2fu");
-							$(".solidReasonInput__rightItemsWrapper__Pwd").children().text("멋지네요!");
-							$(".solidReasonInput__rightItemsWrapper__Pwd").children().css("color", "black");
-							
-					
-				 }
-			}
-			var emailFinal = $("#email").val();
-			var pwdFinal = $("#pwd").val();
-			if((emailFinal != '' && emailFinal != 'undefined' && regexEmail.test(emailFinal)) && (pwdFinal != '' && pwdFinal != 'undefined' && regexPwd.test(pwdFinal))){
-				$(".solidButton__button__15V").removeClass("solidButton__disabled__15i");
-				$(".solidButton__button__15V").prop("disabled", false);
-			}else{
-				$(".solidButton__button__15V").addClass("solidButton__disabled__15i");
-				$(".solidButton__button__15V").prop("disabled", true);
-			}
-			
-			 
-		});
-		$(".solidButton__button__15V").click(function(){
-			// ㄹ로딩 화면?
-					console.log($("#email").val());
-				$.ajax({
-					/* 확인해보니 에러 메세지에서 javax.mail.authenticationfailedexception 534-5.7.14 
-					이 부분으로 확인해보시면 동일한 증상으로 문제되는 사람들이 몇몇 있었네요.
-					구글계정에 대한 보안수준이 낮은 앱에 접근성을 허용하는 부분에 대한 문제네요.
-					https://www.google.com/settings/security/lesssecureapps 
-					위 링크로 접속해서 로그인이 안되어있다면 로그인하시고 보안수준이 낮은 앱 설정을 
-					사용안함에서 사용으로 적용해보시면 될듯합니다. */
-					url : "checkEmail.do",
-					data : {email : $("#email").val()},
-					type : "get",
-					success:function(data){
-						if(data){
-							alert("이미 가입한 이메일 입니다..");
-							/* var $auNum_wrapper = $("<div class='auNum_wrapper'></div>");
-							 var $solidReasonInput_wrapper = $("<div class='solidReasonInput__wrapper__auNum undefined'></div>");
-							 var $auNumInput = $("<input type='text' id='auNum' autofocus='' class='solidReasonInput__textInput__auNum' placeholder='인증번호 6자리를 입력해주세요.' value='''/>");
-							 var $solidButton = $("<div class='solidButton__buttonWrapper__auNum'></div>");
-							 var $auNumButton = $("<button type='button' class='solidButton__button__auNum  solidButton__disabled__15i signUpBody__nextButton__auNum' disabled style='background-color:rgba(0,0,0,0)'>제출</button>");
-							
-	 						$solidReasonInput_wrapper.append($auNumInput);
-	 						$auNum_wrapper.append($solidReasonInput_wrapper);
-	 						$solidButton.append($auNumButton);
-							$auNum_wrapper.append($solidButton);
-							$(".signUpBody__content__1PG").append($auNum_wrapper); */
-							
-							
-						}else{
-							alert("인증 번호를 확인해 주세요!");
-						 //인증번호 보내기 찾아보기
-						 //세션에 이메일 저장..
-						 $(".solidButton__button__15V").addClass("solidButton__disabled__15i");
-						sessionStorage.setItem("email", $("#email").val());
-						sessionStorage.setItem("pwd", $("#pwd").val());
-						
-						 
-						 
-						 //div 만들기
-						 var $auNum_wrapper = $("<div class='auNum_wrapper'></div>");
-						 var $solidReasonInput_wrapper = $("<div class='solidReasonInput__wrapper__auNum undefined'></div>");
-						 var $auNumInput = $("<input type='text' id='auNum' autofocus='' class='solidReasonInput__textInput__auNum' placeholder='인증번호 6자리를 입력해주세요.' value='''/>");
-						 var $solidButton = $("<div class='solidButton__buttonWrapper__auNum'></div>");
-						 var $auNumButton = $("<button type='button' class='solidButton__button__auNum  solidButton__disabled__15i signUpBody__nextButton__auNum' disabled style='background-color:rgba(0,0,0,0)'>제출</button>");
-						
- 						$solidReasonInput_wrapper.append($auNumInput);
- 						$auNum_wrapper.append($solidReasonInput_wrapper);
- 						$solidButton.append($auNumButton);
-						$auNum_wrapper.append($solidButton);
-						$(".signUpBody__content__1PG").append($auNum_wrapper);
-						 
-							
-						}
-					},
-					beforeSend:function(){
-						$('#loading').css('display','block');
-				    },
-				    complete:function(){
-				    	 $('#loading').css('display','none');
-				    },
-					error:function(e){
-						console.log(e);
-					}
-				});
-		});
-		$(document).on("keyup","#auNum", function(){
-			var auNum = $(this).val();
-			var regex=/(^[0-9]{6,6}$)/;
-			var flag = (auNum != '' && auNum != 'undefined' && regex.test(auNum));
-			var $msgAuNum = $("<div class='solidReasonInput__rightItemsWrapper__AuNum'><span></span></div>");
-			
-			if(!flag){
-				$(this).addClass("solidReasonInput__failedWrapper__2fu");
-				
-				if($(this).parent().children().length<2){
-					$(this).parent().append($msgAuNum);
-				}
-				$(".solidReasonInput__rightItemsWrapper__AuNum").children().css("color", "#fb2942");
-				$(".solidReasonInput__rightItemsWrapper__AuNum").children().text("인증번호를 확인하세요.");
-				$(".solidButton__button__auNum").addClass("solidButton__disabled__15i");
-				$(".solidButton__button__auNum").prop("disabled", true);
-				
-			 }else{
-					 $(this).removeClass("solidReasonInput__failedWrapper__2fu");
-					$(".solidReasonInput__rightItemsWrapper__AuNum").children().text("멋지네요!");
-					$(".solidReasonInput__rightItemsWrapper__AuNum").children().css("color", "black");
-					$(".solidButton__button__auNum").removeClass("solidButton__disabled__15i");
-					$(".solidButton__button__auNum").prop("disabled", false);
-					
-			 }
-		});
-		$(document).on("click",".solidButton__button__auNum", function(){
-			//이메일 로 확인하고 누를경우 다음페이지로~인증번호 확인 구현 안했음
-			location.href="/sellpie/getPwd.do";
-			
-		});
-	});
-	function test(){
-		location.href="test.do";
-	}
+  $(function(){
+     var count = 0;
+     var $view2 = $(".signUpComponent__backgroundImagesWrapper__VTf").children();
+     setInterval(function(){
+        if(count==7){
+           $view2.eq(0).animate({opacity:"1"}, 2000);
+        }
+        if(count==8){
+           count=0;
+        }
+        $view2.eq(count).animate({opacity:"0"}, 2000);
+        count++
+        $view2.eq(count).animate({opacity:"1"}, 2000);
+        console.log(count);
+     },4000);
+     
+     $("._5f5mN").click(function(){
+    	location.href="/sellpie/signIn.do"; 
+     });
+        
+     var $button         = $('.button'),
+     $modalContainer = $('#modal-container'),
+     $body           = $('body'),
+     $content        = $('.content'),
+     btnId;
+
+ $("#one").on('click', function(){
+ 	console.log("ㅁㄷ");
+	 btnId = $(this).attr('id');
+ 	
+ 	$modalContainer
+ 			.removeAttr('class')
+ 			.addClass(btnId);
+ 	$content
+ 			.removeAttr('class')
+ 			.addClass('content');
+ 	
+ 	$body.addClass('modal-active');
+ 	
+ 	if (btnId == 'two' || btnId == 'three'|| btnId == 'four') {
+ 		$content.addClass(btnId);
+ 	}
+ 	
+ });
+// 모달 끄기 펑션
+/*  $modalContainer.on('click', function () {
+ 	$(this).addClass('out');
+ 	$body.removeClass('modal-active');
+ 	if ($(this).hasClass(btnId)) {
+ 		
+ 		$content.addClass('out');
+ 		
+ 	}
+ }); */
+     
+     });
 </script>
-      </head>
+</head>
       <body>
         <div id="vingle-web">
             <div>
@@ -1157,6 +1707,7 @@ span + .signupNavbar__vingleLogo__3Ob {
                             <nav class="navbar__navWrapper__2mJ">
                                 <div class="navbar__container__3tL clearfix">
                                 	<ul class="navbar__left__2RB">
+<<<<<<< HEAD
                                 		<li><a href="mailto:ads@vingle.net"><span>관리자 페이지</span></a></li><li>
                                 	</ul>
                                     <ul class="navbar__right__2FE">
@@ -1184,9 +1735,65 @@ span + .signupNavbar__vingleLogo__3Ob {
                             </div>
                             <div class="signUpDetail__bodyContainer__vop">
     					<div class="signUpBody__emailBodyWrapper__20z">
+=======
+                                		<li><a href="mailto:ads@vingle.net"><span>TEST 페이지</span></a></li><li>
+                                		<li><a href="/sellpie/test.do"><span>TEST TEST TEST</span></a></li><li>
+                                	</ul>
+                                    <ul class="navbar__right__2FE">
+                                        <a href="/users/sign_in">
+                                            <li class="navbar__login__3ct"><a href="/sellpie/login.do"><span>로그인</span></a></li>
+                                        </a>
+                                    </ul>
+                                </div>
+                            </nav>
+                        <div class="signUpComponent__bodyWrapper__3ND">
+                            <div class="signUpComponent__backgroundImagesWrapper__VTf">
+                                <div class="signUpComponent__backgroundImage__3VS" style="opacity: 1; background-image: url('resources/images/mainImg/main1.jpg'); background-size: cover;"></div>
+                                <div class="signUpComponent__backgroundImage__3VS" style="opacity: 0; background-image: url('resources/images/mainImg/main2.jpg'); background-size: cover;"></div>
+                                <div class="signUpComponent__backgroundImage__3VS" style="opacity: 0; background-image: url('resources/images/mainImg/main3.jpg'); background-size: cover;"></div>
+                                <div class="signUpComponent__backgroundImage__3VS" style="opacity: 0; background-image: url('resources/images/mainImg/main4.jpg'); background-size: cover;"></div>
+                                <div class="signUpComponent__backgroundImage__3VS" style="opacity: 0; background-image: url('resources/images/mainImg/main5.jpg'); background-size: cover;"></div>
+                                <div class="signUpComponent__backgroundImage__3VS" style="opacity: 0; background-image: url('resources/images/mainImg/main6.jpg'); background-size: cover;"></div>
+                                <div class="signUpComponent__backgroundImage__3VS" style="opacity: 0; background-image: url('resources/images/mainImg/main7.jpg'); background-size: cover;"></div>
+                                <div class="signUpComponent__backgroundImage__3VS" style="opacity: 0; background-image: url('resources/images/mainImg/main8.jpg');; background-size: cover;"></div>
+                            </div>
+                            <div class="signUpComponent__container__6PN">
+                                <div class="signUpComponent__logo__3Im">
+                                    <img src="resources/images/mainImg/sellpie.png" class="icons__icon__2cq"/>
+                                </div>
+                                    <div class="signUpComponent__comment__1Pa">내 친구가 좋아하는 것이 아닌<br><b>"내"</b>가 좋아하는 것을 즐기세요
+                                    </div>
+                            </div>
+                            <div class="signUpComponent__footer__DSK">
+                                <div class="solidButton__buttonWrapper__tkE">
+                                    <button type="submit"  id="one"  class="solidButton__button__15V   signUpComponent__btnFB__1uM">페이스북으로 시작하기</button>
+                                </div>
+                            <div class="signUpComponent__hadAccount__gtQ"><span>이미 빙글을 사용하고 있나요? </span>
+                                <span class="signUpComponent__login__3Iz"><a href="/sellpie/login.do"><span>로그인</span></a></span>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        	<div id="modal-container">
+				<div class="modal-background">
+				<div class="signUpBody__emailBodyWrapper__20z modal">
+<nav class="signupNavbar__navWrapper__186">
+         				 <div class="signupNavbar__titleWrapper__4Iq">
+          					<span>Welcome to </span>
+          					<i class="icons__icon__2cq signupNavbar__vingleLogo__3Ob">
+    							<img id="logo_img" src="resources/images/join/logo_sellpie2.png"/>
+    						</i>
+    						<hr>
+    					</div>
+    				</nav>
+    				
+>>>>>>> branch 's2jun' of https://github.com/Sueng-Won/sellpie.git
     					    <div class="signUpBody__emailHeader__TiN">
     							<div class="titleWithVerify__head__3gv">
-    								<div class="titleWithVerify__title__1ix">이메일로 회원가입</div>
+    								<div class="titleWithVerify__title__1ix">이메일로 시작하기</div>
     						   </div>
     						</div>
     						<div class="signUpBody__content__1PG"> <!--  form -> div  -->
@@ -1204,14 +1811,9 @@ span + .signupNavbar__vingleLogo__3Ob {
     							<button type="button" class="solidButton__button__15V  solidButton__disabled__15i signUpBody__nextButton__wU3" disabled style="background-color:rgba(0,0,0,0)">Next</button>
     						</div>
     						</div> <!-- button end (form) -->
-    					</div>
-    				</div>
-    				</div>
-    		</div>
-    	</div>
+    					</div> 
+  </div>
+</div>
     </div>
-  </div> <!-- sellpie-web end -->
-    
-<!-- Mirrored from www.vingle.net/users/sign_up/email by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 04 Aug 2018 19:30:58 GMT -->
+  </body>
 </html>
-  

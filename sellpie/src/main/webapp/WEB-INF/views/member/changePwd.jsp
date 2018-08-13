@@ -16,6 +16,7 @@
 
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <style type="text/css">
 * {
   font-family: "Noto Sans KR", "Noto Sans", Helvetica, Arial, "Malgun Gothic", sans-serif; }
@@ -150,7 +151,7 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
 .signupNavbar__titleWrapper__4Iq {
   font-size: 16px;
   height: 26px;
-  line-height: 34px;
+  line-height: 50px;
   text-align: left;
   color: #fb2942; }
 
@@ -161,7 +162,6 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
   width: 70px;
   height: 26px; }
   .signupNavbar__vingleLogo__3Ob img {
-    padding-left:10px;
     height: 26px; }
 
 .signupNavbar__vingleLogo__3Ob + span {
@@ -171,7 +171,6 @@ span + .signupNavbar__vingleLogo__3Ob {
   margin-left: 2px; }
 
 .signUpBody__content__1PG {
-  width: 460px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -357,27 +356,75 @@ span + .signupNavbar__vingleLogo__3Ob {
  	display:inline-block;
  	padding-top:30px;
  }
- .resetPageComponent__header__lIK .resetPageComponent__subTitle__QEn {
-    line-height: 1.57;
-    text-align: center;
-    color: #869197;
-    white-space: pre;
-}
 </style>
 <script>
 	$(function(){
-		
-		$(".solidButton__button__15V").click(function(){
-				$.ajax({
+		<c:if test="${not empty sessionScope.user}">
+		 location.href="/sellpie/main.do";
+		</c:if>
+		$(".solidReasonInput__textInput__ZZr").keyup(function(){
+			var $msgEmail = $("<div class='solidReasonInput__rightItemsWrapper__Email'><span></span></div>");
+			
+			var regexEmail =/([a-z0-9]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-z-]+\.)+))([a-z]{2,4}|[0-9]{1,3})(\]?)$/;
+			 
+				var email = $(this).val();
+				var flagEmail = (email != '' && email != 'undefined' && regexEmail.test(email));
+				
+				
+				if(!flagEmail){
 					
-					url : "checkEmail.do",
+						$(this).addClass("solidReasonInput__failedWrapper__2fu");
+						if($(this).parent().children().length<2){
+							$(this).parent().append($msgEmail);
+							
+						}
+						$(".solidReasonInput__rightItemsWrapper__Email").children().css("color", "#fb2942");
+						$(".solidReasonInput__rightItemsWrapper__Email").children().text("이메일 형식이 맞지 않습니다.");
+						$(".solidButton__button__15V").prop("disabled", true);
+					
+				 }else{
+							$(this).removeClass("solidReasonInput__failedWrapper__2fu");
+							$(".solidReasonInput__rightItemsWrapper__Email").children().text("멋지네요!");
+							$(".solidReasonInput__rightItemsWrapper__Email").children().css("color", "black");
+					
+				 }
+				
+			
+			var emailFinal = $("#email").val();
+			if((emailFinal != '' && emailFinal != 'undefined' && regexEmail.test(emailFinal))){
+				$(".solidButton__button__15V").removeClass("solidButton__disabled__15i");
+				$(".solidButton__button__15V").prop("disabled", false);
+			}else{
+				$(".solidButton__button__15V").addClass("solidButton__disabled__15i");
+				$(".solidButton__button__15V").prop("disabled", true);
+			}
+			
+			 
+		});
+		$(".solidButton__button__15V").click(function(){
+			// ㄹ로딩 화면?
+					console.log($("#email").val());
+				$.ajax({
+					/* 확인해보니 에러 메세지에서 javax.mail.authenticationfailedexception 534-5.7.14 
+					이 부분으로 확인해보시면 동일한 증상으로 문제되는 사람들이 몇몇 있었네요.
+					구글계정에 대한 보안수준이 낮은 앱에 접근성을 허용하는 부분에 대한 문제네요.
+					https://www.google.com/settings/security/lesssecureapps 
+					위 링크로 접속해서 로그인이 안되어있다면 로그인하시고 보안수준이 낮은 앱 설정을 
+					사용안함에서 사용으로 적용해보시면 될듯합니다. */
+					url : "changePwdAu.do",
 					data : {email : $("#email").val()},
 					type : "get",
 					success:function(data){
-						console.log(data);
-						if(data){
-							alert("이미 가입한 이메일 입니다..");
-							/* var $auNum_wrapper = $("<div class='auNum_wrapper'></div>");
+						console.log(data.result);
+						if( data.result == "1" ){
+							swal("인증번호 전송 완료!", "인증 번호가 전송 되었습니다.", "success");
+							$(".solidReasonInput__textInput__ZZr").off();
+							 $(".solidButton__button__15V").addClass("solidButton__disabled__15i");
+							
+							 
+							 
+							 //div 만들기
+							 var $auNum_wrapper = $("<div class='auNum_wrapper'></div>");
 							 var $solidReasonInput_wrapper = $("<div class='solidReasonInput__wrapper__auNum undefined'></div>");
 							 var $auNumInput = $("<input type='text' id='auNum' autofocus='' class='solidReasonInput__textInput__auNum' placeholder='인증번호 6자리를 입력해주세요.' value='''/>");
 							 var $solidButton = $("<div class='solidButton__buttonWrapper__auNum'></div>");
@@ -387,34 +434,23 @@ span + .signupNavbar__vingleLogo__3Ob {
 	 						$auNum_wrapper.append($solidReasonInput_wrapper);
 	 						$solidButton.append($auNumButton);
 							$auNum_wrapper.append($solidButton);
-							$(".signUpBody__content__1PG").append($auNum_wrapper); */
-							
+							$(".signUpBody__content__1PG").append($auNum_wrapper);
+							 
+							console.log();
+							sessionStorage.setItem("randomNum", data.randomNum);
+							sessionStorage.setItem("userEmail", data.email);
 							
 						}else{
-							alert("인증 번호를 확인해 주세요!");
-							//이벤트 지워야한다..
-						 //인증번호 보내기 찾아보기
-						 //세션에 이메일 저장..
-						 $(".solidButton__button__15V").addClass("solidButton__disabled__15i");
-						sessionStorage.setItem("email", $("#email").val());
-						sessionStorage.setItem("pwd", $("#pwd").val());
+							swal("이메일이 존재하지 않습니다..", "아이디를 다시 확인해 주세요!", "error");
 						
-						 
-						 
-						 //div 만들기
-						 var $auNum_wrapper = $("<div class='auNum_wrapper'></div>");
-						 var $solidReasonInput_wrapper = $("<div class='solidReasonInput__wrapper__auNum undefined'></div>");
-						 var $auNumInput = $("<input type='text' id='auNum' autofocus='' class='solidReasonInput__textInput__auNum' placeholder='인증번호 6자리를 입력해주세요.' value='''/>");
-						 var $solidButton = $("<div class='solidButton__buttonWrapper__auNum'></div>");
-						 var $auNumButton = $("<button type='button' class='solidButton__button__auNum  solidButton__disabled__15i signUpBody__nextButton__auNum' disabled style='background-color:rgba(0,0,0,0)'>제출</button>");
-						
- 						$solidReasonInput_wrapper.append($auNumInput);
- 						$auNum_wrapper.append($solidReasonInput_wrapper);
- 						$solidButton.append($auNumButton);
-						$auNum_wrapper.append($solidButton);
-						$(".signUpBody__content__1PG").append($auNum_wrapper);
 						}
 					},
+					beforeSend:function(){
+						$('#loading').css('display','block');
+				    },
+				    complete:function(){
+				    	 $('#loading').css('display','none');
+				    },
 					error:function(e){
 						console.log(e);
 					}
@@ -447,15 +483,26 @@ span + .signupNavbar__vingleLogo__3Ob {
 			 }
 		});
 		$(document).on("click",".solidButton__button__auNum", function(){
-			//이메일 로 확인하고 누를경우 다음페이지로~인증번호 확인 구현 안했음
-			location.href="/sellpie/getName.do";
+			
+			var auNum = $("#auNum").val();
+			var randomNum = sessionStorage.getItem("randomNum");
+			console.log("auNum타입"+typeof(auNum), auNum);
+			console.log("randomNum타입"+typeof(randomNum), randomNum);
+			if(auNum==randomNum){
+			 location.href="/sellpie/changeUserPwd.do"; 
+				
+			}else{
+				swal ( "인증번호 오류" ,  "인증 번호를 확인 해주세요.." ,  "error" );
+			}
 			
 		});
 	});
 </script>
       </head>
       <body>
-      	<div id="loading"><img id="loading-image" src="resources/images/join/loading2.gif" /></div>
+      	<div id="loading">
+      		<img id="loading-image" src="resources/images/join/loading2.gif" />
+      	</div>
         <div id="sellpie-web">
           <div data-reactroot=""><div class="root__rootWrapper__1So">
           	<div class="commonView__container__2RU">
@@ -464,7 +511,7 @@ span + .signupNavbar__vingleLogo__3Ob {
          				 <div class="signupNavbar__titleWrapper__4Iq">
           					<span>Welcome to </span>
           					<i class="icons__icon__2cq signupNavbar__vingleLogo__3Ob">
-    							<img id="logo_img" src="resources/images/join/logo_sellpie2.png"/>
+    							<img style="width:120px; height:30px;"src="resources/images/join/logo_sellpie.png"/>
     						</i>
     					</div>
     				</nav>
@@ -481,20 +528,13 @@ span + .signupNavbar__vingleLogo__3Ob {
     									<input type="text" id="email" autofocus="" class="solidReasonInput__textInput__ZZr " placeholder="이메일 주소를 입력해주세요. (sellpie@sellpie.net)" value=""  autocomplete="off"/>
     								</div>
     							</div>
-    						<div class="signUpBody__formInput__1yh">
-    							<div class="solidReasonInput__wrapper__28f undefined " >
-    								<input type="password"  id="pwd" class="solidReasonInput__textInput__ZZr " placeholder="비밀번호를 입력해주세요." value=""/>
-    								<div class="resetPageComponent__subTitle__QEn">이메일 주소를 입력해주세요.
-		비밀번호 재설정 방법을 이메일로 보내드립니다.</div>
-    							</div>
-    						</div>
     						<div class="solidButton__buttonWrapper__tkE">
     							<button type="button" class="solidButton__button__15V  solidButton__disabled__15i signUpBody__nextButton__wU3" disabled style="background-color:rgba(0,0,0,0)">Next</button>
     						</div>
     						</div> <!-- button end (form) -->
     					</div>
     				</div>
-    				</div>
+    			</div>
     		</div>
     	</div>
     </div>
