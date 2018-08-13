@@ -362,11 +362,7 @@ function fileUpload(inputFiles, condition){
   <!-- The Grid -->
   <div class="w3-row">
     <!-- Left Column -->
-<<<<<<< HEAD
     	<c:import url="sideLeft.jsp"/>
-=======
-       <c:import url="sideLeft.jsp"></c:import>
->>>>>>> refs/heads/HaSungMi
     <!-- End Left Column -->
     
     <!-- Middle Column -->
