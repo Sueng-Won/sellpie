@@ -11,8 +11,8 @@
 	<select id="selectReviewList" parameterType="java.util.List" resultType="Review">
 		SELECT RNO, PNO, REVIEWSTAR
 		FROM REVIEW
-		WHERE PNO =
-		<foreach collection="list" item="product" open="(" close=")">
+		WHERE PNO IN
+		<foreach collection="list" item="product" separator="," open="(" close=")">
 			#{product.pNo}
 		</foreach>
 	</select>

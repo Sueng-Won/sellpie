@@ -31,6 +31,9 @@ VALUES(SEQ_SELLER_SNO.NEXTVAL, 'aaa@aaa.com', '111-1111-1111-11','NH채움','051
 INSERT INTO PRODUCT
 VALUES(SEQ_PRODUCT_PNO.NEXTVAL,1, '탈곡기','강냉이를, 탈탈탈, 털어드리죠!','3, 4',100,'N',300000,'강냉이를 털어주는 좋은 탈곡기입니다.','N');
 
+INSERT INTO PRODUCT
+VALUES(SEQ_PRODUCT_PNO.NEXTVAL,1, '탈곡기1','강냉이를, 탈탈탈, 털어드리죠!','3, 4',100,'N',300000,'강냉이를 털어주는 좋은 탈곡기입니다.','N');
+
 ----------CONTRACT DUMMY DATA---------------------
 INSERT INTO CONTRACT
 VALUES(SEQ_CONTRACT_CNO.NEXTVAL,'aaa@aaa.com',1,1,3,'11111',1111111111111);
