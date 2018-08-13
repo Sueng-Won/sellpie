@@ -173,33 +173,36 @@
 								                               <div>
 								                                  <button class="btn btn-primary btn-lg btn-block" type="button" onclick="insertContract()">구매하기</button>
 								                               </div>
-								                               
+								                               <c:if test="${countList[status.index] eq 0}">
+								                               		<h4 align="center">해당 제품의 리뷰가 없습니다.</h4>
+								                               </c:if>
+								                               <c:if test="${countList[status.index] ne 0 }">
 								                               <div style="height:30%; width:100%; text-align:center;">
 								                               	<h3>해당 제품의 총 평점은?</h3>
 								                               		<h3>
 								                               			<c:forEach begin="1" end="5" step="1" var="i">
 								                                        <!-- 별 추가할 곳 -->
-								                                        <c:if test="${i <= star }">
+								                                        <c:if test="${i <= starList[status.index]}">
 									                                        <span class = "glyphicon glyphicon-star" style="color:#f49d46"></span>
 									                                    </c:if>
-									                                    <c:if test="${i > star }">
+									                                    <c:if test="${i > starList[status.index] }">
 									                                        <span class = "glyphicon glyphicon-star-empty " style="color:#f49d46"></span>
 									                                    </c:if>
 									                                    </c:forEach>
 									                                </h3>
-									                                <h6>(총 <c:out value="${count}"/>명의 평균을 반올림 한 값입니다.)</h6>
+									                                <h6>(총 <c:out value="${countList[status.index]}"/>명의 평균을 반올림 한 값입니다.)</h6>
 								                                  </div>
+								                               </c:if>
 								                               </div>
 								                            </div>
 								                        </div>
 													</div>
 												</div>
-											<c:if test="${status.count mod 2 eq 0}">
-												<br>
-											</c:if>
+												<c:if test="${status.count mod 2 eq 0}">
+													<br>
+												</c:if>
 										</c:forEach>
-										    </div>
-									<!--		    상세보기창 끝-->
+									</div>
 								</div>
 							</div>
 						</div>

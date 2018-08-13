@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.teamnameled.sellpie.contract.controller.ContractController;
+import com.teamnameled.sellpie.contract.model.vo.Contract;
 import com.teamnameled.sellpie.member.model.service.MemberService;
 import com.teamnameled.sellpie.member.model.vo.Member;
 
@@ -27,7 +29,8 @@ public class MemberController {
 	@Autowired
 	private JavaMailSender mailSender;
 	
-	
+	@Autowired
+	ContractController contractContract;
 
 	@RequestMapping("login.do")
 	public String loginPage(){
@@ -127,5 +130,13 @@ public class MemberController {
 		request.setAttribute("searchText", searchText);
 		return "member/searchMemberList";
 	}
-	
+	//개인정보수정-구매현황
+	@RequestMapping("purchaseList.do")
+	public String purchaseList(String email, HttpServletRequest request) {
+		//이메일 있으면 지울것
+		email = "aaa@aaa.com";
+		List<Contract> purchaseList = contractContract.contractList(email);
+		request.setAttribute("pList", purchaseList);
+		return "member/purchaseList";
+	}
 }

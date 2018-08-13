@@ -39,17 +39,25 @@ public class ProductController {
 	public String selectProductList(int sNo,HttpServletRequest request) {
 		List<Product> productList = productService.selectProductList(sNo);
 		List<Review> reviewList = reviewController.selectReviewList(productList);
-		double starAvg = 0;
-		int flooredStarAvg = 0;
-		int reviewerCount = reviewList.size();
-		for(int i = 0; i<reviewList.size(); i++) {
-			starAvg += reviewList.get(i).getReviewStar();
+		double[] starAvg = new double[productList.size()];
+		int[] flooredStarAvg = new int[productList.size()];
+		int[] reviewerCount = new int[productList.size()];
+		for(int i=0;i<productList.size();i++) {
+			for(int j = 0; j<reviewList.size(); j++) {
+				if(productList.get(i).getpNo() == reviewList.get(j).getpNo()) {
+					starAvg[i] += reviewList.get(j).getReviewStar();
+					reviewerCount[i] += 1;
+				}
+			}
 		}
-		starAvg /= reviewList.size();
-		flooredStarAvg = (int)Math.round(starAvg);
+		
+		for(int i=0; i<starAvg.length;i++) {
+			starAvg[i] /= reviewerCount[i];
+			flooredStarAvg[i] = (int)Math.round(starAvg[i]);
+		}
 		request.setAttribute("productList", productList);
-		request.setAttribute("star", flooredStarAvg);
-		request.setAttribute("count", reviewerCount);
+		request.setAttribute("starList", flooredStarAvg);
+		request.setAttribute("countList", reviewerCount);
 		return "product/productList";
 	}
 	
