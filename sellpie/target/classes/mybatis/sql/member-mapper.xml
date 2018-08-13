@@ -20,6 +20,11 @@
 		UPDATE MEMBER SET PWD = #{pwd}
 		WHERE EMAIL = #{email}
 	</update>
+	<select id="searchMemberList" parameterType="String" resultType="Member">
+		SELECT EMAIL, PWD, NAME, GENDER, PHONE, BIRTH, PROFILE_IMG
+		FROM MEMBER
+		WHERE NAME LIKE '%'||#{searchText}||'%'
+	</select>
 </mapper>
 
 

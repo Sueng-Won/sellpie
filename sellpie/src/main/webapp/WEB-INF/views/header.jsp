@@ -29,7 +29,8 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 				$("#searchFrm").submit();
 			}
 			else{
-				alert("넌 사람검색을 하고있어 친구");
+				$("#searchFrm").attr("action","memberSearch.do");
+				$("#searchFrm").submit();
 			}
 		}
 	}

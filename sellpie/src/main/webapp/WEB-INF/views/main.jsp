@@ -163,39 +163,45 @@ function fileUpload(inputFiles, condition){
    
 	$(document).ready(function(){
         //취소버튼
-	    $(".divC").click(function(){
-	          $("#uploadFile").empty();
-	          $("#content").html("");
-	    });
-	});
-	
-	// Accordion
-	function myFunction(id) {
-	    var x = document.getElementById(id);
-	    if (x.className.indexOf("w3-show") == -1) {
-	        x.className += " w3-show";
-	        x.previousElementSibling.className += " w3-theme-d1";
-	    } else { 
-	        x.className = x.className.replace("w3-show", "");
-	        x.previousElementSibling.className = 
-	        x.previousElementSibling.className.replace(" w3-theme-d1", "");
-	    }
-	}
+       $(".divC").click(function(){
+             $("#uploadFile").empty();
+             $("#content").html("");
+       });
+        
+       setTimeout(function() {
+              location.href = "selectBoardList.do";
+              }, 180000); // 3000ms(3초)가 경과하면 이 함수가 실행됩니다.
 
-	// Used to toggle the menu on smaller screens when clicking on the menu button
-	function openNav() {
-	    var x = document.getElementById("navDemo");
-	    if (x.className.indexOf("w3-show") == -1) {
-	        x.className += " w3-show";
-	    } else { 
-	        x.className = x.className.replace(" w3-show", "");
-	    }
-	}
-	
-function validate(){
-	var str = $("#bcontent").text();
-	$("#hiddenContent").val(str);
-}
+        
+   }); 
+      
+   // Accordion
+   function myFunction(id) {
+       var x = document.getElementById(id);
+       if (x.className.indexOf("w3-show") == -1) {
+           x.className += " w3-show";
+           x.previousElementSibling.className += " w3-theme-d1";
+       } else { 
+           x.className = x.className.replace("w3-show", "");
+           x.previousElementSibling.className = 
+           x.previousElementSibling.className.replace(" w3-theme-d1", "");
+       }
+   }
+
+   // Used to toggle the menu on smaller screens when clicking on the menu button
+   function openNav() {
+       var x = document.getElementById("navDemo");
+       if (x.className.indexOf("w3-show") == -1) {
+           x.className += " w3-show";
+       } else { 
+           x.className = x.className.replace(" w3-show", "");
+       }
+   }
+   
+   function validate(){
+      var str = $("#bcontent").text();
+      $("#hiddenContent").val(str);
+   }
 </script>
 </head><body class="w3-theme-l5">
 
@@ -207,7 +213,6 @@ function validate(){
     	<c:import url="sideLeft.jsp"></c:import>
     <!-- End Left Column -->
     
-
     
     <!-- Middle Column -->
     <div class="w3-col m7" style="margin-left:25%;">
@@ -344,46 +349,118 @@ function validate(){
                                </div>
                             </div>
                         </div>
-					</div>
-				</div>
-		    </div>
-<!--		    상세보기창 끝-->
-		    
+               </div>
+            </div>
+          </div>
+<!--          상세보기창 끝-->
+          
+    <c:forEach var="board" items="${bList }">
+   <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+      <input type="hidden" name="bno" />
       
-      <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
         <img src="resources/images/header/twice2.png" alt="Avatar" class="w3-left w3-circle w3-margin-right rounded-circle" style="width:60px; height:60px;">
         <span class="w3-right w3-opacity">32 min</span>
-        <h4>Angie Jane</h4><br>
+        
+        <h4><c:out value="${board.name }"></c:out></h4><br>
         <hr class="w3-clear">
-        <p>Have you seen this?</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-<!--        <img src="image/twice2.png" style="width:100%; height:500px;" class="w3-margin-bottom">-->
-        <table id="fileTb" cellspacing="0" align="center" class="w3-margin-bottom">
-            <tr>
-                <td>
-                    <img src="resources/images/header/twice2.png" style="width:100%; height:35%;">
-                </td>
-                <td>
-                    <img src="resources/images/header/twice2.png" style="width:100%; height:35%;">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <img src="resources/images/header/twice2.png" style="width:100%; height:35%;">
-                </td>
-                <td>
-                    <img src="resources/images/header/twice2.png" style="width:100%; height:35%;">
-                </td>
-            </tr>
+        <p><c:out value="${board.bcontent }"></c:out></p>
+        <p> veniam</p>
+        
+        <table id="fileTb" cellspacing="0" class="w3-margin-bottom">
+           <c:forEach var="resource" items="${board.resource }" varStatus="st">
+                 
+                 <c:if test="${board.resource.size() eq 1}">
+                    <c:if test="${st.count eq 1}">
+                       <tr>
+                            <td>
+                                <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:720px; height:500px;" >
+                            </td>
+                        </tr>
+                     </c:if>
+                  </c:if>
+                  
+                  <c:if test="${board.resource.size() eq 2}">
+                     
+                     <c:if test="${st.count eq 1}">
+                     <tr>
+                         <td>
+                              <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:500px;">
+                          </td>
+                     </c:if>
+                     <c:if test="${st.count eq 2}">
+                         <td>
+                              <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:500px;">
+                          </td>
+                    </tr>
+                     </c:if>
+                     
+                  </c:if>
+                  <c:if test="${board.resource.size() eq 3}">
+                  <c:if test="${st.count eq 1}">
+                        <tr>
+                           <td colspan="2">
+                               <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:720px; height:240px;">
+                           </td>
+                        </tr>
+                  </c:if> 
+                  <c:if test="${st.count >= 2}">
+                      <c:if test="${st.count eq 2}">
+                      <tr>
+                              <td>
+                                 <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
+                             </td>
+                        </c:if>
+                        <c:if test="${st.count eq 3}">
+                               <td>
+                                   <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
+                               </td>
+                        </tr>
+                         </c:if>
+                  </c:if>
+                     
+                  </c:if>
+                  
+                  <c:if test="${board.resource.size() eq 4}">
+                  <c:if test="${st.count < 3}">
+                      <c:if test="${st.count eq 1}">
+                      <tr>
+                              <td>
+                                 <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
+                             </td>
+                        </c:if>
+                        <c:if test="${st.count eq 2}">
+                               <td>
+                                   <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
+                               </td>
+                        </tr>
+                         </c:if>
+                  </c:if>
+                  <c:if test="${st.count >= 3}">
+                      <c:if test="${st.count eq 3}">
+                      <tr>
+                              <td>
+                                 <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
+                             </td>
+                        </c:if>
+                        <c:if test="${st.count eq 4}">
+                               <td>
+                                   <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
+                               </td>
+                        </tr>
+                         </c:if>
+                  </c:if>
+                     
+                  </c:if>
+           </c:forEach>
         </table>
         &nbsp;
         <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i> &nbsp;600</button> 
-          <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom" onclick="javascript:location.href='#open'"><i class="fa fa-comment"></i> &nbsp;128</button> 
-      </div>  
-      
+        <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom" onclick="javascript:location.href='#open'"><i class="fa fa-comment"></i> &nbsp;128</button> 
+    </div>
+    </c:forEach>
     <!-- End Middle Column -->
     </div>
-    
+   
     <!-- Right Column -->
     
       <c:import url="sideRight.jsp"></c:import>
@@ -408,5 +485,5 @@ function validate(){
 
 
 
- 
 </body></html>
+ 

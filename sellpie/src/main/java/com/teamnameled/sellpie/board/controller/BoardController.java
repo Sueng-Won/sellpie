@@ -42,8 +42,12 @@ public class BoardController {
 		String bcontent = board.getBcontent();
 		String email = board.getEmail();
 		
+		
+		// 웹서버 컨테이너 경로 추출함
+		String root = request.getSession().getServletContext().getRealPath("resources");
 		//파일경로
-		String filePath ="C:\\Upload\\"+email+"\\"+sdf.format(today).toString();
+		String filePath = root+"\\data\\"+email+"\\"+sdf.format(today).toString();
+		String savePath = "resources/data/"+email+"/"+sdf.format(today).toString();
 		//파일들을 List형식으로 보관
 		List<MultipartFile> files = multipartHttpServletRequest.getFiles("file");
 		
@@ -70,10 +74,10 @@ public class BoardController {
 				UUID uuid = UUID.randomUUID();
 	
 				if(null!=files.get(i).getOriginalFilename()&&!files.get(i).getOriginalFilename().equals("")){
-					board.setRurl(filePath);
+					board.setRurl(savePath);
 					file = new File(filePath+"\\"+uuid+files.get(i).getOriginalFilename());
 					ResourceVo resource = new ResourceVo();
-					resource.setRsrc(filePath+"\\"+uuid+files.get(i).getOriginalFilename());
+					resource.setRsrc(savePath+"/"+uuid+files.get(i).getOriginalFilename());
 					resourceResult += resourceService.insertResource(resource);
 					if(fileLength<resourceResult){
 						fileLength++;
@@ -150,7 +154,7 @@ public class BoardController {
 		}
 		
 		
-		
+		mv.addObject("bList", bList);
 		mv.setViewName("main");
 		
 		return mv;

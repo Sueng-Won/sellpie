@@ -19,10 +19,9 @@ public class SellerController {
 	@RequestMapping("tagSearch.do")
 	public String tagSearch(String searchText,HttpServletRequest request) {
 		String selTag = searchText;
-//		request.setAttribute("selTag", selTag);
+		request.setAttribute("selTag", selTag);
 		List<Member> sellerList = sellerService.selectSellerList(selTag);
 		List<Seller> sellerInfo = sellerService.selectSellersInfo(sellerList);
-		System.out.println(sellerInfo);
 		request.setAttribute("sellerList", sellerList);
 		request.setAttribute("sellerInfo", sellerInfo);
 		return "seller/sellerList";

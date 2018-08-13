@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>태그 검색</title>
+<title>사람 검색</title>
 </head>
 <body class="w3-theme-l5">
 	<!-- Page Container -->
@@ -26,19 +26,14 @@
 					<div class="w3-col m12">
 						<div class="w3-card w3-round w3-white">
 							<div class="w3-container w3-padding">
-							#"${selTag}" 로 검색한 판매자 결과입니다.
+							"${searchText}" 로 검색한 사용자 결과입니다.
 							<div class="list-group">
-									<c:forEach var="member" items="${sellerList}">
-										<c:forEach var="info" items="${sellerInfo}">
-  											<a href="productList.do?sNo=${info.sNo}" class="list-group-item">
+									<c:forEach var="member" items="${memberList}">
+  											<a href="#" class="list-group-item">
   												<img src="resources/images/header/red1.jpg" class="w3-circle" style="height:50px;width:50px" alt="Avatar">
     											<b>${member.name}</b>
-    											<span class="pull-right block">
-    												판매 분야 : ${info.pCategory}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	    										</span>
   											</a>
-  										</c:forEach>
-									</c:forEach>
+  									</c:forEach>
 							</div>
 							</div>
 						</div>

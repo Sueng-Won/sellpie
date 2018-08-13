@@ -1,5 +1,7 @@
 package com.teamnameled.sellpie.member.model.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -47,6 +49,10 @@ public class MemberService {
 		String encPassword = bpe.encode(member.getPwd());
 		member.setPwd(encPassword);
 		return dao.updateUserPwd(member);
+	}
+
+	public List<Member> searchMemberList(String searchText) {
+		return dao.searchMemberList(searchText);
 	}
 
 

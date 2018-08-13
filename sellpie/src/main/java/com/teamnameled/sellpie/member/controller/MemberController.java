@@ -1,9 +1,14 @@
 package com.teamnameled.sellpie.member.controller;
 
 
+<<<<<<< HEAD
 import java.util.HashMap;
+=======
+import java.util.List;
+>>>>>>> refs/heads/master
 
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -193,6 +198,7 @@ public class MemberController {
 		}
 		return map;
 	}
+<<<<<<< HEAD
 	@RequestMapping("changeUserPwd.do")
 	public String changeUserPwd(){
 		return "member/changeUserPwd";
@@ -209,4 +215,14 @@ public class MemberController {
 		
 		return "redirect:signIn.do";
 	}
+=======
+	@RequestMapping(value="memberSearch.do")
+	public String searchMember(String searchText,HttpServletRequest request) {
+		List<Member> memberList = memberService.searchMemberList(searchText);
+		request.setAttribute("memberList", memberList);
+		request.setAttribute("searchText", searchText);
+		return "member/searchMemberList";
+	}
+	
+>>>>>>> refs/heads/master
 }
