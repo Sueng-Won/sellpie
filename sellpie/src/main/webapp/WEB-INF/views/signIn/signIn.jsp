@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE>
 <html>
 <head>
@@ -867,7 +869,7 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
                             <nav class="navbar__navWrapper__2mJ">
                                 <div class="navbar__container__3tL clearfix">
                                 	<ul class="navbar__left__2RB">
-                                		<li><a href="mailto:ads@vingle.net"><span>관리자 페이지</span></a></li><li>
+                                		<li><a href="/sellpie/errorPage.do"><span>관리자 페이지</span></a></li><li>
                                 	</ul>
                                 </div>
                             </nav>
@@ -894,7 +896,19 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
                                     <button type="submit" class="solidButton__button__15V   signUpComponent__btnFB__1uM">이메일로 시작하기</button>
                                 </div>
                             <div class="signUpComponent__hadAccount__gtQ"><span>이미 SellPie를 사용하고 있나요? </span>
-                                <span class="signUpComponent__login__3Iz"><a href="/sellpie/login.do"><span>로그인</span></a></span>
+                                <span class="signUpComponent__login__3Iz">
+                                	<c:if test="${not empty sessionScope.user }">
+                                	<a href="/sellpie/main.do">
+                                		<span>SellPie 시작하기</span>
+                                	</a>
+                                	</c:if>
+                                	<c:if test="${empty sessionScope.user }">
+                                	<a href="/sellpie/login.do">
+                                		<span>로그인</span>
+                                	</a>
+                                	</c:if>
+                                	
+                                </span>
                             </div>
                             </div>
                         </div>

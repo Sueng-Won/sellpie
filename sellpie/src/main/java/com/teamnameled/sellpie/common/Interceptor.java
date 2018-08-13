@@ -9,20 +9,15 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 public class Interceptor extends HandlerInterceptorAdapter {
-	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handle){ 
-		ModelAndView mav = new ModelAndView();
-		System.out.println(mav.isEmpty());
+		
 		System.out.println("인터셉터 호출");
-		int prevent = (int)request.getSession().getAttribute("prevent");
-		System.out.println(prevent);
 			try {
 				if(null==request.getSession().getAttribute("prevent")){
 					System.out.println("prevent 발동..");
-				response.sendRedirect("/sellpie/signIn.do");
+					response.sendRedirect("/sellpie/signIn.do");
 				
-				return false;
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -34,6 +29,8 @@ public class Interceptor extends HandlerInterceptorAdapter {
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
             ModelAndView modelAndView) throws Exception {
         super.postHandle(request, response, handler, modelAndView);
+        /*int prevent = (int)request.getSession().getAttribute("prevent");
+        System.out.println(prevent);*/
     }
 
 

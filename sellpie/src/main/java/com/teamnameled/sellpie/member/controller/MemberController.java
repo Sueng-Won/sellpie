@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.teamnameled.sellpie.common.GenerateCertNumber;
 import com.teamnameled.sellpie.member.model.service.MemberService;
@@ -44,18 +45,15 @@ public class MemberController {
 		return "member/join/email";
 	}
 	@RequestMapping("getName.do")
-	public String getName(HttpSession session){
-		session.setAttribute("prevent", 2);
+	public String getName(){
 		return "member/join/name";
 	}
 	@RequestMapping("getGender.do")
-	public String getGender(HttpSession session){
-		session.setAttribute("prevent", 3);
+	public String getGender(){
 		return "member/join/gender";
 	}
 	@RequestMapping("getPhone.do")
-	public String getPhone(HttpSession session){
-		session.setAttribute("prevent", 4);
+	public String getPhone(){
 		return "member/join/phone";
 	}
 	@RequestMapping("getBirth.do")
@@ -144,23 +142,28 @@ public class MemberController {
 	
 
 	@RequestMapping(value = "signUp.do", method = RequestMethod.POST)
-	public String memberJoin(Member member, HttpSession session){
-		String url = "";
+	public ModelAndView memberJoin(Member member, HttpSession session, ModelAndView mav, HttpServletRequest request){
+		
+		
 		int result = 0;
 		try {
 			result =  memberService.insertMember(member);
 			if(result>0){
+				session.removeAttribute("prevent");
 				session.setAttribute("user", member);
-				url ="redirect:main.do";				
+				
+				mav.setViewName("redirect:main.do");
 			}else{
-				url = "redirect:signIn.do";
+				mav.addObject("msg", "회원 가입 처리중 에러 발생!");
+				mav.setViewName("common/errorPage");
 			}
 			
 		} catch (Exception e) {
-			
+			mav.addObject("msg", "회원 가입 처리중 에러 발생!");
+			mav.setViewName("common/errorPage");
 			e.printStackTrace();
 		}
-		return url;
+		return mav;
 	}
 	//테스트
 	@RequestMapping("test.do")
@@ -222,5 +225,9 @@ public class MemberController {
 	@RequestMapping("updateMember.do")
 	public String updateMember(){
 		return "member/memberUpdate";
+	}
+	@RequestMapping("errorPage.do")
+	public String errorPage(){
+		return "common/errorPage";
 	}
 }
