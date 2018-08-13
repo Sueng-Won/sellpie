@@ -44,9 +44,7 @@ $(document).ready(function(){
                   // 방법 2. Json으로 가져온 데이터에 Array로 바로 접근하기
                   var CompanyArray = data.Company; // Json Array에 접근하기 위해 Array명 Company 입력
                   var myData="";
-                  console.log(pList);
                 for (var i = 0; i < length; i++) {
-                	console.log(pList[i].delivCode);
                   $.each(CompanyArray,function(key,value) {
                 	  if(pList[i].delivCode == value.Code){
                         myData = (value.Name);
