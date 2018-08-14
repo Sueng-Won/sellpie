@@ -139,4 +139,13 @@ public class MemberController {
 		request.setAttribute("pList", purchaseList);
 		return "member/purchaseList";
 	}
+	//개인정보수정-판매현황
+	@RequestMapping("salesList.do")
+	public String salesList(String email, HttpServletRequest request) {
+		//이메일 있으면 지울것
+		email = "aaa@aaa.com";
+		List<Contract> purchaseList = contractContract.contractList(email);
+		request.setAttribute("pList", purchaseList);
+		return "member/salseList";
+	}
 }
