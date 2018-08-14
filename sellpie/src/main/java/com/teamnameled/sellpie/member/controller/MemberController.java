@@ -20,11 +20,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.teamnameled.sellpie.contract.controller.ContractController;
 import com.teamnameled.sellpie.contract.model.service.ContractService;
 import com.teamnameled.sellpie.contract.model.vo.Contract;
-<<<<<<< HEAD
 import com.teamnameled.sellpie.common.GenerateCertNumber;
-=======
 import com.teamnameled.sellpie.contract.model.vo.ContractWithName;
->>>>>>> refs/heads/yuventius
 import com.teamnameled.sellpie.member.model.service.MemberService;
 import com.teamnameled.sellpie.member.model.vo.Member;
 
