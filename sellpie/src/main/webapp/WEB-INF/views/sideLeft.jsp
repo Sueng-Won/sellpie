@@ -50,7 +50,7 @@ function openNav() {
         	<c:choose>
         	
         	<c:when test="${!empty sessionScope.user}">
-         	 <p class="w3-center"><img src="resources/images/userImg/${(sessionScope.user.profile_img ne null)?'profile.png':sessionScope.user.profile_img}" class="w3-circle" style="height:106px;width:106px" alt="Avatar"/></p>
+         	 <p class="w3-center"><img src="resources/images/userImg/${(sessionScope.user.profileImg ne null)?'profile.png':sessionScope.user.profileImg}" class="w3-circle" style="height:106px;width:106px" alt="Avatar"/></p>
          	 <hr>
         	 <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i><c:out value="${sessionScope.user.email}"/></p>
        		 <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> 주 소</p>
