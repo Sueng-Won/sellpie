@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import com.teamnameled.sellpie.reply.model.vo.ReplyVo;
 import com.teamnameled.sellpie.resource.model.vo.ResourceVo;
 
 
@@ -19,6 +20,9 @@ public class BoardVo {
 	private char likeflag = 'F';
 	private List<ResourceVo> resource;
 	private String name;
+	private String name;
+	private String profileImg;
+	private int rcount;
 	
 	public BoardVo() {
 		super();
@@ -101,9 +105,8 @@ public class BoardVo {
 	public void setResource(List<ResourceVo> resource) {
 		this.resource = resource;
 	}
-	
-	
 
+	
 
 
 	public String getName() {
@@ -115,6 +118,33 @@ public class BoardVo {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	
+
+
+	public String getProfileImg() {
+		return profileImg;
+	}
+
+
+
+	public void setProfileImg(String profileImg) {
+		this.profileImg = profileImg;
+	}
+
+
+	
+	
+
+	public int getRcount() {
+		return rcount;
+	}
+
+
+
+	public void setRcount(int rcount) {
+		this.rcount = rcount;
+	}
 
 
 
@@ -125,8 +155,6 @@ public class BoardVo {
 				+ ", name=" + name + "]";
 	}
 
-	
-	
 	
 
 }

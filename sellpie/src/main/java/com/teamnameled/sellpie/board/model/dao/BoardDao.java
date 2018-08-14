@@ -2,6 +2,7 @@ package com.teamnameled.sellpie.board.model.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,5 +35,27 @@ public class BoardDao {
 	public List<String> selectlList(int bno) {
 		return sqlSession.selectList("boardMapper.selectlList", bno);
 	}
+
+	public BoardVo selectBoard(String bno) {
+		return sqlSession.selectOne("boardMapper.selectBoard", bno);
+	}
+
+	public List<String> selectfList5(String email) {
+		return sqlSession.selectList("boardMapper.selectfList5", email);
+	}
+
+	public int updateGcount(Map<String, Integer> bmap) {
+		return sqlSession.update("boardMapper.updateGcount", bmap);
+	}
+
+	public int insertBlike(Map<String, String> likeMap) {
+		return sqlSession.insert("boardMapper.insertBlike", likeMap);
+	}
+
+
+	public int deleteBlike(Map<String, String> likeMap) {
+		return sqlSession.delete("boardMapper.deleteBlike", likeMap);
+	}
+
 
 }
