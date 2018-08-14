@@ -25,5 +25,28 @@
 			null
 		)
 	</insert>
+	<select id="selectContractListWithName" parameterType="java.util.List" resultType="ContractWithName">
+		<foreach collection="list" item="contract" separator="UNION ALL">
+			SELECT CNO, (
+				SELECT NAME
+				FROM MEMBER 
+				WHERE EMAIL = #{contract.email}
+				) AS NAME,(
+					SELECT NAME
+					FROM MEMBER
+					WHERE EMAIL = (
+						SELECT EMAIL
+						FROM SELLER
+						WHERE SNO = #{contract.sNo}
+					)
+				) AS SNAME,(
+					SELECT PNAME
+					FROM PRODUCT
+					WHERE PNO = #{contract.pNo}
+				) AS PNAME,QUANTITY, DELIVCODE, INVNUM
+				FROM CONTRACT
+				WHERE CNO = #{contract.cNo}
+			</foreach>
+	</select>
 </mapper>
 

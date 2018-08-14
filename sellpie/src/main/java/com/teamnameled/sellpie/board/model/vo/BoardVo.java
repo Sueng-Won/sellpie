@@ -20,7 +20,6 @@ public class BoardVo {
 	private char likeflag = 'F';
 	private List<ResourceVo> resource;
 	private String name;
-	private String name;
 	private String profileImg;
 	private int rcount;
 	
