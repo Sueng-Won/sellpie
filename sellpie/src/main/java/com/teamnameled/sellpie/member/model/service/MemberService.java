@@ -1,5 +1,6 @@
 package com.teamnameled.sellpie.member.model.service;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,7 @@ import com.teamnameled.sellpie.member.model.dao.MemberDao;
 import com.teamnameled.sellpie.member.model.vo.Member;
 
 @Service
-public class MemberService {
+public class MemberService  {
 	@Autowired
 	MemberDao dao;
 	
@@ -18,7 +19,7 @@ public class MemberService {
 	BCryptPasswordEncoder bpe;
 
 	public Member checkEmail(String email) {
-		return dao.selectByEmail(email);
+		return dao.userLogin(email);
 	}
 
 	public int insertMember(Member member) throws Exception{
@@ -28,10 +29,21 @@ public class MemberService {
 		return dao.insertMember(member);
 	}
 
+
+	public int updateUserPwd(Member member) throws Exception {
+		String encPassword = bpe.encode(member.getPwd());
+		member.setPwd(encPassword);
+		return dao.updateUserPwd(member);
+	}
+
+	public List<Member> searchMemberList(String searchText) {
+		return dao.searchMemberList(searchText);
+	}
+
 	public Member userLogin(Member member) {
 		String userEncPassword = null;
 		String email = member.getEmail();
-		Member result = dao.selectByEmail(email);
+		Member result = dao.userLogin(email);
 		System.out.println(result);
 		
 		if(null!=result){
@@ -45,14 +57,16 @@ public class MemberService {
 		return result;
 	}
 
-	public int updateUserPwd(Member member) throws Exception {
-		String encPassword = bpe.encode(member.getPwd());
-		member.setPwd(encPassword);
-		return dao.updateUserPwd(member);
+	public void keepLogin(String email, String sessionId, Date next) {
+		dao.keepLogin(email, sessionId, next);
+
+		
 	}
 
-	public List<Member> searchMemberList(String searchText) {
-		return dao.searchMemberList(searchText);
+
+	public Member checkUserSessionKey(String sessionId) {
+		return dao.checkUserSessionKey(sessionId);
+
 	}
 
 
