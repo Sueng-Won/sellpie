@@ -18,8 +18,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.teamnameled.sellpie.contract.controller.ContractController;
+import com.teamnameled.sellpie.contract.model.service.ContractService;
 import com.teamnameled.sellpie.contract.model.vo.Contract;
+<<<<<<< HEAD
 import com.teamnameled.sellpie.common.GenerateCertNumber;
+=======
+import com.teamnameled.sellpie.contract.model.vo.ContractWithName;
+>>>>>>> refs/heads/yuventius
 import com.teamnameled.sellpie.member.model.service.MemberService;
 import com.teamnameled.sellpie.member.model.vo.Member;
 
@@ -33,7 +38,7 @@ public class MemberController {
 	private JavaMailSender mailSender;
 	
 	@Autowired
-	ContractController contractContract;
+	ContractService contractService;
 
 	@RequestMapping("login.do")
 	public String loginPage(){
@@ -236,8 +241,10 @@ public class MemberController {
 	public String purchaseList(String email, HttpServletRequest request) {
 		//이메일 있으면 지울것
 		email = "aaa@aaa.com";
-		List<Contract> purchaseList = contractContract.contractList(email);
-		request.setAttribute("pList", purchaseList);
+		List<Contract> purchaseList = contractService.selectContractList(email);
+		List<ContractWithName> purchaseListWithName = contractService.selectContractListWithName(purchaseList);
+		request.setAttribute("cList", purchaseList);
+		request.setAttribute("pList", purchaseListWithName);
 		return "member/purchaseList";
 	}
 }
