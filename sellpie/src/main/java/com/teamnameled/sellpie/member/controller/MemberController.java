@@ -40,7 +40,6 @@ public class MemberController {
 	@RequestMapping("memberJoin.do")
 	public String memberJoin(HttpSession session){
 		//회원가입 1 페이지(이메일입력)로 이동
-		session.setAttribute("prevent", 1);
 		
 		return "member/join/email";
 	}
@@ -149,7 +148,6 @@ public class MemberController {
 		try {
 			result =  memberService.insertMember(member);
 			if(result>0){
-				session.removeAttribute("prevent");
 				session.setAttribute("user", member);
 				
 				mav.setViewName("redirect:main.do");

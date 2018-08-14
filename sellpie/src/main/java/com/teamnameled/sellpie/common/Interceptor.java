@@ -14,12 +14,14 @@ public class Interceptor extends HandlerInterceptorAdapter {
 		
 		System.out.println("인터셉터 호출");
 			try {
-				if(null==request.getSession().getAttribute("prevent")){
-					System.out.println("prevent 발동..");
-					response.sendRedirect("/sellpie/signIn.do");
+				if(null==request.getSession().getAttribute("user")){
+					System.out.println("로그인 처리가 안되어있습니다..");
+					response.sendRedirect("/sellpie/errorPage.do");
+					return false;
 				
 				}
 			} catch (IOException e) {
+				System.out.println("??에러찍음?");
 				e.printStackTrace();
 			}
 			
