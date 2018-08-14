@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE>
 <html>
 <head>
@@ -684,6 +683,224 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
 </style>
 
 <style type="text/css" id="s2726-0">/* New Vingle */
+<<<<<<< HEAD
+/* Old Vingle */
+/* Component Specific colors */
+/* font weights */
+/* Element Sizes */
+/* Z-indexs */
+/* Animations */
+
+.signUpComponent__footer__DSK .signUpComponent__btnFB__1uM, .signUpComponent__footer__DSK .signUpComponent__btnEmail__25y {
+  width: 350px;
+  height: 55px;
+  border-radius: 100px; }
+
+.signUpDetail__rootWrapper__1D9 {
+  height: 100%; }
+
+.signUpDetail__bodyContainer__vop {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  overflow: scroll; }
+  .signUpComponent__bodyWrapper__3ND .signUpComponent__backgroundImage__3VS {
+    position: absolute;
+    width: 100%;
+    height: 100%;}
+  .signUpComponent__bodyWrapper__3ND .signUpComponent__backgroundImagesWrapper__VTf {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1; }
+    .signUpComponent__bodyWrapper__3ND .signUpComponent__backgroundImagesWrapper__VTf::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.2);
+      z-index: 1; }
+  .signUpComponent__bodyWrapper__3ND .signUpComponent__container__6PN {
+    position: absolute;
+    top: 200px;
+    left: 0;
+    right: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column; }
+    @media (max-height: 740px) {
+      .signUpComponent__bodyWrapper__3ND .signUpComponent__container__6PN {
+        top: 124px; } }
+    .signUpComponent__bodyWrapper__3ND .signUpComponent__container__6PN .signUpComponent__logo__3Im {
+      width: 210px;
+      height: 78px; }
+      .signUpComponent__bodyWrapper__3ND .signUpComponent__container__6PN .signUpComponent__logo__3Im svg {
+        width: 210px;
+        height: 78px; }
+    .signUpComponent__bodyWrapper__3ND .signUpComponent__container__6PN .signUpComponent__comment__1Pa {
+      width: 780px;
+      height: 117px;
+      font-weight: 200;
+      font-size: 32px;
+      line-height: 1.5;
+      text-align: center;
+      color: #fff;
+      margin-top: 20px;
+      -webkit-animation: signUpComponent__fade__2ze 3s infinite;
+              animation: signUpComponent__fade__2ze 3s infinite; }
+      .signUpComponent__bodyWrapper__3ND .signUpComponent__container__6PN .signUpComponent__comment__1Pa .signUpComponent__title__xzN {
+        font-size: 48px;
+        line-height: 1.21;
+        margin-bottom: 14px; }
+      .signUpComponent__bodyWrapper__3ND .signUpComponent__container__6PN .signUpComponent__comment__1Pa .signUpComponent__subTitle__135 {
+        font-size: 26px;
+        line-height: 1.38; }
+      .signUpComponent__bodyWrapper__3ND .signUpComponent__container__6PN .signUpComponent__comment__1Pa .signUpComponent__small__bDV {
+        font-size: 29px;
+        line-height: 1.34; }
+      .signUpComponent__bodyWrapper__3ND .signUpComponent__container__6PN .signUpComponent__comment__1Pa b {
+        font-weight: 400; }
+
+
+.signupNavbar__navWrapper__186 {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 70px;
+  padding: 0 70px;
+  border-bottom: 1px solid #e9eef0;
+  background-color: #fff;
+  z-index: 500; }
+
+.signupNavbar__titleWrapper__4Iq {
+  font-size: 16px;
+  height: 26px;
+  line-height: 34px;
+  text-align: left;
+  color: #fb2942; }
+
+@keyframes signUpComponent__fade__2ze {
+  0% {
+    opacity: 0; }
+  25% {
+    opacity: 1; }
+  50% {
+    opacity: 1; }
+  75% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
+    
+    a{color:#000;}
+
+.signupNavbar__vingleLogo__3Ob + span {
+  margin-left: 2px; }
+
+span + .signupNavbar__vingleLogo__3Ob {
+  margin-left: 2px; }
+
+.signUpBody__content__1PG {
+  width: 460px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center; }
+           
+  .signUpBody__content__1PG .signUpBody__formInput__1yh {
+    width: 100%; }
+    .signUpBody__content__1PG .signUpBody__formInput__1yh:nth-child(1) {
+      margin-bottom: 12px; }
+  .signUpBody__content__1PG .signUpBody__btnSignUp__Y5M {
+    width: 156px;
+    height: 55px;
+    margin-top: 30px;
+    margin-bottom: 22px;
+    border: solid 1px #1cbcd7;
+    color: #1cbcd7; }
+  .signUpBody__content__1PG .signUpBody__nextButton__wU3 {
+    width: 150px;
+    height: 55px;
+    border-radius: 100px;
+    margin-top: 30px;
+    border: solid 1px #394247;
+    color: #394247; }
+    
+    .signUpBody__nextButton__auNum{
+    width: 150px;
+    height: 55px;
+    border-radius: 100px;
+    border: solid 1px #394247;
+    color: #394247; 
+    }
+
+
+.signUpBody__emailHeader__TiN {
+  margin-bottom: 70px; }
+
+.signUpBody__emailUsernameHeader__3IY {
+  margin-bottom: 55px; }
+
+.signUpBody__facebookHeader__1ii {
+  margin-bottom: 34px; }
+
+.signUpBody__facebookUsernameHeader__2ug {
+  margin-bottom: 25px; }
+
+
+.titleWithVerify__head__3gv .titleWithVerify__title__1ix {
+  height: 58px;
+  font-size: 48px;
+  font-weight: 200;
+  line-height: 1.21;
+  text-align: center;
+  color: #1f2629; }
+
+.titleWithVerify__head__3gv .titleWithVerify__verify__278 {
+  margin-top: 16px;
+  font-size: 16px;
+  line-height: 1.62;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  color: #1cbcd7; }
+  .titleWithVerify__head__3gv .titleWithVerify__verify__278 svg {
+    margin-right: 6px;
+    width: 18px;
+    height: 26px; }
+/* New Vingle */
+=======
+>>>>>>> branch 's2jun' of https://github.com/Sueng-Won/sellpie.git
 /* Old Vingle */
 /* Component Specific colors */
 /* font weights */
@@ -1490,6 +1707,35 @@ body.modal-active {
                             <nav class="navbar__navWrapper__2mJ">
                                 <div class="navbar__container__3tL clearfix">
                                 	<ul class="navbar__left__2RB">
+<<<<<<< HEAD
+                                		<li><a href="mailto:ads@vingle.net"><span>관리자 페이지</span></a></li><li>
+                                	</ul>
+                                    <ul class="navbar__right__2FE">
+                                            <li class="navbar__login__3ct"><a href="/sellpie/login.do"><span>로그인</span></a></li>
+                                    </ul>
+                                </div>
+                            </nav>
+                        <div class="signUpComponent__bodyWrapper__3ND">
+                            <div class="signUpComponent__backgroundImagesWrapper__VTf">
+                                <div class="signUpComponent__backgroundImage__3VS" style="opacity: 1; background-image: url('resources/images/mainImg/main1.jpg'); background-size: cover;"></div>
+                                <div class="signUpComponent__backgroundImage__3VS" style="opacity: 0; background-image: url('resources/images/mainImg/main2.jpg'); background-size: cover;"></div>
+                                <div class="signUpComponent__backgroundImage__3VS" style="opacity: 0; background-image: url('resources/images/mainImg/main3.jpg'); background-size: cover;"></div>
+                                <div class="signUpComponent__backgroundImage__3VS" style="opacity: 0; background-image: url('resources/images/mainImg/main4.jpg'); background-size: cover;"></div>
+                                <div class="signUpComponent__backgroundImage__3VS" style="opacity: 0; background-image: url('resources/images/mainImg/main5.jpg'); background-size: cover;"></div>
+                                <div class="signUpComponent__backgroundImage__3VS" style="opacity: 0; background-image: url('resources/images/mainImg/main6.jpg'); background-size: cover;"></div>
+                                <div class="signUpComponent__backgroundImage__3VS" style="opacity: 0; background-image: url('resources/images/mainImg/main7.jpg'); background-size: cover;"></div>
+                                <div class="signUpComponent__backgroundImage__3VS" style="opacity: 0; background-image: url('resources/images/mainImg/main8.jpg');; background-size: cover;"></div>
+                            </div>
+                            <div class="signUpComponent__container__6PN">
+                                <div class="signUpComponent__logo__3Im">
+                                    <img src="resources/images/mainImg/sellpie.png" class="icons__icon__2cq"/>
+                                </div>
+                                    <div class="signUpComponent__comment__1Pa">내 친구가 좋아하는 것이 아닌<br><b>"내"</b>가 좋아하는 것을 즐기세요
+                                    </div>
+                            </div>
+                            <div class="signUpDetail__bodyContainer__vop">
+    					<div class="signUpBody__emailBodyWrapper__20z">
+=======
                                 		<li><a href="mailto:ads@vingle.net"><span>TEST 페이지</span></a></li><li>
                                 		<li><a href="/sellpie/test.do"><span>TEST TEST TEST</span></a></li><li>
                                 	</ul>
@@ -1544,6 +1790,7 @@ body.modal-active {
     					</div>
     				</nav>
     				
+>>>>>>> branch 's2jun' of https://github.com/Sueng-Won/sellpie.git
     					    <div class="signUpBody__emailHeader__TiN">
     							<div class="titleWithVerify__head__3gv">
     								<div class="titleWithVerify__title__1ix">이메일로 시작하기</div>
