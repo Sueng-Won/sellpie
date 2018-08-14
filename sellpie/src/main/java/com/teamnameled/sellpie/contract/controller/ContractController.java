@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.teamnameled.sellpie.contract.model.service.ContractService;
 import com.teamnameled.sellpie.contract.model.vo.Contract;
@@ -26,5 +27,16 @@ public class ContractController {
 			System.out.println("insert 실패");
 		}
 		return "main";
+	}
+	@RequestMapping(value="updateinvNum.do")
+	public @ResponseBody int updateinvNum(Contract contract) {
+		System.out.println(contract);
+		int result = contractService.updateContract(contract);
+		if(result>0) {
+			System.out.println("update 성공");
+		}else {
+			System.out.println("update 실패");
+		}
+		return result;
 	}
 }

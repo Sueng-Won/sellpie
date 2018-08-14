@@ -20,4 +20,8 @@ public class ContractDao {
 	public int insertContract(Contract contract) {
 		return sqlSession.insert("ContractMapper.insertContract", contract);
 	}
+
+	public int updateContract(Contract contract) {
+		return sqlSession.update("ContractMapper.updateContract", contract);
+	}
 }

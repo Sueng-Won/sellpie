@@ -43,7 +43,7 @@
 <div>
    <table id="myPtag2"></table>
 </div>
-							<table class="table">
+							<table class="table w3-striped w3-hoverable">
 							  <thead>
 							    <tr>
 							      <th scope="col">#</th>
@@ -57,30 +57,31 @@
 							  </thead>
 							  <tbody>
 							  <c:forEach var="pIndex" items="${pList}" varStatus="status">
-							    <tr id="pList">
+							    <tr class="pList" id="pList">
 							      <th scope="row">${status.index}</th>
 							      <td><c:out value="${pIndex.sNo}"/></td>
 							      <td><c:out value="${pIndex.pNo}"/></td>
 							      <td><c:out value="${pIndex.quantity}"/></td>
 							      
-							      <c:if test="${pIndex.invNum == '' }">
-							      <td><c:out value="${pIndex.delivCode}"/></td>
-							      <td><c:out value="${pIndex.invNum}"/></td>
+							      <c:if test="${pIndex.invNum != null }">
+							      <td class="delivName"><c:out value="${pIndex.delivCode}"/></td>
+							      <td class="invNum"><c:out value="${pIndex.invNum}"/></td>
+							      <td style="display:none" class="tCode"><c:out value="${pIndex.delivCode}"/></td>
 							      </c:if>
 							      
-							      <c:if test="${pIndex.invNum != '' }">
-							      <td id="delivCode">
-							      	<select id="delivList"></select>
+							      <c:if test="${pIndex.invNum == null }">
+							      <td id="delivList">
+							      	<select class="delivCode" name="delivCode"></select>
 							      </td>
-							      <td id="invNum">
-							      	<input type="text"/>
+							      <td class="invNumInput">
+							      	<input type="text" class="invNum" name="invNum"/>
 							      </td>
 							      <td>
-							      	<button class="w3-theme w3-button w3-tiny w3-padding-small">등록</button>
+							      	<button onclick="updateDeliv(this, ${pIndex.cNo});" class="w3-theme w3-button w3-tiny w3-padding-small">등록</button>
 							      </td>
 							      </c:if>
-							      
 							    </tr>
+							      
 							   </c:forEach>
 							  </tbody>
 							</table>
@@ -116,6 +117,27 @@
 	</footer> -->
 </body>
 <script>
+function updateDeliv(obj, cNoVal) {
+	var pList = $(obj).closest(".pList");
+	var delivCodeVal = pList.find('.delivCode option:selected').val();
+	var invNumVal = pList.find('.invNum').val();
+	
+	console.log('pList='+pList);
+	console.log('delivCode='+delivCodeVal);
+	console.log('invNum='+invNumVal);
+	console.log('cNoVal='+cNoVal);
+	
+	$.ajax({
+        type:"GET",
+        dataType : "json",
+        url:'updateinvNum.do',
+        data:{delivCode:delivCodeVal,invNum:invNumVal,cNo:cNoVal},
+        success:function(data){
+        	alert('등록완료');
+			location.href = location.href = 'salesList.do?email=email';
+        }
+	});
+}
 // Accordion
 function myFunction(id) {
     var x = document.getElementById(id);
@@ -161,9 +183,17 @@ $(document).ready(function(){
 	                  $.each(CompanyArray,function(key,value) {
 	                        myData += ('<option value='+value.Code+'>' +'key:'+key+', Code:'+value.Code+',Name:'+value.Name + '</option>');                    
 	                        dilvData +=('<option value='+value.Code+'>'+value.Name + '</option>');
+		                  $('.pList').each(function() {
+		              		if(value.Code == $(this).find('.delivName').text()){
+		                	  $(this).find('.delivName').text(value.Name);
+		              		console.log($(this).text());
+		              			//$(this).text(value.Name);
+		              		
+		              		}
+		              	});
 	                  });
+		              $(".delivCode").html(dilvData);
 	                  $("#tekbeCompnayList").html(myData);
-	                  $("#delivList").html(dilvData);
 	            }
 	        });
 
@@ -228,12 +258,58 @@ $(document).ready(function(){
 	                }
 	            });
 	        });
-	$('#pList').each(function() {
-		console.log($(this).text());
-		if(!$(this).text() != ''){
-			$(this).$('#invNum').attr('text', '<input type="text"/>');
-		}
-	});
+	
+	        $(".pList").click(function() {
+	        	var thisObj = $(this);
+	        	console.log('태그리무브'+$(this).next('tr').hasClass('infoTag'));
+	        	if($(this).next('tr').hasClass('infoTag')){
+	        		$(this).next('tr').remove();
+	        	}else{
+	        		
+	           var t_code = $(this).find('.tCode').text();
+	           var t_invoice = $(this).find('.invNum').text();
+	           console.log(t_code);
+	                  var myTracking="";
+	                  var header ="";
+	            $.ajax({
+	                type:"GET",
+	                dataType : "json",
+	                url:"http://info.sweettracker.co.kr/api/v1/trackingInfo?t_key="+myKey+"&t_code="+t_code+"&t_invoice="+t_invoice,
+	                success:function(data){
+	                   console.log(data);
+	                   var myInvoiceData = "";
+	                   if(data.status == false){
+	                      myInvoiceData += ('<p>'+data.msg+'<p>');
+	                   }else{
+	                   var trackingDetails = data.trackingDetails;
+	                   
+	                   
+	                  header += ('<tr class="infoTag"><td colspan="7">'); 
+	                  header += ('<table>'); 
+	                  header += ('<th>'+"시간"+'</th>');
+	                  header += ('<th>'+"장소"+'</th>');
+	                  header += ('<th>'+"유형"+'</th>');
+	                  header += ('<th>'+"전화번호"+'</th>');                 
+	                 header += ('</tr>');     
+	                  
+	                  $.each(trackingDetails,function(key,value) {
+	                     myTracking += ('<tr>');               
+	                     myTracking += ('<td>'+value.timeString+'</td>');
+	                     myTracking += ('<td>'+value.where+'</td>');
+	                     myTracking += ('<td>'+value.kind+'</td>');
+	                     myTracking += ('<td>'+value.telno+'</td>');                 
+	                     myTracking += ('</td></tr>');                                
+	                  });
+	                   myTracking += ('</table>');
+	                  console.log(header+myTracking);
+	                  thisObj.after(header+myTracking);
+	                	   
+	                   }
+	                   
+	                }
+	            });
+	        	}
+	        });
 	});
 </script>
 </body>

@@ -20,4 +20,8 @@ public class ContractService {
 	public int insertContract(Contract contract) {
 		return contractDao.insertContract(contract);
 	}
+
+	public int updateContract(Contract contract) {
+		return contractDao.updateContract(contract);
+	}
 }

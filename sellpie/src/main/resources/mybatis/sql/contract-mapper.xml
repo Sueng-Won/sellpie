@@ -25,5 +25,8 @@
 			null
 		)
 	</insert>
+	<update id="updateContract" parameterType="Contract">
+		UPDATE CONTRACT SET DELIVCODE = #{delivCode}, INVNUM = #{invNum} WHERE CNO = #{cNo}
+	</update>
 </mapper>
 
