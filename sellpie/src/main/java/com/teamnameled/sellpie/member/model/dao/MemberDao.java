@@ -22,6 +22,10 @@ public class MemberDao {
 		return sqlSession.insert("memberMapper.insertMember", member);
 	}
 
+	public int updateUserPwd(Member member) {
+		return sqlSession.update("memberMapper.updateMemberPwd", member);
+	}
+
 	public List<Member> searchMemberList(String searchText) {
 		return sqlSession.selectList("memberMapper.searchMemberList", searchText);
 	}

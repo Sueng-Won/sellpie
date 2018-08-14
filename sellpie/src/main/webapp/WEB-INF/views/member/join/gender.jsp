@@ -1,10 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE>
 <html>
 <head>
 <meta charset="utf-8">
 <title>SellPie</title>
+<script src="resources/js/jquery-3.3.1.min.js"></script>
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+<!-- 부가적인 테마 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <style type="text/css">
 * {
   font-family: "Noto Sans KR", "Noto Sans", Helvetica, Arial, "Malgun Gothic", sans-serif; }
@@ -135,6 +145,15 @@ button::-moz-focus-inner {
 
 </style>
 <script>
+history.pushState(null, null, location.href);
+window.onpopstate = function(event) {
+	history.go(1);
+};
+$(function(){
+	<c:if test="${not empty sessionScope.user}">
+	 location.href="/sellpie/main.do";
+	</c:if>
+});
 function getGender(type){
 	sessionStorage.setItem("gender", type);
 	location.href="/sellpie/getBirth.do";

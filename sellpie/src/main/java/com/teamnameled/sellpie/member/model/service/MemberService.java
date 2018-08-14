@@ -21,7 +21,7 @@ public class MemberService {
 		return dao.selectByEmail(email);
 	}
 
-	public int insertMember(Member member) {
+	public int insertMember(Member member) throws Exception{
 		String encPassword = bpe.encode(member.getPwd());
 		member.setPwd(encPassword);
 		System.out.println(encPassword);
@@ -32,6 +32,7 @@ public class MemberService {
 		String userEncPassword = null;
 		String email = member.getEmail();
 		Member result = dao.selectByEmail(email);
+		System.out.println(result);
 		
 		if(null!=result){
 			userEncPassword = result.getPwd();			
@@ -42,6 +43,12 @@ public class MemberService {
 			}
 		}
 		return result;
+	}
+
+	public int updateUserPwd(Member member) throws Exception {
+		String encPassword = bpe.encode(member.getPwd());
+		member.setPwd(encPassword);
+		return dao.updateUserPwd(member);
 	}
 
 	public List<Member> searchMemberList(String searchText) {

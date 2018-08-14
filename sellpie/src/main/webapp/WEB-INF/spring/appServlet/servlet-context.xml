@@ -3,9 +3,13 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
@@ -24,6 +28,32 @@
 
 	<context:component-scan base-package="com.teamnameled.sellpie" />
 	
-	
-	
+	<aop:aspectj-autoproxy/>
+
+	<!-- 인터셉터 객체 생성 -->
+    <beans:bean id="authenticationInterceptor" class="com.teamnameled.sellpie.common.Interceptor">
+    </beans:bean>
+    <!-- Interceptor 설정 -->
+    <interceptors>
+        <interceptor>
+            <mapping path="/**"/>
+            <exclude-mapping path="/login.do"/>
+            <exclude-mapping path="/memberJoin.do"/>
+            <exclude-mapping path="/getName.do"/>
+            <exclude-mapping path="/getGender.do"/>
+            <exclude-mapping path="/getPhone.do"/>
+            <exclude-mapping path="/getBirth.do"/>
+            <exclude-mapping path="/checkEmail.do"/>
+            <exclude-mapping path="/changePwdAu.do"/>
+            <exclude-mapping path="/signUp.do"/>
+            <exclude-mapping path="/signIn.do"/>
+            <exclude-mapping path="/changePwd.do"/>
+            <exclude-mapping path="/userLogin.do"/>
+            <exclude-mapping path="/changeUserPwd.do"/>
+            <exclude-mapping path="/updateMember.do"/>
+            <exclude-mapping path="/errorPage.do"/>
+            <beans:ref bean="authenticationInterceptor"/>
+        </interceptor>
+    </interceptors>
+     
 </beans:beans>
