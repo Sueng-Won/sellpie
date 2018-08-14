@@ -17,8 +17,8 @@ $(document).ready(function(){
    var pList = new Array();
    <c:forEach var="purchaseItem" items="${pList}" varStatus="status">
    		var tempObj = {
-   			sNo : "${purchaseItem.sNo}",
-			pNo : "${purchaseItem.pNo}",
+   			sName : "${purchaseItem.sName}",
+   			pName : "${purchaseItem.pName}",
 			quantity : "${purchaseItem.quantity}",
 			delivCode : "${purchaseItem.delivCode}",
 			invNum : "${purchaseItem.invNum}"
@@ -158,8 +158,8 @@ $(document).ready(function(){
 							  <c:forEach var="pIndex" items="${pList}" varStatus="status">
 							    <tr>
 							      <th scope="row">${status.count}</th>
-							      <td><c:out value="${pIndex.sNo}"/></td>
-							      <td><c:out value="${pIndex.pNo}"/></td>
+							      <td><c:out value="${pIndex.sName}"/></td>
+							      <td><c:out value="${pIndex.pName}"/></td>
 							      <td><c:out value="${pIndex.quantity}"/></td>
 							      <td id="delivTd${status.index}"></td>
 							      <td><c:out value="${pIndex.invNum}"/></td>
