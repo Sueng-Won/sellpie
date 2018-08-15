@@ -2490,12 +2490,12 @@ span + .signupNavbar__vingleLogo__3Ob {
 		$(".solidButton__button__15V").click(function(){
 			$.ajax({
 				url : "userLogin.do", 
-				data : {email : $("#email").val(), pwd : $("#pwd").val()},
+				data : {email : $("#email").val(), pwd : $("#pwd").val(), isUseCookie : $("#isUseCookie").prop("checked")},
 				type : "post",
 				success:function(data){
 					console.log(data.result);
 					if( data.result == "1" ){
-						location.href="/sellpie/main.do";
+						 location.href="/sellpie/main.do"; 
 						
 					}else{
 						swal("","이메일 혹은 비밀번호를 확인 해주세요!", "error");
@@ -2538,7 +2538,7 @@ span + .signupNavbar__vingleLogo__3Ob {
         								</div>
         							</div>
         							<div class="signIn__loginInformation__3Nk">공용 PC 이용 후 개인정보 보호를 위해 로그아웃 해주세요.</div>
-        							<div class="signIn__loginInformation__3Nk">자동 로그인 <input type="checkbox" id="saveLocal"/></div>
+        							<div class="signIn__loginInformation__3Nk">자동 로그인 <input type="checkbox" id="isUseCookie" name="isUseCookie"/></div>
         							<div class="solidButton__buttonWrapper__tkE" data-cy="login">
         								<button type="button" class="solidButton__button__15V  signIn__loginButton__1dS" style="background-color: rgba(0, 0, 0, 0);">로그인</button>
         							</div>
