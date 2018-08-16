@@ -854,7 +854,14 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
     	location.href="/sellpie/signIn.do"; 
      });
       $(".signUpComponent__btnFB__1uM").click(function(){
-    		location.href="/sellpie/memberJoin.do"; 
+    		
+    	  <c:if test="${not empty sessionScope.user }">
+    	  	location.href="/sellpie/main.do"; 
+    	  </c:if>
+      	<c:if test="${empty sessionScope.user }">
+      	 	location.href="/sellpie/memberJoin.do"; 
+      	</c:if>
+    	 
       });  
       
      });
@@ -892,9 +899,16 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
                                     </div>
                             </div>
                             <div class="signUpComponent__footer__DSK">
+                            <c:if test="${not empty sessionScope.user }">
+                           		<div class="solidButton__buttonWrapper__tkE">
+                                    <button type="submit" class="solidButton__button__15V   signUpComponent__btnFB__1uM"><c:out value="${sessionScope.user.name }"/> 님 반가워요!</button>
+                                </div>
+                            </c:if>
+                            	<c:if test="${empty sessionScope.user }">
                                 <div class="solidButton__buttonWrapper__tkE">
                                     <button type="submit" class="solidButton__button__15V   signUpComponent__btnFB__1uM">이메일로 시작하기</button>
                                 </div>
+                            	</c:if>
                             <div class="signUpComponent__hadAccount__gtQ"><span>이미 SellPie를 사용하고 있나요? </span>
                                 <span class="signUpComponent__login__3Iz">
                                 	<c:if test="${not empty sessionScope.user }">
@@ -907,7 +921,6 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
                                 		<span>로그인</span>
                                 	</a>
                                 	</c:if>
-                                	
                                 </span>
                             </div>
                             </div>

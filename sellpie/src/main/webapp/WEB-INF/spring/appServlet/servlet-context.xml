@@ -38,7 +38,6 @@
         <interceptor>
             <mapping path="/**"/>
             <exclude-mapping path="/login.do"/>
-            <exclude-mapping path="/signIn.do"/>
             <exclude-mapping path="/memberJoin.do"/>
             <exclude-mapping path="/getName.do"/>
             <exclude-mapping path="/getGender.do"/>
