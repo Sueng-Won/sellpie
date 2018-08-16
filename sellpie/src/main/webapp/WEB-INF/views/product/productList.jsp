@@ -163,11 +163,16 @@
 								                               
 								                               <div style="text-align:center;">
 								                               	<form id="contractFrm${product.pNo}" action="insertContract.do" method="post">
+								                               	<c:if test="${product.isCraft eq 'N'.charAt(0)}">
 								                               	<label>수량 : <input type="number" id="quantity" name="quantity" min="1" max="${product.pQuantity}"/>개 / ${product.pQuantity}</label>
+								                               	</c:if>
+								                               	<c:if test="${product.isCraft eq 'Y'.charAt(0)}">
+								                               		<label>개인 제작 상품은 1개만 구매 가능합니다.</label>
+								                               		<input type="hidden" id="quantity" name="quantity" value="1"/>
+								                               	</c:if>
 								                               	<input type="hidden" id="pNo" name="pNo" value="${product.pNo}"/>
 								                               	<input type="hidden" id="sNo" name="sNo" value="${product.sNo}"/>
-								                               	<!-- <input type="hidden" id="email" name="email" value="${sessionScope.member.email}"/> -->
-								                               	<input type="hidden" id="email" name="email" value="aaa@aaa.com"/>
+								                               	<input type="hidden" id="email" name="email" value="${sessionScope.user.email}"/>
 								                               	</form>
 								                               </div>
 								                               <div>

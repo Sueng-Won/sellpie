@@ -56,6 +56,7 @@ public class ProductController {
 			flooredStarAvg[i] = (int)Math.round(starAvg[i]);
 		}
 		request.setAttribute("productList", productList);
+		System.out.println(productList.toString());
 		request.setAttribute("starList", flooredStarAvg);
 		request.setAttribute("countList", reviewerCount);
 		return "product/productList";
