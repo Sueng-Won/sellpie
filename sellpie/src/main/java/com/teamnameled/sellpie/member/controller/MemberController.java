@@ -292,8 +292,10 @@ public class MemberController {
 	public String salesList(String email, HttpServletRequest request) {
 		//이메일 있으면 지울것
 		email = "aaa@aaa.com";
-		List<Contract> purchaseList = contractContract.contractList(email);
-		request.setAttribute("pList", purchaseList);
+		List<Contract> purchaseList = contractService.selectContractList(email);
+		List<ContractWithName> purchaseListWithName = contractService.selectContractListWithName(purchaseList);
+		request.setAttribute("cList", purchaseList);
+		request.setAttribute("pList", purchaseListWithName);
 		return "member/salseList";
 	}
 }

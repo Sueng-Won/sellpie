@@ -59,8 +59,8 @@
 							  <c:forEach var="pIndex" items="${pList}" varStatus="status">
 							    <tr class="pList" id="pList">
 							      <th scope="row">${status.index}</th>
-							      <td><c:out value="${pIndex.sNo}"/></td>
-							      <td><c:out value="${pIndex.pNo}"/></td>
+							      <td><c:out value="${pIndex.sName}"/></td>
+							      <td><c:out value="${pIndex.pName}"/></td>
 							      <td><c:out value="${pIndex.quantity}"/></td>
 							      
 							      <c:if test="${pIndex.invNum != null }">
