@@ -154,6 +154,7 @@
 								                            <div class="w3-container w3-card w3-white w3-round"><br>
 								                              <div class="w3-border-bottom" style="height:10%;">
 								                                   <img src="resources/images/header/twice2.png" alt="Avatar" class="w3-left w3-circle w3-margin-right rounded-circle" style="width:40px; height:40px;">
+								                                    <button class="w3-button w3-theme w3-right" onclick="javascript: location.href = 'productUpdateForm.do?pNo='+${product.pNo}">수정</button>
 								                                    <h4>${product.pName}</h4><br>
 								                              </div>
 								                               <div class="w3-margin-bottom" style="height:27%; overflow-y:scroll;"> 

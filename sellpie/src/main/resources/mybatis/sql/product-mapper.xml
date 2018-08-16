@@ -23,5 +23,10 @@
 		INSERT INTO PRODUCT VALUES(
 		SEQ_PRODUCT_PNO.NEXTVAL, #{sNo}, #{pName}, #{selTag}, #{rUrl}, #{pQuantity}, #{isCraft},#{price}, #{pDetail}, 'N')
 	</insert>
+	<update id="updateProduct" parameterType="Product">
+		UPDATE PRODUCT 
+		SET PNAME = #{pName}, SELTAG = #{selTag}, RURL = #{rUrl}, PQUANTITY =  #{pQuantity}, ISCRAFT = #{isCraft}, PRICE = #{price}, PDETAIL = #{pDetail}
+		WHERE PNO = #{pNo}
+	</update>
 </mapper>
 
