@@ -82,8 +82,8 @@
 		location.href="sellpie/productDetail.do?pNo="+pNo;
 	}
 	
-	function insertContract(){
-		$("#contractFrm").submit();
+	function insertContract(pNo){
+		$("#contractFrm"+pNo).submit();
 	}
 </script>
 </head>
@@ -162,8 +162,8 @@
 								                               </div>
 								                               
 								                               <div style="text-align:center;">
-								                               	<form id="contractFrm" action="insertContract.do" method="get">
-								                               	<label>수량 : <input type="number" id="pQuantity" name="pQuantity" min="1" max="${product.pQuantity}"/>개 / ${product.pQuantity}</label>
+								                               	<form id="contractFrm${product.pNo}" action="insertContract.do" method="post">
+								                               	<label>수량 : <input type="number" id="quantity" name="quantity" min="1" max="${product.pQuantity}"/>개 / ${product.pQuantity}</label>
 								                               	<input type="hidden" id="pNo" name="pNo" value="${product.pNo}"/>
 								                               	<input type="hidden" id="sNo" name="sNo" value="${product.sNo}"/>
 								                               	<!-- <input type="hidden" id="email" name="email" value="${sessionScope.member.email}"/> -->
@@ -171,7 +171,7 @@
 								                               	</form>
 								                               </div>
 								                               <div>
-								                                  <button class="btn btn-primary btn-lg btn-block" type="button" onclick="insertContract()">구매하기</button>
+								                                  <button class="btn btn-primary btn-lg btn-block" type="button" onclick="insertContract(${product.pNo})">구매하기</button>
 								                               </div>
 								                               <c:if test="${countList[status.index] eq 0}">
 								                               		<h4 align="center">해당 제품의 리뷰가 없습니다.</h4>
