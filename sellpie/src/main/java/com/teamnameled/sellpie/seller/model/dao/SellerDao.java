@@ -21,5 +21,9 @@ public class SellerDao {
 	public List<Seller> selectSellersInfo(List<Member> sellerList) {
 		return sqlSession.selectList("SellerMapper.selectSellersInfo",sellerList);
 	}
+
+	public Seller selectSeller(String email) {
+		return sqlSession.selectOne("SellerMapper.selectSeller",email);
+	}
 	
 }

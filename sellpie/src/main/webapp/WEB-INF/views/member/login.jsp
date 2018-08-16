@@ -2183,7 +2183,7 @@ input::-ms-clear {
 .signupNavbar__titleWrapper__4Iq {
   font-size: 16px;
   height: 26px;
-  line-height: 50px;
+  line-height: 26px;
   text-align: left;
   color: #fb2942; }
 

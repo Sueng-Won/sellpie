@@ -46,6 +46,7 @@
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="maxUploadSize" value="1000000000" />
 		<property name="maxInMemorySize" value="1000000000" />
+
 	</bean>
 	<!-- 메일 보내기 -->
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
@@ -66,39 +67,5 @@
 		</property>
 	</bean>
 	
-	<!-- 서블릿 인터셉터
-	<mvc:interceptors> 
-		<mvc:interceptor> 
-			<mvc:mapping path="/getName.do"/> 
-			<bean class="com.teamnameled.sellpie.common.Interceptor"/> 
-		</mvc:interceptor>
-	</mvc:interceptors> -->
-
-	<!--<mvc:interceptors>
-		<mvc:interceptor>
-			<mvc:mapping path="/sellpie/ />
-				<bean class="com.teamnameled.sellpie.common.Interceptor"/>
-			<mvc:exclude-mapping path="/login/**" />인터셉터에서 제외할 경로 설정.. 
-		</mvc:interceptor>
-	</mvc:interceptors>	-->
-	
-	<mvc:interceptors>
-        <mvc:interceptor>
-           <mvc:mapping path="/**"/>
-           <!-- 여러개 컨트롤러 추가 가능 -->
-           <!--
-                <mvc:mapping path="/admin_write"/>
-                <mvc:mapping path="/admin_update"/>
-                <mvc:mapping path="/admin_delete"/>
-                .
-                .
-                .
-           -->
-           <!-- 로그인체크 인터셉터 클래스 -->
-           <bean class="com.teamnameled.sellpie.common.Interceptor"/>
-        </mvc:interceptor>
-    </mvc:interceptors>
-
-
 	
 </beans>

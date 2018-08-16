@@ -16,6 +16,7 @@ import com.teamnameled.sellpie.seller.model.vo.Seller;
 public class SellerController {
 	@Autowired
 	SellerService sellerService;
+	
 	@RequestMapping("tagSearch.do")
 	public String tagSearch(String searchText,HttpServletRequest request) {
 		String selTag = searchText;
@@ -26,4 +27,12 @@ public class SellerController {
 		request.setAttribute("sellerInfo", sellerInfo);
 		return "seller/sellerList";
 	}
+	
+	@RequestMapping("applySeller.do")
+	public String sellerDetail() {
+		
+		return "seller/sellerDetail";
+	}
+	
+	
 }

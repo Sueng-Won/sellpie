@@ -23,4 +23,8 @@ public class ProductDao {
 		return sqlSession.selectOne("ProductMapper.selectProduct", pNo);
 	}
 
+	public int insertProduct(Product product) {
+		return sqlSession.insert("ProductMapper.insertProduct", product);
+	}
+
 }

@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.WebUtils;
 
+import com.teamnameled.sellpie.contract.controller.ContractController;
+import com.teamnameled.sellpie.contract.model.vo.Contract;
 import com.teamnameled.sellpie.common.GenerateCertNumber;
 import com.teamnameled.sellpie.member.model.service.MemberService;
 import com.teamnameled.sellpie.member.model.vo.Member;
@@ -34,7 +36,8 @@ public class MemberController {
 	@Autowired
 	private JavaMailSender mailSender;
 	
-	
+	@Autowired
+	ContractController contractContract;
 
 	@RequestMapping("login.do")
 	public String loginPage(){
@@ -42,7 +45,7 @@ public class MemberController {
 		return "member/login";
 	}
 	@RequestMapping("memberJoin.do")
-	public String memberJoin(HttpSession session){
+	public String memberJoin(){
 		//회원가입 1 페이지(이메일입력)로 이동
 		
 		return "member/join/email";
@@ -263,12 +266,21 @@ public class MemberController {
 		request.setAttribute("searchText", searchText);
 		return "member/searchMemberList";
 	}
-	@RequestMapping("updateMember.do")
+		@RequestMapping("updateMember.do")
 	public String updateMember(){
 		return "member/memberUpdate";
 	}
 	@RequestMapping("errorPage.do")
 	public String errorPage(){
 		return "common/errorPage";
+	}
+	//개인정보수정-구매현황
+	@RequestMapping("purchaseList.do")
+	public String purchaseList(String email, HttpServletRequest request) {
+		//이메일 있으면 지울것
+		email = "aaa@aaa.com";
+		List<Contract> purchaseList = contractContract.contractList(email);
+		request.setAttribute("pList", purchaseList);
+		return "member/purchaseList";
 	}
 }
