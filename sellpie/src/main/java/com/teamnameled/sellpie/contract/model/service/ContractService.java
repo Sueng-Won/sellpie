@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.teamnameled.sellpie.contract.model.dao.ContractDao;
 import com.teamnameled.sellpie.contract.model.vo.Contract;
+import com.teamnameled.sellpie.contract.model.vo.ContractWithName;
 
 @Service
 public class ContractService {
@@ -23,5 +24,8 @@ public class ContractService {
 
 	public int updateContract(Contract contract) {
 		return contractDao.updateContract(contract);
+	}
+	public List<ContractWithName> selectContractListWithName(List<Contract> purchaseList) {
+		return contractDao.selectContractListWithName(purchaseList);
 	}
 }

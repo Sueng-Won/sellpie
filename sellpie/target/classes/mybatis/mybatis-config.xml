@@ -20,6 +20,7 @@
 		<typeAlias type="com.teamnameled.sellpie.resource.model.vo.ResourceVo" alias="Resource"/>
 		<typeAlias type="com.teamnameled.sellpie.seller.model.vo.Seller" alias="Seller"/>
 		<typeAlias type="com.teamnameled.sellpie.contract.model.vo.Contract" alias="Contract"/>
+		<typeAlias type="com.teamnameled.sellpie.contract.model.vo.ContractWithName" alias="ContractWithName"/>
 		<typeAlias type="com.teamnameled.sellpie.review.model.vo.Review" alias="Review"/>
 		<typeAlias type="com.teamnameled.sellpie.reply.model.vo.ReplyVo" alias="Reply"/>
 	</typeAliases>
@@ -34,7 +35,6 @@
 		<mapper resource="mybatis/sql/member-mapper.xml"/>
 		<mapper resource="mybatis/sql/product-mapper.xml"/>
 		<mapper resource="mybatis/sql/boardMapper.xml"/>
-		<mapper resource="mybatis/sql/friendMapper.xml"/>
 		<mapper resource="mybatis/sql/resourceMapper.xml"/>
 		<mapper resource="mybatis/sql/seller-mapper.xml"/>
 		<mapper resource="mybatis/sql/contract-mapper.xml"/>

@@ -2,10 +2,11 @@
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE>
-<html>
+ <html>
+<!-- Mirrored from www.vingle.net/users/sign_up/email by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 04 Aug 2018 19:30:58 GMT -->
 <head>
-<meta charset="UTF-8">
-<title>이름</title>
+<meta charset="utf-8">
+<title data-react-helmet="true">이메일로 가입하기 | SellPie</title>
 <script src="resources/js/jquery-3.3.1.min.js"></script>
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -15,6 +16,7 @@
 
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <style type="text/css">
 * {
   font-family: "Noto Sans KR", "Noto Sans", Helvetica, Arial, "Malgun Gothic", sans-serif; }
@@ -169,7 +171,6 @@ span + .signupNavbar__vingleLogo__3Ob {
   margin-left: 2px; }
 
 .signUpBody__content__1PG {
-  width: 460px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -312,7 +313,7 @@ span + .signupNavbar__vingleLogo__3Ob {
 #logo_img{
 	display:inline-block;
 }
-.solidReasonInput__rightItemsWrapper__name{
+.solidReasonInput__rightItemsWrapper__Email, .solidReasonInput__rightItemsWrapper__Pwd, .solidReasonInput__rightItemsWrapper__AuNum {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -323,7 +324,7 @@ span + .signupNavbar__vingleLogo__3Ob {
     right: 10px;
     position: absolute;
 }
-.solidReasonInput__rightItemsWrapper__name span{
+.solidReasonInput__rightItemsWrapper__Email span, .solidReasonInput__rightItemsWrapper__Pwd span {
     height: 20px;
     font-size: 10px;
     line-height: 2;
@@ -355,155 +356,154 @@ span + .signupNavbar__vingleLogo__3Ob {
  	display:inline-block;
  	padding-top:30px;
  }
-@import url(http://weloveiconfonts.com/api/?family=brandico);
-@import url(https://fonts.googleapis.com/css?family=Junge);
-
-
-
-/* brandico */
-[class*="brandico-"]:before {
-  font-family: 'brandico', sans-serif;
-}
-
-
-
-.content{max-width:40%; max-height:50%;margin:100px auto;}
-
-.welcomeText { width:100%; }
-/*welcome text*/
-.welcome{
-  height:100px;
-  position:relative;
-  border-bottom:1px solid;
-  overflow:hidden;
-}
-
-.greet{
-  width:100%;
-  height:100%;
-  position:absolute;
-  top:100%;
-  font-size:50px;
-  text-align:center;
-  line-height:100px;
-  transition:all .5s;
-}
-/*taglines*/
-.subText{
-  width:100%;
-  height:100px;
-  position:relative;
-  font-size:30px;
-  overflow:hidden;
-}
-.subText p{
-  height:100%;
-  line-height:100px;
-  text-align:center;
-
-}
-.subTexts{
-  width:100%;
-  position:absolute;
-  bottom:100%;
-  text-align:center;
-  overflow:hidden;
-  transition:all .5s;
-}
 </style>
-<script src="resources/js/jquery-3.3.1.min.js"></script>
 <script>
-history.pushState(null, null, location.href);
-window.onpopstate = function(event) {
-	history.go(1);
-};
 	$(function(){
 		<c:if test="${not empty sessionScope.user}">
 		 location.href="/sellpie/main.do";
 		</c:if>
-		$("#name").keyup(function(){
-			var name = $(this).val();
-			 var regex= /^[가-힣]{2,4}$/;
-			 var flag = (name != '' && name != 'undefined' && regex.test(name));
-			 var $msg = $("<div class='solidReasonInput__rightItemsWrapper__name'><span></span></div>");
+		$(".solidReasonInput__textInput__ZZr").keyup(function(){
+			var $msgEmail = $("<div class='solidReasonInput__rightItemsWrapper__Email'><span></span></div>");
 			
+			var regexEmail =/([a-z0-9]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-z-]+\.)+))([a-z]{2,4}|[0-9]{1,3})(\]?)$/;
 			 
-			if(!flag){
-				$(this).addClass("solidReasonInput__failedWrapper__2fu");
-				if($(this).parent().children().length<2){
-					$(this).parent().append($msg);
+				var email = $(this).val();
+				var flagEmail = (email != '' && email != 'undefined' && regexEmail.test(email));
+				
+				
+				if(!flagEmail){
 					
-				}
-				$(".solidReasonInput__rightItemsWrapper__name").children().css("color", "#fb2942");
-				$(".solidReasonInput__rightItemsWrapper__name").children().text("한글만 입력 가능합니다.");
-				$(".solidButton__button__15V").prop("disabled", true);
+						$(this).addClass("solidReasonInput__failedWrapper__2fu");
+						if($(this).parent().children().length<2){
+							$(this).parent().append($msgEmail);
+							
+						}
+						$(".solidReasonInput__rightItemsWrapper__Email").children().css("color", "#fb2942");
+						$(".solidReasonInput__rightItemsWrapper__Email").children().text("이메일 형식이 맞지 않습니다.");
+						$(".solidButton__button__15V").prop("disabled", true);
+					
+				 }else{
+							$(this).removeClass("solidReasonInput__failedWrapper__2fu");
+							$(".solidReasonInput__rightItemsWrapper__Email").children().text("멋지네요!");
+							$(".solidReasonInput__rightItemsWrapper__Email").children().css("color", "black");
+					
+				 }
+				
+			
+			var emailFinal = $("#email").val();
+			if((emailFinal != '' && emailFinal != 'undefined' && regexEmail.test(emailFinal))){
+				$(".solidButton__button__15V").removeClass("solidButton__disabled__15i");
+				$(".solidButton__button__15V").prop("disabled", false);
+			}else{
 				$(".solidButton__button__15V").addClass("solidButton__disabled__15i");
 				$(".solidButton__button__15V").prop("disabled", true);
-				
-			 }else{
-					$(this).removeClass("solidReasonInput__failedWrapper__2fu");
-					$(".solidReasonInput__rightItemsWrapper__name").children().text("멋지네요!");
-					$(".solidReasonInput__rightItemsWrapper__name").children().css("color", "black");
-					$(".solidButton__button__15V").removeClass("solidButton__disabled__15i");
-					$(".solidButton__button__15V").prop("disabled", false);
-			 }
+			}
+			
 			 
 		});
 		$(".solidButton__button__15V").click(function(){
-			sessionStorage.setItem("name", $("#name").val());
-			console.log(sessionStorage);
-			$("#sellpie-web").remove();
-			var contentDiv = $("<div class='content'>");
-			var welcomeTextDiv = $("<div class='welcomeText'>");
-			var welcomeDiv = $("<div class='welcome'>");
-			var greetH1 = $("<h1 class='greet'>");
-			greetH1.text("반갑습니다!");
-			var subTextDiv = $("<div class='subText'>");
-			var subTextsDiv = $("<div class='subTexts'>");
-			var p1 = $("<p class='inform'>");
-			var p2 = $("<p class='user'>");
-			p1.text("간단한 정보입력 부탁드려요");
-			p2.text("반가워요 "+sessionStorage.getItem("name")+"님" );
-			
-			welcomeDiv.append(greetH1);
-			welcomeTextDiv.append(welcomeDiv);
-			subTextsDiv.append(p1);
-			subTextsDiv.append(p2);
-			subTextDiv.append(subTextsDiv);
-			welcomeTextDiv.append(subTextDiv);
-			contentDiv.append(welcomeTextDiv);
-			$("body").append(contentDiv);
-			
-				$("*").css("margin","0");
-				$("*").css("padding","0");
-				$("html").css("width","100%");
-				$("html").css("height","100%");
-				$("body").css("width","100%");
-				$("body").css("height","100%");
-				$("body").css("text-align","center");
-				$(".content").css("margin","auto");
-				$(".content").css("padding-top","250px");
-				
-				  var welcome = document.querySelector('.greet'),
-				      subtext = document.querySelector('.subTexts'),
-				      delay = 1000; 
-				  
-				  
-				  setTimeout(function(){welcome.style.top='0';},delay);
-				  setTimeout(function(){subtext.style.bottom = '0%';},delay*2);
-				  setTimeout(function(){subtext.style.bottom = '-100%';},delay*4);
-				   
-			
-			
-			    setTimeout(function(){ location.href="/sellpie/getGender.do" }, delay*6);  
+			// ㄹ로딩 화면?
+					console.log($("#email").val());
+				$.ajax({
+					/* 확인해보니 에러 메세지에서 javax.mail.authenticationfailedexception 534-5.7.14 
+					이 부분으로 확인해보시면 동일한 증상으로 문제되는 사람들이 몇몇 있었네요.
+					구글계정에 대한 보안수준이 낮은 앱에 접근성을 허용하는 부분에 대한 문제네요.
+					https://www.google.com/settings/security/lesssecureapps 
+					위 링크로 접속해서 로그인이 안되어있다면 로그인하시고 보안수준이 낮은 앱 설정을 
+					사용안함에서 사용으로 적용해보시면 될듯합니다. */
+					url : "changePwdAu.do",
+					data : {email : $("#email").val()},
+					type : "get",
+					success:function(data){
+						console.log(data.result);
+						if( data.result == "1" ){
+							swal("인증번호 전송 완료!", "인증 번호가 전송 되었습니다.", "success");
+							$(".solidReasonInput__textInput__ZZr").off();
+							 $(".solidButton__button__15V").addClass("solidButton__disabled__15i");
+							
+							 
+							 
+							 //div 만들기
+							 var $auNum_wrapper = $("<div class='auNum_wrapper'></div>");
+							 var $solidReasonInput_wrapper = $("<div class='solidReasonInput__wrapper__auNum undefined'></div>");
+							 var $auNumInput = $("<input type='text' id='auNum' autofocus='' class='solidReasonInput__textInput__auNum' placeholder='인증번호 6자리를 입력해주세요.' value='''/>");
+							 var $solidButton = $("<div class='solidButton__buttonWrapper__auNum'></div>");
+							 var $auNumButton = $("<button type='button' class='solidButton__button__auNum  solidButton__disabled__15i signUpBody__nextButton__auNum' disabled style='background-color:rgba(0,0,0,0)'>제출</button>");
+							
+	 						$solidReasonInput_wrapper.append($auNumInput);
+	 						$auNum_wrapper.append($solidReasonInput_wrapper);
+	 						$solidButton.append($auNumButton);
+							$auNum_wrapper.append($solidButton);
+							$(".signUpBody__content__1PG").append($auNum_wrapper);
+							 
+							console.log();
+							sessionStorage.setItem("randomNum", data.randomNum);
+							sessionStorage.setItem("userEmail", data.email);
+							
+						}else{
+							swal("이메일이 존재하지 않습니다..", "아이디를 다시 확인해 주세요!", "error");
+						
+						}
+					},
+					beforeSend:function(){
+						$('#loading').css('display','block');
+				    },
+				    complete:function(){
+				    	 $('#loading').css('display','none');
+				    },
+					error:function(e){
+						console.log(e);
+					}
+				});
 		});
-		
+		$(document).on("keyup","#auNum", function(){
+			var auNum = $(this).val();
+			var regex=/(^[0-9]{6,6}$)/;
+			var flag = (auNum != '' && auNum != 'undefined' && regex.test(auNum));
+			var $msgAuNum = $("<div class='solidReasonInput__rightItemsWrapper__AuNum'><span></span></div>");
+			
+			if(!flag){
+				$(this).addClass("solidReasonInput__failedWrapper__2fu");
+				
+				if($(this).parent().children().length<2){
+					$(this).parent().append($msgAuNum);
+				}
+				$(".solidReasonInput__rightItemsWrapper__AuNum").children().css("color", "#fb2942");
+				$(".solidReasonInput__rightItemsWrapper__AuNum").children().text("인증번호를 확인하세요.");
+				$(".solidButton__button__auNum").addClass("solidButton__disabled__15i");
+				$(".solidButton__button__auNum").prop("disabled", true);
+				
+			 }else{
+					 $(this).removeClass("solidReasonInput__failedWrapper__2fu");
+					$(".solidReasonInput__rightItemsWrapper__AuNum").children().text("멋지네요!");
+					$(".solidReasonInput__rightItemsWrapper__AuNum").children().css("color", "black");
+					$(".solidButton__button__auNum").removeClass("solidButton__disabled__15i");
+					$(".solidButton__button__auNum").prop("disabled", false);
+					
+			 }
+		});
+		$(document).on("click",".solidButton__button__auNum", function(){
+			
+			var auNum = $("#auNum").val();
+			var randomNum = sessionStorage.getItem("randomNum");
+			console.log("auNum타입"+typeof(auNum), auNum);
+			console.log("randomNum타입"+typeof(randomNum), randomNum);
+			if(auNum==randomNum){
+			 location.href="/sellpie/changeUserPwd.do"; 
+				
+			}else{
+				swal ( "인증번호 오류" ,  "인증 번호를 확인 해주세요.." ,  "error" );
+			}
+			
+		});
 	});
-
-	</script>
-</head>
-<body>
-	<div id="sellpie-web">
+</script>
+      </head>
+      <body>
+      	<div id="loading">
+      		<img id="loading-image" src="resources/images/join/loading2.gif" />
+      	</div>
+        <div id="sellpie-web">
           <div data-reactroot=""><div class="root__rootWrapper__1So">
           	<div class="commonView__container__2RU">
           		<div class="signUpDetail__rootWrapper__1D9">
@@ -519,13 +519,13 @@ window.onpopstate = function(event) {
     					<div class="signUpBody__emailBodyWrapper__20z">
     					    <div class="signUpBody__emailHeader__TiN">
     							<div class="titleWithVerify__head__3gv">
-    								<div class="titleWithVerify__title__1ix">이름을 입력 해주세요</div>
+    								<div class="titleWithVerify__title__1ix">비밀번호를 잊으셨나요?</div>
     						   </div>
     						</div>
     						<div class="signUpBody__content__1PG"> <!--  form -> div  -->
     							<div class="signUpBody__formInput__1yh">
     								<div class="solidReasonInput__wrapper__28f undefined " >
-    									<input type="text" id="name" autofocus="" class="solidReasonInput__textInput__ZZr " placeholder="이름이 어떻게 되시나요?" value=""  autocomplete="off"/>
+    									<input type="text" id="email" autofocus="" class="solidReasonInput__textInput__ZZr " placeholder="이메일 주소를 입력해주세요. (sellpie@sellpie.net)" value=""  autocomplete="off"/>
     								</div>
     							</div>
     						<div class="solidButton__buttonWrapper__tkE">
@@ -534,11 +534,12 @@ window.onpopstate = function(event) {
     						</div> <!-- button end (form) -->
     					</div>
     				</div>
-    				</div>
+    			</div>
     		</div>
     	</div>
     </div>
   </div> <!-- sellpie-web end -->
     
-</body>
+<!-- Mirrored from www.vingle.net/users/sign_up/email by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 04 Aug 2018 19:30:58 GMT -->
 </html>
+  

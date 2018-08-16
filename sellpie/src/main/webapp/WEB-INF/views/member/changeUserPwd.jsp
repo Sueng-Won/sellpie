@@ -2,10 +2,11 @@
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE>
-<html>
+ <html>
+<!-- Mirrored from www.vingle.net/users/sign_up/email by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 04 Aug 2018 19:30:58 GMT -->
 <head>
-<meta charset="UTF-8">
-<title>이름</title>
+<meta charset="utf-8">
+<title data-react-helmet="true">이메일로 가입하기 | SellPie</title>
 <script src="resources/js/jquery-3.3.1.min.js"></script>
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -15,6 +16,7 @@
 
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <style type="text/css">
 * {
   font-family: "Noto Sans KR", "Noto Sans", Helvetica, Arial, "Malgun Gothic", sans-serif; }
@@ -312,7 +314,7 @@ span + .signupNavbar__vingleLogo__3Ob {
 #logo_img{
 	display:inline-block;
 }
-.solidReasonInput__rightItemsWrapper__name{
+.solidReasonInput__rightItemsWrapper__Email, .solidReasonInput__rightItemsWrapper__Pwd, .solidReasonInput__rightItemsWrapper__AuNum {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -323,7 +325,7 @@ span + .signupNavbar__vingleLogo__3Ob {
     right: 10px;
     position: absolute;
 }
-.solidReasonInput__rightItemsWrapper__name span{
+.solidReasonInput__rightItemsWrapper__Email span, .solidReasonInput__rightItemsWrapper__Pwd span {
     height: 20px;
     font-size: 10px;
     line-height: 2;
@@ -355,155 +357,62 @@ span + .signupNavbar__vingleLogo__3Ob {
  	display:inline-block;
  	padding-top:30px;
  }
-@import url(http://weloveiconfonts.com/api/?family=brandico);
-@import url(https://fonts.googleapis.com/css?family=Junge);
-
-
-
-/* brandico */
-[class*="brandico-"]:before {
-  font-family: 'brandico', sans-serif;
-}
-
-
-
-.content{max-width:40%; max-height:50%;margin:100px auto;}
-
-.welcomeText { width:100%; }
-/*welcome text*/
-.welcome{
-  height:100px;
-  position:relative;
-  border-bottom:1px solid;
-  overflow:hidden;
-}
-
-.greet{
-  width:100%;
-  height:100%;
-  position:absolute;
-  top:100%;
-  font-size:50px;
-  text-align:center;
-  line-height:100px;
-  transition:all .5s;
-}
-/*taglines*/
-.subText{
-  width:100%;
-  height:100px;
-  position:relative;
-  font-size:30px;
-  overflow:hidden;
-}
-.subText p{
-  height:100%;
-  line-height:100px;
-  text-align:center;
-
-}
-.subTexts{
-  width:100%;
-  position:absolute;
-  bottom:100%;
-  text-align:center;
-  overflow:hidden;
-  transition:all .5s;
-}
 </style>
-<script src="resources/js/jquery-3.3.1.min.js"></script>
 <script>
-history.pushState(null, null, location.href);
-window.onpopstate = function(event) {
-	history.go(1);
-};
 	$(function(){
 		<c:if test="${not empty sessionScope.user}">
 		 location.href="/sellpie/main.do";
 		</c:if>
-		$("#name").keyup(function(){
-			var name = $(this).val();
-			 var regex= /^[가-힣]{2,4}$/;
-			 var flag = (name != '' && name != 'undefined' && regex.test(name));
-			 var $msg = $("<div class='solidReasonInput__rightItemsWrapper__name'><span></span></div>");
+		console.log(sessionStorage.getItem("userEmail"));
+		$("#email").val(sessionStorage.getItem("userEmail"));
+		$(".solidReasonInput__textInput__ZZr").keyup(function(){
+			var $msgPwd = $("<div class='solidReasonInput__rightItemsWrapper__Pwd'><span></span></div>");
+			var regexPwd =/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
 			
 			 
-			if(!flag){
-				$(this).addClass("solidReasonInput__failedWrapper__2fu");
-				if($(this).parent().children().length<2){
-					$(this).parent().append($msg);
+				var pwd = $(this).val();
+				 var flagPwd = (pwd != '' && pwd != 'undefined' && regexPwd.test(pwd));
+				
+				 if(!flagPwd){
+						$(this).addClass("solidReasonInput__failedWrapper__2fu");
+						
+						if($(this).parent().children().length<2){
+							$(this).parent().append($msgPwd);
+						}
+						$(".solidReasonInput__rightItemsWrapper__Pwd").children().css("color", "#fb2942");
+						$(".solidReasonInput__rightItemsWrapper__Pwd").children().text("특수문자, 영문, 숫자를 포함해야 합니다.");
+						$(".solidButton__button__15V").prop("disabled", true);
 					
-				}
-				$(".solidReasonInput__rightItemsWrapper__name").children().css("color", "#fb2942");
-				$(".solidReasonInput__rightItemsWrapper__name").children().text("한글만 입력 가능합니다.");
-				$(".solidButton__button__15V").prop("disabled", true);
+				 }else{
+							$(this).removeClass("solidReasonInput__failedWrapper__2fu");
+							$(".solidReasonInput__rightItemsWrapper__Pwd").children().text("멋지네요!");
+							$(".solidReasonInput__rightItemsWrapper__Pwd").children().css("color", "black");
+							
+					
+				 }
+			
+			var pwdFinal = $("#pwd").val();
+			if((pwdFinal != '' && pwdFinal != 'undefined' && regexPwd.test(pwdFinal))){
+				$(".solidButton__button__15V").removeClass("solidButton__disabled__15i");
+				$(".solidButton__button__15V").prop("disabled", false);
+			}else{
 				$(".solidButton__button__15V").addClass("solidButton__disabled__15i");
 				$(".solidButton__button__15V").prop("disabled", true);
-				
-			 }else{
-					$(this).removeClass("solidReasonInput__failedWrapper__2fu");
-					$(".solidReasonInput__rightItemsWrapper__name").children().text("멋지네요!");
-					$(".solidReasonInput__rightItemsWrapper__name").children().css("color", "black");
-					$(".solidButton__button__15V").removeClass("solidButton__disabled__15i");
-					$(".solidButton__button__15V").prop("disabled", false);
-			 }
+			}
+			
 			 
 		});
 		$(".solidButton__button__15V").click(function(){
-			sessionStorage.setItem("name", $("#name").val());
-			console.log(sessionStorage);
-			$("#sellpie-web").remove();
-			var contentDiv = $("<div class='content'>");
-			var welcomeTextDiv = $("<div class='welcomeText'>");
-			var welcomeDiv = $("<div class='welcome'>");
-			var greetH1 = $("<h1 class='greet'>");
-			greetH1.text("반갑습니다!");
-			var subTextDiv = $("<div class='subText'>");
-			var subTextsDiv = $("<div class='subTexts'>");
-			var p1 = $("<p class='inform'>");
-			var p2 = $("<p class='user'>");
-			p1.text("간단한 정보입력 부탁드려요");
-			p2.text("반가워요 "+sessionStorage.getItem("name")+"님" );
 			
-			welcomeDiv.append(greetH1);
-			welcomeTextDiv.append(welcomeDiv);
-			subTextsDiv.append(p1);
-			subTextsDiv.append(p2);
-			subTextDiv.append(subTextsDiv);
-			welcomeTextDiv.append(subTextDiv);
-			contentDiv.append(welcomeTextDiv);
-			$("body").append(contentDiv);
-			
-				$("*").css("margin","0");
-				$("*").css("padding","0");
-				$("html").css("width","100%");
-				$("html").css("height","100%");
-				$("body").css("width","100%");
-				$("body").css("height","100%");
-				$("body").css("text-align","center");
-				$(".content").css("margin","auto");
-				$(".content").css("padding-top","250px");
-				
-				  var welcome = document.querySelector('.greet'),
-				      subtext = document.querySelector('.subTexts'),
-				      delay = 1000; 
-				  
-				  
-				  setTimeout(function(){welcome.style.top='0';},delay);
-				  setTimeout(function(){subtext.style.bottom = '0%';},delay*2);
-				  setTimeout(function(){subtext.style.bottom = '-100%';},delay*4);
-				   
-			
-			
-			    setTimeout(function(){ location.href="/sellpie/getGender.do" }, delay*6);  
 		});
-		
 	});
-
-	</script>
-</head>
-<body>
-	<div id="sellpie-web">
+</script>
+      </head>
+      <body>
+      	<div id="loading">
+      		<img id="loading-image" src="resources/images/join/loading2.gif" />
+      	</div>
+        <div id="sellpie-web">
           <div data-reactroot=""><div class="root__rootWrapper__1So">
           	<div class="commonView__container__2RU">
           		<div class="signUpDetail__rootWrapper__1D9">
@@ -519,26 +428,28 @@ window.onpopstate = function(event) {
     					<div class="signUpBody__emailBodyWrapper__20z">
     					    <div class="signUpBody__emailHeader__TiN">
     							<div class="titleWithVerify__head__3gv">
-    								<div class="titleWithVerify__title__1ix">이름을 입력 해주세요</div>
+    								<div class="titleWithVerify__title__1ix">비밀번호 재설정</div>
     						   </div>
     						</div>
-    						<div class="signUpBody__content__1PG"> <!--  form -> div  -->
-    							<div class="signUpBody__formInput__1yh">
-    								<div class="solidReasonInput__wrapper__28f undefined " >
-    									<input type="text" id="name" autofocus="" class="solidReasonInput__textInput__ZZr " placeholder="이름이 어떻게 되시나요?" value=""  autocomplete="off"/>
-    								</div>
+    						<form class="signUpBody__content__1PG" action="/sellpie/updateUserPwd.do" method="post"> <!--  form -> div  -->
+    						<input type="hidden" id="email" name="email"/>
+    						<div class="signUpBody__formInput__1yh">
+    							<div class="solidReasonInput__wrapper__28f undefined " >
+    								<input type="password"  id="pwd" name="pwd" class="solidReasonInput__textInput__ZZr " placeholder="비밀번호를 입력해주세요." value=""/>
     							</div>
-    						<div class="solidButton__buttonWrapper__tkE">
-    							<button type="button" class="solidButton__button__15V  solidButton__disabled__15i signUpBody__nextButton__wU3" disabled style="background-color:rgba(0,0,0,0)">Next</button>
     						</div>
-    						</div> <!-- button end (form) -->
+    						<div class="solidButton__buttonWrapper__tkE">
+    							<button type="submit" class="solidButton__button__15V  solidButton__disabled__15i signUpBody__nextButton__wU3" disabled style="background-color:rgba(0,0,0,0)">변경</button>
+    						</div>
+    						</form> <!-- button end (form) -->
     					</div>
     				</div>
-    				</div>
+    			</div>
     		</div>
     	</div>
     </div>
   </div> <!-- sellpie-web end -->
     
-</body>
+<!-- Mirrored from www.vingle.net/users/sign_up/email by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 04 Aug 2018 19:30:58 GMT -->
 </html>
+  

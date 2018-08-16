@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.teamnameled.sellpie.contract.model.vo.Contract;
+import com.teamnameled.sellpie.contract.model.vo.ContractWithName;
 
 @Repository
 public class ContractDao {
@@ -23,5 +24,9 @@ public class ContractDao {
 
 	public int updateContract(Contract contract) {
 		return sqlSession.update("ContractMapper.updateContract", contract);
+	}
+	
+	public List<ContractWithName> selectContractListWithName(List<Contract> purchaseList) {
+		return sqlSession.selectList("ContractMapper.selectContractListWithName",purchaseList);
 	}
 }

@@ -151,7 +151,7 @@ public class BoardVo {
 	public String toString() {
 		return "BoardVo [bno=" + bno + ", email=" + email + ", bcontent=" + bcontent + ", gcount=" + gcount + ", rurl="
 				+ rurl + ", isad=" + isad + ", delflag=" + delflag + ", likeflag=" + likeflag + ", resource=" + resource
-				+ ", name=" + name + "]";
+				+ ", name=";
 	}
 
 	
