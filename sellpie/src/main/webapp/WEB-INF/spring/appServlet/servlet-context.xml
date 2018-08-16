@@ -46,7 +46,6 @@
             <exclude-mapping path="/checkEmail.do"/>
             <exclude-mapping path="/changePwdAu.do"/>
             <exclude-mapping path="/signUp.do"/>
-            <exclude-mapping path="/signIn.do"/>
             <exclude-mapping path="/changePwd.do"/>
             <exclude-mapping path="/userLogin.do"/>
             <exclude-mapping path="/changeUserPwd.do"/>
