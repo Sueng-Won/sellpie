@@ -163,7 +163,7 @@
 								                               
 								                               <div style="text-align:center;">
 								                               	<form id="contractFrm" action="insertContract.do" method="get">
-								                               	<label>수량 : <input type="number" id="quantity" name="quantity" min="1" max="${product.pQuantity}"/>개 / ${product.pQuantity}</label>
+								                               	<label>수량 : <input type="number" id="pQuantity" name="pQuantity" min="1" max="${product.pQuantity}"/>개 / ${product.pQuantity}</label>
 								                               	<input type="hidden" id="pNo" name="pNo" value="${product.pNo}"/>
 								                               	<input type="hidden" id="sNo" name="sNo" value="${product.sNo}"/>
 								                               	<!-- <input type="hidden" id="email" name="email" value="${sessionScope.member.email}"/> -->
