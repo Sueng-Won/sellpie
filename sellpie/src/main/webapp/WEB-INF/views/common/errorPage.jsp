@@ -143,6 +143,11 @@
 						<span >홈으로 가기</span>
 					</div>
 					</a>
+					<a href="/sellpie/deleteCookie.do" style="text-decoration:none">
+					<div class="_404Style__btn__2XH">
+						<span >쿠키삭제</span>
+					</div>
+					</a>
 				</div>
 			</div>
 		</div>

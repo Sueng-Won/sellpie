@@ -56,7 +56,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
     
   </div>
   	
-  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account">
+  <a href="/sellpie/logout.do" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account">
     <img src="resources/images/header/sellfieLogo.png" class="w3-circle" style="height:30px; width:30px" alt="Avatar">
   </a>
   <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-center top_search" style="margin-top:10px; margin-bottom:0px;">

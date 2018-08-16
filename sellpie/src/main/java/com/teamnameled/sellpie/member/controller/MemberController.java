@@ -1,11 +1,14 @@
 package com.teamnameled.sellpie.member.controller;
 
 
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.WebUtils;
 
 import com.teamnameled.sellpie.contract.controller.ContractController;
 import com.teamnameled.sellpie.contract.model.service.ContractService;
@@ -148,7 +152,6 @@ public class MemberController {
 	@RequestMapping(value = "signUp.do", method = RequestMethod.POST)
 	public ModelAndView memberJoin(Member member, HttpSession session, ModelAndView mav, HttpServletRequest request){
 		
-		
 		int result = 0;
 		try {
 			result =  memberService.insertMember(member);
@@ -168,10 +171,22 @@ public class MemberController {
 		}
 		return mav;
 	}
-	//테스트
-	@RequestMapping("test.do")
-	public String test(){
-		return "member/join/test";
+	//테스트 쿠키삭제
+	@RequestMapping("deleteCookie.do")
+	public String test(HttpServletRequest request, HttpServletResponse response){
+		Cookie[] cookies = request.getCookies();
+	     
+	    if(cookies != null){
+	        for(int i=0; i < cookies.length; i++){
+	             
+	            // 쿠키의 유효시간을 0으로 설정하여 만료시킨다
+	            cookies[i].setMaxAge(0) ;
+	             
+	            // 응답 헤더에 추가한다
+	            response.addCookie(cookies[i]) ;
+	        }
+	}
+	    return "redirect:signIn.do";
 	}
 	//signIn 테스트
 	@RequestMapping("signIn.do")
@@ -184,10 +199,11 @@ public class MemberController {
 	}
 	//로그인하기
 	@RequestMapping(value="userLogin.do", method= RequestMethod.POST)
-	public @ResponseBody HashMap<String, String> loginUser(String email, String pwd, HttpSession session){
-		System.out.println("email"+email);
-		System.out.println("pwd"+pwd);
-		
+	public @ResponseBody HashMap<String, String> loginUser(String email, String pwd, boolean isUseCookie, HttpSession session, HttpServletResponse response){
+		System.out.println(isUseCookie);
+		if(session.getAttribute("user")!=null){
+			session.removeAttribute("user");
+		}
 		Member member = new Member();
 		member.setEmail(email);
 		member.setPwd(pwd);
@@ -197,10 +213,37 @@ public class MemberController {
 			session.setAttribute("user", user);
 			map.put("user", user.getName());
 			map.put("result", "1");
+			if(isUseCookie){
+				Cookie cookie = new Cookie("loginCookie", session.getId());//??세션아이디?
+				cookie.setPath("/");
+				int period = 60*60*24*3;
+				cookie.setMaxAge(period);
+				response.addCookie(cookie);
+				Date sessionLimit = new Date(System.currentTimeMillis()+(1000*period));
+				memberService.keepLogin(user.getEmail(), session.getId(), sessionLimit);
+			}
 		}else{
 			map.put("result", "2");
 		}
 		return map;
+	}
+	//로그아웃
+	@RequestMapping("logout.do")
+	public String logout(HttpSession session, HttpServletRequest request, HttpServletResponse response){
+		if(null!=session.getAttribute("user")){
+			Member member = (Member)session.getAttribute("user");
+			session.invalidate();			
+		
+		Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
+		if(loginCookie!=null){
+			loginCookie.setPath("/");
+			loginCookie.setMaxAge(0);
+			response.addCookie(loginCookie);
+			Date date = new Date(System.currentTimeMillis());
+			memberService.keepLogin(member.getEmail(), session.getId(), date);
+			}
+		}
+		return "redirect:signIn.do";
 	}
 	@RequestMapping("changeUserPwd.do")
 	public String changeUserPwd(){
