@@ -23,8 +23,9 @@ public class Interceptor extends HandlerInterceptorAdapter {
 	MemberService service;
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handle){ 
-		
+
 		System.out.println("인터셉터 호출");
+		System.out.println(request.getRequestURI());
 		HttpSession session = request.getSession();
 		Object obj = session.getAttribute("user");
 			try {
@@ -38,6 +39,8 @@ public class Interceptor extends HandlerInterceptorAdapter {
 							session.setAttribute("user", member);
 							return true;
 						}
+					}else if(request.getRequestURI().equals("/sellpie/signIn.do")){
+						return true;
 					}
 					System.out.println("로그인 처리가 안되어있습니다..");
 					response.sendRedirect("/sellpie/errorPage.do");

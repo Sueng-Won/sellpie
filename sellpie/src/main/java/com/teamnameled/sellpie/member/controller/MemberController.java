@@ -147,7 +147,6 @@ public class MemberController {
 	@RequestMapping(value = "signUp.do", method = RequestMethod.POST)
 	public ModelAndView memberJoin(Member member, HttpSession session, ModelAndView mav, HttpServletRequest request){
 		
-		
 		int result = 0;
 		try {
 			result =  memberService.insertMember(member);
