@@ -419,7 +419,7 @@ window.onpopstate = function(event) {
 };
 	$(function(){
 		<c:if test="${not empty sessionScope.user}">
-		 location.href="/sellpie/main.do";
+		 location.href="/sellpie/signIn.do";
 		</c:if>
 		$("#name").keyup(function(){
 			var name = $(this).val();

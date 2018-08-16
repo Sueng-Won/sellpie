@@ -2485,7 +2485,7 @@ span + .signupNavbar__vingleLogo__3Ob {
 	
 	$(function(){
 		<c:if test="${not empty sessionScope.user}">
-		 location.href="/sellpie/main.do";
+		location.href="/sellpie/signIn.do";
 		</c:if>
 		$(".solidButton__button__15V").click(function(){
 			$.ajax({
