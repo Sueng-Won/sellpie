@@ -12,22 +12,29 @@
 	margin-left:auto;
 	margin-right:auto;
 }
+.w3-card{
+	height:200px;
+	margin-bottom:20px;
+}
+.userInfo{
+	padding-left:15px;
+}
+.user{
+	display:inline-block;
+}
 </style>
 </head>
 <body>
 	<div class="w3-container container">
 	<div class="w3-panel">
-  		<p>I am a panel.</p>
+  		<p>panel</p>
 	</div> 
-	<div class="w3-panel">
-  		<p>I am a panel.</p>
-	</div>
-	<div class="w3-panel">
-  		<p>I am a panel.</p>
-	</div>
-	<div class="w3-panel">
-  		<p>I am a panel.</p>
-	</div>
+	<div class="w3-card">
+  			<header class="w3-container w3-blue">
+  				<h1 class="user">Header</h1>
+  				<button class="w3-btn w3-white w3-border w3-border-blue w3-round userInfo">Button</button>
+			</header>
+		</div>
 </div>
 
 
