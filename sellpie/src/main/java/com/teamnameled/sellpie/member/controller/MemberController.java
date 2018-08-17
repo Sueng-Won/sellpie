@@ -1,8 +1,10 @@
 package com.teamnameled.sellpie.member.controller;
 
 
+import java.io.File;
 import java.sql.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.mail.internet.MimeMessage;
@@ -17,9 +19,13 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.context.request.SessionScope;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 import org.springframework.web.util.WebUtils;
 
 import com.teamnameled.sellpie.contract.controller.ContractController;
@@ -41,6 +47,7 @@ public class MemberController {
 	
 	@Autowired
 	ContractService contractService;
+	
 
 	@RequestMapping("login.do")
 	public String loginPage(){
@@ -279,10 +286,10 @@ public class MemberController {
 	}
 	//개인정보수정-구매현황
 	@RequestMapping("purchaseList.do")
-	public String purchaseList(HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		Member user = (Member)session.getAttribute("user");
-		List<Contract> purchaseList = contractService.selectContractList(user.getEmail());
+	public String purchaseList(String email, HttpServletRequest request) {
+		//이메일 있으면 지울것
+		email = "aaa@aaa.com";
+		List<Contract> purchaseList = contractService.selectContractList(email);
 		List<ContractWithName> purchaseListWithName = contractService.selectContractListWithName(purchaseList);
 		request.setAttribute("cList", purchaseList);
 		request.setAttribute("pList", purchaseListWithName);
