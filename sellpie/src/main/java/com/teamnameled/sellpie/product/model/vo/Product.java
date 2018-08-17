@@ -1,6 +1,10 @@
 package com.teamnameled.sellpie.product.model.vo;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
+
+import com.teamnameled.sellpie.resource.model.vo.ResourceVo;
 
 @Component
 public class Product {
@@ -26,14 +30,14 @@ public class Product {
 	private int price;
 	private String pDetail;
 	private char delFlag;
+	private List<ResourceVo> resource; 
 	
 	public Product() {
 		
 	}
 
-	public Product(int pNo, int sNo, String pName, String selTag, String rUrl, int pQuantity, char isCraft,
-			int price, String pDetail, char delFlag) {
-		super();
+	public Product(int pNo, int sNo, String pName, String selTag, String rUrl, int pQuantity, char isCraft, int price,
+			String pDetail, char delFlag, List<ResourceVo> resource) {
 		this.pNo = pNo;
 		this.sNo = sNo;
 		this.pName = pName;
@@ -44,6 +48,7 @@ public class Product {
 		this.price = price;
 		this.pDetail = pDetail;
 		this.delFlag = delFlag;
+		this.resource = resource;
 	}
 
 	public int getpNo() {
@@ -126,12 +131,22 @@ public class Product {
 		this.delFlag = delFlag;
 	}
 
+	public List<ResourceVo> getResource() {
+		return resource;
+	}
+
+	public void setResource(List<ResourceVo> resource) {
+		this.resource = resource;
+	}
+
 	@Override
 	public String toString() {
-		return "Product [pNo=" + pNo + ", sNo=" + sNo + ", pName=" + pName + ", selTag=" + selTag + ", rUrl="
-				+ rUrl + ", pQuantity=" + pQuantity + ", isCraft=" + isCraft + ", price=" + price + ", pDetail="
-				+ pDetail + ", delFlag=" + delFlag + "]";
+		return "Product [pNo=" + pNo + ", sNo=" + sNo + ", pName=" + pName + ", selTag=" + selTag + ", rUrl=" + rUrl
+				+ ", pQuantity=" + pQuantity + ", isCraft=" + isCraft + ", price=" + price + ", pDetail=" + pDetail
+				+ ", delFlag=" + delFlag + ", resource=" + resource + "]";
 	}
+
+	
 	
 	
 }

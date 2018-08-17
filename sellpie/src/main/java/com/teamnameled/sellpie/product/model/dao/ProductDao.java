@@ -27,4 +27,8 @@ public class ProductDao {
 		return sqlSession.insert("ProductMapper.insertProduct", product);
 	}
 
+	public int updateProduct(Product product) {
+		return sqlSession.update("ProductMapper.updateProduct", product);
+	}
+
 }
