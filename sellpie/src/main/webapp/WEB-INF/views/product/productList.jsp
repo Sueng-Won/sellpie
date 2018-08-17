@@ -82,8 +82,8 @@
 		location.href="sellpie/productDetail.do?pNo="+pNo;
 	}
 	
-	function insertContract(){
-		$("#contractFrm").submit();
+	function insertContract(pNo){
+		$("#contractFrm"+pNo).submit();
 	}
 </script>
 </head>
@@ -141,7 +141,7 @@
 									                        	</div>
 									                        	<div class="w3-col" style="width:10%; height:95%;" onclick="plusDivs(1);">
 									                        		<br><br><br><br><br>
-									                        		<img src="resources/images/header/nextRight.png" style="width:28%; height:23%;">
+									                        		<img src="${product.resource[0].rsrc}" style="width:28%; height:23%;">
 									                        	</div>
 									                        </div>                             
 									                        <div style="text-align:center">
@@ -154,6 +154,7 @@
 								                            <div class="w3-container w3-card w3-white w3-round"><br>
 								                              <div class="w3-border-bottom" style="height:10%;">
 								                                   <img src="resources/images/header/twice2.png" alt="Avatar" class="w3-left w3-circle w3-margin-right rounded-circle" style="width:40px; height:40px;">
+								                                    <button class="w3-button w3-theme w3-right" onclick="javascript: location.href = 'productUpdateForm.do?pNo='+${product.pNo}">수정</button>
 								                                    <h4>${product.pName}</h4><br>
 								                              </div>
 								                               <div class="w3-margin-bottom" style="height:27%; overflow-y:scroll;"> 
@@ -161,16 +162,21 @@
 								                               </div>
 								                               
 								                               <div style="text-align:center;">
-								                               	<form id="contractFrm" action="insertContract.do" method="get">
+								                               	<form id="contractFrm${product.pNo}" action="insertContract.do" method="post">
+								                               	<c:if test="${product.isCraft eq 'N'.charAt(0)}">
 								                               	<label>수량 : <input type="number" id="quantity" name="quantity" min="1" max="${product.pQuantity}"/>개 / ${product.pQuantity}</label>
+								                               	</c:if>
+								                               	<c:if test="${product.isCraft eq 'Y'.charAt(0)}">
+								                               		<label>개인 제작 상품은 1개만 구매 가능합니다.</label>
+								                               		<input type="hidden" id="quantity" name="quantity" value="1"/>
+								                               	</c:if>
 								                               	<input type="hidden" id="pNo" name="pNo" value="${product.pNo}"/>
 								                               	<input type="hidden" id="sNo" name="sNo" value="${product.sNo}"/>
-								                               	<!-- <input type="hidden" id="email" name="email" value="${sessionScope.member.email}"/> -->
-								                               	<input type="hidden" id="email" name="email" value="aaa@aaa.com"/>
+								                               	<input type="hidden" id="email" name="email" value="${sessionScope.user.email}"/>
 								                               	</form>
 								                               </div>
 								                               <div>
-								                                  <button class="btn btn-primary btn-lg btn-block" type="button" onclick="insertContract()">구매하기</button>
+								                                  <button class="btn btn-primary btn-lg btn-block" type="button" onclick="insertContract(${product.pNo})">구매하기</button>
 								                               </div>
 								                               <c:if test="${countList[status.index] eq 0}">
 								                               		<h4 align="center">해당 제품의 리뷰가 없습니다.</h4>

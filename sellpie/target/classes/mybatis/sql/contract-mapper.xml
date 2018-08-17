@@ -25,6 +25,9 @@
 			null
 		)
 	</insert>
+	<update id="updateContract" parameterType="Contract">
+		UPDATE CONTRACT SET DELIVCODE = #{delivCode}, INVNUM = #{invNum} WHERE CNO = #{cNo}
+	</update>
 	<select id="selectContractListWithName" parameterType="java.util.List" resultType="ContractWithName">
 		<foreach collection="list" item="contract" separator="UNION ALL">
 			SELECT CNO, (

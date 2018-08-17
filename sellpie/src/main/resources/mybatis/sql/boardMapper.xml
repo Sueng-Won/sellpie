@@ -14,9 +14,9 @@
 	  	<result property="delflag" column="DELFLAG"/>
 	  	<result property="name" column="NAME"/>
 	  	<result property="profileImg" column="PROFILE_IMG"/>
-	  	<collection property="resource" column="BNO" ofType="Resource" resultMap="resourceMap"/> 
+	  	<collection property="resource" column="RES" ofType="Resource" resultMap="resourceMap"/> 
 	 </resultMap>
-  
+
 	 <resultMap type="Resource" id="resourceMap">
 	      <id property="rno" column="RNO"/>
 	      <result property="rsrc" column="RSRC"/>

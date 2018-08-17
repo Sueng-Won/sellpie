@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -97,15 +97,15 @@ $(function() {
      });
 //제작 제품일 경우 수량 삭제-------------------------------------------------------------	 
 	 $('#isCraft').click(function() {
-		 if($('#isCraft').prop('checked')==true){
+		 if($(this).prop('checked')==true){
 			 $('#pQuantity').attr('type', 'hidden');
 			 $('#pQuantity').attr('value', 0);
 		 }else{
 			 $('#pQuantity').attr('type', 'number');
 		 }
 	});
+	
 });
-
 //태그 삭제------------------------------------------------------------------------
 function removeTag(obj){
     $(obj).remove();
@@ -164,10 +164,7 @@ $(function(){
 	}
 });
 function validate(){
-    if($('#img1').val() == null){
-    	alert('제품사진을 등록해주세요');
-    	return false;
-    }else if($('#selTag').val().trim().length==0){
+    if($('#selTag').val().trim().length==0){
     	alert('검색에 이용될 태그를 등록해주세요');
     	return false;
     }else if($('#price').val() <= 0){
@@ -209,13 +206,19 @@ function validate(){
         <div class="w3-col m12">
           <div class="w3-card w3-round w3-white">
             <div class="w3-container w3-padding">
-                  <form id="applyForm" action="productApply.do" method="post" onsubmit="return validate();" enctype="multipart/form-data">
-                      <h2 class="w3-border-bottom">판매등록</h2><br>
-                      <input class="w3-input w3-border w3-round" type="text" id="pName" name="pName" placeholder="판매게시물명"><br>
-                      <input type="hidden" name="sNo" value="1" />
-                      <input type="hidden" name="selTag" id="selTag">
+                  <form id="UpdateForm" action="productUpdate.do" method="post" onsubmit="return validate();" enctype="multipart/form-data">
+                      <h2 class="w3-border-bottom">물품 수정</h2><br>
+                      <input class="w3-input w3-border w3-round" type="text" id="pName" name="pName" value="${product.pName }" placeholder="판매게시물명"><br>
+                      <input type="hidden" name="pNo" value="${product.pNo }"/>
+                      <input type="hidden" name="sNo" value="${product.sNo }"/>
+                      <input type="hidden" name="rUrl" value="${product.rUrl }">
+                      <input type="hidden" name="selTag" id="selTag" value="${product.selTag }">
                       <input type="hidden" name="email" value="test4@naver.com"/>
                       <div id="sellTags">
+                      <c:set var="selTags" value="${fn:split(product.selTag,'!@#$%') }"/>
+                      <c:forEach var="tagItem" items="${selTags}">
+                      	<div class="w3-button w3-theme w3-round-xxlarge" onclick="removeTag(this);">#${tagItem }<i class="fa fa-remove"></i></div>
+                      </c:forEach>
                       </div>
                       
                       <input class="w3-input w3-border w3-round" id="tagInput" type="text" placeholder="판매 태그명" contenteditable="true"/><br>
@@ -226,17 +229,17 @@ function validate(){
 						<hr>
 						              
 					<div class="fileLInk background-white">
-						<img src="resources/images/picture.JPG" width="30" height="30" onclick="imageFile.click()"/><label>등록할 이미지를 선택해주세요</label>
+						<img src="resources/images/picture.JPG" width="30" height="30" onclick="imageFile.click()"/><label>변경할 이미지를 선택해주세요</label>
 						<input type="file" name="file" id="imageFile" onchange="fileUpload(this,0);" accept="image/*" style="display:none;" multiple/>
 		            </div>
-                      <input class="w3-input w3-border w3-round" type="number" style="width:30%" id="pQuantity" name="pQuantity" min="1" placeholder="수량"/><br>
-                      <input class="w3-input w3-border w3-round" type="number" style="width:30%" id="price" name="price" min="1" placeholder="가격"/><br>
-	                  <input class="w3-check w3-border w3-round" type="checkbox" id="isCraft" name="isCraft" value="Y">
+                      <input class="w3-input w3-border w3-round" type="number" style="width:30%" id="pQuantity" name="pQuantity" min="1" value="${product.pQuantity }" placeholder="수량"/><br>
+                      <input class="w3-input w3-border w3-round" type="number" style="width:30%" id="price" name="price" min="1" value="${product.price }" placeholder="가격"/><br>
+	                  <input class="w3-check w3-border w3-round" type="checkbox" id="isCraft" name="isCraft" value="Y" <c:if test="${'Y'.charAt(0) eq product.isCraft}">checked</c:if> >
 	                  <label>제작제품</label>
-                      <textarea class="w3-input w3-border w3-round" id="pDetail" name="pDetail" placeholder="상세설명" rows="20" style="resize: none;"></textarea><br>
+                      <textarea class="w3-input w3-border w3-round" id="pDetail" name="pDetail" placeholder="상세설명" rows="20" style="resize: none;">${product.pDetail }</textarea><br>
 
                     </form>
-              <button onclick="javascript: $('#applyForm').submit();" class="w3-button w3-theme"><i class="fa fa-pencil"></i> &nbsp;등록</button> 
+              <button onclick="javascript: $('#UpdateForm').submit();" class="w3-button w3-theme"><i class="fa fa-pencil"></i> &nbsp;수정</button> 
               <button onclick="javascript: history.back();" class="w3-button w3-theme"><i class="fa fa-close"></i> &nbsp;취소</button> 
             </div>
           </div>
@@ -293,6 +296,14 @@ function openNav() {
     }
 }
 
+$(function() {
+	if($('#isCraft').prop('checked')==true){
+		 $('#pQuantity').attr('type', 'hidden');
+		 $('#pQuantity').attr('value', 0);
+	 }else{
+		 $('#pQuantity').attr('type', 'number');
+	 }
+});
 
 </script>
 

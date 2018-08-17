@@ -22,5 +22,8 @@ public class ProductService {
 	public int insertProduct(Product product) {
 		return productDao.insertProduct(product);
 	}
+	public int updateProduct(Product product) {
+		return productDao.updateProduct(product);
+	}
 
 }

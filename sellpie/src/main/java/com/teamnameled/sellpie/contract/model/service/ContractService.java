@@ -22,6 +22,9 @@ public class ContractService {
 		return contractDao.insertContract(contract);
 	}
 
+	public int updateContract(Contract contract) {
+		return contractDao.updateContract(contract);
+	}
 	public List<ContractWithName> selectContractListWithName(List<Contract> purchaseList) {
 		return contractDao.selectContractListWithName(purchaseList);
 	}

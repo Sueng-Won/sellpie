@@ -22,6 +22,10 @@ public class ContractDao {
 		return sqlSession.insert("ContractMapper.insertContract", contract);
 	}
 
+	public int updateContract(Contract contract) {
+		return sqlSession.update("ContractMapper.updateContract", contract);
+	}
+	
 	public List<ContractWithName> selectContractListWithName(List<Contract> purchaseList) {
 		return sqlSession.selectList("ContractMapper.selectContractListWithName",purchaseList);
 	}
