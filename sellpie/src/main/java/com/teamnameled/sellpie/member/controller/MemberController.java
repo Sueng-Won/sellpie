@@ -274,10 +274,14 @@ public class MemberController {
 		request.setAttribute("searchText", searchText);
 		return "member/searchMemberList";
 	}
-		@RequestMapping("updateMember.do")
-	public String updateMember(){
-		return "member/memberUpdate";
+	@RequestMapping("updateUserInfo.do")
+	public String updateUserInfo(){
+		return "member/updateUserInfo";
 	}
+		@RequestMapping("updateMember.do")
+		public String updateMember(){
+			return "member/memberUpdate";
+		}
 	@RequestMapping("errorPage.do")
 	public String errorPage(){
 		return "common/errorPage";
@@ -285,9 +289,9 @@ public class MemberController {
 	@RequestMapping("userImgUpload.do")
 	public @ResponseBody String userImgUpload(MultipartHttpServletRequest request){
 		// 저장 경로 설정
-        String root = request.getSession().getServletContext().getRealPath("/");
+        String root = request.getSession().getServletContext().getRealPath("resources");
         System.out.println(root);
-        String path = root+"resources/userImg/";
+        String path = root+"\\userImg";
          
         String newFileName = ""; // 업로드 되는 파일명
          
