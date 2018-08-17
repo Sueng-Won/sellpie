@@ -1,6 +1,7 @@
 package com.teamnameled.sellpie.board.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +35,31 @@ public class BoardService {
 		return dao.selectlList(bno);
 	}
 
-	
+	public BoardVo selectBoard(String bno) {
+		return dao.selectBoard(bno);
+	}
 
+	public List<String> selectfList5(String email) {
+		return dao.selectfList5(email);
+	}
+	
+	public int insertBlike(Map<String, String> likeMap) {
+		return dao.insertBlike(likeMap);
+	}
+
+	public int deleteBlike(Map<String, String> likeMap) {
+		return dao.deleteBlike(likeMap);
+	}
+	
+	public int updateGcount(Map<String, Integer> bmap) {
+		return dao.updateGcount(bmap);
+	}
+
+	public int deleteResource(String delfile) {
+		return dao.deleteResource(delfile);
+	}
+
+	public int updateBoard(BoardVo board) {
+		return dao.updateBoard(board);
+	}
 }

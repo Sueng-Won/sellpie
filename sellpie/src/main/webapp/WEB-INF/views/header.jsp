@@ -10,10 +10,31 @@
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <script src="resources/js/jquery-3.3.1.min.js"></script>
 <style>
 html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 </style>
+<script type="text/javascript">
+	function searchContent(){
+		
+		var searchContentStr = $("#searchText").val();
+		if(searchContentStr == ""){
+			alert("검색어를 입력해주세요.");
+		}
+		else{
+			if(searchContentStr.charAt(0)=="#"){
+				$("#searchText").val(searchContentStr.slice(1));
+				$("#searchFrm").attr("action","tagSearch.do");
+				$("#searchFrm").submit();
+			}
+			else{
+				$("#searchFrm").attr("action","memberSearch.do");
+				$("#searchFrm").submit();
+			}
+		}
+	}
+</script>
 </head>
 
 <body class="w3-theme-l5">
@@ -33,10 +54,25 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
       <a href="#" class="w3-bar-item w3-button">John Doe posted on your wall</a>
       <a href="#" class="w3-bar-item w3-button">Jane likes your post</a>
     </div>
+    
   </div>
+  	
   <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account">
     <img src="resources/images/header/sellfieLogo.png" class="w3-circle" style="height:30px; width:30px" alt="Avatar">
   </a>
+  <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-center top_search" style="margin-top:10px; margin-bottom:0px;">
+                <div class="input-group">
+                	<form action="#" method="get" id="searchFrm">
+                  <input type="text" class="form-control" placeholder="Search for..." name="searchText" id="searchText">
+                  </form>
+                  <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" onclick="searchContent();">
+                            <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                      
+                </div>
+     </div>
  </div>
 </div>
 

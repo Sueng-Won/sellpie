@@ -29,5 +29,11 @@
 			#{seller.email}
 		</foreach>
 	</select>
+	
+	<select id="selectSeller" parameterType="string" resultType="Seller">
+		SELECT SNO, EMAIL, ACNUM, BANK, ZIPCODE, ADDR, ADDRDETAIL, PCATEGORY, REASON
+		FROM SELLER
+		WHERE EMAIL = #{email}
+	</select>
 </mapper>
 

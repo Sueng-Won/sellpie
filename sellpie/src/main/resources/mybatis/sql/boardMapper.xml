@@ -13,6 +13,7 @@
 	  	<result property="isad" column="ISAD"/>
 	  	<result property="delflag" column="DELFLAG"/>
 	  	<result property="name" column="NAME"/>
+	  	<result property="profileImg" column="PROFILE_IMG"/>
 	  	<collection property="resource" column="BNO" ofType="Resource" resultMap="resourceMap"/> 
 	 </resultMap>
   
@@ -20,7 +21,6 @@
 	      <id property="rno" column="RNO"/>
 	      <result property="rsrc" column="RSRC"/>
 	 </resultMap>
-
 
 	<insert id="insertBoard" parameterType="Board">
 		INSERT INTO BOARD VALUES(
@@ -48,6 +48,7 @@
 		<foreach collection="list" open="(" item="item" close=")" separator=",">
 			#{item}
 		</foreach>
+		 ORDER BY BNO DESC
 	</select>
 	
 	<select id="selectlList" parameterType="_int" resultType="string">
@@ -56,4 +57,43 @@
 		WHERE BNO = #{bno}
 	</select>
 	
+	<select id="selectBoard" parameterType="string" resultMap="resultBoard">
+		SELECT B.BNO, B.EMAIL, B.BCONTENT, B.GCOUNT, B.RURL, B.ISAD, B.DELFLAG, B.NAME, B.PROFILE_IMG, R.RSRC
+		FROM (SELECT * FROM BOARD JOIN MEMBER USING(EMAIL)) B
+		LEFT JOIN RESOURCES R
+		ON(B.RURL = SUBSTR(R.RSRC,1,INSTR(R.RSRC,'/',-1,1)-1))
+		WHERE B.DELFLAG = 'N' AND
+		bno = #{bno}
+	</select>
+	
+	<select id="selectfList5" parameterType="string" resultType="String">
+		SELECT EMAIL
+		FROM MEMBER
+		WHERE EMAIL = #{email}
+	</select>
+
+	<insert id="insertBlike" parameterType="hashMap">
+		INSERT INTO BOARD_LIKE 
+		VALUES(SEQ_BOARD_LIKE_BLNO.NEXTVAL, #{email}, #{bno})
+	</insert>
+	
+	<update id="updateGcount" parameterType="hashMap">
+		UPDATE BOARD SET GCOUNT = GCOUNT + #{signNum}
+		WHERE BNO = #{bno}
+	</update>
+	
+	<delete id="deleteBlike" parameterType="hashMap">
+		DELETE FROM BOARD_LIKE
+		WHERE BNO = #{bno} AND EMAIL = #{email}
+	</delete>
+	
+	<delete id="deleteResource" parameterType="string">
+		DELETE FROM RESOURCES
+		WHERE RSRC = #{delfile}
+	</delete>
+	
+	<update id="updateBoard" parameterType="Board">
+		UPDATE BOARD SET BCONTENT = #{bcontent}, RURL = #{rurl}
+		WHERE BNO = #{bno}
+	</update>
 </mapper>
