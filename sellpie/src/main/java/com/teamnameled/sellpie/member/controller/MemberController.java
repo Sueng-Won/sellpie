@@ -287,9 +287,9 @@ public class MemberController {
 	//개인정보수정-구매현황
 	@RequestMapping("purchaseList.do")
 	public String purchaseList(String email, HttpServletRequest request) {
-		//이메일 있으면 지울것
-		email = "aaa@aaa.com";
-		List<Contract> purchaseList = contractService.selectContractList(email);
+		HttpSession session = request.getSession();
+		Member user = (Member)session.getAttribute("user");
+		List<Contract> purchaseList = contractService.selectContractList(user.getEmail());
 		List<ContractWithName> purchaseListWithName = contractService.selectContractListWithName(purchaseList);
 		request.setAttribute("cList", purchaseList);
 		request.setAttribute("pList", purchaseListWithName);
