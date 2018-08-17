@@ -8,10 +8,34 @@
     보통 서비스의 이름과 같게 설정하여
     연결의 착오를 줄인다. -->
 <mapper namespace="ProductMapper">
-	<select id="selectProductList" parameterType="int" resultType="Product">
-		SELECT PNO, SNO, PNAME, SELTAG, RURL, PQUANTITY, ISCRAFT, PRICE, PDETAIL, DELFLAG
-		FROM PRODUCT
-		WHERE SNO = #{sNo}
+	<resultMap type="Product" id="resultProduct">
+	  	<id property="pNo" column="PNO" /> <!-- id는 프라이머리키 -->
+	  	<result property="sNo" column="SNO"/>
+	  	<result property="pName" column="PNAME"/> <!-- result는 나머지 -->
+	  	<result property="selTag" column="SELTAG"/> 
+	  	<result property="rUrl" column="RURL"/>
+	  	<result property="pQuantity" column="PQUANTITY"/>
+	  	<result property="isCraft" column="ISCRAFT"/>
+	  	<result property="price" column="PRICE"/>
+	  	<result property="pDetail" column="PDETAIL"/>
+	  	<result property="delFlag" column="DELFLAG"/>
+	  	<collection property="resource" column="resource" ofType="Resource" resultMap="resourceMap"/> 
+	 </resultMap>
+  
+	 <resultMap type="Resource" id="resourceMap">
+	      <id property="rno" column="RNO"/>
+	      <result property="rsrc" column="RSRC"/>
+	 </resultMap>
+
+
+	<select id="selectProductList" parameterType="int" resultMap="resultProduct">
+	
+		SELECT P.PNO, P.SNO, P.PNAME, P.SELTAG, P.RURL, P.PQUANTITY, P.ISCRAFT, P.PRICE, P.PDETAIL, P.DELFLAG, R.RNO, R.RSRC
+		FROM (SELECT * FROM PRODUCT JOIN (SELECT * FROM SELLER S JOIN MEMBER USING(EMAIL) WHERE SNO = #{sNo}) USING(SNO)) P
+		LEFT JOIN RESOURCES R
+		ON(P.RURL = SUBSTR(R.RSRC,1,INSTR(R.RSRC,'/',-1,1)-1))
+		WHERE P.DELFLAG = 'N'
+		ORDER BY P.PNO DESC
 	</select>
 	<select id="selectProduct" parameterType="int" resultType="Product">
 		SELECT PNO, SNO, PNAME, SELTAG, RURL, PQUANTITY, ISCRAFT, PRICE, PDETAIL, DELFLAG

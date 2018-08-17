@@ -141,7 +141,7 @@
 									                        	</div>
 									                        	<div class="w3-col" style="width:10%; height:95%;" onclick="plusDivs(1);">
 									                        		<br><br><br><br><br>
-									                        		<img src="resources/images/header/nextRight.png" style="width:28%; height:23%;">
+									                        		<img src="${product.resource[0].rUrl}" style="width:28%; height:23%;">
 									                        	</div>
 									                        </div>                             
 									                        <div style="text-align:center">
