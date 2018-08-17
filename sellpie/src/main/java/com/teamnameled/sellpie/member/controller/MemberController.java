@@ -1,8 +1,10 @@
 package com.teamnameled.sellpie.member.controller;
 
 
+import java.io.File;
 import java.sql.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.mail.internet.MimeMessage;
@@ -17,8 +19,12 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 import org.springframework.web.util.WebUtils;
 
 import com.teamnameled.sellpie.contract.controller.ContractController;
@@ -40,6 +46,7 @@ public class MemberController {
 	
 	@Autowired
 	ContractService contractService;
+	
 
 	@RequestMapping("login.do")
 	public String loginPage(){
@@ -275,6 +282,44 @@ public class MemberController {
 	@RequestMapping("errorPage.do")
 	public String errorPage(){
 		return "common/errorPage";
+	}
+	@RequestMapping("updateUserInfo.do")
+	public String updateUserInfo(){
+		return "member/updateUserInfo";
+	}
+	@RequestMapping("userImgUpload.do")
+	public @ResponseBody String userImgUpload(MultipartHttpServletRequest request){
+		// 저장 경로 설정
+        String root = request.getSession().getServletContext().getRealPath("/");
+        System.out.println(root);
+        String path = root+"resources/userImg/";
+         
+        String newFileName = ""; // 업로드 되는 파일명
+         
+        File dir = new File(path);
+        if(!dir.isDirectory()){
+            dir.mkdirs();
+        }
+         
+        	Iterator<String> file = request.getFileNames();
+            String uploadFile = file.next();
+                         
+            MultipartFile mFile = request.getFile(uploadFile);
+            String fileName = mFile.getOriginalFilename();
+            System.out.println("실제 파일 이름 : " +fileName);
+            newFileName = System.currentTimeMillis()+"."
+                    +fileName.substring(fileName.lastIndexOf(".")+1);
+             
+            try {
+                mFile.transferTo(new File(path+newFileName));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+         
+        System.out.println("id : " + request.getParameter("id"));
+        System.out.println("pw : " + request.getParameter("pw"));
+        
+		return "msg";
 	}
 	//개인정보수정-구매현황
 	@RequestMapping("purchaseList.do")
