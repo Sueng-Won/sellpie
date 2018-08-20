@@ -3,10 +3,12 @@ package com.teamnameled.sellpie.seller.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.teamnameled.sellpie.member.model.vo.Member;
 import com.teamnameled.sellpie.seller.model.service.SellerService;
@@ -34,5 +36,15 @@ public class SellerController {
 		return "seller/sellerDetail";
 	}
 	
+	@RequestMapping("sellerCheck.do")
+	public @ResponseBody int sellerCheck(HttpServletRequest request) {
+		int result = 0;
+		HttpSession session = request.getSession();
+		Member user = (Member)session.getAttribute("user");
+		if(sellerService.selectSeller(user.getEmail())!=null){
+			result = 1;
+		}
+		return result;
+	}
 	
 }

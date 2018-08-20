@@ -77,8 +77,6 @@ function openNav() {
         <div class="w3-white">
           <button onclick="myFunction('Demo1')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-circle-o-notch fa-fw w3-margin-right"></i> My Page</button>
           <div id="Demo1" class="w3-hide w3-container">
-            <a class="w3-button w3-theme" onclick="javascript: location.href = 'productForm.do'">물품등록</a>
-            <a class="w3-button w3-theme" onclick="javascript: location.href = 'salesList.do?email=${sessionScope.user.email}'">판매관리</a>
           </div>
           <button onclick="myFunction('Demo2')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i> My Events</button>
           <div id="Demo2" class="w3-hide w3-container">
@@ -144,6 +142,20 @@ function openNav() {
     
     <!-- End Left Column -->
     </div>
-
+<script type="text/javascript">
+$(function() {
+	$.ajax({
+        type:"GET",
+        dataType : "json",
+        url:'sellerCheck.do',
+        success:function(data){
+        	if(data == 1){
+        		$('#Demo1').append('<a class="w3-button w3-theme" onclick="javascript: location.href = '+"'productForm.do'"+'">물품등록</a>');
+        		$('#Demo1').append('<a class="w3-button w3-theme" onclick="javascript: location.href = '+"'salesList.do'"+'">판매관리</a>');
+        	}
+        }
+	});
+});
+</script>
 </body>
 </html>
