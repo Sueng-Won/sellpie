@@ -10,20 +10,20 @@ public class Member {
 	 private String gender;
 	 private String phone;
 	 private String birth;
-	 private String profile_img;
+	 private String profileImg;
 	 
 	public Member() {
 	}
 
 	public Member(String email, String pwd, String name, String gender, String phone, String birth,
-			String profile_img) {
+			String profileImg) {
 		this.email = email;
 		this.pwd = pwd;
 		this.name = name;
 		this.gender = gender;
 		this.phone = phone;
 		this.birth = birth;
-		this.profile_img = profile_img;
+		this.profileImg = profileImg;
 	}
 
 	public String getEmail() {
@@ -75,18 +75,18 @@ public class Member {
 	}
 
 
-	public String getProfile_img() {
-		return profile_img;
+	public String getProfileImg() {
+		return profileImg;
 	}
 
-	public void setProfile_img(String profile_img) {
-		this.profile_img = profile_img;
+	public void setProfileImg(String profileImg) {
+		this.profileImg = profileImg;
 	}
 
 	@Override
 	public String toString() {
 		return "Member [email=" + email + ", pwd=" + pwd + ", name=" + name + ", gender=" + gender + ", phone=" + phone
-				+ ", birth=" + birth + ", prifile_img=" + profile_img + "]";
+				+ ", birth=" + birth + ", prifile_img=" + profileImg + "]";
 	}
 	 
 
