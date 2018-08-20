@@ -27,8 +27,11 @@ import com.teamnameled.sellpie.contract.model.service.ContractService;
 import com.teamnameled.sellpie.contract.model.vo.Contract;
 import com.teamnameled.sellpie.common.GenerateCertNumber;
 import com.teamnameled.sellpie.contract.model.vo.ContractWithName;
+import com.teamnameled.sellpie.contract.model.vo.SalesListVo;
 import com.teamnameled.sellpie.member.model.service.MemberService;
 import com.teamnameled.sellpie.member.model.vo.Member;
+import com.teamnameled.sellpie.seller.model.service.SellerService;
+import com.teamnameled.sellpie.seller.model.vo.SalesStatisticsVo;
 
 @Controller
 public class MemberController {
@@ -41,6 +44,9 @@ public class MemberController {
 	
 	@Autowired
 	ContractService contractService;
+	
+	@Autowired
+	SellerService sellerService;
 
 	@RequestMapping("login.do")
 	public String loginPage(){
@@ -290,13 +296,14 @@ public class MemberController {
 	}
 	//개인정보수정-판매현황
 	@RequestMapping("salesList.do")
-	public String salesList(HttpServletRequest request) {
+	public String salesList(HttpServletRequest request, SalesListVo salesListVo) {
 		HttpSession session = request.getSession();
 		Member user = (Member)session.getAttribute("user");
-		List<Contract> purchaseList = contractService.selectContractList(user.getEmail());
-		List<ContractWithName> purchaseListWithName = contractService.selectContractListWithName(purchaseList);
-		request.setAttribute("cList", purchaseList);
-		request.setAttribute("pList", purchaseListWithName);
+		salesListVo.setEmail(user.getEmail());
+		List<SalesListVo> pList = contractService.selectSalesList(salesListVo);
+		List<SalesStatisticsVo> sList = sellerService.selectSalesStatisticsList(user.getEmail());
+		request.setAttribute("pList", pList);
+		request.setAttribute("sList", sList);
 		return "member/salseList";
 	}
 }
