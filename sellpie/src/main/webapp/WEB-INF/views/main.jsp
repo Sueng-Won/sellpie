@@ -549,11 +549,11 @@ Z
         <img src="<c:out value='${board.profileImg }'/>" alt="Avatar" class="w3-left w3-circle w3-margin-right rounded-circle" style="width:60px; height:60px;">
         <span class="w3-right w3-opacity">
 <%----%>
-          <c:if test="${sessionScope.user eq board.email }">
-           <button type="button" class="btn btn-default" aria-label="Left Align" onclick="javascript:location.href='updateForm.do?bno='+<c:out value='${board.bno }'/>">
-              <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-         </button>
-      </c:if>
+          <c:if test="${sessionScope.user.email eq board.email }">
+	           <button type="button" class="btn btn-default" aria-label="Left Align" onclick="javascript:location.href='updateForm.do?bno='+<c:out value='${board.bno }'/>">
+	              <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+	           </button>
+          </c:if>
       </span>
         
         <h4><c:out value="${board.name }"></c:out></h4><br>

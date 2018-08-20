@@ -35,6 +35,7 @@
 	    에러가 발생한다. -->
 	<mappers>
 		<mapper resource="mybatis/sql/member-mapper.xml"/>
+		<mapper resource="mybatis/sql/friendMapper.xml"/>
 		<mapper resource="mybatis/sql/product-mapper.xml"/>
 		<mapper resource="mybatis/sql/boardMapper.xml"/>
 		<mapper resource="mybatis/sql/resourceMapper.xml"/>
