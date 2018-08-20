@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.teamnameled.sellpie.board.model.service.BoardService;
 import com.teamnameled.sellpie.board.model.vo.BoardVo;
+import com.teamnameled.sellpie.member.model.vo.Member;
 import com.teamnameled.sellpie.reply.model.service.ReplyService;
 import com.teamnameled.sellpie.resource.model.service.ResourceService;
 import com.teamnameled.sellpie.resource.model.vo.ResourceVo;
@@ -113,14 +114,14 @@ public class BoardController {
             errorMsg="db에 file insert중 에러";
          }
       }
-       
-      File[] b = file.listFiles();
-
-            if(null!=b && b.length!=0){
-               board.setRurl(savePath);
-            }else{
-               file.delete();
-            }
+//       
+//      File[] b = file.listFiles();
+//
+//            if(null!=b && b.length!=0){
+//               board.setRurl(savePath);
+//            }else{
+//               file.delete();
+//            }
             
       request.setAttribute("msg", errorMsg);
       
@@ -129,8 +130,7 @@ public class BoardController {
    
    @RequestMapping("selectBoardList.do")
    public ModelAndView selectBoardList(HttpSession session, ModelAndView mv){
-//      String email = session.getAttribute("member").getEmail();
-      String email = "test2@naver.com";
+      String email = ((Member)session.getAttribute("user")).getEmail();
       
       //친구리스트
       List<String> fList1 = boardService.selectfList1(email); //응답자일 때
@@ -174,10 +174,9 @@ public class BoardController {
    }
 
    @RequestMapping("updateLike.do")
-   public @ResponseBody String subLike(String bno, String condition){
+   public @ResponseBody String subLike(String bno, String condition, HttpSession session){
       
-//      String mEmail = session.getAttribute("user");
-      String mEmail = "test2@naver.com";
+      String mEmail = ((Member)session.getAttribute("user")).getEmail();
       
       Map<String, String> likeMap = new HashMap<String, String>();
       likeMap.put("email", mEmail);
@@ -221,8 +220,8 @@ public class BoardController {
    
    @RequestMapping("updateBoard.do")
    public String updateBoard(MultipartHttpServletRequest multipartHttpServletRequest, BoardVo board, String delfile, HttpServletRequest request){
-      //세션정보생기면 바꾸기
-      String email = "test2@naver.com";
+	  HttpSession session = request.getSession();
+      String email = ((Member)session.getAttribute("user")).getEmail();
       
       Date today = new Date();
       SimpleDateFormat sdf = new SimpleDateFormat("yyMMddHHmmssZ");

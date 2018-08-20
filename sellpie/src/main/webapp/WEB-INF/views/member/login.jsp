@@ -2495,7 +2495,7 @@ span + .signupNavbar__vingleLogo__3Ob {
 				success:function(data){
 					console.log(data.result);
 					if( data.result == "1" ){
-						 location.href="/sellpie/main.do"; 
+						 location.href="/sellpie/selectBoardList.do"; 
 						
 					}else{
 						swal("","이메일 혹은 비밀번호를 확인 해주세요!", "error");

@@ -38,15 +38,11 @@ public class FriendController {
    
    @RequestMapping("friendForm.do")
    public ModelAndView friendForm(HttpSession session, ModelAndView mv) {
+         Member member = (Member)session.getAttribute("user");
          
-         String email = "test2@naver.com";
-         Member member = new Member();
-         member.setEmail(email);
-         /*Member member = session.getAttribute("user");*/
-         
-         List<Member> fList3 = friendService.selectfList3(email); //응답자일 때
-         List<Member> fList4 = friendService.selectfList4(email); //요청자일 때
-         List<Member> fList7 = friendService.selectfList7(email); //다른 사람한테 친구 신청 올때
+         List<Member> fList3 = friendService.selectfList3(member.getEmail()); //응답자일 때
+         List<Member> fList4 = friendService.selectfList4(member.getEmail()); //요청자일 때
+         List<Member> fList7 = friendService.selectfList7(member.getEmail()); //다른 사람한테 친구 신청 올때
          
          if(null!=fList4){
             for(int i=0; i<fList4.size(); i++){
@@ -64,8 +60,9 @@ public class FriendController {
    }
    
    @RequestMapping("searchFriendForm.do")
-   public ModelAndView searchFriendForm(ModelAndView mv, String email) {
-         String email2 = "test2@naver.com";
+   public ModelAndView searchFriendForm(ModelAndView mv, String email, HttpSession session) {
+	   Member member = (Member)session.getAttribute("user");
+	   String email2 = member.getEmail();
          
        Member fmember = memberService.checkEmail(email);       // 검색한 이메일 체크 
        Seller sellerInfo = sellerService.selectSeller(email);  // 셀러에 있는 이메일 체크
@@ -101,8 +98,9 @@ public class FriendController {
    }
    
    @RequestMapping("friendDelect.do")
-   public String friendDelect(String email) {
-      String myEmail = "test2@naver.com";
+   public String friendDelect(String email, HttpSession session) {
+	  Member member = (Member)session.getAttribute("user");
+      String myEmail = member.getEmail();
       Map<String, String> emailMap = new HashMap<String, String>();
       emailMap.put("myEmail", myEmail);
       emailMap.put("email", email);
@@ -119,8 +117,9 @@ public class FriendController {
    }   
    
    @RequestMapping("friendApply.do")
-   public @ResponseBody String friendApply(String email) {
-      String myEmail = "test2@naver.com";
+   public @ResponseBody String friendApply(String email, HttpSession session) {
+	   Member member = (Member)session.getAttribute("user");
+      String myEmail = member.getEmail();
       System.out.println(email);
       Map<String, String> emailMap = new HashMap<String, String>();
       emailMap.put("myEmail", myEmail);
@@ -138,8 +137,9 @@ public class FriendController {
    }   
    
    @RequestMapping("friendApplyDelete.do")
-   public @ResponseBody String friendApplyDelete(String email) {
-      String myEmail = "test2@naver.com";
+   public @ResponseBody String friendApplyDelete(String email, HttpSession session) {
+	   Member member = (Member)session.getAttribute("user");
+      String myEmail = member.getEmail();
       Map<String, String> emailMap = new HashMap<String, String>();
       emailMap.put("myEmail", myEmail);
       emailMap.put("email", email);
@@ -155,8 +155,9 @@ public class FriendController {
    }  
    
    @RequestMapping("friendAcceptUpdate.do")
-   public String friendAcceptUpdate(String email) {
-      String myEmail = "test2@naver.com";
+   public String friendAcceptUpdate(String email, HttpSession session) {
+	   Member member = (Member)session.getAttribute("user");
+      String myEmail = member.getEmail();
       
       Map<String, String> emailMap = new HashMap<String, String>();
       emailMap.put("myEmail", myEmail);
@@ -173,8 +174,9 @@ public class FriendController {
    }   
    
    @RequestMapping("friendRefuseDelete.do")
-   public String friendRefuseDelete(String email) {
-      String myEmail = "test2@naver.com";
+   public String friendRefuseDelete(String email, HttpSession session) {
+	   Member member = (Member)session.getAttribute("user");
+      String myEmail = member.getEmail();
       
       Map<String, String> emailMap = new HashMap<String, String>();
       emailMap.put("myEmail", myEmail);
