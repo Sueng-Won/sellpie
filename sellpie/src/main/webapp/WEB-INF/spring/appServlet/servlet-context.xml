@@ -37,19 +37,18 @@
     <interceptors>
         <interceptor>
             <mapping path="/**"/>
-            <exclude-mapping path="/login.do"/>
-            <exclude-mapping path="/memberJoin.do"/>
+            <!-- <exclude-mapping path="/memberJoin.do"/>
             <exclude-mapping path="/getName.do"/>
             <exclude-mapping path="/getGender.do"/>
             <exclude-mapping path="/getPhone.do"/>
-            <exclude-mapping path="/getBirth.do"/>
-            <exclude-mapping path="/checkEmail.do"/>
-            <exclude-mapping path="/changePwdAu.do"/>
-            <exclude-mapping path="/signUp.do"/>
-            <exclude-mapping path="/changePwd.do"/>
-            <exclude-mapping path="/userLogin.do"/>
-            <exclude-mapping path="/changeUserPwd.do"/>
-            <exclude-mapping path="/updateMember.do"/>
+            <exclude-mapping path="/getBirth.do"/> -->
+            <!-- <exclude-mapping path="/checkEmail.do"/> -->
+            <!-- <exclude-mapping path="/changePwdAu.do"/> -->
+            <!-- <exclude-mapping path="/signUp.do"/> -->
+            <!-- <exclude-mapping path="/changePwd.do"/> -->
+            <!-- <exclude-mapping path="/userLogin.do"/> -->
+            <!-- <exclude-mapping path="/changeUserPwd.do"/> -->
+            <!-- <exclude-mapping path="/updateMember.do"/> -->
             <exclude-mapping path="/errorPage.do"/>
             <beans:ref bean="authenticationInterceptor"/>
         </interceptor>

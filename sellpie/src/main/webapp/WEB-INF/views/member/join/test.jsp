@@ -1707,7 +1707,6 @@ body.modal-active {
                             <nav class="navbar__navWrapper__2mJ">
                                 <div class="navbar__container__3tL clearfix">
                                 	<ul class="navbar__left__2RB">
-<<<<<<< HEAD
                                 		<li><a href="mailto:ads@vingle.net"><span>관리자 페이지</span></a></li><li>
                                 	</ul>
                                     <ul class="navbar__right__2FE">
@@ -1735,7 +1734,6 @@ body.modal-active {
                             </div>
                             <div class="signUpDetail__bodyContainer__vop">
     					<div class="signUpBody__emailBodyWrapper__20z">
-=======
                                 		<li><a href="mailto:ads@vingle.net"><span>TEST 페이지</span></a></li><li>
                                 		<li><a href="/sellpie/test.do"><span>TEST TEST TEST</span></a></li><li>
                                 	</ul>
@@ -1789,8 +1787,6 @@ body.modal-active {
     						<hr>
     					</div>
     				</nav>
-    				
->>>>>>> branch 's2jun' of https://github.com/Sueng-Won/sellpie.git
     					    <div class="signUpBody__emailHeader__TiN">
     							<div class="titleWithVerify__head__3gv">
     								<div class="titleWithVerify__title__1ix">이메일로 시작하기</div>
