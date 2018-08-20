@@ -876,7 +876,9 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
                             <nav class="navbar__navWrapper__2mJ">
                                 <div class="navbar__container__3tL clearfix">
                                 	<ul class="navbar__left__2RB">
-                                		<li><a href="/sellpie/errorPage.do"><span>관리자 페이지</span></a></li><li>
+                                		<li><a href="/sellpie/inspectAu.do"><span>관리자 페이지1</span></a></li>
+                                		<li><a href="/sellpie/template.do"><span>관리자 페이지2</span></a></li>
+                                		<li><a href="/sellpie/templateAdvance.do"><span>관리자 페이지3</span></a></li>
                                 	</ul>
                                 </div>
                             </nav>

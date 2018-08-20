@@ -287,10 +287,6 @@ public class MemberController {
 		public String updateMember(){
 			return "member/memberUpdate";
 		}
-	@RequestMapping("errorPage.do")
-	public String errorPage(){
-		return "common/errorPage";
-	}
 	@RequestMapping("userImgUpload.do")
 	public @ResponseBody String userImgUpload(MultipartHttpServletRequest request, HttpServletRequest servletRequest, Member member){
 		// 저장 경로 설정

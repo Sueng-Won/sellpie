@@ -17,4 +17,8 @@ public class AdminController {
 	public String templateAdvance() {
 		return "template/templateAdvance";
 	}
+	@RequestMapping("inspectAu.do")
+	public String inspectAu(){
+		return "admin/adminMain";
+	}
 }
