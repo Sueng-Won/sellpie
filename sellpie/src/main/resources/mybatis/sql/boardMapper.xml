@@ -14,9 +14,9 @@
 	  	<result property="delflag" column="DELFLAG"/>
 	  	<result property="name" column="NAME"/>
 	  	<result property="profileImg" column="PROFILE_IMG"/>
-	  	<collection property="resource" column="BNO" ofType="Resource" resultMap="resourceMap"/> 
+	  	<collection property="resource" column="RES" ofType="Resource" resultMap="resourceMap"/> 
 	 </resultMap>
-  
+
 	 <resultMap type="Resource" id="resourceMap">
 	      <id property="rno" column="RNO"/>
 	      <result property="rsrc" column="RSRC"/>
@@ -71,7 +71,7 @@
 		FROM MEMBER
 		WHERE EMAIL = #{email}
 	</select>
-
+	
 	<insert id="insertBlike" parameterType="hashMap">
 		INSERT INTO BOARD_LIKE 
 		VALUES(SEQ_BOARD_LIKE_BLNO.NEXTVAL, #{email}, #{bno})
@@ -87,13 +87,9 @@
 		WHERE BNO = #{bno} AND EMAIL = #{email}
 	</delete>
 	
-	<delete id="deleteResource" parameterType="string">
-		DELETE FROM RESOURCES
-		WHERE RSRC = #{delfile}
-	</delete>
-	
 	<update id="updateBoard" parameterType="Board">
 		UPDATE BOARD SET BCONTENT = #{bcontent}, RURL = #{rurl}
 		WHERE BNO = #{bno}
 	</update>
+	
 </mapper>

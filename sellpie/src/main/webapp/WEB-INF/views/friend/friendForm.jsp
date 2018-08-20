@@ -16,27 +16,27 @@
 <script>
 
 function friendDelect(fList){
-	if (confirm("정말 삭제하시겠습니까??") == true){    //확인
-		location.href = "friendDelect.do?email="+fList;
-	}else{   
-	    return;
-	}
+   if (confirm("정말 삭제하시겠습니까?") == true){    //확인
+      location.href = "friendDelect.do?email="+fList;
+   }else{   
+       return;
+   }
 }
 
 function friendAcceptUpdate(AfList){
-	if (confirm("친구신청을 수락 하시겠습니까?") == true){    // 친구 수락
-		location.href = "friendAcceptUpdate.do?email="+AfList;
-	}else{   
-	    return;
-	}
+   if (confirm("친구신청을 수락 하시겠습니까?") == true){    // 친구 수락
+      location.href = "friendAcceptUpdate.do?email="+AfList;
+   }else{   
+       return;
+   }
 }
 
 function friendRefuseDelete(AfList){
-	if (confirm("친구신청을 거절 하시겠습니까?") == true){    // 친구 거절
-		location.href = "friendRefuseDelete.do?email="+AfList;
-	}else{   
-	    return;
-	}
+   if (confirm("친구신청을 거절 하시겠습니까?") == true){    // 친구 거절
+      location.href = "friendRefuseDelete.do?email="+AfList;
+   }else{   
+       return;
+   }
 }
 
 </script>
@@ -82,13 +82,13 @@ function friendRefuseDelete(AfList){
          <hr>          
               <div class="w3-container w3-padding-16 w3-row">
               
-              	<c:forEach var="AfList" items="${AfList }">
-	                <div class="w3-col m6 w3-container" >
-	                   <img src="resources/images/header/twice2.png" alt="Avatar" class="w3-left w3-circle w3-margin-right rounded-circle" style="width:60px; height:60px;">
-	                    <button class="w3-btn w3-white w3-border w3-border-blue w3-round w3-right w3-margin-left" style="margin-top:10px;" onclick="friendRefuseDelete('<c:out value='${AfList.email }'/>');">거절</button> 
-	                    <button class="w3-btn w3-white w3-border w3-border-blue w3-round w3-right" style="margin-top:10px;" onclick="friendAcceptUpdate('<c:out value='${AfList.email }'/>');">수락</button>
-	                    <br><h5><c:out value="${AfList.name }"></c:out></h5>
-	                </div>
+                 <c:forEach var="AfList" items="${AfList }">
+                   <div class="w3-col m6 w3-container" >
+                      <img src="resources/images/header/twice2.png" alt="Avatar" class="w3-left w3-circle w3-margin-right rounded-circle" style="width:60px; height:60px;">
+                       <button class="w3-btn w3-white w3-border w3-border-blue w3-round w3-right w3-margin-left" style="margin-top:10px;" onclick="friendRefuseDelete('<c:out value='${AfList.email }'/>');">거절</button> 
+                       <button class="w3-btn w3-white w3-border w3-border-blue w3-round w3-right" style="margin-top:10px;" onclick="friendAcceptUpdate('<c:out value='${AfList.email }'/>');">수락</button>
+                       <br><h5><c:out value="${AfList.name }"></c:out></h5>
+                   </div>
                 </c:forEach>
               </div>   
               </div>   

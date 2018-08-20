@@ -42,7 +42,7 @@ public class BoardService {
 	public List<String> selectfList5(String email) {
 		return dao.selectfList5(email);
 	}
-	
+
 	public int insertBlike(Map<String, String> likeMap) {
 		return dao.insertBlike(likeMap);
 	}
@@ -50,16 +50,16 @@ public class BoardService {
 	public int deleteBlike(Map<String, String> likeMap) {
 		return dao.deleteBlike(likeMap);
 	}
-	
+
 	public int updateGcount(Map<String, Integer> bmap) {
 		return dao.updateGcount(bmap);
 	}
-
-	public int deleteResource(String delfile) {
-		return dao.deleteResource(delfile);
-	}
-
+	
 	public int updateBoard(BoardVo board) {
 		return dao.updateBoard(board);
 	}
+
+
+
+
 }

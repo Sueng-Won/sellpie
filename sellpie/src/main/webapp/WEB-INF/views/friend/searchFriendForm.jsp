@@ -42,14 +42,14 @@
     pointer-events: auto;
 }
 .detail_content > div {
-	position: absolute;
-	top: 9%;
-	left: 15%;
-	width: 890px;
-	height: 520px;
-	padding: 16px;
-	background-color: rgba(0, 0, 0, 0.8);
-	overflow: auto;	
+   position: absolute;
+   top: 9%;
+   left: 15%;
+   width: 890px;
+   height: 520px;
+   padding: 16px;
+   background-color: rgba(0, 0, 0, 0.8);
+   overflow: auto;   
 }
 
 .detail_content2 {
@@ -88,10 +88,10 @@
     color: #fff;
     font-size: 35px;
     font-weight: normal;
-	position: absolute;
-	width: 350px;
-	height: 240px;
-	-webkit-margin-before: -6.9em;
+   position: absolute;
+   width: 350px;
+   height: 240px;
+   -webkit-margin-before: -6.9em;
 }
 
 .image_hide2 {
@@ -109,10 +109,10 @@
 </style>
 <script>
 $(function(){
-	var msg = '<c:out value="${msg}"/>';
-	if(msg.length!=0&&msg!=""){
-		alert(msg);
-	}
+   var msg = '<c:out value="${msg}"/>';
+   if(msg.length!=0&&msg!=""){
+      alert(msg);
+   }
 });
 </script>
 <script>  
@@ -227,35 +227,35 @@ function fileUpload(inputFiles, condition){
    }
    
    function friendApply(member){
-		    if($("#btn1").hasClass("w3-opacity")) {
-		    	if (confirm("친구 추가를 하시겠습니까?") == true){ 
-		            $("#btn1").removeClass("w3-opacity");
-			            $.ajax({
-							url:"friendApply.do",
-							type:"get",
-							data:{"email":member},
-							success:function(data){
-								console.log("성공");
-							},error:function(e){
-								console.log("댓글 입력 에러");
-							}
-						});
-		    	}
-	         }else{
-	        	if (confirm("친구 신청을 취소 하시겠습니까?") == true){ 
-	        		$("#btn1").addClass("w3-opacity");
-			        	$.ajax({
-							url:"friendApplyDelete.do",
-							type:"get",
-							data:{"email":member},
-							success:function(data){
-								console.log("성공");
-							},error:function(e){
-								console.log("댓글 입력 에러");
-							}
-						});
-	        	}
-	         } 
+          if($("#btn1").hasClass("w3-opacity")) {
+             if (confirm("친구 추가를 하시겠습니까?") == true){ 
+                  $("#btn1").removeClass("w3-opacity");
+                     $.ajax({
+                     url:"friendApply.do",
+                     type:"get",
+                     data:{"email":member},
+                     success:function(data){
+                        console.log("성공");
+                     },error:function(e){
+                        console.log("댓글 입력 에러");
+                     }
+                  });
+             }
+            }else{
+              if (confirm("친구 신청을 취소 하시겠습니까?") == true){ 
+                 $("#btn1").addClass("w3-opacity");
+                    $.ajax({
+                     url:"friendApplyDelete.do",
+                     type:"get",
+                     data:{"email":member},
+                     success:function(data){
+                        console.log("성공");
+                     },error:function(e){
+                        console.log("댓글 입력 에러");
+                     }
+                  });
+              }
+            } 
    }
 </script>
 </head><body class="w3-theme-l5">
@@ -271,40 +271,40 @@ function fileUpload(inputFiles, condition){
     
     <!-- Middle Column -->
     <div class="w3-col m7" style="margin-left:25%;" id="contentDiv">
-    		
-				<div class="w3-row-padding">
-			        <div class="w3-col m12">
-			          <div class="w3-card w3-round w3-white">
-			            <div class="w3-container w3-padding" id="memberInfoDiv">
-			                  <img src="" alt="Avatar" class="w3-left w3-margin-right w3-circle" style="width:55px; height:55px;">
-			                  	 
-			                  	 <c:if test="${member.email eq sellerInfo.email}">
-			                  	 	
-									<button type="button" class="btn btn-default btn-lg w3-right w3-opacity" style="margin-top:10px;">
-									       <span class="glyphicon glyphicon-shopping-cart"></span>
-									</button>
-								 </c:if>
-								 
-								 
-								 <c:if test="${applyflag eq 'Y'  }">
-									 	<button type="button" class="btn btn-default btn-lg w3-right w3-opacity" style="margin-top:10px;">
-												       <span class="glyphicon glyphicon-user"></span>
-										</button>
-								 </c:if>
-								 			
-								 <c:if test="${applyflag ne 'Y'  }">
-										 	<button id="btn1" type="button" class="btn btn-default btn-lg w3-right 
-											 	<c:if test="${applyCheck eq null }">
-											 		w3-opacity
-											 	</c:if>" style="margin-top:10px;" onclick="friendApply('<c:out value='${member.email }'/>');">
-												<span class="glyphicon glyphicon-user">+</span>
-											</button>
-								 </c:if>
-			                  <h4><c:out value="${member.name }"></c:out></h4><br>
-			            </div>
-			          </div>
-			        </div>
-			      </div>
+          
+            <div class="w3-row-padding">
+                 <div class="w3-col m12">
+                   <div class="w3-card w3-round w3-white">
+                     <div class="w3-container w3-padding" id="memberInfoDiv">
+                           <img src="" alt="Avatar" class="w3-left w3-margin-right w3-circle" style="width:55px; height:55px;">
+                               
+                               <c:if test="${member.email eq sellerInfo.email}">
+                                  
+                           <button type="button" class="btn btn-default btn-lg w3-right w3-opacity" style="margin-top:10px;">
+                                  <span class="glyphicon glyphicon-shopping-cart"></span>
+                           </button>
+                         </c:if>
+                         
+                         
+                         <c:if test="${applyflag eq 'Y'  }">
+                               <button type="button" class="btn btn-default btn-lg w3-right w3-opacity" style="margin-top:10px;">
+                                           <span class="glyphicon glyphicon-user"></span>
+                              </button>
+                         </c:if>
+                                  
+                         <c:if test="${applyflag ne 'Y'  }">
+                                  <button id="btn1" type="button" class="btn btn-default btn-lg w3-right 
+                                     <c:if test="${applyCheck eq null }">
+                                        w3-opacity
+                                     </c:if>" style="margin-top:10px;" onclick="friendApply('<c:out value='${member.email }'/>');">
+                                    <span class="glyphicon glyphicon-user">+</span>
+                                 </button>
+                         </c:if>
+                           <h4><c:out value="${member.name }"></c:out></h4><br>
+                     </div>
+                   </div>
+                 </div>
+               </div>
 
 <!--게시글보기 창 -->
          <form id="board" method="post"  action="/sellpie/insertBoard.do" onsubmit="validate();" enctype="multipart/form-data">
@@ -474,98 +474,98 @@ function fileUpload(inputFiles, condition){
                   
                   <!-- 사진 3개 -->
                   <c:if test="${board.resource.size() eq 3}">
-	                  <c:if test="${st.count eq 1}">
-	                        <tr>
-	                           <td colspan="2">
-	                               <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:720px; height:240px;">
-	                           </td>
-	                        </tr>
-	                  </c:if> 
-	                  <c:if test="${st.count >= 2}">
-	                      <c:if test="${st.count eq 2}">
-	                      <tr>
-	                              <td>
-	                                 <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
-	                             </td>
-	                        </c:if>
-	                        <c:if test="${st.count eq 3}">
-	                               <td>
-	                                   <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
-	                               </td>
-	                        </tr>
-	                         </c:if>
-	                  </c:if>
+                     <c:if test="${st.count eq 1}">
+                           <tr>
+                              <td colspan="2">
+                                  <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:720px; height:240px;">
+                              </td>
+                           </tr>
+                     </c:if> 
+                     <c:if test="${st.count >= 2}">
+                         <c:if test="${st.count eq 2}">
+                         <tr>
+                                 <td>
+                                    <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
+                                </td>
+                           </c:if>
+                           <c:if test="${st.count eq 3}">
+                                  <td>
+                                      <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
+                                  </td>
+                           </tr>
+                            </c:if>
+                     </c:if>
                   </c:if>
                   
                   <!-- 사진 4개 -->
                   <c:if test="${board.resource.size() eq 4}">
-	                  <c:if test="${st.count < 3}">
-	                      <c:if test="${st.count eq 1}">
-	                      <tr>
-	                              <td>
-	                                 <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
-	                             </td>
-	                        </c:if>
-	                        <c:if test="${st.count eq 2}">
-	                               <td>
-	                                   <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
-	                               </td>
-	                        </tr>
-	                         </c:if>
-	                  </c:if>
-	                  <c:if test="${st.count >= 3}">
-	                      <c:if test="${st.count eq 3}">
-	                      <tr>
-	                              <td>
-	                                 <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
-	                             </td>
-	                        </c:if>
-	                        <c:if test="${st.count eq 4}">
-	                               <td>
-	                                   <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
-	                               </td>
-	                        </tr>
-	                        </c:if>
-	                  </c:if>
+                     <c:if test="${st.count < 3}">
+                         <c:if test="${st.count eq 1}">
+                         <tr>
+                                 <td>
+                                    <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
+                                </td>
+                           </c:if>
+                           <c:if test="${st.count eq 2}">
+                                  <td>
+                                      <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
+                                  </td>
+                           </tr>
+                            </c:if>
+                     </c:if>
+                     <c:if test="${st.count >= 3}">
+                         <c:if test="${st.count eq 3}">
+                         <tr>
+                                 <td>
+                                    <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
+                                </td>
+                           </c:if>
+                           <c:if test="${st.count eq 4}">
+                                  <td>
+                                      <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
+                                  </td>
+                           </tr>
+                           </c:if>
+                     </c:if>
                   </c:if>
-          		  
-          		  <!-- 사진 4개 이상-->
-          		  <c:if test="${board.resource.size() > 4}">
-	                  <c:if test="${st.count < 3}">
-	                      <c:if test="${st.count eq 1}">
-	                      <tr>
-	                              <td>
-	                                 <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
-	                             </td>
-	                        </c:if>
-	                        <c:if test="${st.count eq 2}">
-	                               <td>
-	                                   <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
-	                               </td>
-	                        </tr>
-	                         </c:if>
-	                  </c:if>
-	                  <c:if test="${st.count >= 3}">
-	                      <c:if test="${st.count eq 3}">
-	                      <tr>
-	                              <td>
-	                                 <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
-	                             </td>
-	                        </c:if>
-	                        <c:if test="${st.count eq 4}">
-	                               <td>
-	                                   <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
-	                                   <div class="image_hide1">
-			                               <div class="image_hide2">
-				                               <div class="image_hide3"><c:out value='${board.resource.size()-4}'></c:out>장+
-				                               </div>
-			                               </div>
-	                               	   </div>
-	                               </td>
-	                               
-	                        </tr>
-	                        </c:if>
-	                  </c:if>
+                  
+                  <!-- 사진 4개 이상-->
+                  <c:if test="${board.resource.size() > 4}">
+                     <c:if test="${st.count < 3}">
+                         <c:if test="${st.count eq 1}">
+                         <tr>
+                                 <td>
+                                    <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
+                                </td>
+                           </c:if>
+                           <c:if test="${st.count eq 2}">
+                                  <td>
+                                      <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
+                                  </td>
+                           </tr>
+                            </c:if>
+                     </c:if>
+                     <c:if test="${st.count >= 3}">
+                         <c:if test="${st.count eq 3}">
+                         <tr>
+                                 <td>
+                                    <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
+                                </td>
+                           </c:if>
+                           <c:if test="${st.count eq 4}">
+                                  <td>
+                                      <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
+                                      <div class="image_hide1">
+                                        <div class="image_hide2">
+                                           <div class="image_hide3"><c:out value='${board.resource.size()-4}'></c:out>장+
+                                           </div>
+                                        </div>
+                                        </div>
+                                  </td>
+                                  
+                           </tr>
+                           </c:if>
+                     </c:if>
                   </c:if>
            </c:forEach>
         </table>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE>
 <html>
 <head>
@@ -9,6 +10,9 @@
 <script src="resources/js/jquery-3.3.1.min.js"></script>
 <script>
 	$(function(){
+		<c:if test="${not empty sessionScope.user}">
+		location.href="/sellpie/signIn.do";
+		</c:if>
 		$("#inputPwd").keyup(function(){
 			var pwd = $(this).val();
 			 var regex=/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/

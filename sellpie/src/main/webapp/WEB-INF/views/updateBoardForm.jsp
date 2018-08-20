@@ -18,22 +18,12 @@ $(function(){
 	}
 });
    
-   var delfile = "";
+	var delfile = "";
    function deleteFile(delBtn){
 	   var rsrc = $(delBtn).parent().next().attr("src");
-	   delfile = rsrc + ",";
+	   delfile += rsrc + ",";
 	   $(delBtn).parent().parent().remove();
-// 	   $.ajax({
-// 		  url:"deleteFile.do",
-// 		  type:"get",
-// 		  data:{"rsrc":rsrc},
-// 		  success:function(data){
-// 			  $(delBtn).parent().parent().remove();
-// // 			  console.log(data);
-// 		  },error:function(e){
-// 			  console.log("에러",e);
-// 		  }
-// 	   });
+	   console.log(delfile);
    }
    
 function validate(){
@@ -103,6 +93,7 @@ function fileUpload(inputFiles, condition){
 
 </head><body class="w3-theme-l5">
 
+
 <!-- Page Container -->
 <div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">    
   <!-- The Grid -->
@@ -127,6 +118,7 @@ function fileUpload(inputFiles, condition){
         </div>
       </div>
       
+
 	<div class="w3-container w3-card w3-white w3-round w3-margin"><br>
         <c:if test="${!empty board }">
         <form id="board" method="post" action="/sellpie/updateBoard.do" onsubmit="validate();" enctype="multipart/form-data">
@@ -170,6 +162,7 @@ function fileUpload(inputFiles, condition){
           </c:if>
       </div>  
     
+    
     <!-- End Middle Column -->
     </div>
    
@@ -183,6 +176,9 @@ function fileUpload(inputFiles, condition){
 <!-- End Page Container -->
 </div>
 <br>
+
+
+
 
 </body></html>
  

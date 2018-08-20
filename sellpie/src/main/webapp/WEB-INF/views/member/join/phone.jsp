@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE>
 <html>
 <head>
@@ -49,7 +50,6 @@
   width: 780px;
   display: -webkit-box;
   display: -ms-flexbox;
-  display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -86,7 +86,7 @@
       -ms-flex-align: center;
           align-items: center; }
   .signUpBody__content__1PG .signUpBody__formInput__1yh {
-    display:inline-block;}
+    display:inline-flex;}
     .signUpBody__content__1PG .signUpBody__formInput__1yh:nth-child(1) {
       margin-bottom: 12px; }
   .signUpBody__content__1PG .signUpBody__btnSignUp__Y5M {
@@ -264,7 +264,14 @@
     background-color: #ad1326; }
 </style>
 <script>
+history.pushState(null, null, location.href);
+window.onpopstate = function(event) {
+	history.go(1);
+};
 	$(function(){
+		<c:if test="${not empty sessionScope.user}">
+		location.href="/sellpie/signIn.do";
+		</c:if>
 		$("input[id*='phoneNum']").keyup(function(){
 			var phoneNum = new Array();
 			$("input[id*='phoneNum']").each(function(value, index){
@@ -339,12 +346,18 @@
     								<div class="solidReasonInput__wrapper__28f undefined " >
     									<input type="text" id="phoneNum1" class="solidReasonInput__textInput__ZZr " value=""  autocomplete="off"/>
     								</div>
+    								<div class="titleWithVerify__head__3gv">
+    								<div class="titleWithVerify__title__1ix">-</div>
+    						   </div>
     								<div class="solidReasonInput__wrapper__28f undefined " >
     									<input type="text" id="phoneNum2" class="solidReasonInput__textInput__ZZr " value=""  autocomplete="off"/>
-    								</div>
+    								</div><div class="titleWithVerify__head__3gv">
+    								<div class="titleWithVerify__title__1ix">-</div>
+    						   </div>
     								<div class="solidReasonInput__wrapper__28f undefined " >
     									<input type="text" id="phoneNum3" class="solidReasonInput__textInput__ZZr " value=""  autocomplete="off"/>
     								</div>
+    								
     							</div>
     						<div class="solidButton__buttonWrapper__tkE">
     							<button type="button" class="solidButton__button__15V  solidButton__disabled__15i signUpBody__nextButton__wU3" disabled style="background-color:rgba(0,0,0,0)">Next</button>

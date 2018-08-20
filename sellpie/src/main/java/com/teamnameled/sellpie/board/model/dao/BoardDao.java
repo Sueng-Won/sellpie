@@ -52,15 +52,15 @@ public class BoardDao {
 		return sqlSession.insert("boardMapper.insertBlike", likeMap);
 	}
 
+
 	public int deleteBlike(Map<String, String> likeMap) {
 		return sqlSession.delete("boardMapper.deleteBlike", likeMap);
 	}
 
-	public int deleteResource(String delfile) {
-		return sqlSession.delete("boardMapper.deleteResource", delfile);
-	}
 
 	public int updateBoard(BoardVo board) {
 		return sqlSession.update("boardMapper.updateBoard", board);
 	}
+
+
 }
