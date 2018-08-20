@@ -114,14 +114,14 @@ public class BoardController {
             errorMsg="db에 file insert중 에러";
          }
       }
-//       
-//      File[] b = file.listFiles();
-//
-//            if(null!=b && b.length!=0){
-//               board.setRurl(savePath);
-//            }else{
-//               file.delete();
-//            }
+      
+      /*File[] b = file.listFiles();
+
+            if(null!=b && b.length!=0){
+               board.setRurl(savePath);
+           }else{
+               file.delete();
+            }*/
             
       request.setAttribute("msg", errorMsg);
       

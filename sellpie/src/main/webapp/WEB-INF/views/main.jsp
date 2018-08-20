@@ -191,7 +191,7 @@ function fileUpload(inputFiles, condition){
          });
       }
    }
-Z
+
    function getReply(bno){
       $.ajax({
          url:"selectReply.do",
@@ -539,14 +539,15 @@ Z
             </div>
           </div>
 <!--          상세보기창 끝-->
-          
-   <c:forEach var="board" items="${bList }" end="4">
+
+   <c:forEach var="board" items="${bList }" >
+   
    <div class="w3-container w3-card w3-white w3-round w3-margin" id="boardList"><br>
       <input type="hidden" name="bno" />
       
         <img src="<c:out value='${board.profileImg }'/>" alt="Avatar" class="w3-left w3-circle w3-margin-right rounded-circle" style="width:60px; height:60px;">
         <span class="w3-right w3-opacity">
-          <c:if test="${sessionScope.user eq board.email }">
+          <c:if test="${sessionScope.user.email eq board.email }">
            <button type="button" class="btn btn-default" aria-label="Left Align" onclick="javascript:location.href='updateForm.do?bno='+<c:out value='${board.bno }'/>">
               <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
          </button>
@@ -563,6 +564,7 @@ Z
                  <!-- 사진 1개 -->
                  <c:if test="${board.resource.size() eq 1}">
                     <c:if test="${st.count eq 1}">
+                    
                        <tr>
                             <td>
                                 <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:720px; height:500px;" >
@@ -679,6 +681,7 @@ Z
                                   </td>
                                   
                            </tr>
+                           
                            </c:if>
                      </c:if>
                   </c:if>
@@ -695,7 +698,7 @@ Z
         <input type="hidden" name="bno" value="<c:out value='${board.bno }'/>"/>
         <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom w3-border" onclick="openDetail('<c:out value="${board.bno }"/>')"><i class="fa fa-comment"></i> &nbsp;
          <c:out value="${board.rcount }"/>
-      </button> 
+        </button> 
     </div>
     
     </c:forEach> 
