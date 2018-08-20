@@ -23,6 +23,7 @@
 		<typeAlias type="com.teamnameled.sellpie.contract.model.vo.ContractWithName" alias="ContractWithName"/>
 		<typeAlias type="com.teamnameled.sellpie.review.model.vo.Review" alias="Review"/>
 		<typeAlias type="com.teamnameled.sellpie.reply.model.vo.ReplyVo" alias="Reply"/>
+		<typeAlias type="com.teamnameled.sellpie.contract.model.vo.SalesListVo" alias="SalesListVo"/>
 	</typeAliases>
 	
 	

@@ -26,6 +26,7 @@ import com.teamnameled.sellpie.contract.model.service.ContractService;
 import com.teamnameled.sellpie.contract.model.vo.Contract;
 import com.teamnameled.sellpie.common.GenerateCertNumber;
 import com.teamnameled.sellpie.contract.model.vo.ContractWithName;
+import com.teamnameled.sellpie.contract.model.vo.SalesListVo;
 import com.teamnameled.sellpie.member.model.service.MemberService;
 import com.teamnameled.sellpie.member.model.vo.Member;
 
@@ -289,13 +290,12 @@ public class MemberController {
 	}
 	//개인정보수정-판매현황
 	@RequestMapping("salesList.do")
-	public String salesList(String email, HttpServletRequest request) {
+	public String salesList(String email,SalesListVo salesListVo, HttpServletRequest request) {
 		//이메일 있으면 지울것
-		email = "aaa@aaa.com";
-		List<Contract> purchaseList = contractService.selectContractList(email);
-		List<ContractWithName> purchaseListWithName = contractService.selectContractListWithName(purchaseList);
-		request.setAttribute("cList", purchaseList);
-		request.setAttribute("pList", purchaseListWithName);
+		salesListVo.setEmail("aaa@aaa.com");
+		System.out.println(salesListVo.toString());
+		List<SalesListVo> pList = contractService.selectSalesList(salesListVo);
+		request.setAttribute("pList", pList);
 		return "member/salseList";
 	}
 }
