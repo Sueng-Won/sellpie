@@ -6,7 +6,16 @@
 <head>
 <meta charset="utf-8">
 <title>SellPie</title>
+<script src="resources/js/jquery-3.3.1.min.js"></script>
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
+<!-- 부가적인 테마 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> <!-- 스윗알람 CDN -->
 <style type="text/css" id="s1956-0">
 
 @-webkit-keyframes root__bounceIn__3s4 {
@@ -2473,7 +2482,32 @@ span + .signupNavbar__vingleLogo__3Ob {
     height: 22px; }
 </style>
 <script>
-
+	
+	$(function(){
+		<c:if test="${not empty sessionScope.user}">
+		location.href="/sellpie/signIn.do";
+		</c:if>
+		$(".solidButton__button__15V").click(function(){
+			$.ajax({
+				url : "userLogin.do", 
+				data : {email : $("#email").val(), pwd : $("#pwd").val(), isUseCookie : $("#isUseCookie").prop("checked")},
+				type : "post",
+				success:function(data){
+					console.log(data.result);
+					if( data.result == "1" ){
+						 location.href="/sellpie/main.do"; 
+						
+					}else{
+						swal("","이메일 혹은 비밀번호를 확인 해주세요!", "error");
+					}
+				},
+				error:function(e){
+					console.log(e);
+				}
+			});
+		});
+	
+	});
 </script>
 </head>
       <body>
@@ -2483,7 +2517,7 @@ span + .signupNavbar__vingleLogo__3Ob {
         			<div>
         				<nav class="signupNavbar__navWrapper__186">
         					<div class="signupNavbar__titleWrapper__4Iq">
-        						<span>Welcome to</span> <i class="icons__icon__2cq signupNavbar__vingleLogo__3Ob">로고 이미지</i>
+        						<span>Welcome to</span> <i class="icons__icon__2cq signupNavbar__vingleLogo__3Ob"><img style="width:120px; height:30px;"src="resources/images/join/logo_sellpie.png"/></i>
         					</div></nav>
         					<div class="signIn__signInWrapper__1Wg">
         					<h1 class="signIn__headLine__SGa">로그인</h1>
@@ -2492,26 +2526,26 @@ span + .signupNavbar__vingleLogo__3Ob {
         						</div>
         					</div>
         					<div class="signIn__divider__sz8">또는</div>
-        						<form class="signIn__form__2cu" action="/sellpie/userLogin.do">
+        						<div class="signIn__form__2cu" >
         							<div class="signIn__formControl__35V">
         								<div class="solidReasonInput__wrapper__28f undefined ">
-        									<input type="text"  name="email" class="solidReasonInput__textInput__ZZr " placeholder="이메일" value="">
+        									<input type="text"  name="email" id="email" class="solidReasonInput__textInput__ZZr " placeholder="이메일" value="">
         								</div>
         							</div>
         							<div class="signIn__formControl__35V">
         								<div class="solidReasonInput__wrapper__28f undefined ">
-        									<input type="password" name="pwd" class="solidReasonInput__textInput__ZZr " placeholder="비밀번호" value="">
+        									<input type="password" name="pwd"  id="pwd" class="solidReasonInput__textInput__ZZr " placeholder="비밀번호" value="">
         								</div>
         							</div>
         							<div class="signIn__loginInformation__3Nk">공용 PC 이용 후 개인정보 보호를 위해 로그아웃 해주세요.</div>
-        							<div class="signIn__loginInformation__3Nk">자동 로그인 <input type="checkbox" id="saveLocal"/></div>
+        							<div class="signIn__loginInformation__3Nk">자동 로그인 <input type="checkbox" id="isUseCookie" name="isUseCookie"/></div>
         							<div class="solidButton__buttonWrapper__tkE" data-cy="login">
-        								<button type="submit" class="solidButton__button__15V  signIn__loginButton__1dS" style="background-color: rgba(0, 0, 0, 0);">로그인</button>
+        								<button type="button" class="solidButton__button__15V  signIn__loginButton__1dS" style="background-color: rgba(0, 0, 0, 0);">로그인</button>
         							</div>
         							<div class="signIn__bottomLinkWrapper__ndb">
-        								<a href="/users/password/new">비밀번호 찾기</a><a>|</a><a href="/sellpie/memberJoin.do">회원가입</a>
+        								<a href="/sellpie/changePwd.do">비밀번호 찾기</a><a>|</a><a href="/sellpie/memberJoin.do">회원가입</a>
         							</div>
-        						</form>
+        						</div><!-- div 00form -->
         					</div>
         				</div>
         			</div>

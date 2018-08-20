@@ -408,7 +408,7 @@ Z
   <!-- The Grid -->
   <div class="w3-row">
     <!-- Left Column -->
-       <c:import url="sideLeft.jsp"></c:import>
+    	<c:import url="sideLeft.jsp"/>
     <!-- End Left Column -->
     
     <!-- Middle Column -->

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <html>
 <head>
 <meta charset="utf-8">
@@ -15,7 +15,28 @@
 function frientForm(){
    location.href="friendForm.do";
 }
+//Accordion
+function myFunction(id) {
+    var x = document.getElementById(id);
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+        x.previousElementSibling.className += " w3-theme-d1";
+    } else { 
+        x.className = x.className.replace("w3-show", "");
+        x.previousElementSibling.className = 
+        x.previousElementSibling.className.replace(" w3-theme-d1", "");
+    }
+}
 
+// Used to toggle the menu on smaller screens when clicking on the menu button
+function openNav() {
+    var x = document.getElementById("navDemo");
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+    } else { 
+        x.className = x.className.replace(" w3-show", "");
+    }
+}
 </script>
 </head>
 
@@ -24,12 +45,29 @@ function frientForm(){
       <!-- Profile -->
       <div class="w3-card w3-round w3-white">
         <div class="w3-container">
-         <h4 class="w3-center">My Profile</h4>
-         <p class="w3-center"><img src="resources/images/header/red1.jpg" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
-         <hr>
-         <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> Designer, UI</p>
-         <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> London, UK</p>
-         <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> April 1, 1988</p>
+	         <h4 class="w3-center">My Profile</h4>
+	         
+        	<c:choose>
+        	
+        	<c:when test="${!empty sessionScope.user}">
+         	 <p class="w3-center"><img src="resources/images/userImg/${(sessionScope.user.profileImg ne null)?'profile.png':sessionScope.user.profileImg}" class="w3-circle" style="height:106px;width:106px" alt="Avatar"/></p>
+         	 <hr>
+        	 <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i><c:out value="${sessionScope.user.email}"/></p>
+       		 <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> 주 소</p>
+        	 <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i><c:out value="${sessionScope.user.age}"/> </p>
+         	</c:when>
+         	<c:otherwise>
+         		<p class="w3-center"><img src="resources/images/header/red1.jpg" class="w3-circle" style="height:106px;width:106px" alt="Avatar"/></p>
+         	<hr>
+         	<p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> Designer, UI</p>
+        	<p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> London, UK</p>
+            <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> April 1, 1988</p>
+         	
+         	</c:otherwise>
+        	</c:choose>
+         	
+         	
+         
         </div>
       </div>
       <br>
@@ -37,9 +75,10 @@ function frientForm(){
       <!-- Accordion -->
       <div class="w3-card w3-round">
         <div class="w3-white">
-          <button onclick="myFunction('Demo1')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-circle-o-notch fa-fw w3-margin-right"></i> My Groups</button>
+          <button onclick="myFunction('Demo1')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-circle-o-notch fa-fw w3-margin-right"></i> My Page</button>
           <div id="Demo1" class="w3-hide w3-container">
-            <p>Some text..</p>
+            <a class="w3-button w3-theme" onclick="javascript: location.href = 'productForm.do'">물품등록</a>
+            <a class="w3-button w3-theme" onclick="javascript: location.href = 'salesList.do?email=${sessionScope.user.email}'">판매관리</a>
           </div>
           <button onclick="myFunction('Demo2')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i> My Events</button>
           <div id="Demo2" class="w3-hide w3-container">

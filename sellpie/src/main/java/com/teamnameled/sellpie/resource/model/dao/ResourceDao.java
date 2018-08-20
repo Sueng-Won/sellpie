@@ -24,4 +24,5 @@ public class ResourceDao {
 		return sqlSession.delete("resourceMapper.deleteResource", delfile);
 	}
 
+
 }

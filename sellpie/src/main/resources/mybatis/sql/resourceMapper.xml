@@ -8,7 +8,6 @@
 		INSERT INTO RESOURCES
 		VALUES(SEQ_RESOURCES_RNO.NEXTVAL, #{rsrc})
 	</insert>
-	
 	<delete id="deleteResource" parameterType="string">
 		DELETE FROM RESOURCES WHERE RSRC = #{delfile}
 	</delete>
