@@ -12,7 +12,7 @@
 <script src="resources/js/jquery-3.3.1.min.js"></script>
 <script>
 $(document).ready(function(){
-   var myKey = "fMRb63gXbA5qym8Hl18qCw"; // sweet tracker에서 발급받은 자신의 키 넣는다.
+   var myKey = "nbeEbTsubouLt0cxAval8w"; // sweet tracker에서 발급받은 자신의 키 넣는다.
    var length = "${fn:length(pList)}";
    var pList = new Array();
    <c:forEach var="purchaseItem" items="${pList}" varStatus="status">

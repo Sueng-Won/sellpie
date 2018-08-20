@@ -58,4 +58,9 @@ public class BoardDao {
 	}
 
 
+	public int updateBoard(BoardVo board) {
+		return sqlSession.update("boardMapper.updateBoard", board);
+	}
+
+
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.teamnameled.sellpie.member.model.vo.Member;
 import com.teamnameled.sellpie.seller.model.dao.SellerDao;
+import com.teamnameled.sellpie.seller.model.vo.SalesStatisticsVo;
 import com.teamnameled.sellpie.seller.model.vo.Seller;
 
 @Service
@@ -21,6 +22,9 @@ public class SellerService {
 	}
 	public Seller selectSeller(String email) {
 		return sellerDao.selectSeller(email);
+	}
+	public List<SalesStatisticsVo> selectSalesStatisticsList(String email) {
+		return sellerDao.selectSalesStatisticsList(email);
 	}
 	
 }

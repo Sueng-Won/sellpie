@@ -19,10 +19,48 @@
    </select>
    
    <select id="selectfList6" parameterType="string" resultType="string">
-		SELECT REPLACE(APPLICANT_EMAIL||SUBJECT_EMAIL, #{email2}, '') 
+      SELECT REPLACE(APPLICANT_EMAIL||SUBJECT_EMAIL, #{email2}, '') 
         FROM ADDFRIEND
-		WHERE ISAPPLY='Y' AND 
-		APPLICANT_EMAIL||SUBJECT_EMAIL LIKE '%'||#{email2}||'%'
+      WHERE ISAPPLY='Y' AND 
+      APPLICANT_EMAIL||SUBJECT_EMAIL LIKE '%'||#{email2}||'%'
    </select>
   
+   <delete id="friendDelect" parameterType="hashMap">
+         DELETE FROM ADDFRIEND
+      WHERE (APPLICANT_EMAIL = #{myEmail} AND SUBJECT_EMAIL = #{email} )
+      OR (APPLICANT_EMAIL = #{email} AND SUBJECT_EMAIL = #{myEmail} )
+   </delete>
+   
+   <insert id="friendApplyInsert" parameterType="hashMap">
+         INSERT INTO ADDFRIEND 
+        VALUES(SEQ_ADDFRIEND_ANO.NEXTVAL,#{myEmail},#{email},'N')
+   </insert>
+   
+   <delete id="friendApplyDelete" parameterType="hashMap">
+         DELETE FROM ADDFRIEND
+      WHERE APPLICANT_EMAIL = #{myEmail} AND SUBJECT_EMAIL = #{email}
+   </delete>
+   
+   <select id="selectfList7" parameterType="string" resultType="Member">
+      SELECT M.EMAIL , M.NAME , M.PROFILE_IMG
+      FROM ADDFRIEND F
+      JOIN MEMBER M ON (F.APPLICANT_EMAIL = M.EMAIL)
+      WHERE F.SUBJECT_EMAIL = #{email} AND ISAPPLY = 'N'
+   </select>
+   
+   <update id="friendAcceptUpdate" parameterType="hashMap">
+        UPDATE ADDFRIEND SET ISAPPLY = 'Y' WHERE APPLICANT_EMAIL = #{email} AND SUBJECT_EMAIL = #{myEmail}
+   </update>
+   
+   <delete id="friendRefuseDelete" parameterType="hashMap">
+         DELETE FROM ADDFRIEND
+      WHERE APPLICANT_EMAIL = #{email} AND SUBJECT_EMAIL = #{myEmail}
+   </delete>
+   
+   <select id="selectApplyCheck" parameterType="hashMap" resultType="string">
+         SELECT SUBJECT_EMAIL
+        FROM ADDFRIEND
+      WHERE ISAPPLY='N' AND 
+      APPLICANT_EMAIL = #{myEmail} AND SUBJECT_EMAIL = #{email}
+   </select>
 </mapper>

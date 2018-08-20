@@ -51,5 +51,23 @@
 				WHERE CNO = #{contract.cNo}
 			</foreach>
 	</select>
+	<select id="selectSalesList" parameterType="SalesListVo" resultType="SalesListVo">
+		SELECT S.EMAIL,C.CNO, M.NAME AS BUYER, (SELECT NAME FROM MEMBER WHERE EMAIL = S.EMAIL) AS SELLER, P.PNAME AS PNAME, QUANTITY, DELIVCODE, INVNUM
+		FROM CONTRACT C
+		JOIN MEMBER M ON (C.EMAIL = M.EMAIL)
+		JOIN PRODUCT P ON (C.PNO = P.PNO)
+		JOIN SELLER S ON (C.SNO = S.SNO)
+		WHERE S.EMAIL = #{email}
+			<if test="pName != null">
+				AND P.PNAME LIKE '%'|| #{pName} ||'%'
+			</if>
+			<if test="buyer != null">
+				AND C.EMAIL IN (SELECT EMAIL FROM MEMBER WHERE NAME LIKE '%'|| #{buyer} ||'%')
+			</if>
+			<if test="isChecked != null">
+				AND C.INVNUM IS NULL
+				AND C.DELIVCODE IS NULL
+			</if>
+	</select>
 </mapper>
 

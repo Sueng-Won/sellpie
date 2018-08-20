@@ -87,4 +87,9 @@
 		WHERE BNO = #{bno} AND EMAIL = #{email}
 	</delete>
 	
+	<update id="updateBoard" parameterType="Board">
+		UPDATE BOARD SET BCONTENT = #{bcontent}, RURL = #{rurl}
+		WHERE BNO = #{bno}
+	</update>
+	
 </mapper>
