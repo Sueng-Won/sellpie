@@ -270,7 +270,7 @@ window.onpopstate = function(event) {
 };
 	$(function(){
 		<c:if test="${not empty sessionScope.user}">
-		 location.href="/sellpie/main.do";
+		location.href="/sellpie/signIn.do";
 		</c:if>
 		$("input[id*='phoneNum']").keyup(function(){
 			var phoneNum = new Array();

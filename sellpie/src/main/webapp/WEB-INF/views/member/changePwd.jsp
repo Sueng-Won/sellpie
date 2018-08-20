@@ -360,7 +360,7 @@ span + .signupNavbar__vingleLogo__3Ob {
 <script>
 	$(function(){
 		<c:if test="${not empty sessionScope.user}">
-		 location.href="/sellpie/main.do";
+		location.href="/sellpie/signIn.do";
 		</c:if>
 		$(".solidReasonInput__textInput__ZZr").keyup(function(){
 			var $msgEmail = $("<div class='solidReasonInput__rightItemsWrapper__Email'><span></span></div>");
