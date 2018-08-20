@@ -25,7 +25,7 @@
 		SELECT SNO, EMAIL, ACNUM, BANK, ZIPCODE, ADDR, ADDRDETAIL, PCATEGORY, REASON
 		FROM SELLER
 		WHERE EMAIL IN 
-		<foreach collection="list" item="seller" open="(" close=")">
+		<foreach collection="list" item="seller" open="(" separator="," close=")">
 			#{seller.email}
 		</foreach>
 	</select>

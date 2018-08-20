@@ -361,7 +361,7 @@ span + .signupNavbar__vingleLogo__3Ob {
 <script>
 	$(function(){
 		<c:if test="${not empty sessionScope.user}">
-		 location.href="/sellpie/main.do";
+		location.href="/sellpie/signIn.do";
 		</c:if>
 		console.log(sessionStorage.getItem("userEmail"));
 		$("#email").val(sessionStorage.getItem("userEmail"));

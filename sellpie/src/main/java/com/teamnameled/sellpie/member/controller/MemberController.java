@@ -1,8 +1,10 @@
 package com.teamnameled.sellpie.member.controller;
 
 
+import java.io.File;
 import java.sql.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.mail.internet.MimeMessage;
@@ -18,6 +20,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.context.request.SessionScope;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.WebUtils;
 
@@ -40,6 +45,7 @@ public class MemberController {
 	
 	@Autowired
 	ContractService contractService;
+	
 
 	@RequestMapping("login.do")
 	public String loginPage(){
@@ -276,12 +282,46 @@ public class MemberController {
 	public String errorPage(){
 		return "common/errorPage";
 	}
+	@RequestMapping("userImgUpload.do")
+	public @ResponseBody String userImgUpload(MultipartHttpServletRequest request){
+		// 저장 경로 설정
+        String root = request.getSession().getServletContext().getRealPath("/");
+        System.out.println(root);
+        String path = root+"resources/userImg/";
+         
+        String newFileName = ""; // 업로드 되는 파일명
+         
+        File dir = new File(path);
+        if(!dir.isDirectory()){
+            dir.mkdirs();
+        }
+         
+        	Iterator<String> file = request.getFileNames();
+            String uploadFile = file.next();
+                         
+            MultipartFile mFile = request.getFile(uploadFile);
+            String fileName = mFile.getOriginalFilename();
+            System.out.println("실제 파일 이름 : " +fileName);
+            newFileName = System.currentTimeMillis()+"."
+                    +fileName.substring(fileName.lastIndexOf(".")+1);
+             
+            try {
+                mFile.transferTo(new File(path+newFileName));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+         
+        System.out.println("id : " + request.getParameter("id"));
+        System.out.println("pw : " + request.getParameter("pw"));
+        
+		return "msg";
+	}
 	//개인정보수정-구매현황
 	@RequestMapping("purchaseList.do")
 	public String purchaseList(String email, HttpServletRequest request) {
-		//이메일 있으면 지울것
-		email = "aaa@aaa.com";
-		List<Contract> purchaseList = contractService.selectContractList(email);
+		HttpSession session = request.getSession();
+		Member user = (Member)session.getAttribute("user");
+		List<Contract> purchaseList = contractService.selectContractList(user.getEmail());
 		List<ContractWithName> purchaseListWithName = contractService.selectContractListWithName(purchaseList);
 		request.setAttribute("cList", purchaseList);
 		request.setAttribute("pList", purchaseListWithName);
@@ -289,10 +329,10 @@ public class MemberController {
 	}
 	//개인정보수정-판매현황
 	@RequestMapping("salesList.do")
-	public String salesList(String email, HttpServletRequest request) {
-		//이메일 있으면 지울것
-		email = "aaa@aaa.com";
-		List<Contract> purchaseList = contractService.selectContractList(email);
+	public String salesList(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		Member user = (Member)session.getAttribute("user");
+		List<Contract> purchaseList = contractService.selectContractList(user.getEmail());
 		List<ContractWithName> purchaseListWithName = contractService.selectContractListWithName(purchaseList);
 		request.setAttribute("cList", purchaseList);
 		request.setAttribute("pList", purchaseListWithName);

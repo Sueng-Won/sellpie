@@ -38,6 +38,7 @@ public class ProductController {
 	@RequestMapping("productList.do")
 	public String selectProductList(int sNo,HttpServletRequest request) {
 		List<Product> productList = productService.selectProductList(sNo);
+		System.out.println(productList.toString());
 		List<Review> reviewList = reviewController.selectReviewList(productList);
 		double[] starAvg = new double[productList.size()];
 		int[] flooredStarAvg = new int[productList.size()];
