@@ -133,9 +133,6 @@
   				  <button type="submit" class="w3-btn w3-white w3-border w3-border-blue w3-round userInfo">수정 완료</button>
   				  <button class="w3-btn w3-white w3-border w3-border-red w3-round cancel">취소</button>
 			</header>
-			<div class="w3-container userInfo_List">
- 				 <h4 >친구 :  XX 명</h4>
-			</div>
 			<hr>
 			<div class="w3-container userInfo_board">
  				 <form class="w3-container w3-card w3-white w3-round w3-margin userInfoArea" action="modifyUserInfo.do" method="post" onsubmit="return validate();"><br>
@@ -195,7 +192,8 @@
                   </table>
                 </form>
 			</div>
+			
 			</div>
-
+<%-- <c:import url="../footer.jsp"></c:import> --%>
 </body>
 </html>

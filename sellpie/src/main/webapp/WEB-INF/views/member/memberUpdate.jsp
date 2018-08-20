@@ -77,7 +77,7 @@
 
 	<div class="w3-card container" >
   			<header class="w3-container  header">
-  			<img src="resources/images/header/twice2.png" id="userProfile" name="userProfile"  class="w3-left w3-circle w3-margin-right rounded-circle userImgArea" style="width:116px; height:116px;">
+  			<img src="resources/images/userImg/${(sessionScope.user.profileImg eq null)?'profile.png':sessionScope.user.profileImg}" id="userProfile" name="userProfile"  class="w3-left w3-circle w3-margin-right rounded-circle userImgArea" style="width:116px; height:116px;">
   					<form id="uploadForm" enctype="multipart/form-data" method="POST" action="/sellpie/userImgUpload.do">
   						<input type="file" id="userImg" name="profileImg" onchange="printImage(this);"/>
   					</form>

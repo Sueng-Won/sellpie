@@ -296,7 +296,7 @@ public class MemberController {
 		// 저장 경로 설정
         String root = servletRequest.getSession().getServletContext().getRealPath("resources");
         System.out.println(root);
-        String path = root+"\\userImg";
+        String path = root+"\\images\\userImg";
          
         String newFileName = ""; // 업로드 되는 파일명
          
