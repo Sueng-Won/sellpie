@@ -20,8 +20,8 @@ public class ResourceDao {
 		return sqlSession.insert("resourceMapper.insertResource", resource);
 	}
 
-	public int deleteResource(String oldFilePath) {
-		return sqlSession.delete("resourceMapper.deleteResource", oldFilePath);
+	public int deleteResource(String delfile) {
+		return sqlSession.delete("resourceMapper.deleteResource", delfile);
 	}
 
 
