@@ -20,6 +20,7 @@ public class ContractController {
 	}
 	@RequestMapping("insertContract.do")
 	public String insertContract(Contract contract) {
+		System.out.println(contract);
 		int result = contractService.insertContract(contract);
 		if(result>0) {
 			System.out.println("insert 성공");
