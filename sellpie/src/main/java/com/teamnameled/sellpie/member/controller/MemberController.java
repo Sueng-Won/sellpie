@@ -27,7 +27,6 @@ import com.teamnameled.sellpie.contract.model.service.ContractService;
 import com.teamnameled.sellpie.contract.model.vo.Contract;
 import com.teamnameled.sellpie.common.GenerateCertNumber;
 import com.teamnameled.sellpie.contract.model.vo.ContractWithName;
-import com.teamnameled.sellpie.contract.model.vo.SalesListVo;
 import com.teamnameled.sellpie.member.model.service.MemberService;
 import com.teamnameled.sellpie.member.model.vo.Member;
 
@@ -291,14 +290,6 @@ public class MemberController {
 	}
 	//개인정보수정-판매현황
 	@RequestMapping("salesList.do")
-<<<<<<< HEAD
-	public String salesList(String email,SalesListVo salesListVo, HttpServletRequest request) {
-		//이메일 있으면 지울것
-		salesListVo.setEmail("aaa@aaa.com");
-		System.out.println(salesListVo.toString());
-		List<SalesListVo> pList = contractService.selectSalesList(salesListVo);
-		request.setAttribute("pList", pList);
-=======
 	public String salesList(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		Member user = (Member)session.getAttribute("user");
@@ -306,7 +297,6 @@ public class MemberController {
 		List<ContractWithName> purchaseListWithName = contractService.selectContractListWithName(purchaseList);
 		request.setAttribute("cList", purchaseList);
 		request.setAttribute("pList", purchaseListWithName);
->>>>>>> branch 'ppororo' of https://github.com/Sueng-Won/sellpie.git
 		return "member/salseList";
 	}
 }
