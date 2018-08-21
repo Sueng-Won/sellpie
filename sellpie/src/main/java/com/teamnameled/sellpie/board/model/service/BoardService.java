@@ -54,6 +54,10 @@ public class BoardService {
 	public int updateGcount(Map<String, Integer> bmap) {
 		return dao.updateGcount(bmap);
 	}
+	
+	public int updateBoard(BoardVo board) {
+		return dao.updateBoard(board);
+	}
 
 
 

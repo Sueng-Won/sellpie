@@ -20,8 +20,8 @@ public class ResourceService {
 		return dao.insertResource(resource);
 	}
 
-	public int deleteResource(String oldFilePath) {
-		return dao.deleteResource(oldFilePath);
+	public int deleteResource(String delfile) {
+		return dao.deleteResource(delfile);
 	}
 
 

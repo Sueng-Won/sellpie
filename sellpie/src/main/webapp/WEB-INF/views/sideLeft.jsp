@@ -13,7 +13,7 @@
 <script>
 
 function frientForm(){
-	location.href="friendForm.do";
+   location.href="friendForm.do";
 }
 //Accordion
 function myFunction(id) {
@@ -86,7 +86,7 @@ function openNav() {
           <div id="Demo3" class="w3-hide w3-container">
          <div class="w3-row-padding">
          <br>
-           <div class="w3-half">
+           <!-- <div class="w3-half">
              <img src="/w3images/lights.jpg" style="width:100%" class="w3-margin-bottom">
            </div>
            <div class="w3-half">
@@ -103,7 +103,7 @@ function openNav() {
            </div>
            <div class="w3-half">
              <img src="/w3images/snow.jpg" style="width:100%" class="w3-margin-bottom">
-           </div>
+           </div> -->
          </div>
           </div>
         </div>      

@@ -169,7 +169,7 @@ public class MemberController {
 			if(result>0){
 				session.setAttribute("user", member);
 				
-				mav.setViewName("redirect:main.do");
+				mav.setViewName("redirect:selectBoardList.do");
 			}else{
 				mav.addObject("msg", "회원 가입 처리중 에러 발생!");
 				mav.setViewName("common/errorPage");
