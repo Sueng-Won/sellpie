@@ -89,6 +89,10 @@ function fileUpload(inputFiles, condition){
          });
       }
    }
+   
+function boardDelflag(bno){
+    location.href="boardDelflag.do?bno="+bno;
+ }
 </script>
 
 </head><body class="w3-theme-l5">
@@ -104,20 +108,6 @@ function fileUpload(inputFiles, condition){
     
     <!-- Middle Column -->
     <div class="w3-col m7" style="margin-left:25%;" id="contentDiv">
-    
-      <div class="w3-row-padding">
-        <div class="w3-col m12">
-          <div class="w3-card w3-round w3-white" onclick="javascript:location.href='#contentOpen'">
-            <div class="w3-container w3-padding">
-              <h6 class="w3-opacity">게시물 작성</h6>
-              <div contenteditable="true" class="w3-border w3-padding-16"> 
-              </div>
-              <button type="button" class="w3-button w3-theme"><i class="fa fa-pencil"></i> &nbsp; 게시</button> 
-            </div>
-          </div>
-        </div>
-      </div>
-      
 
 	<div class="w3-container w3-card w3-white w3-round w3-margin"><br>
         <c:if test="${!empty board }">
@@ -153,7 +143,9 @@ function fileUpload(inputFiles, condition){
  				 <span class="glyphicon glyphicon-facetime-video" aria-hidden="true"></span>
 			</button>
 			<input type="file" name="file" id="videoFile" onchange="fileUpload(this,1);" accept="video/*" style="display:none"/>
-
+			
+			<button type="button" class="w3-button w3-theme-d1 w3-margin-bottom w3-right w3-margin-left" onclick="boardDelflag('<c:out value='${board.bno }'/>');"><i class="glyphicon glyphicon-trash"></i> &nbsp;삭제
+            </button>
 	        <button type="submit" class="w3-button w3-theme-d1 w3-margin-bottom w3-right"><i class="glyphicon glyphicon-pencil"></i> &nbsp;수정
 	        </button>
 	          <br><br><br>

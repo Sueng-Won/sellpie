@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -40,14 +41,13 @@ public class BoardController {
    ReplyService replyService;
    
    @RequestMapping("insertBoard.do")
-   public String insertBoard(MultipartHttpServletRequest multipartHttpServletRequest, BoardVo board, HttpServletRequest request){
+   public String insertBoard(MultipartHttpServletRequest multipartHttpServletRequest, BoardVo board, HttpServletRequest request, String exceptFile){
       int boardResult = -1;
       int resourceResult = 0;
       Date today = new Date();
       SimpleDateFormat sdf = new SimpleDateFormat("yyMMddHHmmssZ");
       String bcontent = board.getBcontent();
       String email = board.getEmail();
-      
       
       // 웹서버 컨테이너 경로 추출함
       String root = request.getSession().getServletContext().getRealPath("resources");
@@ -79,11 +79,16 @@ public class BoardController {
                
             UUID uuid = UUID.randomUUID();
    
-            if(null!=files.get(i).getOriginalFilename()&&!files.get(i).getOriginalFilename().equals("")){
+            if(null!=files.get(i).getOriginalFilename()&&!files.get(i).getOriginalFilename().equals("")
+            		&&!exceptFile.contains(files.get(i).getOriginalFilename())){
                board.setRurl(savePath);
-               file = new File(filePath+"\\"+uuid+files.get(i).getOriginalFilename());
+               String fType = "";
+               if(files.get(i).getContentType().contains("video")){
+            	   fType = "video__";
+               }
+               file = new File(filePath+"\\"+uuid+fType+files.get(i).getOriginalFilename());
                ResourceVo resource = new ResourceVo();
-               resource.setRsrc(savePath+"/"+uuid+files.get(i).getOriginalFilename());
+               resource.setRsrc(savePath+"/"+uuid+fType+files.get(i).getOriginalFilename());
                resourceResult += resourceService.insertResource(resource);
                if(fileLength<resourceResult){
                   fileLength++;
@@ -125,7 +130,7 @@ public class BoardController {
             
       request.setAttribute("msg", errorMsg);
       
-      return "redirect:selectBoardList.do";
+      return "redirect:searchFriendForm.do?email="+email;
    }
    
    @RequestMapping("selectBoardList.do")
@@ -167,8 +172,20 @@ public class BoardController {
    }
 
    @RequestMapping("selectBoard.do")
-   public @ResponseBody BoardVo selectBoard(String bno){
+   public @ResponseBody BoardVo selectBoard(String bno, HttpSession session){
       BoardVo b = boardService.selectBoard(bno);
+      String email = ((Member)session.getAttribute("user")).getEmail();
+      List<String> lList = boardService.selectlList(b.getBno());
+      if(null!=lList && lList.size()!=0){
+         for(int j=0; j<lList.size(); j++){
+            String str = lList.get(j);
+            if(str.equals(email)){
+               b.setLikeflag('T');
+            }
+         }
+      }
+      int rcount = replyService.selectRcount(b.getBno());
+      b.setRcount(rcount);
       
       return b;
    }
@@ -242,23 +259,25 @@ public class BoardController {
          //경로 파일 가져와서 안의 파일들 배열에 담음
          File temp = new File(delfilePath);
          File[] a = temp.listFiles();
-         for(int x=0; x<a.length; x++){
-            int result = resourceService.deleteResource(folder+"/"+a[x].getName());
-            if(0<result){
-               int rResult = -1;
-               if(delfile.contains(a[x].getName())){
-                  a[x].delete();
-               }else{
-                  ResourceVo resource = new ResourceVo();
-                  resource.setRsrc(savePath+"/"+a[x].getName());
-                  rResult = resourceService.insertResource(resource);
-                     
-                  if(rResult<=0){
-                     System.out.println("update에서 resource insert중 에러!");
-                  }
-               }      
-               
-            }
+         if(null!=a && a.length !=0){
+	         for(int x=0; x<a.length; x++){
+	            int result = resourceService.deleteResource(folder+"/"+a[x].getName());
+	            if(0<result){
+	               int rResult = -1;
+	               if(delfile.contains(a[x].getName())){
+	                  a[x].delete();
+	               }else{
+	                  ResourceVo resource = new ResourceVo();
+	                  resource.setRsrc(savePath+"/"+a[x].getName());
+	                  rResult = resourceService.insertResource(resource);
+	                     
+	                  if(rResult<=0){
+	                     System.out.println("update에서 resource insert중 에러!");
+	                  }
+	               }      
+	               
+	            }
+	         }
          }
 
          File renamefile = new File(filePath);
@@ -278,9 +297,13 @@ public class BoardController {
       for (int i = 0; i < files.size(); i++) {   
          UUID uuid = UUID.randomUUID();
          if(null!=files.get(i).getOriginalFilename()&&!files.get(i).getOriginalFilename().equals("")){
-            file = new File(filePath+"\\"+uuid+files.get(i).getOriginalFilename());
+        	 String fType = "";
+             if(files.get(i).getContentType().contains("video")){
+          	   fType = "video__";
+             }
+            file = new File(filePath+"\\"+uuid+fType+files.get(i).getOriginalFilename());
             ResourceVo resource = new ResourceVo();
-            resource.setRsrc(savePath+"/"+uuid+files.get(i).getOriginalFilename());
+            resource.setRsrc(savePath+"/"+uuid+fType+files.get(i).getOriginalFilename());
             resourceResult += resourceService.insertResource(resource);
                if(fileLength<resourceResult){
                   fileLength++;
@@ -316,4 +339,18 @@ public class BoardController {
    
       return "redirect:selectBoardList.do";
    }
+   
+   @RequestMapping("boardDelflag.do")
+   public String boardDelflag(String bno){
+      int result = boardService.boardDelflag(bno);
+      
+         if(result > 0) {
+            System.out.println("boardDelflag 성공");
+         }else {
+            System.out.println("boardDelflag 실패");
+         }
+     
+      return "redirect:selectBoardList.do";
+   }
+   
 }

@@ -59,6 +59,10 @@ public class BoardService {
 		return dao.updateBoard(board);
 	}
 
+	public int boardDelflag(String bno) {
+		return dao.boardDelflag(bno);
+	}
+
 
 
 
