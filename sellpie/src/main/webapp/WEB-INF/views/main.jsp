@@ -107,6 +107,11 @@
     text-align: center;
     vertical-align: middle;
 }
+
+.LoadMore{
+   display: none;
+}
+
 </style>
 <script>
 $(function(){
@@ -146,51 +151,74 @@ var videoIdx = 0;
 function fileUpload(inputFiles, condition){
    var files = inputFiles.files; //선택된 파일들
    var filesArr = Array.prototype.slice.call(files); //files 배열로 담음
-   
-   if(files!=null && filesArr.length!=0){//선택된 파일이 없거나 , 배열에 담긴 파일이 없을 때
-         
+   if(files!=null && filesArr.length!=0){//선택된 파일이 없거나 , 배열에 담긴 파일이 없을 때   
          filesArr.forEach(function(f){//배열에 담긴 파일 하나씩 올리기
             var reader = new FileReader();
-            console.log(f);
             reader.onload = function (e) {
                var fileTag;//이미지나 비디오 태그 생성할 변수
                var newTag;//새로운 input file태그 생성할 변수
-               
                if(condition == 0){//이미지버튼 클릭 후  파일 선택시 이미지 파일인지 확인
                   if(!(f.type.match("image.*"))){
                      alert('이미지파일을 선택해 주세요.');
                      return;
                   }
-                  fileTag = $("<img/>");
-                  imgIdx = imgIdx+1;
-                  $("#imageFile").attr("id","img"+imgIdx);
-                  newTag = '<input type="file" name="file" id="imageFile" onchange="fileUpload(this,0);" accept="image/*" style="display:none" multiple/>';
-                  
+				  if(videoIdx!=0){
+                	  alert('동영상 파일은 단독 업로드만 가능합니다.');
+                	  return;
+                  }else if(videoIdx==0){
+	                  fileTag = $("<img/>");
+	                  imgIdx = imgIdx+1;
+	                  $("#imageFile").attr("id","img"+imgIdx);
+	                  newTag = '<input type="file" name="file" id="imageFile" onchange="fileUpload(this,0);" accept="image/*" style="display:none" multiple/>';
+                  }
                }else{
                   if(!(f.type.match("video.*"))){//동영상버튼 클릭 후  파일 선택시 동영상 파일인지 확인
                      alert('동영상파일을 선택해 주세요.');
                      return;
                   }
-                  fileTag = $("<video/>");
-                  fileTag.attr("controll","true");
-                  videoIdx = videoIdx+1;
-                  $("#videoFile").attr("id","video"+videoIdx);
-                  newTag = '<input type="file" name="file" id="videoFile" onchange="fileUpload(this,1);" accept="video/*" style="display:none"/>';
+				  if(imgIdx!=0 || videoIdx!=0){
+                	  alert('동영상 파일은 단독 업로드만 가능합니다.');
+                	  return;
+                  }else if(videoIdx==0){
+	                  fileTag = $("<video/>");
+	                  fileTag.attr("controll","true");
+	                  videoIdx = videoIdx+1;
+	                  $("#videoFile").attr("id","video"+videoIdx);
+	                  newTag = '<input type="file" name="file" id="videoFile" onchange="fileUpload(this,1);" accept="video/*" style="display:none"/>';
+                  }
                }            
                fileTag.css({"width":"100%","height":"100%"});
                fileTag.attr('src', e.target.result); //image or video 담긴 태그 생성
                //크기 같은 div에 담음
-               var div = $("<div>").css({"width":"80","height":"80","display":"inline-block","background":"black"});
+               var div = $("<div>").css({"width":"75px","height":"75px","display":"inline-block","border":"1px dashed gray","positioin":"relative","padding":"6.5px","margin-right":"3px"});
+               var innerDiv = $("<div class='w3-right'>").css({"position":"absolute"});
+               var innerA = '<a onclick="deleteFile(this,'+imgIdx+');"><i class="fa fa-close w3-text-black"></i></a>'
+               
+               innerDiv.append(innerA);
+               div.append(innerDiv);
                div.append(fileTag);
+
                $('#uploadFile').append(div); 
                
                $("#board").append(newTag); 
+               
             }
-            //이미지를 data URL형태로 onload이벤트 콜백을 통해 생성한 파일태그의 src에 넣어줌
-            reader.readAsDataURL(f); //file내용을 읽어 data URL형식의 문자열로 저장
+//             console.log(except);
+	            //이미지를 data URL형태로 onload이벤트 콜백을 통해 생성한 파일태그의 src에 넣어줌
+	            reader.readAsDataURL(f); //file내용을 읽어 data URL형식의 문자열로 저장
          });
       }
    }
+   
+	var delfile = "";
+	function deleteFile(delBtn,image){
+	         console.log(delBtn);
+	      var rsrc = $(delBtn).parent().next().attr("src");
+	      delfile += rsrc + ",";
+	      $(delBtn).parent().parent().remove();
+	      
+	      $("#img"+image).remove();
+	}
 
    function getReply(bno){
       $.ajax({
@@ -233,23 +261,59 @@ function fileUpload(inputFiles, condition){
          type:"get",
          data:{"bno":bno},
          success:function(data){
+        	 
             var srcArr = data.resource;
-            for(var i=0; i<srcArr.length; i++){
-               if(i==0){
-                  $("#fileview").append("<img src='"+srcArr[i].rsrc+"' style='width:90%; height:95%;' class='w3-margin-bottom mySlides'>");
-               }
-               $("#subView").append("<img src='"+srcArr[i].rsrc+"' style='width:7%; height:6%;' class='w3-margin-bottom mySlides'>");
-            }
-            
+            var detailInfo = $("<div class='w3-border-bottom'>");
+            detailInfo.css({"height":"60px"});
             var profile = '<img src="'+data.profileImg+'" alt="Avatar" class="w3-left w3-circle w3-margin-right rounded-circle" style="width:50px; height:50px;">';
             var name = '<span class="w3-large w3-margin-top">'+data.name+'</span><br>';
-            $("#detailInfo").append(profile);
-            $("#detailInfo").append(name);
+            detailInfo.append("<br>");
+            detailInfo.append(profile);
+            detailInfo.append(name);
             $("#detailBno").val(data.bno);
-            
+            var detailContent = $('<div class="w3-margin-bottom">');
+            detailContent.css({"height":"130px"});
             var content = data.bcontent;
-            $("#detailContent").append(content);
-            
+            detailContent.append(content);
+            var tagDiv = '<div>'
+            tagDiv += '<button type="button" class="w3-button w3-margin-bottom w3-align-right'
+            	if(data.likeflag== 'T'){
+            		console.log(data.likeflag);
+            		tagDiv += ' w3-theme-d2'; 
+            	}
+            tagDiv += '" onclick="likeCheck(this);">'
+            		  +'<i class="fa fa-thumbs-up"></i> &nbsp;'
+					  +'<span>'+data.gcount+'</span>'
+					  +'</button>'
+					  +'<input type="hidden" name="bno" value="'+data.bno+'"/>'
+            		  +'<button type="button" class="w3-button w3-theme-d2 w3-margin-bottom w3-align-right" onclick="javascript:$("#inputReply").focus();">'
+            		  +'<i class="fa fa-comment"></i> &nbsp;'
+                      +'<span id="rcount">'+data.rcount+'</span></button></div>';
+                      	 
+            if(srcArr.length!=0){
+	            for(var i=0; i<srcArr.length; i++){
+	               if(i==0){
+	            	   if(srcArr[i].rsrc.indexOf("video__") == -1){
+	            		   $("#fileview").append("<img src='"+srcArr[i].rsrc+"' style='width:90%; height:95%;' class='w3-margin-bottom mySlides'>");
+	            	   }else{
+	            		   $("#fileview").append("<video src='"+srcArr[i].rsrc+"' style='width:90%; height:95%;' class='w3-margin-bottom mySlides' controls='controls'></video>");
+	            	   }
+	               }
+	               $("#subView").append("<img src='"+srcArr[i].rsrc+"' style='width:7%; height:6%;' class='w3-margin-bottom mySlides'>");
+	            }
+	            $("#infoView").prepend(tagDiv);
+	            $("#infoView").prepend(detailContent);
+	            $("#infoView").prepend(detailInfo);
+            }else{
+            	$("#resourceView").empty();
+            	var div = $('<div class="w3-container w3-card w3-white w3-round">');
+            	div.append(detailInfo);
+            	detailContent.css({"height":"300px"});
+            	div.append(detailContent);
+            	div.append(tagDiv);
+            	$("#resourceView").append(div);
+            	$("#replyInfo").css({"height":"370px"});
+            }
             
          },error:function(e){
             console.log(e);
@@ -281,7 +345,7 @@ function fileUpload(inputFiles, condition){
         
        setTimeout(function() {
                  location.href = "selectBoardList.do";
-              }, 180000); // 3000ms(3초)가 경과하면 이 함수가 실행됩니다.
+              }, 1800000); // 3000ms(3초)가 경과하면 이 함수가 실행됩니다.
               
        //댓글 쓰고 엔터키 누를시 댓글 등록
        $("#inputReply").keyup(function(key) {
@@ -352,6 +416,9 @@ function fileUpload(inputFiles, condition){
    function validate(){
       var str = $("#bcontent").text();
       $("#hiddenContent").val(str);
+      if(videoIdx >= 0){
+    	  $("#videoFile").remove();
+      }
    }
    
    function likeCheck(b){
@@ -379,24 +446,16 @@ function fileUpload(inputFiles, condition){
       });
    }
    
-   // 이전 스크롤 좌표
-   var lastScrollTop = 0 ;
-   
-   // 스크롤 이벤트 최초 발생
-   $(window).scroll(function(){
-      
-      // 현재 스크롤 좌표
-      var currentScrollTop = $(window).scrollTop();
-      
-      // 다운 스크롤
-      if(currentScrollTop - lastScrollTop > 0){
-        // 현재 스크롤 좌표를 이전 스크롤 좌표로 할당 
-        lastScrollTop = currentScrollTop;
-      }else{   // 업 스크롤
-         // 현재 스크롤 좌표를 이전 스크롤 좌표로 할당
-         lastScrollTop = currentScrollTop;
-      }
-      
+   $(function(){
+	      $(".LoadMore").slice(0, 3).show(); // 최초 3개 선택
+	         $("#load").click(function(e){ // Load More를 위한 클릭 이벤트e
+	         e.preventDefault();
+	            if($(".LoadMore:hidden").length == 0){ // 숨겨진 DIV가 있는지 체크
+	                  alert("더 이상 항목이 없습니다.");
+	                  location.href="selectBoardList.do";
+	             }
+	         $(".LoadMore:hidden").slice(0, 3).show(); // 숨김 설정된 다음 3개를 선택하여 표시
+	      });
    });
 
 </script>
@@ -430,8 +489,10 @@ function fileUpload(inputFiles, condition){
 <!--게시글작성 창 -->
          <form id="board" method="post"  action="/sellpie/insertBoard.do" onsubmit="validate();" enctype="multipart/form-data">
                <div class="detail_content2" id="contentOpen" >
+<!--                나중에 세션정보로 바꾸기 -->
                <input type="hidden" name="email" value="<c:out value='${sessionScope.user.email }'/>"/> 
                <input type="hidden" name="bcontent" id="hiddenContent"/>
+               <input type="hidden" name="exceptFile" id="exceptFile"/>
                   <div>
                      <div style="text-align:right;">
                         <a class="divC" href="#close"> 
@@ -447,7 +508,7 @@ function fileUpload(inputFiles, condition){
                                  <li class="w3-bar">
                                      <img src="<c:out value='${sessionScope.user.profileImg }'/>" width="70" height="70" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
                                         <div class="w3-bar-item w3-padding-24">
-                                           <span class="w3-large"><c:out value='${sessionScope.user.name }'/></span><br>
+                                           <span class="w3-large"><c:out value="${sessionScope.user.name }"></c:out></span><br>
                                         </div>
                                  </li>
                                </ul>
@@ -478,7 +539,7 @@ function fileUpload(inputFiles, condition){
                </div>
              </div>
           </form>
-<!--게시글 작성창 끝-->
+<!--게시글작성 끝-->
       
 <!-- // 상세보기 창(1개만 존재, hidden) -->
             <div class="detail_content" id="open" >
@@ -490,7 +551,7 @@ function fileUpload(inputFiles, condition){
                    </a>
                 </div>
                     <div class="w3-row" style="height:440px; overflow: hidden;">
-                        <div class="w3-col m7" style="height:94%;">
+                        <div class="w3-col m7 w3-margin-left" style="height:94%;" id="resourceView">
                            <div class="w3-row" style="text-align:center; width:98%; height:98%;" >
                               <div class="w3-col" style="width:10%; height:95%;" onclick="plusDivs(-1);">
                                  <br><br><br><br><br>
@@ -507,26 +568,14 @@ function fileUpload(inputFiles, condition){
                            </div>
                         </div>
                         <div class="w3-col m4" style="width:36%; height:98%;">
-                            <div class="w3-container w3-card w3-white w3-round"><br>
-                                 <div class="w3-border-bottom" style="height:60px;" id="detailInfo">
-   <!--                                  ajax에서 프로필 정보 가져옴 -->
-                                 </div>
-                                  <div class="w3-margin-bottom" style="height:130px; overflow-y:scroll;" id="detailContent"> 
-   <!--                                     ajax에서 내용 가져옴 -->
-                                  </div>
-                                  <div>
-                                     <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom w3-align-right"><i class="fa fa-thumbs-up"></i> &nbsp;600</button>
-                                      <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom w3-align-right" onclick="javascript:$('#inputReply').focus();"><i class="fa fa-comment"></i> &nbsp;
-                                            <span id="rcount"></span>
-                                      </button>  
-                                  </div>
+                            <div class="w3-container w3-card w3-white w3-round w3-margin-left" id="infoView"><br>
                               
                                <div style="height:120px; width:100%; overflow-y:scroll;" id="replyInfo">
    <!--                                getReply에서 댓글 가져옴 -->
                                </div>
                                <div class="w3-row w3-cell-bottom w3-margin-bottom">
                                    <div class="w3-col m1">
-                                        <img src="<c:out value='${sessionScope.user.profileImg}'/>" alt="Avatar" class="w3-left w3-circle rounded-circle w3-block" style="width:20px; height:20px;">
+                                  <img src="<c:out value='${sessionScope.user.profileImg}'/>" alt="Avatar" class="w3-left w3-circle rounded-circle w3-block" style="width:20px; height:20px;">
                                    </div>
                                    <div contenteditable="true" class="w3-border w3-col m9 w3-round" id="inputReply"></div>
                                    <div class="w3-col m1" style="border-radius: 17px;  width:22px; height:22px; text-align: center;">
@@ -539,169 +588,175 @@ function fileUpload(inputFiles, condition){
             </div>
           </div>
 <!--          상세보기창 끝-->
-
+          
    <c:forEach var="board" items="${bList }" >
-   
-   <div class="w3-container w3-card w3-white w3-round w3-margin" id="boardList"><br>
-      <input type="hidden" name="bno" />
-      
-        <img src="<c:out value='${board.profileImg }'/>" alt="Avatar" class="w3-left w3-circle w3-margin-right rounded-circle" style="width:60px; height:60px;">
-        <span class="w3-right w3-opacity">
-          <c:if test="${sessionScope.user.email eq board.email }">
-           <button type="button" class="btn btn-default" aria-label="Left Align" onclick="javascript:location.href='updateForm.do?bno='+<c:out value='${board.bno }'/>">
-              <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-         </button>
-      </c:if>
-      </span>
-        
-        <h4><c:out value="${board.name }"></c:out></h4><br>
-        <hr class="w3-clear">
-        <p><c:out value="${board.bcontent }"></c:out></p>
-        
-        <table id="fileTb" cellspacing="0" class="w3-margin-bottom">
-           <c:forEach var="resource" items="${board.resource }" varStatus="st">
-                 
-                 <!-- 사진 1개 -->
-                 <c:if test="${board.resource.size() eq 1}">
-                    <c:if test="${st.count eq 1}">
+      <div class="w3-container w3-card w3-white w3-round w3-margin LoadMore"><br>
+         <input type="hidden" name="bno" />
+         
+           <img src="<c:out value='${board.profileImg }'/>" alt="Avatar" class="w3-left w3-circle w3-margin-right rounded-circle" style="width:60px; height:60px;">
+           <span class="w3-right w3-opacity">
+             <c:if test="${sessionScope.user.email eq board.email }">
+              <button type="button" class="btn btn-default" aria-label="Left Align" onclick="javascript:location.href='updateForm.do?bno='+<c:out value='${board.bno }'/>">
+                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+              </button>
+              </c:if>
+           </span>
+           
+           <h4><c:out value="${board.name }"></c:out></h4><br>
+           <hr class="w3-clear">
+           <p><c:out value="${board.bcontent }"></c:out></p>
+           
+           <table id="fileTb" cellspacing="0" class="w3-margin-bottom">
+              <c:forEach var="resource" items="${board.resource }" varStatus="st">
                     
-                       <tr>
+                    <!-- 사진 1개 -->
+                    <c:if test="${board.resource.size() eq 1}">
+                       <c:if test="${st.count eq 1}">
+                       
+                          <tr>
+                               <td>
+                                   <c:choose>
+                                        <c:when test='${fn:contains(resource.rsrc,"video__") }'>
+                                           <video src='${resource.rsrc}' style="width:720px; height:500px;" controls="controls"></video>
+                                        </c:when>
+                                        <c:otherwise>
+                                           <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:720px; height:500px;" >
+                                        </c:otherwise>
+                                     </c:choose> 
+                               </td>
+                           </tr>
+                        </c:if>
+                     </c:if>
+                     
+                     <!-- 사진 2개 -->
+                     <c:if test="${board.resource.size() eq 2}">
+                        <c:if test="${st.count eq 1}">
+                        <tr>
                             <td>
-                                <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:720px; height:500px;" >
-                            </td>
+                                 <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:500px;">
+                             </td>
+                        </c:if>
+                        <c:if test="${st.count eq 2}">
+                            <td>
+                                 <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:500px;">
+                             </td>
                         </tr>
+                        </c:if>
                      </c:if>
-                  </c:if>
-                  
-                  <!-- 사진 2개 -->
-                  <c:if test="${board.resource.size() eq 2}">
-                     <c:if test="${st.count eq 1}">
-                     <tr>
-                         <td>
-                              <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:500px;">
-                          </td>
+                     
+                     <!-- 사진 3개 -->
+                     <c:if test="${board.resource.size() eq 3}">
+                        <c:if test="${st.count eq 1}">
+                              <tr>
+                                 <td colspan="2">
+                                     <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:720px; height:240px;">
+                                 </td>
+                              </tr>
+                        </c:if> 
+                        <c:if test="${st.count >= 2}">
+                            <c:if test="${st.count eq 2}">
+                            <tr>
+                                    <td>
+                                       <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
+                                   </td>
+                              </c:if>
+                              <c:if test="${st.count eq 3}">
+                                     <td>
+                                         <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
+                                     </td>
+                              </tr>
+                               </c:if>
+                        </c:if>
                      </c:if>
-                     <c:if test="${st.count eq 2}">
-                         <td>
-                              <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:500px;">
-                          </td>
-                     </tr>
+                     
+                     <!-- 사진 4개 -->
+                     <c:if test="${board.resource.size() eq 4}">
+                        <c:if test="${st.count < 3}">
+                            <c:if test="${st.count eq 1}">
+                            <tr>
+                                    <td>
+                                       <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
+                                   </td>
+                              </c:if>
+                              <c:if test="${st.count eq 2}">
+                                     <td>
+                                         <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
+                                     </td>
+                              </tr>
+                               </c:if>
+                        </c:if>
+                        <c:if test="${st.count >= 3}">
+                            <c:if test="${st.count eq 3}">
+                            <tr>
+                                    <td>
+                                       <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
+                                   </td>
+                              </c:if>
+                              <c:if test="${st.count eq 4}">
+                                     <td>
+                                         <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
+                                     </td>
+                              </tr>
+                              </c:if>
+                        </c:if>
                      </c:if>
-                  </c:if>
-                  
-                  <!-- 사진 3개 -->
-                  <c:if test="${board.resource.size() eq 3}">
-                     <c:if test="${st.count eq 1}">
-                           <tr>
-                              <td colspan="2">
-                                  <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:720px; height:240px;">
-                              </td>
-                           </tr>
-                     </c:if> 
-                     <c:if test="${st.count >= 2}">
-                         <c:if test="${st.count eq 2}">
-                         <tr>
-                                 <td>
-                                    <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
-                                </td>
-                           </c:if>
-                           <c:if test="${st.count eq 3}">
-                                  <td>
-                                      <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
-                                  </td>
-                           </tr>
-                            </c:if>
-                     </c:if>
-                  </c:if>
-                  
-                  <!-- 사진 4개 -->
-                  <c:if test="${board.resource.size() eq 4}">
-                     <c:if test="${st.count < 3}">
-                         <c:if test="${st.count eq 1}">
-                         <tr>
-                                 <td>
-                                    <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
-                                </td>
-                           </c:if>
-                           <c:if test="${st.count eq 2}">
-                                  <td>
-                                      <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
-                                  </td>
-                           </tr>
-                            </c:if>
-                     </c:if>
-                     <c:if test="${st.count >= 3}">
-                         <c:if test="${st.count eq 3}">
-                         <tr>
-                                 <td>
-                                    <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
-                                </td>
-                           </c:if>
-                           <c:if test="${st.count eq 4}">
-                                  <td>
-                                      <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
-                                  </td>
-                           </tr>
-                           </c:if>
-                     </c:if>
-                  </c:if>
-                  
-                  <!-- 사진 4개 이상-->
-                  <c:if test="${board.resource.size() > 4}">
-                     <c:if test="${st.count < 3}">
-                         <c:if test="${st.count eq 1}">
-                         <tr>
-                                 <td>
-                                    <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
-                                </td>
-                           </c:if>
-                           <c:if test="${st.count eq 2}">
-                                  <td>
-                                      <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
-                                  </td>
-                           </tr>
-                            </c:if>
-                     </c:if>
-                     <c:if test="${st.count >= 3}">
-                         <c:if test="${st.count eq 3}">
-                         <tr>
-                                 <td>
-                                    <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
-                                </td>
-                           </c:if>
-                           <c:if test="${st.count eq 4}">
-                                  <td>
-                                      <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
-                                      <div class="image_hide1">
-                                        <div class="image_hide2">
-                                           <div class="image_hide3"><c:out value='${board.resource.size()-4}'></c:out>장+
+                     
+                     <!-- 사진 4개 이상-->
+                     <c:if test="${board.resource.size() > 4}">
+                        <c:if test="${st.count < 3}">
+                            <c:if test="${st.count eq 1}">
+                            <tr>
+                                    <td>
+                                       <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
+                                   </td>
+                              </c:if>
+                              <c:if test="${st.count eq 2}">
+                                     <td>
+                                         <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
+                                     </td>
+                              </tr>
+                               </c:if>
+                        </c:if>
+                        <c:if test="${st.count >= 3}">
+                            <c:if test="${st.count eq 3}">
+                            <tr>
+                                    <td>
+                                       <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
+                                   </td>
+                              </c:if>
+                              <c:if test="${st.count eq 4}">
+                                     <td>
+                                         <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
+                                         <div class="image_hide1">
+                                           <div class="image_hide2">
+                                              <div class="image_hide3"><c:out value='${board.resource.size()-4}'></c:out>장+
+                                              </div>
                                            </div>
-                                        </div>
-                                        </div>
-                                  </td>
-                                  
-                           </tr>
-                           
-                           </c:if>
+                                           </div>
+                                     </td>
+                                     
+                              </tr>
+                              
+                              </c:if>
+                        </c:if>
                      </c:if>
-                  </c:if>
-           </c:forEach>
-        </table>
-        &nbsp;
-        <button type="button" class="w3-button w3-margin-bottom w3-border  
-        <c:if test="${fn:contains(board.likeflag, 'T') }">
-            w3-theme-d2 
-         </c:if>
-         " onclick="likeCheck(this);"><i class="fa fa-thumbs-up"></i> &nbsp;          
-           <span><c:out value="${board.gcount }"></c:out></span>
-        </button>
-        <input type="hidden" name="bno" value="<c:out value='${board.bno }'/>"/>
-        <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom w3-border" onclick="openDetail('<c:out value="${board.bno }"/>')"><i class="fa fa-comment"></i> &nbsp;
-         <c:out value="${board.rcount }"/>
-        </button> 
-    </div>
-    
-    </c:forEach> 
+              </c:forEach>
+           </table>
+           &nbsp;
+           <button type="button" class="w3-button w3-margin-bottom w3-border  
+           <c:if test="${fn:contains(board.likeflag, 'T') }">
+               w3-theme-d2 
+            </c:if>
+            " onclick="likeCheck(this);"><i class="fa fa-thumbs-up"></i> &nbsp;          
+              <span><c:out value="${board.gcount }"></c:out></span>
+           </button>
+           <input type="hidden" name="bno" value="<c:out value='${board.bno }'/>"/>
+           <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom w3-border" onclick="openDetail('<c:out value="${board.bno }"/>')"><i class="fa fa-comment"></i> &nbsp;
+            <c:out value="${board.rcount }"/>
+           </button> 
+       </div>
+       </c:forEach> 
+       <div id="js-btn-wrap" class="btn-wrap"> <a href="#" id="load">더보기</a> </div>
     <!-- End Middle Column -->
     </div>
    

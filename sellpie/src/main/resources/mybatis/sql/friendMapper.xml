@@ -8,14 +8,14 @@
       SELECT M.EMAIL , M.NAME , M.PROFILE_IMG
       FROM ADDFRIEND F
       JOIN MEMBER M ON (F.APPLICANT_EMAIL = M.EMAIL)
-      WHERE F.SUBJECT_EMAIL = #{email2} AND ISAPPLY = 'Y'
+      WHERE F.SUBJECT_EMAIL = #{email} AND ISAPPLY = 'Y'
    </select>
    
    <select id="selectfList4" parameterType="string" resultType="Member">
       SELECT M.EMAIL , M.NAME , M.PROFILE_IMG
       FROM ADDFRIEND F
       JOIN MEMBER M ON (F.SUBJECT_EMAIL = M.EMAIL)
-      WHERE F.APPLICANT_EMAIL = #{email2} AND ISAPPLY = 'Y'
+      WHERE F.APPLICANT_EMAIL = #{email} AND ISAPPLY = 'Y'
    </select>
    
    <select id="selectfList6" parameterType="string" resultType="string">
