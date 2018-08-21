@@ -344,4 +344,13 @@ public class MemberController {
 		request.setAttribute("sList", sList);
 		return "member/salseList";
 	}
+	
+	@RequestMapping("inputUrlToSession.do")
+	public @ResponseBody int inputUrlToSession(HttpServletRequest request, String url) {
+		int result = 1;
+		System.out.println(url);
+		HttpSession session = request.getSession();
+		session.setAttribute("url", url);
+		return result;
+	}
 }

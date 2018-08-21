@@ -150,12 +150,32 @@ $(function() {
         url:'sellerCheck.do',
         success:function(data){
         	if(data == 1){
-        		$('#Demo1').append('<a class="w3-button w3-theme" onclick="javascript: location.href = '+"'productForm.do'"+'">물품등록</a>');
+        		$('#Demo1').append('<a class="w3-button w3-theme" onclick="productForm();">물품등록</a>');
         		$('#Demo1').append('<a class="w3-button w3-theme" onclick="javascript: location.href = '+"'salesList.do'"+'">판매관리</a>');
         	}
         }
 	});
+	
 });
+
+function productForm() {
+	var pathNames = $(location).attr('pathname').split('/');
+	var prams = $(location).attr('search');
+	var first = pathNames[1];
+	var presentUrl = pathNames[2] + prams;
+	console.log(first);
+	console.log(presentUrl);
+	$.ajax({
+		type:"GET",
+        dataType : "json",
+        data:{url:presentUrl},
+        url:'inputUrlToSession.do',
+        success:function(data){
+        	console.log(data);
+        }
+	});
+	location.href = 'productForm.do';
+}
 </script>
 </body>
 </html>

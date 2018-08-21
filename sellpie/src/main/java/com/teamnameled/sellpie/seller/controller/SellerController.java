@@ -41,7 +41,9 @@ public class SellerController {
 		int result = 0;
 		HttpSession session = request.getSession();
 		Member user = (Member)session.getAttribute("user");
-		if(sellerService.selectSeller(user.getEmail())!=null){
+		Seller seller = sellerService.selectSeller(user.getEmail());
+		if(seller!=null){
+			request.getSession().setAttribute("sNo", seller.getsNo());
 			result = 1;
 		}
 		return result;

@@ -64,7 +64,6 @@ public class ProductController {
 	
 	@RequestMapping("productForm.do")
 	public String productForm() {
-		
 		return "product/productForm";
 	}
 	
@@ -148,7 +147,7 @@ public class ProductController {
 		
 		
 		
-		return "redirect:main.do";
+		return "redirect:"+request.getSession().getAttribute("url");
 	}
 	
 	
@@ -258,6 +257,6 @@ public class ProductController {
 	
 		
 		System.out.println(product.toString());
-		return "redirect:main.do";
+		return "redirect:"+request.getSession().getAttribute("url");
 	}
 }
