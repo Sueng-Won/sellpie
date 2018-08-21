@@ -267,6 +267,7 @@ public class MemberController {
 			int result = memberService.updateUserPwd(member);
 			System.out.println(result);
 		} catch (Exception e) {
+			System.out.println("비밀번호 수정중 에ㅓㄹ");
 			e.printStackTrace();
 		}
 		
@@ -339,6 +340,11 @@ public class MemberController {
 			
 		
 		return mav;
+	}
+	
+	@RequestMapping("errorPage.do")
+	public String errorPage(){
+		return "common/errorPage";
 	}
 	
 	//개인정보수정-구매현황
