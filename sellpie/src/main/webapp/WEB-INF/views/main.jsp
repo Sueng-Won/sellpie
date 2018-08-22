@@ -345,7 +345,7 @@ function fileUpload(inputFiles, condition){
         
        setTimeout(function() {
                  location.href = "selectBoardList.do";
-              }, 180000); // 3000ms(3초)가 경과하면 이 함수가 실행됩니다.
+              }, 1800000); // 3000ms(3초)가 경과하면 이 함수가 실행됩니다.
               
        //댓글 쓰고 엔터키 누를시 댓글 등록
        $("#inputReply").keyup(function(key) {
@@ -486,7 +486,7 @@ function fileUpload(inputFiles, condition){
         </div>
       </div>
       
-<!--게시글보기 창 -->
+<!--게시글작성 창 -->
          <form id="board" method="post"  action="/sellpie/insertBoard.do" onsubmit="validate();" enctype="multipart/form-data">
                <div class="detail_content2" id="contentOpen" >
 <!--                나중에 세션정보로 바꾸기 -->
@@ -506,9 +506,9 @@ function fileUpload(inputFiles, condition){
                            <div class="w3- container w3-padding">
                                <ul class="w3-ul" style="-webkit-margin-before: 0em; -webkit-margin-after: 0em; -webkit-margin-start: -30px; -webkit-margin-end: 0px;">
                                  <li class="w3-bar">
-                                     <img src="resources/images/header/twice1.png" width="70" height="70" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
+                                     <img src="<c:out value='${sessionScope.user.profileImg }'/>" width="70" height="70" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
                                         <div class="w3-bar-item w3-padding-24">
-                                           <span class="w3-large">트와이스</span><br>
+                                           <span class="w3-large"><c:out value="${sessionScope.user.name }"></c:out></span><br>
                                         </div>
                                  </li>
                                </ul>
@@ -539,7 +539,7 @@ function fileUpload(inputFiles, condition){
                </div>
              </div>
           </form>
-<!--게시글 보기창 끝-->
+<!--게시글작성 끝-->
       
 <!-- // 상세보기 창(1개만 존재, hidden) -->
             <div class="detail_content" id="open" >
@@ -551,7 +551,7 @@ function fileUpload(inputFiles, condition){
                    </a>
                 </div>
                     <div class="w3-row" style="height:440px; overflow: hidden;">
-                        <div class="w3-col m7" style="height:94%;">
+                        <div class="w3-col m7 w3-margin-left" style="height:94%;" id="resourceView">
                            <div class="w3-row" style="text-align:center; width:98%; height:98%;" >
                               <div class="w3-col" style="width:10%; height:95%;" onclick="plusDivs(-1);">
                                  <br><br><br><br><br>
@@ -625,7 +625,7 @@ function fileUpload(inputFiles, condition){
                                      </c:choose> 
                                </td>
                            </tr>
-                            </c:if>
+                        </c:if>
                      </c:if>
                      
                      <!-- 사진 2개 -->
@@ -740,7 +740,6 @@ function fileUpload(inputFiles, condition){
                               </c:if>
                         </c:if>
                      </c:if>
- 
               </c:forEach>
            </table>
            &nbsp;

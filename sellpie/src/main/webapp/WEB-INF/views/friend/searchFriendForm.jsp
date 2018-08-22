@@ -506,33 +506,33 @@ function fileUpload(inputFiles, condition){
             <div class="w3-row-padding">
                  <div class="w3-col m12">
                    <div class="w3-card w3-round w3-white">
-                     <div class="w3-container w3-padding" id="memberInfoDiv">
-                           <img src="" alt="Avatar" class="w3-left w3-margin-right w3-circle" style="width:55px; height:55px;">
-                               
-                               <c:if test="${member.email eq sellerInfo.email}">
-                                  
-                           <button type="button" class="btn btn-default btn-lg w3-right w3-opacity" style="margin-top:10px;">
-                                  <span class="glyphicon glyphicon-shopping-cart"></span>
-                           </button>
-                         </c:if>
-                         
-                         
-                         <c:if test="${applyflag eq 'Y'  }">
-                               <button type="button" class="btn btn-default btn-lg w3-right w3-opacity" style="margin-top:10px;">
-                                           <span class="glyphicon glyphicon-user"></span>
-                              </button>
-                         </c:if>
-                                  
-                         <c:if test="${applyflag ne 'Y'  }">
-                                  <button id="btn1" type="button" class="btn btn-default btn-lg w3-right 
-                                     <c:if test="${applyCheck eq null }">
-                                        w3-opacity
-                                     </c:if>" style="margin-top:10px;" onclick="friendApply('<c:out value='${member.email }'/>');">
-                                    <span class="glyphicon glyphicon-user">+</span>
-                                 </button>
-                         </c:if>
-                           <h4><c:out value="${member.name }"></c:out></h4><br>
-                     </div>
+	                     <div class="w3-container w3-padding" id="memberInfoDiv">
+	                           <img src="<c:out value='${member.profileImg }'/>" alt="Avatar" class="w3-left w3-margin-right w3-circle" style="width:55px; height:55px;">
+	                               
+	                               <c:if test="${member.email eq sellerInfo.email}">
+	                                  
+	                           <button type="button" class="btn btn-default btn-lg w3-right w3-opacity" style="margin-top:10px;">
+	                                  <span class="glyphicon glyphicon-shopping-cart"></span>
+	                           </button>
+	                         </c:if>
+	                         
+	                         
+	                         <c:if test="${applyflag eq 'Y'  }">
+	                               <button type="button" class="btn btn-default btn-lg w3-right w3-opacity" style="margin-top:10px;">
+	                                           <span class="glyphicon glyphicon-user"></span>
+	                              </button>
+	                         </c:if>
+	                                  
+	                         <c:if test="${applyflag ne 'Y'  }">
+	                                  <button id="btn1" type="button" class="btn btn-default btn-lg w3-right 
+	                                     <c:if test="${applyCheck eq null }">
+	                                        w3-opacity
+	                                     </c:if>" style="margin-top:10px;" onclick="friendApply('<c:out value='${member.email }'/>');">
+	                                    <span class="glyphicon glyphicon-user">+</span>
+	                                 </button>
+	                         </c:if>
+	                           <h4><c:out value="${member.name }"></c:out></h4><br>
+	                     </div>
                    </div>
                  </div>
                </div>
@@ -824,7 +824,7 @@ function fileUpload(inputFiles, condition){
            </button> 
        </div>
     </c:forEach> 
-
+    
     <c:if test="${fblist.size()>3 }">
     <div id="js-btn-wrap" class="btn-wrap" style="text-align:center;">
        		 <button type="button" class="btn btn-default btn-lg" id="load">
