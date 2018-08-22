@@ -14,7 +14,7 @@
   <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
 	function searchAddr(){
-	    new daum.Postcode({
+	    var searchAddr = new daum.Postcode({
 	        oncomplete: function(data) {
 	            var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
                 var extraRoadAddr = ''; // 도로명 조합형 주소 변수
@@ -39,8 +39,23 @@
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
                 $("#addrLabel").text(fullRoadAddr);
-	        }
+                $("#addr").val(fullRoadAddr);
+	        },
+		    onclose: function(state) {
+	            //state는 우편번호 찾기 화면이 어떻게 닫혔는지에 대한 상태 변수 이며, 상세 설명은 아래 목록에서 확인하실 수 있습니다.
+	            if(state === 'COMPLETE_CLOSE'){
+	                //사용자가 검색결과를 선택하여 팝업창이 닫혔을 경우, 실행될 코드를 작성하는 부분입니다.
+	                //oncomplete 콜백 함수가 실행 완료된 후에 실행됩니다.
+	            	var addrDetail = window.prompt("상세주소를 입력해주세요.");
+	        		$("#addrLabel").append(", "+addrDetail);
+	        		$("#addrDetail").val(addrDetail);
+	            }
+		    }
 	    }).open();
+	}
+	
+	function insertContract(pNo){
+		$("#contractFrm"+pNo).submit();
 	}
 </script>
 <style type="text/css">
@@ -109,15 +124,6 @@
 }
 </style>
 
-<script type="text/javascript">
-	function productDetail(pNo){
-		location.href="sellpie/productDetail.do?pNo="+pNo;
-	}
-	
-	function insertContract(pNo){
-		$("#contractFrm"+pNo).submit();
-	}
-</script>
 </head>
 <body class="w3-theme-l5">
 
@@ -194,9 +200,8 @@
 								                               <div class="w3-margin-bottom" style="height:27%; overflow-y:scroll;"> 
 								                                    <p>${product.pDetail}</p>
 								                               </div>
-								                               
+								                               <form id="contractFrm${product.pNo}" action="insertContract.do" method="post">
 								                               <div style="text-align:center;">
-								                               	<form id="contractFrm${product.pNo}" action="insertContract.do" method="post">
 								                               	<c:if test="${product.isCraft eq 'N'.charAt(0)}">
 								                               	<label>수량 : <input type="number" id="quantity" name="quantity" min="1" max="${product.pQuantity}"/>개 / ${product.pQuantity}</label>
 								                               	</c:if>
@@ -207,19 +212,18 @@
 								                               	<input type="hidden" id="pNo" name="pNo" value="${product.pNo}"/>
 								                               	<input type="hidden" id="sNo" name="sNo" value="${product.sNo}"/>
 								                               	<input type="hidden" id="email" name="email" value="${sessionScope.user.email}"/>
-								                               	</form>
 								                               </div>
 								                               <div style="text-align:center;">
 								                               <h5>
 								                               	<label id="addrLabel">주소를 검색해주세요</label>
 								                               </h5>
-								                               <input type="hidden" value=""/>
-								                               
-								                               	<button class="btn ptn-primary btn-sm btn-block" onclick="searchAddr();">주소검색</button>
-								                               	<input class="" style="margin-top: 10px; margin-bottom: 10px;" type="text" placeholder="상세 주소 입력"/>
-								                                  <button class="btn btn-primary btn-lg btn-block" type="button" onclick="insertContract(${product.pNo})">구매하기</button>
-								                               
+								                               <input id="addr" name="addr" type="hidden" value=""/>
+								                               <input id="addrDetail" name="addrDetail" type="hidden" value=""/>
+								                               	<a class="btn ptn-primary btn-sm btn-block" onclick="searchAddr();">주소검색</a>
 								                               </div>
+								                               </form>
+								                               <button class="btn btn-primary btn-lg btn-block" type="button" onclick="insertContract(${product.pNo})">구매하기</button>
+								                               
 								                               <c:if test="${countList[status.index] eq 0}">
 								                               		<h4 align="center">해당 제품의 리뷰가 없습니다.</h4>
 								                               </c:if>
@@ -268,7 +272,6 @@
 		</div>
 
 		<!-- End Page Container -->
-	</div>
 	<br>
 
 	<!-- Footer -->
@@ -282,6 +285,7 @@
 				target="_blank">w3.css</a>
 		</p>
 	</footer> -->
+	
 </body>
 <script>
 // Accordion

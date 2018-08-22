@@ -35,6 +35,12 @@
 		FROM MEMBER
 		WHERE NAME LIKE '%'||#{searchText}||'%'
 	</select>
+	<update id="modifyUserInfo" parameterType="Member">
+		UPDATE MEMBER SET PWD =#{pwd}, NAME=#{name}, GENDER=#{gender}, PHONE=#{phone} WHERE EMAIL=#{email}
+	</update>
+	<update id="updateProfileImg" parameterType="Member">
+		UPDATE MEMBER SET PROFILE_IMG = #{profileImg} WHERE EMAIL = #{email}
+	</update>
 </mapper>
 
 

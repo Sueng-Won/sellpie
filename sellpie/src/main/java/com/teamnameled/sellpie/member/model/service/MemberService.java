@@ -44,7 +44,6 @@ public class MemberService  {
 		String userEncPassword = null;
 		String email = member.getEmail();
 		Member result = dao.userLogin(email);
-		System.out.println(result);
 		
 		if(null!=result){
 			userEncPassword = result.getPwd();			
@@ -67,6 +66,17 @@ public class MemberService  {
 	public Member checkUserSessionKey(String sessionId) {
 		return dao.checkUserSessionKey(sessionId);
 
+	}
+
+	public int modifyUserInfo(Member member) throws Exception {
+		String encPassword = bpe.encode(member.getPwd());
+		member.setPwd(encPassword);
+		return dao.modifyUserInfo(member);
+	}
+
+	public int updateImg(Member member) {
+		System.out.println(member);
+		return dao.updateImg(member);
 	}
 
 
