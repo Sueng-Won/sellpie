@@ -372,7 +372,7 @@ public class MemberController {
 		request.setAttribute("sList", sList);
 		return "member/salesList";
 	}
-	@RequestMapping("applySeller")
+	@RequestMapping("applySeller.do")
 	public String applySeller(Seller seller, HttpServletRequest request) {
 		//xml생성
 		StreamResult result = memberService.applySeller(seller);
