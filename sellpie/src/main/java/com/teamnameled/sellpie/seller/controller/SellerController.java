@@ -49,4 +49,21 @@ public class SellerController {
 		return result;
 	}
 	
+	@RequestMapping("sellerForm.do")
+	public String sellerForm() {
+		return "seller/sellerForm";
+	}
+	@RequestMapping("sellerApply.do")
+	public String sellerApply(HttpServletRequest request, Seller seller) {
+		
+		
+		
+		
+		String returnUrl = (String) request.getSession().getAttribute("url");
+	      if(null == returnUrl){
+	    	  returnUrl = "main.do";
+	      }
+	      
+	      return "redirect:"+returnUrl;
+	}
 }

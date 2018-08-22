@@ -143,6 +143,7 @@ function openNav() {
     <!-- End Left Column -->
     </div>
 <script type="text/javascript">
+//판매자 확인 후 마이페이지 버튼추가---------------------------------------------------------------------------
 $(function() {
 	$.ajax({
         type:"GET",
@@ -152,13 +153,15 @@ $(function() {
         	if(data == 1){
         		$('#Demo1').append('<a class="w3-button w3-theme" onclick="productForm();">물품등록</a>');
         		$('#Demo1').append('<a class="w3-button w3-theme" onclick="javascript: location.href = '+"'salesList.do'"+'">판매관리</a>');
+        		$('#Demo1').append('<a class="w3-button w3-theme" onclick="sellerForm();">판매자등록</a>');
+        	}else{
         	}
         }
 	});
 	
 });
-
-function productForm() {
+//이전 경로가 필요할 경우 실행-----------------------------------------------------------------------------
+function saveUrl(){
 	var pathNames = $(location).attr('pathname').split('/');
 	var prams = $(location).attr('search');
 	var first = pathNames[1];
@@ -174,7 +177,17 @@ function productForm() {
         	console.log(data);
         }
 	});
+	return;
+}
+//판매등록 페이지이동-------------------------------------------------------------------------------------
+function productForm() {
+	saveUrl();
 	location.href = 'productForm.do';
+}
+
+function sellerForm() {
+	saveUrl();
+	location.href = 'sellerForm.do';
 }
 </script>
 </body>

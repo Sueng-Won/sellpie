@@ -116,9 +116,17 @@ function removeTag(obj){
     console.log(changeTag);
 //    console.log($(obj).text());
 //    console.log($('#sellTags > div').text());
-//사진등록-----------------------------------------------------------------
 
 }
+//사진 삭제---------------------------------------------------------------------------
+	var delfile = "";
+   function deleteFile(delBtn){
+	   var rsrc = $(delBtn).parent().next().attr("src");
+	   delfile += rsrc + ",";
+	   $(delBtn).parent().parent().remove();
+	   console.log(delfile);
+   }
+//사진 등록---------------------------------------------------------------------------
 var imgIdx = 0;
 function fileUpload(inputFiles, condition){
 	   var files = inputFiles.files; //선택된 파일들
@@ -147,6 +155,10 @@ function fileUpload(inputFiles, condition){
 	               fileTag.attr('src', e.target.result); //image or video 담긴 태그 생성
 	               //크기 같은 div에 담음
 	               var div = $("<div>").css({"width":"80","height":"80","display":"inline-block","background":"black"});
+	               var innerDiv = $("<div class='w3-right'>").css({"position":"absolute"});
+	               var innerA = '<a onclick="deleteFile(this);"><i class="fa fa-close w3-text-black"></i></a>';
+	            	innerDiv.append(innerA);
+	            	div.append(innerDiv);
 	               div.append(fileTag);
 	               $('#uploadFile').append(div); 
 	               
@@ -212,8 +224,8 @@ function validate(){
                       <input type="hidden" name="pNo" value="${product.pNo }"/>
                       <input type="hidden" name="sNo" value="${product.sNo }"/>
                       <input type="hidden" name="rUrl" value="${product.rUrl }">
+                      <input type="hidden" name="delfile" id="hiddenDelfile"/>
                       <input type="hidden" name="selTag" id="selTag" value="${product.selTag }">
-                      <input type="hidden" name="email" value="test4@naver.com"/>
                       <div id="sellTags">
                       <c:set var="selTags" value="${fn:split(product.selTag,'!@#$%') }"/>
                       <c:forEach var="tagItem" items="${selTags}">
@@ -223,8 +235,18 @@ function validate(){
                       
                       <input class="w3-input w3-border w3-round" id="tagInput" type="text" placeholder="판매 태그명" contenteditable="true"/><br>
                       <br>
-                      <div class="uploadFile background-white" id="uploadFile">
+                      <div class="uploadFile background-white w3-margin-top" id="uploadFile" style="width:650px;  overflow-x: scroll;">
 						<!-- 업로드한 이미지 표시 영역 사진 선택시 표시 하기 위함.-->
+						<c:forEach items="${product.resource }" var="resource">
+				             <div style="width:75px; height:75px; float:left; border:1px dashed gray; position:relative; padding:6.5px; margin-right:3px;">
+				                 <div class="w3-right" style="position:absolute">
+				                          <a onclick="deleteFile(this);"> 
+				                             <i class="fa fa-close w3-text-black"></i>
+				                          </a>
+				                 </div>
+				                 <img src="<c:out value='${resource.rsrc }'/>" alt="Avatar" class="w3-left w3-margin-right" style="width:60px; height:60px;">
+				             </div>
+				         </c:forEach>
 						</div>
 						<hr>
 						              
@@ -234,7 +256,7 @@ function validate(){
 		            </div>
                       <input class="w3-input w3-border w3-round" type="number" style="width:30%" id="pQuantity" name="pQuantity" min="1" value="${product.pQuantity }" placeholder="수량"/><br>
                       <input class="w3-input w3-border w3-round" type="number" style="width:30%" id="price" name="price" min="1" value="${product.price }" placeholder="가격"/><br>
-	                  <input class="w3-check w3-border w3-round" type="checkbox" id="isCraft" name="isCraft" value="Y" <c:if test="${'Y'.charAt(0) eq product.isCraft}">checked</c:if> >
+	                  <input class="w3-check w3-border w3-round" type="checkbox" id="isCraft" name="isCraft" value="Y" <c:if test="${product.isCraft eq 'Y'.charAt(0)}">checked</c:if> >
 	                  <label>제작제품</label>
                       <textarea class="w3-input w3-border w3-round" id="pDetail" name="pDetail" placeholder="상세설명" rows="20" style="resize: none;">${product.pDetail }</textarea><br>
 

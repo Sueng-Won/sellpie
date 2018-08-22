@@ -342,7 +342,7 @@ public class MemberController {
 		List<SalesStatisticsVo> sList = sellerService.selectSalesStatisticsList(user.getEmail());
 		request.setAttribute("pList", pList);
 		request.setAttribute("sList", sList);
-		return "member/salseList";
+		return "member/salesList";
 	}
 	
 	@RequestMapping("inputUrlToSession.do")
@@ -353,4 +353,5 @@ public class MemberController {
 		session.setAttribute("url", url);
 		return result;
 	}
+	
 }

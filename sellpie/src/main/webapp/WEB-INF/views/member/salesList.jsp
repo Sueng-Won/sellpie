@@ -54,8 +54,12 @@ cursor: pointer;
 											<c:if test="${item.iscraft eq 'N'.charAt(0)}">
 												<td><c:out value="${item.pQuantity}"/></td>
 											</c:if>
-											<td align="right"><button onclick="javascript: location.href = 'productUpdateForm.do?pNo='+${item.pNo}"
-													class="w3-theme w3-button w3-tiny w3-padding-small">수정</button></td>
+											<td align="right">
+											<button onclick="javascript: location.href = 'productUpdateForm.do?pNo='+${item.pNo}"
+													class="w3-theme w3-button w3-tiny w3-padding-small">수정</button>
+											<button onclick="deleteProduct(${item.pNo});"
+													class="w3-theme w3-button w3-tiny w3-padding-small">삭제</button>
+											</td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -159,6 +163,13 @@ cursor: pointer;
 	</footer> -->
 </body>
 <script>
+//물품 삭제------------------------------------------------------------
+function deleteProduct(pNo){
+	if(confirm('혼또니??')){
+		saveUrl();
+		location.href = 'deleteProduct.do?pNo='+pNo;
+	}
+}
 //검색-------------------------------------------------------------
 function changeKeyword(){
 	$('#keyword').attr('name',$('#searchSelector').val());
