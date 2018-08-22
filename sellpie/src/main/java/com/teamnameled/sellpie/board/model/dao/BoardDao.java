@@ -62,5 +62,9 @@ public class BoardDao {
 		return sqlSession.update("boardMapper.updateBoard", board);
 	}
 
+	public int boardDelflag(String bno) {
+		return sqlSession.update("boardMapper.boardDelflag",bno);
+	}
+
 
 }
