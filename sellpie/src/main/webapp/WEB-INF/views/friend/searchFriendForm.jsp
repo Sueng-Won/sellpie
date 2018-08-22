@@ -574,6 +574,18 @@ function fileUpload(inputFiles, condition){
         <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom" onclick="javascript:location.href='#open'"><i class="fa fa-comment"></i> &nbsp;128</button> 
     </div>
     </c:forEach> 
+<<<<<<< HEAD
+=======
+    
+    <c:if test="${fblist.size()>3 }">
+    <div id="js-btn-wrap" class="btn-wrap" style="text-align:center;">
+       		 <button type="button" class="btn btn-default btn-lg" id="load">
+  				<span><h6>more</h6></span>
+  				<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+			 </button>
+    </div>
+    </c:if>
+>>>>>>> refs/heads/HaSungMi
     <!-- End Middle Column -->
     </div>
    

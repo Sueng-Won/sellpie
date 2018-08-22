@@ -684,6 +684,7 @@ function fileUpload(inputFiles, condition){
                            </tr>
                            </c:if>
                      </c:if>
+<<<<<<< HEAD
                   </c:if>
            </c:forEach>
         </table>
@@ -702,6 +703,32 @@ function fileUpload(inputFiles, condition){
     </div>
     
     </c:forEach> 
+=======
+              </c:forEach>
+           </table>
+           &nbsp;
+           <button type="button" class="w3-button w3-margin-bottom w3-border  
+           <c:if test="${fn:contains(board.likeflag, 'T') }">
+               w3-theme-d2 
+            </c:if>
+            " onclick="likeCheck(this);"><i class="fa fa-thumbs-up"></i> &nbsp;          
+              <span><c:out value="${board.gcount }"></c:out></span>
+           </button>
+           <input type="hidden" name="bno" value="<c:out value='${board.bno }'/>"/>
+           <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom w3-border" onclick="openDetail('<c:out value="${board.bno }"/>')"><i class="fa fa-comment"></i> &nbsp;
+            <c:out value="${board.rcount }"/>
+           </button> 
+       </div>
+       </c:forEach> 
+       <c:if test="${bList.size()>3 }">
+    <div id="js-btn-wrap" class="btn-wrap" style="text-align:center;">
+       		 <button type="button" class="btn btn-default btn-lg" id="load">
+  				<span><h6>more</h6></span>
+  				<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+			 </button>
+    </div>
+    </c:if>
+>>>>>>> refs/heads/HaSungMi
     <!-- End Middle Column -->
     </div>
    
