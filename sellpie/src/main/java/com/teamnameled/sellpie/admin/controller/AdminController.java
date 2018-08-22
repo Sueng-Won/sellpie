@@ -38,6 +38,23 @@ public class AdminController {
 	public String inspectAu(){
 		return "admin/adminLogin";
 	}
+	@RequestMapping(value="adminJoin.do", method=RequestMethod.POST)
+	public ModelAndView adminJoin(Admin admin, ModelAndView mav, HttpSession session){
+		
+		try {
+			int result = adminService.adminJoin(admin);
+			if(0<result){
+				session.setAttribute("admin", result);
+				mav.setViewName("admin/adminIndex");
+			}
+		} catch (Exception e) {
+			mav.addObject("msg", "관리자 가입중 에러");
+			mav.setViewName("common/errorPage");
+			e.printStackTrace();
+		}
+		
+		return mav;
+	}
 	@RequestMapping("adminAd.do")
 	public String adminAdPage(){
 		return "admin/adminAd";
