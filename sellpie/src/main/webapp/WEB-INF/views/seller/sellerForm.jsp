@@ -6,6 +6,7 @@
 <html>
 <head>
 <c:import url="../header.jsp"></c:import>
+<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 <meta charset="UTF-8">
 <title>판매자 신청</title>
 <style>
@@ -73,10 +74,10 @@ function validate(){
     }else if($('#addr').val().trim().length==0){
     	alert('주소를 입력해주세요');
     	return false;
-    }else if($('#addrdetail').val().trim().length==0){
+    }else if($('#addrDetail').val().trim().length==0){
     	alert('상세주소를 입력해주세요');
     	return false;
-    }else if($('#pcategory').val().trim().length==0){
+    }else if($('#pCategory').val().trim().length==0){
     	alert('품목종류를 입력해주세요');
     	return false;
     }else if($('#reason').val().trim().length == 0){
@@ -85,6 +86,63 @@ function validate(){
     }
     	return true;
  }
+ 
+function openAddressPopup() {
+	var themeObj = {
+ 		   bgColor: "#162525", //바탕 배경색
+ 		   searchBgColor: "#162525", //검색창 배경색
+ 		   contentBgColor: "#162525", //본문 배경색(검색결과,결과없음,첫화면,검색서제스트)
+ 		   pageBgColor: "#162525", //페이지 배경색
+ 		   textColor: "#FFFFFF", //기본 글자색
+ 		   queryTextColor: "#FFFFFF", //검색창 글자색
+ 		   //postcodeTextColor: "", //우편번호 글자색
+ 		   //emphTextColor: "", //강조 글자색
+ 		   outlineColor: "#444444" //테두리
+ 		};
+	new daum.Postcode({
+ 	   theme: themeObj,
+        oncomplete: function(data) {
+            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+            // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+            var fullAddr = ''; // 최종 주소 변수
+            var extraAddr = ''; // 조합형 주소 변수
+
+            // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                fullAddr = data.roadAddress;
+
+            } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                fullAddr = data.jibunAddress;
+            }
+
+            // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
+            if(data.userSelectedType === 'R'){
+                //법정동명이 있을 경우 추가한다.
+                if(data.bname !== ''){
+                    extraAddr += data.bname;
+                }
+                // 건물명이 있을 경우 추가한다.
+                if(data.buildingName !== ''){
+                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+                fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+            }
+            
+            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+            $("#zipcode").val(data.zonecode);//5자리 새우편번호 사용
+            $("#addr").val(fullAddr);
+
+            // 커서를 상세주소 필드로 이동한다.
+            $("#addrDetail").focus();
+            searchAddr = fullAddr;
+        }
+        
+    }).open();
+	
+}
 </script>
 </head><body class="w3-theme-l5">
 
@@ -122,12 +180,12 @@ function validate(){
 	                      <input class="w3-input w3-border w3-round" style="width: 50%;" type="number" id="acNum" name="acNum" placeholder="계좌번호"/>
                       <br>
                       <div class="w3-row">
-	                      <input class="w3-input w3-border w3-round w3-half"  type="text" id="addr" name="addr" placeholder="주소" readonly/>
-	                      <a class="w3-button w3-theme w3-round-medium">주소검색</a><br>
+	                      <input class="w3-input w3-border w3-round w3-half" type="text" id="addr" name="addr" placeholder="주소" readonly/>
+	                      <a class="w3-button w3-theme w3-round-medium" onclick="openAddressPopup();">주소검색</a><br>
                       </div>
                       <input type="hidden" id="zipcode"name="zipcode"/>
-                      <input class="w3-input w3-border w3-round" type="text" style="width:50%" id="addrdetail" name="addrdetail" placeholder="상세주소"/><br>
-                      <input class="w3-input w3-border w3-round" type="text" style="width:50%" id="pcategory" name="pcategory" placeholder="품목 종류"/>
+                      <input class="w3-input w3-border w3-round" type="text" style="width:50%" id="addrDetail" name="addrDetail" placeholder="상세주소"/><br>
+                      <input class="w3-input w3-border w3-round" type="text" style="width:50%" id="pCategory" name="pCategory" placeholder="품목 종류"/>
                       <textarea class="w3-input w3-border w3-round" id="reason" name="reason" placeholder="신청이유" rows="20" style="resize: none;"></textarea><br>
                     </form>
               <button onclick="javascript: $('#applyForm').submit();" class="w3-button w3-theme"><i class="fa fa-pencil"></i> &nbsp;등록</button> 
