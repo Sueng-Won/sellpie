@@ -9,7 +9,6 @@
     연결의 착오를 줄인다. -->
 <mapper namespace="ContractMapper">
 	<select id="selectContractList" parameterType="String" resultType="Contract">
-<<<<<<< HEAD
 		SELECT CNO, EMAIL, SNO, PNO, QUANTITY, DELIVCODE, INVNUM, ADDR, ADDRDETAIL
 		FROM CONTRACT
 		WHERE EMAIL = #{email}
@@ -50,46 +49,6 @@
 					FROM PRODUCT
 					WHERE PNO = #{contract.pNo}
 				) AS PNAME,QUANTITY, DELIVCODE, INVNUM, ADDR, ADDRDETAIL
-=======
-		SELECT CNO, EMAIL, SNO, PNO, QUANTITY, DELIVCODE, INVNUM
-		FROM CONTRACT
-		WHERE EMAIL = #{email}
-	</select>
-	<insert id="insertContract" parameterType="Contract">
-		INSERT INTO CONTRACT
-		VALUES(
-			SEQ_CONTRACT_CNO.NEXTVAL,
-			#{email},
-			#{sNo},
-			#{pNo},
-			#{quantity},
-			null,
-			null
-		)
-	</insert>
-	<update id="updateContract" parameterType="Contract">
-		UPDATE CONTRACT SET DELIVCODE = #{delivCode}, INVNUM = #{invNum} WHERE CNO = #{cNo}
-	</update>
-	<select id="selectContractListWithName" parameterType="java.util.List" resultType="ContractWithName">
-		<foreach collection="list" item="contract" separator="UNION ALL">
-			SELECT CNO, (
-				SELECT NAME
-				FROM MEMBER 
-				WHERE EMAIL = #{contract.email}
-				) AS NAME,(
-					SELECT NAME
-					FROM MEMBER
-					WHERE EMAIL = (
-						SELECT EMAIL
-						FROM SELLER
-						WHERE SNO = #{contract.sNo}
-					)
-				) AS SNAME,(
-					SELECT PNAME
-					FROM PRODUCT
-					WHERE PNO = #{contract.pNo}
-				) AS PNAME,QUANTITY, DELIVCODE, INVNUM
->>>>>>> branch 'dggb' of https://github.com/Sueng-Won/sellpie.git
 				FROM CONTRACT
 				WHERE CNO = #{contract.cNo}
 			</foreach>

@@ -34,7 +34,6 @@
 		SELECT EMAIL, PWD, NAME, GENDER, PHONE, BIRTH, PROFILE_IMG
 		FROM MEMBER
 		WHERE NAME LIKE '%'||#{searchText}||'%'
-<<<<<<< HEAD
 	</select>
 	<update id="modifyUserInfo" parameterType="Member">
 		UPDATE MEMBER SET PWD =#{pwd}, NAME=#{name}, GENDER=#{gender}, PHONE=#{phone} WHERE EMAIL=#{email}
@@ -42,9 +41,6 @@
 	<update id="updateProfileImg" parameterType="Member">
 		UPDATE MEMBER SET PROFILE_IMG = #{profileImg} WHERE EMAIL = #{email}
 	</update>
-=======
-	</select>
->>>>>>> branch 'dggb' of https://github.com/Sueng-Won/sellpie.git
 </mapper>
 
 
