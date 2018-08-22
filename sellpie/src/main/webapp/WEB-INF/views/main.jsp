@@ -191,7 +191,7 @@ function fileUpload(inputFiles, condition){
          });
       }
    }
-Z
+
    function getReply(bno){
       $.ajax({
          url:"selectReply.do",
