@@ -824,7 +824,15 @@ function fileUpload(inputFiles, condition){
            </button> 
        </div>
     </c:forEach> 
-    <div id="js-btn-wrap" class="btn-wrap"> <a href="#" id="load">더보기</a> </div>
+    
+    <c:if test="${fblist.size()>3 }">
+    <div id="js-btn-wrap" class="btn-wrap" style="text-align:center;">
+       		 <button type="button" class="btn btn-default btn-lg" id="load">
+  				<span><h6>more</h6></span>
+  				<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+			 </button>
+    </div>
+    </c:if>
     <!-- End Middle Column -->
     </div>
    
