@@ -46,12 +46,16 @@
 	            if(state === 'COMPLETE_CLOSE'){
 	                //사용자가 검색결과를 선택하여 팝업창이 닫혔을 경우, 실행될 코드를 작성하는 부분입니다.
 	                //oncomplete 콜백 함수가 실행 완료된 후에 실행됩니다.
-	            	var addrDetail = prompt("상세주소를 입력해주세요.");
+	            	var addrDetail = window.prompt("상세주소를 입력해주세요.");
 	        		$("#addrLabel").append(", "+addrDetail);
 	        		$("#addrDetail").val(addrDetail);
 	            }
 		    }
 	    }).open();
+	}
+	
+	function insertContract(pNo){
+		$("#contractFrm"+pNo).submit();
 	}
 </script>
 <style type="text/css">
@@ -120,15 +124,6 @@
 }
 </style>
 
-<script type="text/javascript">
-	function productDetail(pNo){
-		location.href="sellpie/productDetail.do?pNo="+pNo;
-	}
-	
-	function insertContract(pNo){
-		$("#contractFrm"+pNo).submit();
-	}
-</script>
 </head>
 <body class="w3-theme-l5">
 
@@ -222,14 +217,14 @@
 								                               </h5>
 								                               <input id="addr" name="addr" type="hidden" value=""/>
 								                               <input id="addrDetail" name="addrDetail" type="hidden" value=""/>
-								                               	<button class="btn ptn-primary btn-sm btn-block" onclick="searchAddr();">주소검색</button>
-								                                  <button class="btn btn-primary btn-lg btn-block" type="button" onclick="insertContract(${product.pNo})">구매하기</button>
+								                               	<a class="btn ptn-primary btn-sm btn-block" onclick="searchAddr();">주소검색</a>
 								                               </div>
+								                               </form>
+								                               <button class="btn btn-primary btn-lg btn-block" type="button" onclick="insertContract(${product.pNo})">구매하기</button>
 								                               
 								                               <c:if test="${countList[status.index] eq 0}">
 								                               		<h4 align="center">해당 제품의 리뷰가 없습니다.</h4>
 								                               </c:if>
-								                               </form>
 								                               <c:if test="${countList[status.index] ne 0 }">
 								                               <div style="height:30%; width:100%; text-align:center;">
 								                               	<h3>해당 제품의 총 평점은?</h3>

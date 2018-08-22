@@ -29,7 +29,7 @@ public class ContractController {
 		}else {
 			System.out.println("insert 실패");
 		}
-		return "redirect: productList.do?sNo="+contract.getsNo();
+		return "redirect:productList.do?sNo="+contract.getsNo();
 	}
 	@RequestMapping(value="updateinvNum.do")
 	public @ResponseBody int updateinvNum(Contract contract) {
