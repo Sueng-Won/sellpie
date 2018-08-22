@@ -8,13 +8,15 @@ public class ContractWithName {
 	private int quantity;
 	private String delivCode;
 	private String invNum;
+	private String addr;
+	private String addrDetail;
 	
 	public ContractWithName() {
 		
 	}
 
 	public ContractWithName(int cNo, String name, String sName, String pName, int quantity, String delivCode,
-			String invNum) {
+			String invNum, String addr, String addrDetail) {
 		super();
 		this.cNo = cNo;
 		this.name = name;
@@ -23,6 +25,8 @@ public class ContractWithName {
 		this.quantity = quantity;
 		this.delivCode = delivCode;
 		this.invNum = invNum;
+		this.addr = addr;
+		this.addrDetail = addrDetail;
 	}
 
 	public int getcNo() {
@@ -81,9 +85,28 @@ public class ContractWithName {
 		this.invNum = invNum;
 	}
 
+	public String getAddr() {
+		return addr;
+	}
+
+	public void setAddr(String addr) {
+		this.addr = addr;
+	}
+
+	public String getAddrDetail() {
+		return addrDetail;
+	}
+
+	public void setAddrDetail(String addrDetail) {
+		this.addrDetail = addrDetail;
+	}
+
 	@Override
 	public String toString() {
 		return "ContractWithName [cNo=" + cNo + ", name=" + name + ", sName=" + sName + ", pName=" + pName
-				+ ", quantity=" + quantity + ", delivCode=" + delivCode + ", invNum=" + invNum + "]";
+				+ ", quantity=" + quantity + ", delivCode=" + delivCode + ", invNum=" + invNum + ", addr=" + addr
+				+ ", addrDetail=" + addrDetail + "]";
 	}
+	
+	
 }
