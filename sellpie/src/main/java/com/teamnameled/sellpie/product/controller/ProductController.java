@@ -9,7 +9,6 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.swing.border.Border;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,12 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.teamnameled.sellpie.board.model.vo.BoardVo;
-<<<<<<< HEAD
 import com.teamnameled.sellpie.member.model.vo.Member;
-=======
-import com.teamnameled.sellpie.contract.model.vo.Contract;
->>>>>>> refs/heads/master
 import com.teamnameled.sellpie.product.model.service.ProductService;
 import com.teamnameled.sellpie.product.model.vo.Product;
 import com.teamnameled.sellpie.resource.model.service.ResourceService;
@@ -70,6 +64,7 @@ public class ProductController {
 	
 	@RequestMapping("productForm.do")
 	public String productForm() {
+		
 		return "product/productForm";
 	}
 	
