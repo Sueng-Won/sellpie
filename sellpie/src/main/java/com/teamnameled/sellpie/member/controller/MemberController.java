@@ -372,17 +372,13 @@ public class MemberController {
 		request.setAttribute("sList", sList);
 		return "member/salesList";
 	}
-<<<<<<< HEAD
 	@RequestMapping("applySeller")
 	public String applySeller(Seller seller, HttpServletRequest request) {
-		//root 경로 지정
-		String root = request.getSession().getServletContext().getRealPath("resources");
 		//xml생성
-		StreamResult result = memberService.applySeller(seller,root);
+		StreamResult result = memberService.applySeller(seller);
+		System.out.println(result.toString());
 		return null;
 	}
-=======
-	
 	@RequestMapping("inputUrlToSession.do")
 	public @ResponseBody int inputUrlToSession(HttpServletRequest request, String url) {
 		int result = 1;
@@ -391,6 +387,4 @@ public class MemberController {
 		session.setAttribute("url", url);
 		return result;
 	}
-	
->>>>>>> branch 'master' of https://github.com/Sueng-Won/sellpie.git
 }
