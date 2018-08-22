@@ -370,8 +370,9 @@ public class MemberController {
 		List<SalesStatisticsVo> sList = sellerService.selectSalesStatisticsList(user.getEmail());
 		request.setAttribute("pList", pList);
 		request.setAttribute("sList", sList);
-		return "member/salseList";
+		return "member/salesList";
 	}
+<<<<<<< HEAD
 	@RequestMapping("applySeller")
 	public String applySeller(Seller seller, HttpServletRequest request) {
 		//root 경로 지정
@@ -380,4 +381,16 @@ public class MemberController {
 		StreamResult result = memberService.applySeller(seller,root);
 		return null;
 	}
+=======
+	
+	@RequestMapping("inputUrlToSession.do")
+	public @ResponseBody int inputUrlToSession(HttpServletRequest request, String url) {
+		int result = 1;
+		System.out.println(url);
+		HttpSession session = request.getSession();
+		session.setAttribute("url", url);
+		return result;
+	}
+	
+>>>>>>> branch 'master' of https://github.com/Sueng-Won/sellpie.git
 }
