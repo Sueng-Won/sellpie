@@ -96,6 +96,7 @@ cursor: pointer;
 							      <th scope="col">물품명</th>
 							      <th scope="col">수량</th>
 							      <th scope="col">주문자</th>
+							      <th scope="col">주소</th>
 							      <th scope="col">택배사</th>
 							      <th scope="col">송장번호</th>
 							      <th scope="col"></th>
@@ -108,6 +109,7 @@ cursor: pointer;
 							      <td><c:out value="${pIndex.pName}"/></td>
 							      <td><c:out value="${pIndex.quantity}"/></td>
 							      <td><c:out value="${pIndex.buyer}"/></td>
+							      <td><c:out value="${pIndex.addr}"/> <c:out value="${pIndex.addrDetail}"/></td>
 							      
 							      <c:if test="${pIndex.invNum != null }">
 							      <td class="delivName"><c:out value="${pIndex.delivCode}"/></td>
