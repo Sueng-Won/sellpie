@@ -35,5 +35,12 @@
 		FROM SELLER
 		WHERE EMAIL = #{email}
 	</select>
+	
+	<select id="selectSalesStatisticsList" parameterType="String" resultType="SalesStatisticsVo">
+		SELECT P.PNO, PNAME, PRICE, PQUANTITY, ISCRAFT, (SELECT SUM(C.QUANTITY) FROM CONTRACT C WHERE C.PNO = P.PNO) AS SALESRATE
+		FROM PRODUCT P
+		JOIN SELLER S ON (S.SNO = P.SNO)
+		WHERE S.EMAIL = #{email}
+	</select>
 </mapper>
 

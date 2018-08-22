@@ -69,5 +69,16 @@ public class MemberService  {
 
 	}
 
+	public int modifyUserInfo(Member member) throws Exception {
+		String encPassword = bpe.encode(member.getPwd());
+		member.setPwd(encPassword);
+		return dao.modifyUserInfo(member);
+	}
+
+	public int updateImg(Member member) {
+		System.out.println(member);
+		return dao.updateImg(member);
+	}
+
 
 }

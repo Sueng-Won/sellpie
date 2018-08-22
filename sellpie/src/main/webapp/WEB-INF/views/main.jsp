@@ -44,14 +44,14 @@
     pointer-events: auto;
 }
 .detail_content > div {
-	position: absolute;
-	top: 9%;
-	left: 15%;
-	width: 890px;
-	height: 520px;
-	padding: 16px;
-	background-color: rgba(0, 0, 0, 0.8);
-	overflow: hidden;	
+   position: absolute;
+   top: 9%;
+   left: 15%;
+   width: 890px;
+   height: 520px;
+   padding: 16px;
+   background-color: rgba(0, 0, 0, 0.8);
+   overflow: hidden;   
 }
 
 .detail_content2 {
@@ -84,13 +84,42 @@
    background-color: white;
    overflow: auto;   
 }
+
+.image_hide1 {
+    background-color: rgba(0, 0, 0, .4);
+    color: #fff;
+    font-size: 35px;
+    font-weight: normal;
+   position: absolute;
+   width: 350px;
+   height: 240px;
+   -webkit-margin-before: -6.9em;
+}
+
+.image_hide2 {
+    display: table;
+    height: 100%;
+    width: 100%;
+}
+
+.image_hide3 {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
 </style>
 <script>
 $(function(){
-	var msg = '<c:out value="${msg}"/>';
-	if(msg.length!=0&&msg!=""){
-		alert(msg);
-	}
+   var msg = '<c:out value="${msg}"/>';
+   if(msg.length!=0&&msg!=""){
+      alert(msg);
+   }
+   
+   var scroll = sessionStorage.getItem('scroll');
+      if(null!=scroll&&scroll.length!=0&&scroll!=""){
+         $(window).scrollTop(scroll);
+         sessionStorage.removeItem('scroll');
+   }
 });
 </script>
 <script>  
@@ -162,85 +191,86 @@ function fileUpload(inputFiles, condition){
          });
       }
    }
+Z
+   function getReply(bno){
+      $.ajax({
+         url:"selectReply.do",
+         type:"get",
+         data:{"bno":bno},
+         success:function(data){
+            for(var i=0; i<data.length; i++){
+               var div = $("<div>");
+               div.css({"height":"auto","width":"100%","margin-top":"5px"});
+               var innerDiv1 = $("<div>");
+               innerDiv1.css({"display":"inline-block","width":"28%"});   
+               var img = '<img src="'+data[i].profileImg+'" alt="Avatar" class="w3-left w3-circle rounded-circle" style="width:20px; height:20px;">';
+               innerDiv1.append(img);
+               innerDiv1.append('&nbsp;<b style="font-size: 11px;">'+data[i].name+'</b>');
+               div.append(innerDiv1);
+               
+               var innerDiv2 = $("<div>");
+               innerDiv2.css({"background":"lightgray","display":"inline-block","padding":"3px","border-radius":"10px","margin-left":"6px","width":"70%"});
+               
+               innerDiv2.append('<span style="font-size:11px;">&nbsp;'+data[i].content+'&nbsp;</span>');
+               div.append(innerDiv2);
+               $("#replyInfo").append(div);
+            }
+            $("#rcount").text(data.length);
+            
+            if(data==null || data.length==0){
+               $("#replyInfo").append("등록된 댓글이 없습니다.");
+            }
+               
+         },error:function(e){
+            console.log(e);
+         }
+      });
+   }
+   
+   function openDetail(bno){
+      $.ajax({
+         url:"selectBoard.do",
+         type:"get",
+         data:{"bno":bno},
+         success:function(data){
+            var srcArr = data.resource;
+            for(var i=0; i<srcArr.length; i++){
+               if(i==0){
+                  $("#fileview").append("<img src='"+srcArr[i].rsrc+"' style='width:90%; height:95%;' class='w3-margin-bottom mySlides'>");
+               }
+               $("#subView").append("<img src='"+srcArr[i].rsrc+"' style='width:7%; height:6%;' class='w3-margin-bottom mySlides'>");
+            }
+            
+            var profile = '<img src="'+data.profileImg+'" alt="Avatar" class="w3-left w3-circle w3-margin-right rounded-circle" style="width:50px; height:50px;">';
+            var name = '<span class="w3-large w3-margin-top">'+data.name+'</span><br>';
+            $("#detailInfo").append(profile);
+            $("#detailInfo").append(name);
+            $("#detailBno").val(data.bno);
+            
+            var content = data.bcontent;
+            $("#detailContent").append(content);
+            
+            
+         },error:function(e){
+            console.log(e);
+         }
+      });
+      
+      getReply(bno);
+   
+      location.href="#open";
+   }
 
-	function getReply(bno){
-		$.ajax({
-			url:"selectReply.do",
-			type:"get",
-			data:{"bno":bno},
-			success:function(data){
-				for(var i=0; i<data.length; i++){
-					var div = $("<div>");
-					div.css({"height":"auto","width":"100%","margin-top":"5px"});
-					var innerDiv1 = $("<div>");
-					innerDiv1.css({"display":"inline-block","width":"28%"});	
-					var img = '<img src="'+data[i].profileImg+'" alt="Avatar" class="w3-left w3-circle rounded-circle" style="width:20px; height:20px;">';
-					innerDiv1.append(img);
-					innerDiv1.append('&nbsp;<b style="font-size: 11px;">'+data[i].name+'</b>');
-					div.append(innerDiv1);
-					
-					var innerDiv2 = $("<div>");
-					innerDiv2.css({"background":"lightgray","display":"inline-block","padding":"3px","border-radius":"10px","margin-left":"6px","width":"70%"});
-					
-					innerDiv2.append('<span style="font-size:11px;">&nbsp;'+data[i].content+'&nbsp;</span>');
-					div.append(innerDiv2);
-					$("#replyInfo").append(div);
-				}
-				$("#rcount").text(data.length);
-				
-				if(data==null || data.length==0){
-					$("#replyInfo").append("등록된 댓글이 없습니다.");
-				}
-					
-			},error:function(e){
-				console.log(e);
-			}
-		});
-	}
-	
-	function openDetail(bno){
-		$.ajax({
-			url:"selectBoard.do",
-			type:"get",
-			data:{"bno":bno},
-			success:function(data){
-				var srcArr = data.resource;
-				for(var i=0; i<srcArr.length; i++){
-					if(i==0){
-						$("#fileview").append("<img src='"+srcArr[i].rsrc+"' style='width:90%; height:95%;' class='w3-margin-bottom mySlides'>");
-					}
-					$("#subView").append("<img src='"+srcArr[i].rsrc+"' style='width:7%; height:6%;' class='w3-margin-bottom mySlides'>");
-				}
-				
-				var profile = '<img src="'+data.profileImg+'" alt="Avatar" class="w3-left w3-circle w3-margin-right rounded-circle" style="width:50px; height:50px;">';
-				var name = '<span class="w3-large w3-margin-top">'+data.name+'</span><br>';
-				$("#detailInfo").append(profile);
-				$("#detailInfo").append(name);
-				$("#detailBno").val(data.bno);
-				
-				var content = data.bcontent;
-				$("#detailContent").append(content);
-				
-				
-			},error:function(e){
-				console.log(e);
-			}
-		});
-		
-		getReply(bno);
-	
-		location.href="#open";
-	}
-
-	function closeDetail(){
-		$("#fileview").html('');
-		$("#subView").html('');
-		$("#replyInfo").html('');
-		$("#detailInfo").html('');
-		$("#detailContent").html('');
-		location.href="#close";
-	}
-
+   function closeDetail(){
+            $("#fileview").html('');
+            $("#subView").html('');
+            $("#replyInfo").html('');
+            $("#detailInfo").html('');
+            $("#detailContent").html('');
+            var scrollTop = $(document).scrollTop();
+            sessionStorage.setItem('scroll',scrollTop);
+            location.href="selectBoardList.do";
+   }
    
    $(document).ready(function(){
         //취소버튼
@@ -250,54 +280,50 @@ function fileUpload(inputFiles, condition){
        });
         
        setTimeout(function() {
-              location.href = "selectBoardList.do";
+                 location.href = "selectBoardList.do";
               }, 180000); // 3000ms(3초)가 경과하면 이 함수가 실행됩니다.
-              
               
        //댓글 쓰고 엔터키 누를시 댓글 등록
        $("#inputReply").keyup(function(key) {
-    	   if (key.keyCode == 13) {
-    		   var content = $("#inputReply").text();
-    		   $("#inputReply").text("");
-        	   $("#inputReply").focus();
-				$.ajax({
-					url:"insertReply.do",
-					type:"get",
-					data:{"bno":$("#detailBno").val(), "content":content},
-					success:function(data){
-						if(data != null){
-							$("#replyInfo").html("");
-							getReply(data);
-						}
-					},error:function(e){
-						console.log("댓글 입력 에러",e);
-					}
-				});
-    	   }
+          if (key.keyCode == 13) {
+             var content = $("#inputReply").text();
+             $("#inputReply").text("");
+              $("#inputReply").focus();
+            $.ajax({
+               url:"insertReply.do",
+               type:"get",
+               data:{"bno":$("#detailBno").val(), "content":content},
+               success:function(data){
+                  if(data != null){
+                     $("#replyInfo").html("");
+                     getReply(data);
+                  }
+               },error:function(e){
+                  console.log("댓글 입력 에러",e);
+               }
+            });
+          }
 
-    	});
+       });
               
        $("#inputReplyBtn").click(function(){
-    	   var content = $("#inputReply").text();
-		   $("#inputReply").text("");
-    	   $("#inputReply").focus();
-			$.ajax({
-				url:"insertReply.do",
-				type:"get",
-				data:{"bno":$("#detailBno").val(), "content":content},
-				success:function(data){
-					if(data != null){
-						$("#replyInfo").html("");
-						getReply(data);
-					}
-				},error:function(e){
-					console.log("댓글 입력 에러",e);
-				}
-			});
-       });
-       
-       
-
+          var content = $("#inputReply").text();
+         $("#inputReply").text("");
+          $("#inputReply").focus();
+         $.ajax({
+            url:"insertReply.do",
+            type:"get",
+            data:{"bno":$("#detailBno").val(), "content":content},
+            success:function(data){
+               if(data != null){
+                  $("#replyInfo").html("");
+                  getReply(data);
+               }
+            },error:function(e){
+               console.log("댓글 입력 에러",e);
+            }
+         });
+       })
    }); 
       
    // Accordion
@@ -329,33 +355,53 @@ function fileUpload(inputFiles, condition){
    }
    
    function likeCheck(b){
-	   var likeBtn = b;
-	   var condition = "";
-	   var bno = $(likeBtn).next().val();
-	   if($(likeBtn).hasClass("w3-theme-d2")){
-		   $(likeBtn).removeClass("w3-theme-d2");
-		   condition = "sub"
-	   }else{
-		   $(likeBtn).addClass("w3-theme-d2");
-		   condition = "add"
-	   }
-	   
-	   $.ajax({
-		   url:"updateLike.do",
-		   type:"get",
-		   data:{"bno":bno,"condition":condition},
-		   success:function(data){
-			   var span = $(likeBtn).children()[1];
-			   console.log($(span).text(data));
-		   },error:function(e){
-			   console.log("에러 : "+e);
-		   }
-	   });
+      var likeBtn = b;
+      var condition = "";
+      var bno = $(likeBtn).next().val();
+      if($(likeBtn).hasClass("w3-theme-d2")){
+         $(likeBtn).removeClass("w3-theme-d2");
+         condition = "sub"
+      }else{
+         $(likeBtn).addClass("w3-theme-d2");
+         condition = "add"
+      }
+      
+      $.ajax({
+         url:"updateLike.do",
+         type:"get",
+         data:{"bno":bno,"condition":condition},
+         success:function(data){
+            var span = $(likeBtn).children()[1];
+            $(span).text(data);
+         },error:function(e){
+            console.log("에러 : "+e);
+         }
+      });
    }
+   
+   // 이전 스크롤 좌표
+   var lastScrollTop = 0 ;
+   
+   // 스크롤 이벤트 최초 발생
+   $(window).scroll(function(){
+      
+      // 현재 스크롤 좌표
+      var currentScrollTop = $(window).scrollTop();
+      
+      // 다운 스크롤
+      if(currentScrollTop - lastScrollTop > 0){
+        // 현재 스크롤 좌표를 이전 스크롤 좌표로 할당 
+        lastScrollTop = currentScrollTop;
+      }else{   // 업 스크롤
+         // 현재 스크롤 좌표를 이전 스크롤 좌표로 할당
+         lastScrollTop = currentScrollTop;
+      }
+      
+   });
+
 </script>
 
 </head><body class="w3-theme-l5">
-
 
 <!-- Page Container -->
 <div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">    
@@ -385,20 +431,19 @@ function fileUpload(inputFiles, condition){
          <form id="board" method="post"  action="/sellpie/insertBoard.do" onsubmit="validate();" enctype="multipart/form-data">
                <div class="detail_content2" id="contentOpen" >
 <!--                나중에 세션정보로 바꾸기 -->
-               <input type="hidden" name="email" value="test2@naver.com"/> 
+               <input type="hidden" name="email" value="<c:out value='${sessionScope.user.email }'/>"/> 
                <input type="hidden" name="bcontent" id="hiddenContent"/>
                   <div>
                      <div style="text-align:right;">
-                        <a class="divC" onclick="#close"> 
+                        <a class="divC" href="#close"> 
                          <i class="fa fa-close w3-text-black"></i>
                       </a>
                    </div>
                    
-                   
                      <div class="w3-row-padding">
                        <div class="w3-col m12">
                          <div class="w3-card w3-round w3-white">
-                           <div class="w3-container w3-padding">
+                           <div class="w3- container w3-padding">
                                <ul class="w3-ul" style="-webkit-margin-before: 0em; -webkit-margin-after: 0em; -webkit-margin-start: -30px; -webkit-margin-end: 0px;">
                                  <li class="w3-bar">
                                      <img src="resources/images/header/twice1.png" width="70" height="70" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
@@ -464,32 +509,32 @@ function fileUpload(inputFiles, condition){
                         </div>
                         <div class="w3-col m4" style="width:36%; height:98%;">
                             <div class="w3-container w3-card w3-white w3-round"><br>
-	                              <div class="w3-border-bottom" style="height:60px;" id="detailInfo">
-	<!--                               	ajax에서 프로필 정보 가져옴 -->
-	                              </div>
-	                               <div class="w3-margin-bottom" style="height:130px; overflow-y:scroll;" id="detailContent"> 
-	<!--                                     ajax에서 내용 가져옴 -->
-	                               </div>
-	                               <div>
-	                                  <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom w3-align-right"><i class="fa fa-thumbs-up"></i> &nbsp;600</button>
-	                                   <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom w3-align-right" onclick="javascript:$('#inputReply').focus();"><i class="fa fa-comment"></i> &nbsp;
-	                                   		<span id="rcount"></span>
-	                                   </button>  
-	                               </div>
-	                           
-	                            <div style="height:120px; width:100%; overflow-y:scroll;" id="replyInfo">
-	<!--                             	getReply에서 댓글 가져옴 -->
-	                            </div>
-	                            <div class="w3-row w3-cell-bottom w3-margin-bottom">
-		                             <div class="w3-col m1">
-		                                     <img src="resources/images/header/twice2.png" alt="Avatar" class="w3-left w3-circle rounded-circle w3-block" style="width:20px; height:20px;">
-	<!-- 	       세션에 정보 생기면 이걸로 바꾸기                              <img src="<c:out value='${user.profileImg}'/>" alt="Avatar" class="w3-left w3-circle rounded-circle w3-block" style="width:20px; height:20px;"> -->
-		                             </div>
-		                             <div contenteditable="true" class="w3-border w3-col m9 w3-round" id="inputReply"></div>
-		                             <div class="w3-col m1" style="border-radius: 17px;  width:22px; height:22px; text-align: center;">
-		                                  <img src="resources/images/header/submitImg.jpg" alt="Avatar" class="w3-left w3-circle rounded-circle w3-block" style="width:22px; height:22px;" id="inputReplyBtn">
-		                             </div>
-	                            </div>
+                                 <div class="w3-border-bottom" style="height:60px;" id="detailInfo">
+   <!--                                  ajax에서 프로필 정보 가져옴 -->
+                                 </div>
+                                  <div class="w3-margin-bottom" style="height:130px; overflow-y:scroll;" id="detailContent"> 
+   <!--                                     ajax에서 내용 가져옴 -->
+                                  </div>
+                                  <div>
+                                     <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom w3-align-right"><i class="fa fa-thumbs-up"></i> &nbsp;600</button>
+                                      <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom w3-align-right" onclick="javascript:$('#inputReply').focus();"><i class="fa fa-comment"></i> &nbsp;
+                                            <span id="rcount"></span>
+                                      </button>  
+                                  </div>
+                              
+                               <div style="height:120px; width:100%; overflow-y:scroll;" id="replyInfo">
+   <!--                                getReply에서 댓글 가져옴 -->
+                               </div>
+                               <div class="w3-row w3-cell-bottom w3-margin-bottom">
+                                   <div class="w3-col m1">
+                                           <img src="resources/images/header/twice2.png" alt="Avatar" class="w3-left w3-circle rounded-circle w3-block" style="width:20px; height:20px;">
+   <!--           세션에 정보 생기면 이걸로 바꾸기                              <img src="<c:out value='${user.profileImg}'/>" alt="Avatar" class="w3-left w3-circle rounded-circle w3-block" style="width:20px; height:20px;"> -->
+                                   </div>
+                                   <div contenteditable="true" class="w3-border w3-col m9 w3-round" id="inputReply"></div>
+                                   <div class="w3-col m1" style="border-radius: 17px;  width:22px; height:22px; text-align: center;">
+                                        <img src="resources/images/header/submitImg.jpg" alt="Avatar" class="w3-left w3-circle rounded-circle w3-block" style="width:22px; height:22px;" id="inputReplyBtn">
+                                   </div>
+                               </div>
                              </div>
                         </div>
                </div>
@@ -497,11 +542,19 @@ function fileUpload(inputFiles, condition){
           </div>
 <!--          상세보기창 끝-->
           
+   <c:forEach var="board" items="${bList }" end="4">
+   <div class="w3-container w3-card w3-white w3-round w3-margin" id="boardList"><br>
+      <input type="hidden" name="bno" />
       
-    <c:forEach var="board" items="${bList }">
-   <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
         <img src="<c:out value='${board.profileImg }'/>" alt="Avatar" class="w3-left w3-circle w3-margin-right rounded-circle" style="width:60px; height:60px;">
-        <span class="w3-right w3-opacity">32 min</span>
+        <span class="w3-right w3-opacity">
+<%----%>
+          <c:if test="${sessionScope.user.email eq board.email }">
+	           <button type="button" class="btn btn-default" aria-label="Left Align" onclick="javascript:location.href='updateForm.do?bno='+<c:out value='${board.bno }'/>">
+	              <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+	           </button>
+          </c:if>
+      </span>
         
         <h4><c:out value="${board.name }"></c:out></h4><br>
         <hr class="w3-clear">
@@ -510,6 +563,7 @@ function fileUpload(inputFiles, condition){
         <table id="fileTb" cellspacing="0" class="w3-margin-bottom">
            <c:forEach var="resource" items="${board.resource }" varStatus="st">
                  
+                 <!-- 사진 1개 -->
                  <c:if test="${board.resource.size() eq 1}">
                     <c:if test="${st.count eq 1}">
                        <tr>
@@ -520,8 +574,8 @@ function fileUpload(inputFiles, condition){
                      </c:if>
                   </c:if>
                   
+                  <!-- 사진 2개 -->
                   <c:if test="${board.resource.size() eq 2}">
-                     
                      <c:if test="${st.count eq 1}">
                      <tr>
                          <td>
@@ -532,83 +586,122 @@ function fileUpload(inputFiles, condition){
                          <td>
                               <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:500px;">
                           </td>
-                    </tr>
+                     </tr>
                      </c:if>
-                     
-                  </c:if>
-                  <c:if test="${board.resource.size() eq 3}">
-                  <c:if test="${st.count eq 1}">
-                        <tr>
-                           <td colspan="2">
-                               <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:720px; height:240px;">
-                           </td>
-                        </tr>
-                  </c:if> 
-                  <c:if test="${st.count >= 2}">
-                      <c:if test="${st.count eq 2}">
-                      <tr>
-                              <td>
-                                 <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
-                             </td>
-                        </c:if>
-                        <c:if test="${st.count eq 3}">
-                               <td>
-                                   <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
-                               </td>
-                        </tr>
-                         </c:if>
-                  </c:if>
-                     
                   </c:if>
                   
+                  <!-- 사진 3개 -->
+                  <c:if test="${board.resource.size() eq 3}">
+                     <c:if test="${st.count eq 1}">
+                           <tr>
+                              <td colspan="2">
+                                  <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:720px; height:240px;">
+                              </td>
+                           </tr>
+                     </c:if> 
+                     <c:if test="${st.count >= 2}">
+                         <c:if test="${st.count eq 2}">
+                         <tr>
+                                 <td>
+                                    <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
+                                </td>
+                           </c:if>
+                           <c:if test="${st.count eq 3}">
+                                  <td>
+                                      <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
+                                  </td>
+                           </tr>
+                            </c:if>
+                     </c:if>
+                  </c:if>
+                  
+                  <!-- 사진 4개 -->
                   <c:if test="${board.resource.size() eq 4}">
-                  <c:if test="${st.count < 3}">
-                      <c:if test="${st.count eq 1}">
-                      <tr>
-                              <td>
-                                 <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
-                             </td>
-                        </c:if>
-                        <c:if test="${st.count eq 2}">
-                               <td>
-                                   <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
-                               </td>
-                        </tr>
-                         </c:if>
+                     <c:if test="${st.count < 3}">
+                         <c:if test="${st.count eq 1}">
+                         <tr>
+                                 <td>
+                                    <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
+                                </td>
+                           </c:if>
+                           <c:if test="${st.count eq 2}">
+                                  <td>
+                                      <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
+                                  </td>
+                           </tr>
+                            </c:if>
+                     </c:if>
+                     <c:if test="${st.count >= 3}">
+                         <c:if test="${st.count eq 3}">
+                         <tr>
+                                 <td>
+                                    <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
+                                </td>
+                           </c:if>
+                           <c:if test="${st.count eq 4}">
+                                  <td>
+                                      <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
+                                  </td>
+                           </tr>
+                           </c:if>
+                     </c:if>
                   </c:if>
-                  <c:if test="${st.count >= 3}">
-                      <c:if test="${st.count eq 3}">
-                      <tr>
-                              <td>
-                                 <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
-                             </td>
-                        </c:if>
-                        <c:if test="${st.count eq 4}">
-                               <td>
-                                   <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
-                               </td>
-                        </tr>
-                         </c:if>
+                  
+                  <!-- 사진 4개 이상-->
+                  <c:if test="${board.resource.size() > 4}">
+                     <c:if test="${st.count < 3}">
+                         <c:if test="${st.count eq 1}">
+                         <tr>
+                                 <td>
+                                    <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
+                                </td>
+                           </c:if>
+                           <c:if test="${st.count eq 2}">
+                                  <td>
+                                      <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
+                                  </td>
+                           </tr>
+                            </c:if>
+                     </c:if>
+                     <c:if test="${st.count >= 3}">
+                         <c:if test="${st.count eq 3}">
+                         <tr>
+                                 <td>
+                                    <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
+                                </td>
+                           </c:if>
+                           <c:if test="${st.count eq 4}">
+                                  <td>
+                                      <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
+                                      <div class="image_hide1">
+                                        <div class="image_hide2">
+                                           <div class="image_hide3"><c:out value='${board.resource.size()-4}'></c:out>장+
+                                           </div>
+                                        </div>
+                                        </div>
+                                  </td>
+                                  
+                           </tr>
+                           </c:if>
+                     </c:if>
                   </c:if>
-                     
-                  </c:if>
-          
            </c:forEach>
         </table>
         &nbsp;
         <button type="button" class="w3-button w3-margin-bottom w3-border  
         <c:if test="${fn:contains(board.likeflag, 'T') }">
-         	w3-theme-d2 
+            w3-theme-d2 
          </c:if>
-         " onclick="likeCheck(this);"><i class="fa fa-thumbs-up"></i> &nbsp;       	
-        	<span><c:out value="${board.gcount }"></c:out></span>
+         " onclick="likeCheck(this);"><i class="fa fa-thumbs-up"></i> &nbsp;          
+           <span><c:out value="${board.gcount }"></c:out></span>
         </button>
         <input type="hidden" name="bno" value="<c:out value='${board.bno }'/>"/>
         <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom w3-border" onclick="openDetail('<c:out value="${board.bno }"/>')"><i class="fa fa-comment"></i> &nbsp;
-			<c:out value="${board.rcount }"/>
-		</button> 
+         <c:out value="${board.rcount }"/>
+      </button> 
     </div>
-    </c:forEach>
+    
+    </c:forEach> 
     <!-- End Middle Column -->
     </div>
    
@@ -622,18 +715,6 @@ function fileUpload(inputFiles, condition){
 <!-- End Page Container -->
 </div>
 <br>
-
-<!-- Footer -->
-<footer class="w3-container w3-theme-d3 w3-padding-16">
-  <h5>Footer</h5>
-</footer>
-
-<footer class="w3-container w3-theme-d5">
-  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
-</footer>
- 
-
-
 
 </body></html>
  

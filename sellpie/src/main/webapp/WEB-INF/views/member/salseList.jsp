@@ -8,7 +8,11 @@
 <head>
 <meta charset="UTF-8">
 <title>판매현황</title>
-
+<style type="text/css">
+td{
+cursor: pointer;
+}
+</style>
 </head>
 <body class="w3-theme-l5">
 	<!-- Page Container -->
@@ -25,47 +29,85 @@
 
 				<div class="w3-row-padding">
 					<div class="w3-col m12">
+					<div class="w3-card w3-round w3-white">
+						<div class="w3-container w3-padding">
+							<h2>판매 물품</h2>
+							<hr>
+							<table class="table w3-striped w3-hoverable">
+								<thead>
+									<tr>
+										<th>판매량</th>
+										<th>품명</th>
+										<th>가격</th>
+										<th colspan="2">수량</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach var="item" items="${sList}">
+										<tr>
+											<td><c:out value="${item.salesRate}"/></td>
+											<td><c:out value="${item.pName}"/></td>
+											<td><c:out value="${item.price}"/></td>
+											<c:if test="${item.iscraft eq 'Y'.charAt(0)}">
+												<td>제작</td>
+											</c:if>
+											<c:if test="${item.iscraft eq 'N'.charAt(0)}">
+												<td><c:out value="${item.pQuantity}"/></td>
+											</c:if>
+											<td align="right"><button onclick="javascript: location.href = 'productUpdateForm.do?pNo='+${item.pNo}"
+													class="w3-theme w3-button w3-tiny w3-padding-small">수정</button></td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+							
+						</div>
+					</div>
+					<br>
 						<div class="w3-card w3-round w3-white">
 							<div class="w3-container w3-padding">
-							판매현황
-<span id="tekbeCompnayName">택배회사명: </span>
-<select id="tekbeCompnayList" name="tekbeCompnayList"></select><br/><br/>
-
-<span id="invoiceNumber">운송장번호: </span>
-<input type="text" id="invoiceNumberText" name="invoiceNumberText"><br/><br/>
-<button id="myButton1">택배 조회하기 </button>
-<br/>
-<br/>
-<div>
-   <table id="myPtag"></table>
-</div>
-<br/>
-<div>
-   <table id="myPtag2"></table>
-</div>
+							<h2>판매 정보</h2>
+							<hr>
+							<form onsubmit="return changeKeyword();" id="searchForm" action="salesList.do" method="post">
+								<div class="w3-row">
+									<div class="w3-third w3-margin-right">
+						                <input class="w3-input w3-border w3-round" type="text" id="keyword" name="keyword" placeholder="검색어"/><br>
+							            <input class="w3-check w3-border w3-round" type="checkbox" id="isChecked" name="isChecked" value="YES">
+							            <label for="#isChecked">미처리</label>
+									</div>
+									<div class="w3-quarter w3-margin-right">
+										<select class="w3-select w3-border w3-round" id="searchSelector">
+											<option value="pName">품명</option>
+											<option value="buyer">주문자</option>
+											<!-- <option value="pName">주소</option> -->
+										</select>
+									</div>
+									<input class="w3-theme w3-button" type="submit" value="검색"/>
+								</div>
+							</form>
 							<table class="table w3-striped w3-hoverable">
 							  <thead>
 							    <tr>
 							      <th scope="col">#</th>
-							      <th scope="col">판매자</th>
 							      <th scope="col">물품명</th>
 							      <th scope="col">수량</th>
+							      <th scope="col">주문자</th>
 							      <th scope="col">택배사</th>
 							      <th scope="col">송장번호</th>
 							      <th scope="col"></th>
 							    </tr>
 							  </thead>
-							  <tbody>
+							  <tbody id="itemList">
 							  <c:forEach var="pIndex" items="${pList}" varStatus="status">
 							    <tr class="pList" id="pList">
 							      <th scope="row">${status.index}</th>
-							      <td><c:out value="${pIndex.sNo}"/></td>
-							      <td><c:out value="${pIndex.pNo}"/></td>
+							      <td><c:out value="${pIndex.pName}"/></td>
 							      <td><c:out value="${pIndex.quantity}"/></td>
+							      <td><c:out value="${pIndex.buyer}"/></td>
 							      
 							      <c:if test="${pIndex.invNum != null }">
 							      <td class="delivName"><c:out value="${pIndex.delivCode}"/></td>
-							      <td class="invNum"><c:out value="${pIndex.invNum}"/></td>
+							      <td colspan="2" class="invNum"><c:out value="${pIndex.invNum}"/></td>
 							      <td style="display:none" class="tCode"><c:out value="${pIndex.delivCode}"/></td>
 							      </c:if>
 							      
@@ -117,15 +159,23 @@
 	</footer> -->
 </body>
 <script>
+//검색-------------------------------------------------------------
+function changeKeyword(){
+	$('#keyword').attr('name',$('#searchSelector').val());
+	$('#searchForm').submit();
+	console.log($('#searchSelector').val());
+	return true;
+}
+//송장번호 등록 --------------------------------------------------------
 function updateDeliv(obj, cNoVal) {
 	var pList = $(obj).closest(".pList");
 	var delivCodeVal = pList.find('.delivCode option:selected').val();
 	var invNumVal = pList.find('.invNum').val();
 	
-	console.log('pList='+pList);
+	/* console.log('pList='+pList);
 	console.log('delivCode='+delivCodeVal);
 	console.log('invNum='+invNumVal);
-	console.log('cNoVal='+cNoVal);
+	console.log('cNoVal='+cNoVal); */
 	
 	$.ajax({
         type:"GET",
@@ -160,8 +210,9 @@ function openNav() {
         x.className = x.className.replace(" w3-show", "");
     }
 }
+
 $(document).ready(function(){
-	   var myKey = "fMRb63gXbA5qym8Hl18qCw"; // sweet tracker에서 발급받은 자신의 키 넣는다.
+	   var myKey = "nbeEbTsubouLt0cxAval8w"; // sweet tracker에서 발급받은 자신의 키 넣는다.
 	   
 	      // 택배사 목록 조회 company-api
 	        $.ajax({
@@ -172,11 +223,11 @@ $(document).ready(function(){
 	                  
 	                  // 방법 1. JSON.parse 이용하기
 	                  var parseData = JSON.parse(JSON.stringify(data));
-	                   console.log(parseData.Company); // 그중 Json Array에 접근하기 위해 Array명 Company 입력
+	                   //console.log(parseData.Company); // 그중 Json Array에 접근하기 위해 Array명 Company 입력
 	                  
 	                  // 방법 2. Json으로 가져온 데이터에 Array로 바로 접근하기
 	                  var CompanyArray = data.Company; // Json Array에 접근하기 위해 Array명 Company 입력
-	                  console.log(CompanyArray); 
+	                  //console.log(CompanyArray); 
 	                  
 	                  var myData="";
 	                  var dilvData="";
@@ -186,7 +237,7 @@ $(document).ready(function(){
 		                  $('.pList').each(function() {
 		              		if(value.Code == $(this).find('.delivName').text()){
 		                	  $(this).find('.delivName').text(value.Name);
-		              		console.log($(this).text());
+		              		//console.log($(this).text());
 		              			//$(this).text(value.Name);
 		              		
 		              		}
@@ -197,67 +248,8 @@ $(document).ready(function(){
 	            }
 	        });
 
+	   
 	      // 배송정보와 배송추적 tracking-api
-	        $("#myButton1").click(function() {
-	           var t_code = $('#tekbeCompnayList option:selected').attr('value');
-	           var t_invoice = $('#invoiceNumberText').val();
-	            $.ajax({
-	                type:"GET",
-	                dataType : "json",
-	                url:"http://info.sweettracker.co.kr/api/v1/trackingInfo?t_key="+myKey+"&t_code="+t_code+"&t_invoice="+t_invoice,
-	                success:function(data){
-	                   console.log(data);
-	                   var myInvoiceData = "";
-	                   if(data.status == false){
-	                      myInvoiceData += ('<p>'+data.msg+'<p>');
-	                   }else{
-	                     myInvoiceData += ('<tr>');               
-	                     myInvoiceData += ('<th>'+"보내는사람"+'</td>');                 
-	                     myInvoiceData += ('<th>'+data.senderName+'</td>');                 
-	                     myInvoiceData += ('</tr>');     
-	                     myInvoiceData += ('<tr>');               
-	                     myInvoiceData += ('<th>'+"제품정보"+'</td>');                 
-	                     myInvoiceData += ('<th>'+data.itemName+'</td>');                 
-	                     myInvoiceData += ('</tr>');     
-	                     myInvoiceData += ('<tr>');               
-	                     myInvoiceData += ('<th>'+"송장번호"+'</td>');                 
-	                     myInvoiceData += ('<th>'+data.invoiceNo+'</td>');                 
-	                     myInvoiceData += ('</tr>');     
-	                     myInvoiceData += ('<tr>');               
-	                     myInvoiceData += ('<th>'+"송장번호"+'</td>');                 
-	                     myInvoiceData += ('<th>'+data.receiverAddr+'</td>');                 
-	                     myInvoiceData += ('</tr>');                                    
-	                   }
-	                 
-	                   
-	                   $("#myPtag").html(myInvoiceData)
-	                   
-	                   var trackingDetails = data.trackingDetails;
-	                   
-	                   
-	                  var myTracking="";
-	                  var header ="";
-	                  header += ('<tr>');               
-	                  header += ('<th>'+"시간"+'</th>');
-	                  header += ('<th>'+"장소"+'</th>');
-	                  header += ('<th>'+"유형"+'</th>');
-	                  header += ('<th>'+"전화번호"+'</th>');                 
-	                 header += ('</tr>');     
-	                  
-	                  $.each(trackingDetails,function(key,value) {
-	                     myTracking += ('<tr>');               
-	                     myTracking += ('<td>'+value.timeString+'</td>');
-	                     myTracking += ('<td>'+value.where+'</td>');
-	                     myTracking += ('<td>'+value.kind+'</td>');
-	                     myTracking += ('<td>'+value.telno+'</td>');                 
-	                     myTracking += ('</tr>');                                
-	                  });
-	                  
-	                  $("#myPtag2").html(header+myTracking);
-	                   
-	                }
-	            });
-	        });
 	
 	        $(".pList").click(function() {
 	        	var thisObj = $(this);

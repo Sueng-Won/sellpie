@@ -20,9 +20,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.SessionScope;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.context.request.SessionScope;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.WebUtils;
 
@@ -31,8 +31,11 @@ import com.teamnameled.sellpie.contract.model.service.ContractService;
 import com.teamnameled.sellpie.contract.model.vo.Contract;
 import com.teamnameled.sellpie.common.GenerateCertNumber;
 import com.teamnameled.sellpie.contract.model.vo.ContractWithName;
+import com.teamnameled.sellpie.contract.model.vo.SalesListVo;
 import com.teamnameled.sellpie.member.model.service.MemberService;
 import com.teamnameled.sellpie.member.model.vo.Member;
+import com.teamnameled.sellpie.seller.model.service.SellerService;
+import com.teamnameled.sellpie.seller.model.vo.SalesStatisticsVo;
 
 @Controller
 public class MemberController {
@@ -46,6 +49,8 @@ public class MemberController {
 	@Autowired
 	ContractService contractService;
 	
+	@Autowired
+	SellerService sellerService;
 
 	@RequestMapping("login.do")
 	public String loginPage(){
@@ -164,7 +169,7 @@ public class MemberController {
 			if(result>0){
 				session.setAttribute("user", member);
 				
-				mav.setViewName("redirect:main.do");
+				mav.setViewName("redirect:selectBoardList.do");
 			}else{
 				mav.addObject("msg", "회원 가입 처리중 에러 발생!");
 				mav.setViewName("common/errorPage");
@@ -262,6 +267,7 @@ public class MemberController {
 			int result = memberService.updateUserPwd(member);
 			System.out.println(result);
 		} catch (Exception e) {
+			System.out.println("비밀번호 수정중 에ㅓㄹ");
 			e.printStackTrace();
 		}
 		
@@ -274,20 +280,20 @@ public class MemberController {
 		request.setAttribute("searchText", searchText);
 		return "member/searchMemberList";
 	}
+	@RequestMapping("updateUserInfo.do")
+	public String updateUserInfo(){
+		return "member/updateUserInfo";
+	}
 		@RequestMapping("updateMember.do")
-	public String updateMember(){
-		return "member/memberUpdate";
-	}
-	@RequestMapping("errorPage.do")
-	public String errorPage(){
-		return "common/errorPage";
-	}
+		public String updateMember(){
+			return "member/memberUpdate";
+		}
 	@RequestMapping("userImgUpload.do")
-	public @ResponseBody String userImgUpload(MultipartHttpServletRequest request){
+	public @ResponseBody String userImgUpload(MultipartHttpServletRequest request, HttpServletRequest servletRequest, Member member){
 		// 저장 경로 설정
-        String root = request.getSession().getServletContext().getRealPath("/");
+        String root = servletRequest.getSession().getServletContext().getRealPath("resources");
         System.out.println(root);
-        String path = root+"resources/userImg/";
+        String path = root+"\\images\\userImg";
          
         String newFileName = ""; // 업로드 되는 파일명
          
@@ -304,9 +310,10 @@ public class MemberController {
             System.out.println("실제 파일 이름 : " +fileName);
             newFileName = System.currentTimeMillis()+"."
                     +fileName.substring(fileName.lastIndexOf(".")+1);
-             
             try {
-                mFile.transferTo(new File(path+newFileName));
+                mFile.transferTo(new File(path+"\\"+newFileName));
+                member.setProfileImg(newFileName);
+                int result = memberService.updateImg(member);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -316,6 +323,30 @@ public class MemberController {
         
 		return "msg";
 	}
+	@RequestMapping(value = "modifyUserInfo.do", method=RequestMethod.POST)
+	public ModelAndView modifyUserInfo(Member member, ModelAndView mav){
+		System.out.println(member);
+			try {
+				int result = memberService.modifyUserInfo(member);
+				if(0<result){
+					mav.setViewName("member/memberUpdate");
+				}
+				
+			} catch (Exception e) {
+				mav.addObject("msg", "회원 가입 처리중 에러 발생!");
+				mav.setViewName("common/errorPage");
+				e.printStackTrace();
+			}
+			
+		
+		return mav;
+	}
+	
+	@RequestMapping("errorPage.do")
+	public String errorPage(){
+		return "common/errorPage";
+	}
+	
 	//개인정보수정-구매현황
 	@RequestMapping("purchaseList.do")
 	public String purchaseList(String email, HttpServletRequest request) {
@@ -329,13 +360,14 @@ public class MemberController {
 	}
 	//개인정보수정-판매현황
 	@RequestMapping("salesList.do")
-	public String salesList(HttpServletRequest request) {
+	public String salesList(HttpServletRequest request, SalesListVo salesListVo) {
 		HttpSession session = request.getSession();
 		Member user = (Member)session.getAttribute("user");
-		List<Contract> purchaseList = contractService.selectContractList(user.getEmail());
-		List<ContractWithName> purchaseListWithName = contractService.selectContractListWithName(purchaseList);
-		request.setAttribute("cList", purchaseList);
-		request.setAttribute("pList", purchaseListWithName);
+		salesListVo.setEmail(user.getEmail());
+		List<SalesListVo> pList = contractService.selectSalesList(salesListVo);
+		List<SalesStatisticsVo> sList = sellerService.selectSalesStatisticsList(user.getEmail());
+		request.setAttribute("pList", pList);
+		request.setAttribute("sList", sList);
 		return "member/salseList";
 	}
 }
