@@ -12,6 +12,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.xml.transform.stream.StreamResult;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -36,6 +37,7 @@ import com.teamnameled.sellpie.member.model.service.MemberService;
 import com.teamnameled.sellpie.member.model.vo.Member;
 import com.teamnameled.sellpie.seller.model.service.SellerService;
 import com.teamnameled.sellpie.seller.model.vo.SalesStatisticsVo;
+import com.teamnameled.sellpie.seller.model.vo.Seller;
 
 @Controller
 public class MemberController {
@@ -369,5 +371,13 @@ public class MemberController {
 		request.setAttribute("pList", pList);
 		request.setAttribute("sList", sList);
 		return "member/salseList";
+	}
+	@RequestMapping("applySeller")
+	public String applySeller(Seller seller, HttpServletRequest request) {
+		//root 경로 지정
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		//xml생성
+		StreamResult result = memberService.applySeller(seller,root);
+		return null;
 	}
 }

@@ -1,14 +1,33 @@
 package com.teamnameled.sellpie.member.model.service;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 import com.teamnameled.sellpie.member.model.dao.MemberDao;
 import com.teamnameled.sellpie.member.model.vo.Member;
+import com.teamnameled.sellpie.seller.model.vo.Seller;
 
 @Service
 public class MemberService  {
@@ -77,6 +96,59 @@ public class MemberService  {
 	public int updateImg(Member member) {
 		System.out.println(member);
 		return dao.updateImg(member);
+	}
+
+	public StreamResult applySeller(Seller seller) {
+		//xml틀 생성
+		StreamResult result=null;
+		String savePath = "resources/applySeller/applyList.xml";
+		DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder docBuilder = null;
+		try {
+			docBuilder = docFactory.newDocumentBuilder();
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+		}
+		//Document Element 생성
+		Document doc = docBuilder.newDocument();
+		Element applyEmail = doc.createElement("email");
+		doc.appendChild(applyEmail);
+		
+		//Element에 대한 속성값 정의
+		applyEmail.setAttribute("acNum",seller.getAcNum());
+		applyEmail.setAttribute("bank",seller.getBank());
+		applyEmail.setAttribute("zipcode",seller.getZipcode());
+		applyEmail.setAttribute("addr",seller.getAddr());
+		applyEmail.setAttribute("addrDetail",seller.getAddrDetail());
+		applyEmail.setAttribute("pCategory", seller.getpCategory());
+		applyEmail.setAttribute("reason",seller.getReason());
+		
+		//xml파일 생성
+		TransformerFactory transformerFactory = TransformerFactory.newInstance();
+		Transformer transformer = null;
+		try {
+			//데이터 parsing
+			transformer = transformerFactory.newTransformer();
+			transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+		} catch (TransformerConfigurationException e) {
+			e.printStackTrace();
+		}
+		DOMSource source = new DOMSource(doc);
+		try {
+			result = new StreamResult(new FileWriter(savePath, true));
+		}catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			transformer.transform(source, result);
+			System.out.println("파일 생성 및 데이터 추가 완료");
+		} catch (TransformerException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 
 
