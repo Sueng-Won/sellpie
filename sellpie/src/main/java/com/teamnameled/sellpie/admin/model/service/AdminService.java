@@ -43,4 +43,10 @@ public class AdminService {
 		return dao.insertAdmin(admin);
 	}
 
+
+	public int insertCount(String email) {
+		return dao.insertCount(email);
+		
+	}
+
 }
