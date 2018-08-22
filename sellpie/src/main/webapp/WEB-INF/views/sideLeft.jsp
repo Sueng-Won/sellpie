@@ -77,8 +77,6 @@ function openNav() {
         <div class="w3-white">
           <button onclick="myFunction('Demo1')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-circle-o-notch fa-fw w3-margin-right"></i> My Page</button>
           <div id="Demo1" class="w3-hide w3-container">
-            <a class="w3-button w3-theme" onclick="javascript: location.href = 'productForm.do'">물품등록</a>
-            <a class="w3-button w3-theme" onclick="javascript: location.href = 'salesList.do?email=${sessionScope.user.email}'">판매관리</a>
           </div>
           <button onclick="myFunction('Demo2')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i> My Events</button>
           <div id="Demo2" class="w3-hide w3-container">
@@ -144,6 +142,53 @@ function openNav() {
     
     <!-- End Left Column -->
     </div>
+<script type="text/javascript">
+//판매자 확인 후 마이페이지 버튼추가---------------------------------------------------------------------------
+$(function() {
+	$.ajax({
+        type:"GET",
+        dataType : "json",
+        url:'sellerCheck.do',
+        success:function(data){
+        	if(data == 1){
+        		$('#Demo1').append('<a class="w3-button w3-theme" onclick="productForm();">물품등록</a>');
+        		$('#Demo1').append('<a class="w3-button w3-theme" onclick="javascript: location.href = '+"'salesList.do'"+'">판매관리</a>');
+        		$('#Demo1').append('<a class="w3-button w3-theme" onclick="sellerForm();">판매자등록</a>');
+        	}else{
+        	}
+        }
+	});
+	
+});
+//이전 경로가 필요할 경우 실행-----------------------------------------------------------------------------
+function saveUrl(){
+	var pathNames = $(location).attr('pathname').split('/');
+	var prams = $(location).attr('search');
+	var first = pathNames[1];
+	var presentUrl = pathNames[2] + prams;
+	console.log(first);
+	console.log(presentUrl);
+	$.ajax({
+		type:"GET",
+        dataType : "json",
+        data:{url:presentUrl},
+        url:'inputUrlToSession.do',
+        success:function(data){
+        	console.log(data);
+        }
+	});
+	return;
+}
+//판매등록 페이지이동-------------------------------------------------------------------------------------
+function productForm() {
+	saveUrl();
+	location.href = 'productForm.do';
+}
 
+function sellerForm() {
+	saveUrl();
+	location.href = 'sellerForm.do';
+}
+</script>
 </body>
 </html>
