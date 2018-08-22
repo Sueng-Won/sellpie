@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.teamnameled.sellpie.contract.model.dao.ContractDao;
 import com.teamnameled.sellpie.contract.model.vo.Contract;
 import com.teamnameled.sellpie.contract.model.vo.ContractWithName;
+import com.teamnameled.sellpie.contract.model.vo.SalesListVo;
 
 @Service
 public class ContractService {
@@ -22,7 +23,14 @@ public class ContractService {
 		return contractDao.insertContract(contract);
 	}
 
+	public int updateContract(Contract contract) {
+		return contractDao.updateContract(contract);
+	}
 	public List<ContractWithName> selectContractListWithName(List<Contract> purchaseList) {
 		return contractDao.selectContractListWithName(purchaseList);
+	}
+
+	public List<SalesListVo> selectSalesList(SalesListVo salesListVo) {
+		return contractDao.selectSalesList(salesListVo);
 	}
 }

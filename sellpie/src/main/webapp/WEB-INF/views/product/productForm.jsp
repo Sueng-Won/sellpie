@@ -226,7 +226,7 @@ function validate(){
 						<hr>
 						              
 					<div class="fileLInk background-white">
-						<img src="resources/images/picture.JPG" width="30" height="30" onclick="imageFile.click()"/>
+						<img src="resources/images/picture.JPG" width="30" height="30" onclick="imageFile.click()"/><label>등록할 이미지를 선택해주세요</label>
 						<input type="file" name="file" id="imageFile" onchange="fileUpload(this,0);" accept="image/*" style="display:none;" multiple/>
 		            </div>
                       <input class="w3-input w3-border w3-round" type="number" style="width:30%" id="pQuantity" name="pQuantity" min="1" placeholder="수량"/><br>

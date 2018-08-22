@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.teamnameled.sellpie.member.model.vo.Member;
+import com.teamnameled.sellpie.seller.model.vo.SalesStatisticsVo;
 import com.teamnameled.sellpie.seller.model.vo.Seller;
 
 @Repository
@@ -24,6 +25,10 @@ public class SellerDao {
 
 	public Seller selectSeller(String email) {
 		return sqlSession.selectOne("SellerMapper.selectSeller",email);
+	}
+
+	public List<SalesStatisticsVo> selectSalesStatisticsList(String email) {
+		return sqlSession.selectList("SellerMapper.selectSalesStatisticsList", email);
 	}
 	
 }

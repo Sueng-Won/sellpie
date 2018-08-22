@@ -27,6 +27,9 @@
 		display:inline-block;
 		margin-top: 55px;
 	}
+	#userProfile:hover{
+		cursor:pointer;
+		}
 </style>
 <script>
  $(function(){
@@ -43,7 +46,9 @@
 			var reader = new FileReader();
 			var formData = new FormData();
 			formData.set("img", obj.files[0]);
+			formData.set("email", "${sessionScope.user.email}");
 			console.log(formData.get("img"));
+			console.log(formData.get("email"));
 			reader.onload=function(e){
 				$(".userImgArea").attr("src", e.target.result);
 				$.ajax({
@@ -54,6 +59,7 @@
 					contentType : false,
 					success : function(html) {
 		                alert("파일 업로드하였습니다.");
+		                
 		            },
 		            error : function(error) {
 		                alert("파일 업로드에 실패하였습니다.");
@@ -62,7 +68,7 @@
 		            }
 				});
 			}
-			reader.readAsDataURL(obj.files[0]);
+			reader.readAsDataURL(obj.files[0]); 
 		}
 	}
 </script>
@@ -70,10 +76,10 @@
 <body>
 
 	<div class="w3-card container" >
-  			<header class="w3-container w3-blue header">
-  			<img src="resources/images/header/twice2.png" alt="Avatar" class="w3-left w3-circle w3-margin-right rounded-circle userImgArea" style="width:116px; height:116px;">
+  			<header class="w3-container  header">
+  			<img src="resources/images/userImg/${(sessionScope.user.profileImg eq null)?'profile.png':sessionScope.user.profileImg}" id="userProfile" name="userProfile"  class="w3-left w3-circle w3-margin-right rounded-circle userImgArea" style="width:116px; height:116px;">
   					<form id="uploadForm" enctype="multipart/form-data" method="POST" action="/sellpie/userImgUpload.do">
-  						<input type="file" id="userImg" name="userImg" onchange="printImage(this);"/>
+  						<input type="file" id="userImg" name="profileImg" onchange="printImage(this);"/>
   					</form>
   				<h1 class="user"><c:out value="${sessionScope.user.name }"/></h1>
   				  <button class="w3-btn w3-white w3-border w3-border-blue w3-round userInfo">정보 수정</button>
@@ -84,7 +90,7 @@
 			<hr>
 			<div class="w3-container userInfo_board">
  				 <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-                       <img src="resources/images/header/twice2.png" alt="Avatar" class="w3-left w3-circle w3-margin-right rounded-circle" style="width:60px; height:60px;">
+                       <img src="resources/images/header/twice2.png" class="w3-left w3-circle w3-margin-right rounded-circle" style="width:60px; height:60px;">
                     <span class="w3-right w3-opacity">32 min</span>
                     <h3> <c:out value="${sessionScope.user.name }"/></h3><br>
                     

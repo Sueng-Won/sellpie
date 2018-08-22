@@ -12,7 +12,7 @@
 <script src="resources/js/jquery-3.3.1.min.js"></script>
 <script>
 $(document).ready(function(){
-   var myKey = "fMRb63gXbA5qym8Hl18qCw"; // sweet tracker에서 발급받은 자신의 키 넣는다.
+   var myKey = "nbeEbTsubouLt0cxAval8w"; // sweet tracker에서 발급받은 자신의 키 넣는다.
    var length = "${fn:length(pList)}";
    var pList = new Array();
    <c:forEach var="purchaseItem" items="${pList}" varStatus="status">
@@ -118,6 +118,58 @@ $(document).ready(function(){
             });
         });
       
+        $(".pList").click(function() {
+        	var thisObj = $(this);
+        	console.log('태그리무브'+$(this).next('tr').hasClass('infoTag'));
+        	if($(this).next('tr').hasClass('infoTag')){
+        		$(this).next('tr').remove();
+        	}else{
+        		
+           var t_code = $(this).find('.tCode').text();
+           var t_invoice = $(this).find('.invNum').text();
+           console.log(t_code);
+                  var myTracking="";
+                  var header ="";
+            $.ajax({
+                type:"GET",
+                dataType : "json",
+                url:"http://info.sweettracker.co.kr/api/v1/trackingInfo?t_key="+myKey+"&t_code="+t_code+"&t_invoice="+t_invoice,
+                success:function(data){
+                   console.log(data);
+                   var myInvoiceData = "";
+                   if(data.status == false){
+                      myInvoiceData += ('<p>'+data.msg+'<p>');
+                   }else{
+                   var trackingDetails = data.trackingDetails;
+                   
+                   
+                  header += ('<tr class="infoTag"><td colspan="7">'); 
+                  header += ('<table>'); 
+                  header += ('<th>'+"시간"+'</th>');
+                  header += ('<th>'+"장소"+'</th>');
+                  header += ('<th>'+"유형"+'</th>');
+                  header += ('<th>'+"전화번호"+'</th>');                 
+                 header += ('</tr>');     
+                  
+                  $.each(trackingDetails,function(key,value) {
+                     myTracking += ('<tr>');               
+                     myTracking += ('<td>'+value.timeString+'</td>');
+                     myTracking += ('<td>'+value.where+'</td>');
+                     myTracking += ('<td>'+value.kind+'</td>');
+                     myTracking += ('<td>'+value.telno+'</td>');                 
+                     myTracking += ('</td></tr>');                                
+                  });
+                   myTracking += ('</table>');
+                  console.log(header+myTracking);
+                  thisObj.after(header+myTracking);
+                	   
+                   }
+                   
+                }
+            });
+        	}
+        });
+      
 });
 
 
@@ -156,13 +208,14 @@ $(document).ready(function(){
 							  </thead>
 							  <tbody id="pTable">
 							  <c:forEach var="pIndex" items="${pList}" varStatus="status">
-							    <tr>
+							    <tr class="pList" id="pList">
 							      <th scope="row">${status.count}</th>
 							      <td><c:out value="${pIndex.sName}"/></td>
 							      <td><c:out value="${pIndex.pName}"/></td>
 							      <td><c:out value="${pIndex.quantity}"/></td>
-							      <td id="delivTd${status.index}"></td>
-							      <td><c:out value="${pIndex.invNum}"/></td>
+							      <td class="delivName" id="delivTd${status.index}"></td>
+							      <td class="invNum"><c:out value="${pIndex.invNum}"/></td>
+							      <td style="display:none" class="tCode"><c:out value="${pIndex.delivCode}"/></td>
 							    </tr>
 							   </c:forEach>
 							  </tbody>
@@ -221,6 +274,7 @@ function openNav() {
         x.className = x.className.replace(" w3-show", "");
     }
 }
+
 </script>
 </body>
 </html>

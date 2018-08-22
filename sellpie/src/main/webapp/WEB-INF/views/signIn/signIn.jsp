@@ -8,6 +8,7 @@
 <meta charset="utf-8">
 <title>SellPie</title>
 <script src="resources/js/jquery-3.3.1.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <style type="text/css">
 * {
   font-family: "Noto Sans KR", "Noto Sans", Helvetica, Arial, "Malgun Gothic", sans-serif; }
@@ -835,7 +836,7 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
 </style>
 <script>
   $(function(){
-     var count = 0;
+	  var count = 0;
      var $view2 = $(".signUpComponent__backgroundImagesWrapper__VTf").children();
      setInterval(function(){
         if(count==7){
@@ -856,7 +857,7 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
       $(".signUpComponent__btnFB__1uM").click(function(){
     		
     	  <c:if test="${not empty sessionScope.user }">
-    	  	location.href="/sellpie/main.do"; 
+    	  	location.href="/sellpie/selectBoardList.do"; 
     	  </c:if>
       	<c:if test="${empty sessionScope.user }">
       	 	location.href="/sellpie/memberJoin.do"; 
@@ -876,7 +877,7 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
                             <nav class="navbar__navWrapper__2mJ">
                                 <div class="navbar__container__3tL clearfix">
                                 	<ul class="navbar__left__2RB">
-                                		<li><a href="/sellpie/errorPage.do"><span>관리자 페이지</span></a></li><li>
+                                		<li><a href="/sellpie/admin/inspectAu.do"><span>관리자 페이지</span></a></li>
                                 	</ul>
                                 </div>
                             </nav>
@@ -912,7 +913,7 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
                             <div class="signUpComponent__hadAccount__gtQ"><span>이미 SellPie를 사용하고 있나요? </span>
                                 <span class="signUpComponent__login__3Iz">
                                 	<c:if test="${not empty sessionScope.user }">
-                                	<a href="/sellpie/main.do">
+                                	<a href="/sellpie/selectBoardList.do">
                                 		<span>SellPie 시작하기</span>
                                 	</a>
                                 	</c:if>

@@ -52,4 +52,13 @@ public class MemberDao {
 
 	}
 
+	public int modifyUserInfo(Member member) {
+		return sqlSession.update("memberMapper.modifyUserInfo", member);
+	}
+
+
+	public int updateImg(Member member) {
+		return sqlSession.update("memberMapper.updateProfileImg", member);
+	}
+
 }
