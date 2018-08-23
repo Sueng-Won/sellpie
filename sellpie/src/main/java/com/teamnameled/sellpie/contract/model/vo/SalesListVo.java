@@ -10,14 +10,12 @@ public class SalesListVo {
 	private String delivCode;
 	private String invNum;
 	private String isChecked;
-	private String addr;
-	private String addrDetail;
 	
 	public SalesListVo() {
 	}
 
 	public SalesListVo(String email, int cNo, String buyer, String seller, String pName, int quantity, String delivCode,
-			String invNum, String isChecked, String addr, String addrDetail) {
+			String invNum, String isChecked) {
 		super();
 		this.email = email;
 		this.cNo = cNo;
@@ -28,8 +26,6 @@ public class SalesListVo {
 		this.delivCode = delivCode;
 		this.invNum = invNum;
 		this.isChecked = isChecked;
-		this.addr = addr;
-		this.addrDetail = addrDetail;
 	}
 
 	public String getEmail() {
@@ -104,27 +100,12 @@ public class SalesListVo {
 		this.isChecked = isChecked;
 	}
 
-	public String getAddr() {
-		return addr;
-	}
-
-	public void setAddr(String addr) {
-		this.addr = addr;
-	}
-
-	public String getAddrDetail() {
-		return addrDetail;
-	}
-
-	public void setAddrDetail(String addrDetail) {
-		this.addrDetail = addrDetail;
-	}
-
 	@Override
 	public String toString() {
 		return "SalesListVo [email=" + email + ", cNo=" + cNo + ", buyer=" + buyer + ", seller=" + seller + ", pName="
 				+ pName + ", quantity=" + quantity + ", delivCode=" + delivCode + ", invNum=" + invNum + ", isChecked="
-				+ isChecked + ", addr=" + addr + ", addrDetail=" + addrDetail + "]";
+				+ isChecked + "]";
 	}
 
+	
 }

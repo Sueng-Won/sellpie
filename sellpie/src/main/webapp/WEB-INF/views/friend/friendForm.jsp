@@ -95,10 +95,10 @@ function friendRefuseDelete(AfList){
           </div>
         </div>
       </div>
-    <!-- End Middle Column -->
-    <!-- Right Column -->
+      <!-- Right Column -->
       <c:import url="../sideRight.jsp"></c:import>
     <!-- End Right Column -->
+    <!-- End Middle Column -->
     </div>
   <!-- End Grid -->
   </div>

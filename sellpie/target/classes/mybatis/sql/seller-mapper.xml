@@ -31,7 +31,7 @@
 	</select>
 	
 	<select id="selectSeller" parameterType="string" resultType="Seller">
-		SELECT SNO, EMAIL, ACNUM, BANK, ZIPCODE, ADDR, ADDRDETAIL, PCATEGORY, REASON, CONFIRM
+		SELECT SNO, EMAIL, ACNUM, BANK, ZIPCODE, ADDR, ADDRDETAIL, PCATEGORY, REASON
 		FROM SELLER
 		WHERE EMAIL = #{email}
 	</select>
@@ -40,10 +40,7 @@
 		SELECT P.PNO, PNAME, PRICE, PQUANTITY, ISCRAFT, (SELECT SUM(C.QUANTITY) FROM CONTRACT C WHERE C.PNO = P.PNO) AS SALESRATE
 		FROM PRODUCT P
 		JOIN SELLER S ON (S.SNO = P.SNO)
-		WHERE P.DELFLAG = 'N' AND S.EMAIL = #{email}
+		WHERE S.EMAIL = #{email}
 	</select>
-	<insert id="insertSeller" parameterType="Seller">
-		INSERT INTO SELLER VALUES(SEQ_SELLER_SNO.NEXTVAL, #{email}, #{acNum}, #{bank}, #{zipcode}, #{addr}, #{addrDetail}, #{pCategory}, #{reason}, 'N')
-	</insert>
 </mapper>
 

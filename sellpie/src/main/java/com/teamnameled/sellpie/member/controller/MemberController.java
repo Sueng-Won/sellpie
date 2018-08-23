@@ -12,7 +12,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.xml.transform.stream.StreamResult;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -37,7 +36,6 @@ import com.teamnameled.sellpie.member.model.service.MemberService;
 import com.teamnameled.sellpie.member.model.vo.Member;
 import com.teamnameled.sellpie.seller.model.service.SellerService;
 import com.teamnameled.sellpie.seller.model.vo.SalesStatisticsVo;
-import com.teamnameled.sellpie.seller.model.vo.Seller;
 
 @Controller
 public class MemberController {
@@ -370,6 +368,7 @@ public class MemberController {
 		List<SalesStatisticsVo> sList = sellerService.selectSalesStatisticsList(user.getEmail());
 		request.setAttribute("pList", pList);
 		request.setAttribute("sList", sList);
+<<<<<<< HEAD
 		return "member/salesList";
 	}
 	
@@ -381,4 +380,8 @@ public class MemberController {
 		session.setAttribute("url", url);
 		return result;
 	}
+=======
+		return "member/salseList";
+	}
+>>>>>>> branch 'HaSungMi' of https://github.com/Sueng-Won/sellpie.git
 }
