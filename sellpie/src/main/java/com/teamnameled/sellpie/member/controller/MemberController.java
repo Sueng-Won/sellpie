@@ -368,7 +368,6 @@ public class MemberController {
 		List<SalesStatisticsVo> sList = sellerService.selectSalesStatisticsList(user.getEmail());
 		request.setAttribute("pList", pList);
 		request.setAttribute("sList", sList);
-<<<<<<< HEAD
 		return "member/salesList";
 	}
 	
@@ -380,8 +379,4 @@ public class MemberController {
 		session.setAttribute("url", url);
 		return result;
 	}
-=======
-		return "member/salseList";
-	}
->>>>>>> branch 'HaSungMi' of https://github.com/Sueng-Won/sellpie.git
 }
