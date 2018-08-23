@@ -30,5 +30,9 @@ public class SellerDao {
 	public List<SalesStatisticsVo> selectSalesStatisticsList(String email) {
 		return sqlSession.selectList("SellerMapper.selectSalesStatisticsList", email);
 	}
+
+	public int insertSeller(Seller seller) {
+		return sqlSession.insert("SellerMapper.insertSeller", seller);
+	}
 	
 }

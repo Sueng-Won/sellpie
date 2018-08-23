@@ -153,8 +153,10 @@ $(function() {
         	if(data == 1){
         		$('#Demo1').append('<a class="w3-button w3-theme" onclick="productForm();">물품등록</a>');
         		$('#Demo1').append('<a class="w3-button w3-theme" onclick="javascript: location.href = '+"'salesList.do'"+'">판매관리</a>');
+        	}else if(data == 0){
         		$('#Demo1').append('<a class="w3-button w3-theme" onclick="sellerForm();">판매자등록</a>');
-        	}else{
+        	}else if(data == 2){
+        		$('#Demo1').append('<a class="w3-button w3-theme" disabled>판매자 신청진행중</a>');
         	}
         }
 	});
