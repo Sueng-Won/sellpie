@@ -10,6 +10,9 @@
 <script src="resources/js/jquery-3.3.1.min.js"></script>
 <meta charset="UTF-8">
 <title>메인페이지</title>
+<style type="text/css">
+.fa-close{cursor: pointer;}
+</style>
 <script>
 $(function(){
 	var msg = '<c:out value="${msg}"/>';
