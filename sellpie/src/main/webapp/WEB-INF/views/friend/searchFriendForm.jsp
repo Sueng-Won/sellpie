@@ -43,8 +43,8 @@
 }
 .detail_content > div {
    position: absolute;
-   top: 9%;
-   left: 15%;
+   top: 20%;
+   left: 27%;
    width: 890px;
    height: 520px;
    padding: 16px;
@@ -74,8 +74,8 @@
 
 .detail_content2 > div {
    position: absolute;
-   top: 13%;
-   left: 22%;
+   top: 20%;
+   left: 27%;
    width: 800px;
    height: 400px;
    padding: 16px;
@@ -218,110 +218,121 @@ function fileUpload(inputFiles, condition){
 		      $("#img"+image).remove();
 		}
 
-   function getReply(bno){
-      $.ajax({
-         url:"selectReply.do",
-         type:"get",
-         data:{"bno":bno},
-         success:function(data){
-            for(var i=0; i<data.length; i++){
-               var div = $("<div>");
-               div.css({"height":"auto","width":"100%","margin-top":"5px"});
-               var innerDiv1 = $("<div>");
-               innerDiv1.css({"display":"inline-block","width":"28%"});   
-               var img = '<img src="'+data[i].profileImg+'" alt="Avatar" class="w3-left w3-circle rounded-circle" style="width:20px; height:20px;">';
-               innerDiv1.append(img);
-               innerDiv1.append('&nbsp;<b style="font-size: 11px;">'+data[i].name+'</b>');
-               div.append(innerDiv1);
-               
-               var innerDiv2 = $("<div>");
-               innerDiv2.css({"background":"lightgray","display":"inline-block","padding":"3px","border-radius":"10px","margin-left":"6px","width":"70%"});
-               
-               innerDiv2.append('<span style="font-size:11px;">&nbsp;'+data[i].content+'&nbsp;</span>');
-               div.append(innerDiv2);
-               $("#replyInfo").append(div);
-            }
-            $("#rcount").text(data.length);
-            
-            if(data==null || data.length==0){
-               $("#replyInfo").append("등록된 댓글이 없습니다.");
-            }
-               
-         },error:function(e){
-            console.log(e);
-         }
-      });
-   }
-   
-   function openDetail(bno){
-	      $.ajax({
-	         url:"selectBoard.do",
-	         type:"get",
-	         data:{"bno":bno},
-	         success:function(data){
-	        	 
-	            var srcArr = data.resource;
-	            var detailInfo = $("<div class='w3-border-bottom'>");
-	            detailInfo.css({"height":"60px"});
-	            var profile = '<img src="'+data.profileImg+'" alt="Avatar" class="w3-left w3-circle w3-margin-right rounded-circle" style="width:50px; height:50px;">';
-	            var name = '<span class="w3-large w3-margin-top">'+data.name+'</span><br>';
-	            detailInfo.append("<br>");
-	            detailInfo.append(profile);
-	            detailInfo.append(name);
-	            $("#detailBno").val(data.bno);
-	            var detailContent = $('<div class="w3-margin-bottom">');
-	            detailContent.css({"height":"130px"});
-	            var content = data.bcontent;
-	            detailContent.append(content);
-	            var tagDiv = '<div>'
-	            tagDiv += '<button type="button" class="w3-button w3-margin-bottom w3-align-right'
-	            	if(data.likeflag== 'T'){
-	            		console.log(data.likeflag);
-	            		tagDiv += ' w3-theme-d2'; 
-	            	}
-	            tagDiv += '" onclick="likeCheck(this);">'
-	            		  +'<i class="fa fa-thumbs-up"></i> &nbsp;'
-						  +'<span>'+data.gcount+'</span>'
-						  +'</button>'
-						  +'<input type="hidden" name="bno" value="'+data.bno+'"/>'
-	            		  +'<button type="button" class="w3-button w3-theme-d2 w3-margin-bottom w3-align-right" onclick="javascript:$("#inputReply").focus();">'
-	            		  +'<i class="fa fa-comment"></i> &nbsp;'
-	                      +'<span id="rcount">'+data.rcount+'</span></button></div>';
-	                      	 
-	            if(srcArr.length!=0){
-		            for(var i=0; i<srcArr.length; i++){
-		               if(i==0){
-		            	   if(srcArr[i].rsrc.indexOf("video__") == -1){
-		            		   $("#fileview").append("<img src='"+srcArr[i].rsrc+"' style='width:90%; height:95%;' class='w3-margin-bottom mySlides'>");
-		            	   }else{
-		            		   $("#fileview").append("<video src='"+srcArr[i].rsrc+"' style='width:90%; height:95%;' class='w3-margin-bottom mySlides' controls='controls'></video>");
-		            	   }
-		               }
-		               $("#subView").append("<img src='"+srcArr[i].rsrc+"' style='width:7%; height:6%;' class='w3-margin-bottom mySlides'>");
+		  function getReply(bno){
+		      $.ajax({
+		         url:"selectReply.do",
+		         type:"get",
+		         data:{"bno":bno},
+		         success:function(data){
+		            for(var i=0; i<data.length; i++){
+		            	var profile = '';
+		                if(data[i].profileImg==null||data[i].profileImg.length==0||data[i].profileImg ==''){
+		                	profile = 'resources/images/userImg/profile.png';
+		                }else{
+		                	profile = data[i].profileImg;
+		                }
+		               var div = $("<div>");
+		               div.css({"height":"auto","width":"100%","margin-top":"5px"});
+		               var innerDiv1 = $("<div>");
+		               innerDiv1.css({"display":"inline-block","width":"28%"});   
+		               var img = '<img src="'+profile+'" alt="Avatar" class="w3-left w3-circle rounded-circle" style="width:20px; height:20px;">';
+		               innerDiv1.append(img);
+		               innerDiv1.append('&nbsp;<b style="font-size: 11px;">'+data[i].name+'</b>');
+		               div.append(innerDiv1);
+		               
+		               var innerDiv2 = $("<div>");
+		               innerDiv2.css({"background":"lightgray","display":"inline-block","padding":"3px","border-radius":"10px","margin-left":"6px","width":"70%"});
+		               
+		               innerDiv2.append('<span style="font-size:11px;">&nbsp;'+data[i].content+'&nbsp;</span>');
+		               div.append(innerDiv2);
+		               $("#replyInfo").append(div);
 		            }
-		            $("#infoView").prepend(tagDiv);
-		            $("#infoView").prepend(detailContent);
-		            $("#infoView").prepend(detailInfo);
-	            }else{
-	            	$("#resourceView").empty();
-	            	var div = $('<div class="w3-container w3-card w3-white w3-round">');
-	            	div.append(detailInfo);
-	            	detailContent.css({"height":"300px"});
-	            	div.append(detailContent);
-	            	div.append(tagDiv);
-	            	$("#resourceView").append(div);
-	            	$("#replyInfo").css({"height":"370px"});
-	            }
-	            
-	         },error:function(e){
-	            console.log(e);
-	         }
-	      });
-	      
-	      getReply(bno);
-	   
-	      location.href="#open";
-	   }
+		            $("#rcount").text(data.length);
+		            
+		            if(data==null || data.length==0){
+		               $("#replyInfo").append("등록된 댓글이 없습니다.");
+		            }
+		               
+		         },error:function(e){
+		            console.log(e);
+		         }
+		      });
+		   }
+		   
+		   function openDetail(bno){
+		      $.ajax({
+		         url:"selectBoard.do",
+		         type:"get",
+		         data:{"bno":bno},
+		         success:function(data){
+		            var srcArr = data.resource;
+		            var profile = '';
+		            if(data.profileImg==null||data.profileImg.length==0||data.profileImg ==''){
+		            	profile = 'resources/images/userImg/profile.png';
+		            }else{
+		            	profile = data.profileImg;
+		            }
+		            var detailInfo = $("<div class='w3-border-bottom'>");
+		            detailInfo.css({"height":"60px"});
+		            var profile = '<img src="'+profile+'" alt="Avatar" class="w3-left w3-circle w3-margin-right rounded-circle" style="width:36px; height:36px;">';
+		            var name = '<span class="w3-large w3-margin-top">'+data.name+'</span><br>';
+		            detailInfo.append("<br>");
+		            detailInfo.append(profile);
+		            detailInfo.append(name);
+		            $("#detailBno").val(data.bno);
+		            var detailContent = $('<div class="w3-margin-bottom">');
+		            detailContent.css({"height":"130px"});
+		            var content = data.bcontent;
+		            detailContent.append(content);
+		            var tagDiv = '<div>'
+		            tagDiv += '<button type="button" class="w3-button w3-margin-bottom w3-align-right'
+		            	if(data.likeflag== 'T'){
+		            		console.log(data.likeflag);
+		            		tagDiv += ' w3-theme-d2'; 
+		            	}
+		            tagDiv += '" onclick="likeCheck(this);">'
+		            		  +'<i class="fa fa-thumbs-up"></i> &nbsp;'
+							  +'<span>'+data.gcount+'</span>'
+							  +'</button>'
+							  +'<input type="hidden" name="bno" value="'+data.bno+'"/>'
+		            		  +'<button type="button" class="w3-button w3-theme-d2 w3-margin-bottom w3-align-right" onclick="javascript:$("#inputReply").focus();">'
+		            		  +'<i class="fa fa-comment"></i> &nbsp;'
+		                      +'<span id="rcount">'+data.rcount+'</span></button></div>';
+		                      	 
+		            if(srcArr.length!=0){
+			            for(var i=0; i<srcArr.length; i++){
+			               if(i==0){
+			            	   if(srcArr[i].rsrc.indexOf("video__") == -1){
+			            		   $("#fileview").append("<img src='"+srcArr[i].rsrc+"' style='width:90%; height:95%;' class='w3-margin-bottom mySlides'>");
+			            	   }else{
+			            		   $("#fileview").append("<video src='"+srcArr[i].rsrc+"' style='width:90%; height:95%;' class='w3-margin-bottom mySlides' controls='controls'></video>");
+			            	   }
+			               }
+			               $("#subView").append("<img src='"+srcArr[i].rsrc+"' style='width:7%; height:6%;' class='w3-margin-bottom mySlides'>");
+			            }
+			            $("#infoView").prepend(tagDiv);
+			            $("#infoView").prepend(detailContent);
+			            $("#infoView").prepend(detailInfo);
+		            }else{
+		            	$("#resourceView").empty();
+		            	var div = $('<div class="w3-container w3-card w3-white w3-round">');
+		            	div.append(detailInfo);
+		            	detailContent.css({"height":"300px"});
+		            	div.append(detailContent);
+		            	div.append(tagDiv);
+		            	$("#resourceView").append(div);
+		            	$("#replyInfo").css({"height":"370px"});
+		            }
+		            
+		         },error:function(e){
+		            console.log(e);
+		         }
+		      });
+		      
+		      getReply(bno);
+		   
+		      location.href="#open";
+	}
    
    function closeDetail(){
             $("#fileview").html('');
@@ -500,7 +511,7 @@ function fileUpload(inputFiles, condition){
     <!-- End Left Column -->
     
     <!-- Middle Column -->
-    <div class="w3-col m7" style="margin-left:25%;" id="contentDiv">
+    <div class="w3-col m7" style="margin-left:23%;" id="contentDiv">
           
           <c:if test="${member.email ne sessionScope.user.email }">
             <div class="w3-row-padding">
@@ -570,10 +581,10 @@ function fileUpload(inputFiles, condition){
                      <div class="w3-row-padding">
                        <div class="w3-col m12">
                          <div class="w3-card w3-round w3-white">
-                           <div class="w3- container w3-padding">
+                           <div class="w3-padding">
                                <ul class="w3-ul" style="-webkit-margin-before: 0em; -webkit-margin-after: 0em; -webkit-margin-start: -30px; -webkit-margin-end: 0px;">
                                  <li class="w3-bar">
-                                     <img src="<c:out value='${sessionScope.user.profileImg }'/>" width="70" height="70" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
+                                     <img src="resources/images/userImg/${(sessionScope.user.profileImg eq null)?'profile.png':sessionScope.user.profileImg}" width="70" height="70" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
                                         <div class="w3-bar-item w3-padding-24">
                                            <span class="w3-large"><c:out value="${sessionScope.user.name }"></c:out></span><br>
                                         </div>
@@ -642,7 +653,7 @@ function fileUpload(inputFiles, condition){
                                </div>
                                <div class="w3-row w3-cell-bottom w3-margin-bottom">
                                    <div class="w3-col m1">
-                         			  <img src="<c:out value='${sessionScope.user.profileImg}'/>" alt="Avatar" class="w3-left w3-circle rounded-circle w3-block" style="width:20px; height:20px;">
+                         			  <img src="resources/images/userImg/${(sessionScope.user.profileImg eq null)?'profile.png':sessionScope.user.profileImg}" alt="Avatar" class="w3-left w3-circle rounded-circle w3-block" style="width:20px; height:20px;">
                                    </div>
                                    <div contenteditable="true" class="w3-border w3-col m9 w3-round" id="inputReply"></div>
                                    <div class="w3-col m1" style="border-radius: 17px;  width:22px; height:22px; text-align: center;">
@@ -661,7 +672,7 @@ function fileUpload(inputFiles, condition){
    <div class="w3-container w3-card w3-white w3-round w3-margin LoadMore"><br>
          <input type="hidden" name="bno" />
          
-           <img src="<c:out value='${board.profileImg }'/>" alt="Avatar" class="w3-left w3-circle w3-margin-right rounded-circle" style="width:60px; height:60px;">
+           <img src="resources/images/userImg/${(sessionScope.user.profileImg eq null)?'profile.png':sessionScope.user.profileImg}" alt="Avatar" class="w3-left w3-circle w3-margin-right rounded-circle" style="width:60px; height:60px;">
            <span class="w3-right w3-opacity">
              <c:if test="${sessionScope.user.email eq board.email }">
               <button type="button" class="btn btn-default" aria-label="Left Align" onclick="javascript:location.href='updateForm.do?bno='+<c:out value='${board.bno }'/>">

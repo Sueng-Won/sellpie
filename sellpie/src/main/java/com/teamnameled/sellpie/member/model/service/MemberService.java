@@ -1,34 +1,14 @@
 package com.teamnameled.sellpie.member.model.service;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.xml.sax.SAXException;
 
 import com.teamnameled.sellpie.member.model.dao.MemberDao;
 import com.teamnameled.sellpie.member.model.vo.Member;
-import com.teamnameled.sellpie.seller.model.vo.Seller;
 
 @Service
 public class MemberService  {
@@ -98,5 +78,6 @@ public class MemberService  {
 		System.out.println(member);
 		return dao.updateImg(member);
 	}
+
 
 }
