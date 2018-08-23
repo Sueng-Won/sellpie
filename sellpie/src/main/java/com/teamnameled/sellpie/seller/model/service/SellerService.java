@@ -26,5 +26,8 @@ public class SellerService {
 	public List<SalesStatisticsVo> selectSalesStatisticsList(String email) {
 		return sellerDao.selectSalesStatisticsList(email);
 	}
+	public int insertSeller(Seller seller) {
+		return sellerDao.insertSeller(seller);
+	}
 	
 }

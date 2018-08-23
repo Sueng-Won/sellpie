@@ -42,9 +42,14 @@ public class SellerController {
 		HttpSession session = request.getSession();
 		Member user = (Member)session.getAttribute("user");
 		Seller seller = sellerService.selectSeller(user.getEmail());
+		//seller등록했을 경우
 		if(seller!=null){
 			request.getSession().setAttribute("sNo", seller.getsNo());
-			result = 1;
+			result = 2;
+			//seller등록이 완료됐을경우
+			if(seller.getConfirm()=='Y'){
+				result = 1;
+			}
 		}
 		return result;
 	}
@@ -55,10 +60,10 @@ public class SellerController {
 	}
 	@RequestMapping("sellerApply.do")
 	public String sellerApply(HttpServletRequest request, Seller seller) {
-		
-		
-		
-		
+		Member user = (Member)request.getSession().getAttribute("user");
+		seller.setEmail(user.getEmail());
+		System.out.println(seller);
+		int result = sellerService.insertSeller(seller);
 		String returnUrl = (String) request.getSession().getAttribute("url");
 	      if(null == returnUrl){
 	    	  returnUrl = "main.do";

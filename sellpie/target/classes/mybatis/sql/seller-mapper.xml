@@ -31,7 +31,7 @@
 	</select>
 	
 	<select id="selectSeller" parameterType="string" resultType="Seller">
-		SELECT SNO, EMAIL, ACNUM, BANK, ZIPCODE, ADDR, ADDRDETAIL, PCATEGORY, REASON
+		SELECT SNO, EMAIL, ACNUM, BANK, ZIPCODE, ADDR, ADDRDETAIL, PCATEGORY, REASON, CONFIRM
 		FROM SELLER
 		WHERE EMAIL = #{email}
 	</select>
@@ -42,5 +42,8 @@
 		JOIN SELLER S ON (S.SNO = P.SNO)
 		WHERE P.DELFLAG = 'N' AND S.EMAIL = #{email}
 	</select>
+	<insert id="insertSeller" parameterType="Seller">
+		INSERT INTO SELLER VALUES(SEQ_SELLER_SNO.NEXTVAL, #{email}, #{acNum}, #{bank}, #{zipcode}, #{addr}, #{addrDetail}, #{pCategory}, #{reason}, 'N')
+	</insert>
 </mapper>
 
