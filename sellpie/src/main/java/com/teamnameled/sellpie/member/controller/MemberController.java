@@ -12,6 +12,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.xml.transform.stream.StreamResult;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -36,6 +37,7 @@ import com.teamnameled.sellpie.member.model.service.MemberService;
 import com.teamnameled.sellpie.member.model.vo.Member;
 import com.teamnameled.sellpie.seller.model.service.SellerService;
 import com.teamnameled.sellpie.seller.model.vo.SalesStatisticsVo;
+import com.teamnameled.sellpie.seller.model.vo.Seller;
 
 @Controller
 public class MemberController {
@@ -370,7 +372,13 @@ public class MemberController {
 		request.setAttribute("sList", sList);
 		return "member/salesList";
 	}
-	
+	@RequestMapping("applySeller.do")
+	public String applySeller(Seller seller, HttpServletRequest request) {
+		//xml생성
+		StreamResult result = memberService.applySeller(seller);
+		System.out.println(result.toString());
+		return null;
+	}
 	@RequestMapping("inputUrlToSession.do")
 	public @ResponseBody int inputUrlToSession(HttpServletRequest request, String url) {
 		int result = 1;
@@ -379,5 +387,4 @@ public class MemberController {
 		session.setAttribute("url", url);
 		return result;
 	}
-	
 }

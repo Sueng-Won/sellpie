@@ -61,7 +61,7 @@ input[type="number"]::-webkit-inner-spin-button {
 <script>
 $(function(){
   $("#insertForm").click(function(){
-    location.href="#open2";  
+    location.href="applySeller.do";
   });
 });   
 function validate(){
@@ -165,6 +165,7 @@ function openAddressPopup() {
           <div class="w3-card w3-round w3-white">
             <div class="w3-container w3-padding">
                   <form id="applyForm" action="sellerApply.do" method="post" onsubmit="return validate();" enctype="multipart/form-data">
+                      <input type="hidden" id="email" name="email" value="${sessionScope.email}"/>
                       <h2 class="w3-border-bottom">판매자 신청서</h2><br>
 						  <select class="w3-select w3-border w3-round" style="width: 50%;" id="bank" name="bank">
 						  	<option disabled selected>은행선택</option>
