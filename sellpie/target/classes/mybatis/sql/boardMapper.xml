@@ -92,4 +92,8 @@
 		WHERE BNO = #{bno}
 	</update>
 	
+	<update id="boardDelflag" parameterType="string">
+		UPDATE BOARD SET DELFLAG = 'Y'
+		WHERE BNO = #{bno}
+	</update>
 </mapper>

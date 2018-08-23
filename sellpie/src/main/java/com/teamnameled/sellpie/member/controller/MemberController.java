@@ -372,13 +372,7 @@ public class MemberController {
 		request.setAttribute("sList", sList);
 		return "member/salesList";
 	}
-	@RequestMapping("applySeller.do")
-	public String applySeller(Seller seller, HttpServletRequest request) {
-		//xml생성
-		StreamResult result = memberService.applySeller(seller);
-		System.out.println(result.toString());
-		return null;
-	}
+	
 	@RequestMapping("inputUrlToSession.do")
 	public @ResponseBody int inputUrlToSession(HttpServletRequest request, String url) {
 		int result = 1;
