@@ -1,6 +1,8 @@
 package com.teamnameled.sellpie.admin.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.xml.transform.stream.StreamResult;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.teamnameled.sellpie.admin.model.service.AdminService;
 import com.teamnameled.sellpie.admin.model.vo.Admin;
+import com.teamnameled.sellpie.board.model.vo.BoardVo;
+import com.teamnameled.sellpie.seller.model.vo.Seller;
 
 
 
@@ -78,5 +82,13 @@ public class AdminController {
 		
 		
 		return mav;
+	}
+	@RequestMapping("applyAd.do")
+	public String applyAd(BoardVo board, HttpServletRequest request) {
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		//xml생성
+		StreamResult result = adminService.applyAd(board,root);
+		System.out.println(result.getWriter());
+		return "redirect:userLogin.do";
 	}
 }

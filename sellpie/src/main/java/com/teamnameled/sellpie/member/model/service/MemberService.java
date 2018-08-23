@@ -24,6 +24,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.xml.sax.SAXException;
 
 import com.teamnameled.sellpie.member.model.dao.MemberDao;
 import com.teamnameled.sellpie.member.model.vo.Member;
@@ -97,59 +98,5 @@ public class MemberService  {
 		System.out.println(member);
 		return dao.updateImg(member);
 	}
-
-	public StreamResult applySeller(Seller seller) {
-		//xml틀 생성
-		StreamResult result=null;
-		String savePath = "resources/applySeller/applyList.xml";
-		DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder docBuilder = null;
-		try {
-			docBuilder = docFactory.newDocumentBuilder();
-		} catch (ParserConfigurationException e) {
-			e.printStackTrace();
-		}
-		//Document Element 생성
-		Document doc = docBuilder.newDocument();
-		Element applyEmail = doc.createElement("email");
-		doc.appendChild(applyEmail);
-		
-		//Element에 대한 속성값 정의
-		applyEmail.setAttribute("acNum",seller.getAcNum());
-		applyEmail.setAttribute("bank",seller.getBank());
-		applyEmail.setAttribute("zipcode",seller.getZipcode());
-		applyEmail.setAttribute("addr",seller.getAddr());
-		applyEmail.setAttribute("addrDetail",seller.getAddrDetail());
-		applyEmail.setAttribute("pCategory", seller.getpCategory());
-		applyEmail.setAttribute("reason",seller.getReason());
-		
-		//xml파일 생성
-		TransformerFactory transformerFactory = TransformerFactory.newInstance();
-		Transformer transformer = null;
-		try {
-			//데이터 parsing
-			transformer = transformerFactory.newTransformer();
-			transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
-			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-		} catch (TransformerConfigurationException e) {
-			e.printStackTrace();
-		}
-		DOMSource source = new DOMSource(doc);
-		try {
-			result = new StreamResult(new FileWriter(savePath, true));
-		}catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		try {
-			transformer.transform(source, result);
-			System.out.println("파일 생성 및 데이터 추가 완료");
-		} catch (TransformerException e) {
-			e.printStackTrace();
-		}
-		
-		return result;
-	}
-
 
 }

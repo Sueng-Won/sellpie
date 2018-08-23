@@ -59,11 +59,6 @@ input[type="number"]::-webkit-inner-spin-button {
 </style>
 
 <script>
-$(function(){
-  $("#insertForm").click(function(){
-    location.href="applySeller.do";
-  });
-});   
 function validate(){
     if($('#bank').val() == null){
     	alert('은행을 입력해주세요');
@@ -164,8 +159,8 @@ function openAddressPopup() {
         <div class="w3-col m12">
           <div class="w3-card w3-round w3-white">
             <div class="w3-container w3-padding">
-                  <form id="applyForm" action="sellerApply.do" method="post" onsubmit="return validate();" enctype="multipart/form-data">
-                      <input type="hidden" id="email" name="email" value="${sessionScope.email}"/>
+                  <form id="applyForm" action="applySeller.do" method="post" onsubmit="return validate();" enctype="multipart/form-data">
+                      <input type="hidden" id="email" name="email" value="${sessionScope.user.email}"/>
                       <h2 class="w3-border-bottom">판매자 신청서</h2><br>
 						  <select class="w3-select w3-border w3-round" style="width: 50%;" id="bank" name="bank">
 						  	<option disabled selected>은행선택</option>
