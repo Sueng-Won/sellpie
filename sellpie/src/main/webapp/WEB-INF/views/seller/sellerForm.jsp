@@ -179,7 +179,6 @@
 <!-- header에 jquery-min 선언 되있음 -->
 
 <script>
-<<<<<<< HEAD
 function validate(){
     if($('#bank').val() == null){
     	alert('은행을 입력해주세요');
@@ -219,10 +218,7 @@ function openAddressPopup() {
  	   theme: themeObj,
         oncomplete: function(data) {
             // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-=======
-var imgIdx = 0;
-var videoIdx = 0;
->>>>>>> refs/heads/HaSungMi
+
 
 function fileUpload(inputFiles, condition){
    var files = inputFiles.files; //선택된 파일들
@@ -284,7 +280,6 @@ function fileUpload(inputFiles, condition){
       $('#mask').fadeIn(1000);      
       $('#mask').fadeTo("slow",0.8);    
 
-<<<<<<< HEAD
 
 <!-- Page Container -->
 <div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">    
@@ -335,10 +330,6 @@ function fileUpload(inputFiles, condition){
         </div>
       </div>
        
-=======
-      //윈도우 같은 거 띄운다.
-      $('.window').show();
->>>>>>> refs/heads/HaSungMi
       
    }
    
