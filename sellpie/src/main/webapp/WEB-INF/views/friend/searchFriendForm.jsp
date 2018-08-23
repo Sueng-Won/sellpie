@@ -500,7 +500,7 @@ function fileUpload(inputFiles, condition){
     <!-- End Left Column -->
     
     <!-- Middle Column -->
-    <div class="w3-col m7" style="margin-left:25%;" id="contentDiv">
+    <div class="w3-col m7" style="margin-left:23%;" id="contentDiv">
           
           <c:if test="${member.email ne sessionScope.user.email }">
             <div class="w3-row-padding">

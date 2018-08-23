@@ -45,8 +45,8 @@
 }
 .detail_content > div {
    position: absolute;
-   top: 9%;
-   left: 15%;
+   top: 20%;
+   left: 27%;
    width: 890px;
    height: 520px;
    padding: 16px;
@@ -76,8 +76,8 @@
 
 .detail_content2 > div {
    position: absolute;
-   top: 13%;
-   left: 22%;
+   top: 20%;
+   left: 27%;
    width: 800px;
    height: 400px;
    padding: 16px;
@@ -339,7 +339,6 @@ function fileUpload(inputFiles, condition){
    $(document).ready(function(){
         //취소버튼
        $(".divC").click(function(){
-             $("#uploadFile").empty();
              $("#content").html("");
        });
         
@@ -471,7 +470,7 @@ function fileUpload(inputFiles, condition){
     <!-- End Left Column -->
     
     <!-- Middle Column -->
-    <div class="w3-col m7" style="margin-left:25%;" id="contentDiv">
+    <div class="w3-col m7" style="margin-left:23%;" id="contentDiv">
     
       <div class="w3-row-padding">
         <div class="w3-col m12">
@@ -503,8 +502,8 @@ function fileUpload(inputFiles, condition){
                      <div class="w3-row-padding">
                        <div class="w3-col m12">
                          <div class="w3-card w3-round w3-white">
-                           <div class="w3- container w3-padding">
-                               <ul class="w3-ul" style="-webkit-margin-before: 0em; -webkit-margin-after: 0em; -webkit-margin-start: -30px; -webkit-margin-end: 0px;">
+                           <div class="w3-padding">
+                               <ul class="w3-ul" style="-webkit-margin-start: -30px;">
                                  <li class="w3-bar">
                                      <img src="<c:out value='${sessionScope.user.profileImg }'/>" width="70" height="70" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
                                         <div class="w3-bar-item w3-padding-24">
@@ -515,7 +514,7 @@ function fileUpload(inputFiles, condition){
                                  <br>
                                  
                                 <div>
-                                   <div class="w3-padding-16" id="bcontent" aria-autocomplete="list" aria-controls="js_2ne" aria-describedby="placeholder-a0ec5" aria-multiline="true"  contenteditable="true" data-testid="status-attachment-mentions-input" role="textbox" spellcheck="true" style="/* outline: none; */ user-select: text; /* white-space: pre-wrap; */ word-wrap: break-word;">
+                                   <div class="w3-padding-16" id="bcontent" aria-autocomplete="list" aria-controls="js_2ne" aria-describedby="placeholder-a0ec5" aria-multiline="true"  contenteditable="true" data-testid="status-attachment-mentions-input" role="textbox" spellcheck="true" style="user-select: text; word-wrap: break-word;">
                                    </div>
                                 </div>
                                    <div class="uploadFile background-white" id="uploadFile">
@@ -593,7 +592,7 @@ function fileUpload(inputFiles, condition){
       <div class="w3-container w3-card w3-white w3-round w3-margin LoadMore"><br>
          <input type="hidden" name="bno" />
          
-           <img src="<c:out value='${board.profileImg }'/>" alt="Avatar" class="w3-left w3-circle w3-margin-right rounded-circle" style="width:60px; height:60px;">
+           <img src="resources/images/userImg/${(sessionScope.user.profileImg eq null)?'profile.png':sessionScope.user.profileImg}" alt="Avatar" class="w3-left w3-circle w3-margin-right rounded-circle" style="width:60px; height:60px;">
            <span class="w3-right w3-opacity">
              <c:if test="${sessionScope.user.email eq board.email }">
               <button type="button" class="btn btn-default" aria-label="Left Align" onclick="javascript:location.href='updateForm.do?bno='+<c:out value='${board.bno }'/>">
