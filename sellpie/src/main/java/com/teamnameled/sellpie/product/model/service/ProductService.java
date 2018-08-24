@@ -25,8 +25,5 @@ public class ProductService {
 	public int updateProduct(Product product) {
 		return productDao.updateProduct(product);
 	}
-	public int deleteProduct(int pNo) {
-		return productDao.deleteProduct(pNo);
-	}
 
 }

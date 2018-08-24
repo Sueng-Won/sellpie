@@ -212,7 +212,7 @@ function validate(){
                   <form id="applyForm" action="productApply.do" method="post" onsubmit="return validate();" enctype="multipart/form-data">
                       <h2 class="w3-border-bottom">판매등록</h2><br>
                       <input class="w3-input w3-border w3-round" type="text" id="pName" name="pName" placeholder="판매게시물명"><br>
-                      <input type="hidden" name="sNo" value="${sessionScope.sNo}" />
+                      <input type="hidden" name="sNo" value="1" />
                       <input type="hidden" name="selTag" id="selTag">
                       <input type="hidden" name="email" value="test4@naver.com"/>
                       <div id="sellTags">
