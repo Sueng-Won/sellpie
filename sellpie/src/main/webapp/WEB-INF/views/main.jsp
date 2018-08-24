@@ -212,9 +212,6 @@ function fileUpload(inputFiles, condition){
    
 	var delfile = "";
 	function deleteFile(delBtn,image){
-	         console.log(delBtn);
-	      var rsrc = $(delBtn).parent().next().attr("src");
-	      delfile += rsrc + ",";
 	      $(delBtn).parent().parent().remove();
 	      
 	      $("#img"+image).remove();

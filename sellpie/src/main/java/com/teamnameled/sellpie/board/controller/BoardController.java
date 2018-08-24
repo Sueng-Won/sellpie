@@ -41,7 +41,7 @@ public class BoardController {
    ReplyService replyService;
    
    @RequestMapping("insertBoard.do")
-   public String insertBoard(MultipartHttpServletRequest multipartHttpServletRequest, BoardVo board, HttpServletRequest request, String exceptFile){
+   public String insertBoard(MultipartHttpServletRequest multipartHttpServletRequest, BoardVo board, HttpServletRequest request){
       int boardResult = -1;
       int resourceResult = 0;
       Date today = new Date();
@@ -79,8 +79,7 @@ public class BoardController {
                
             UUID uuid = UUID.randomUUID();
    
-            if(null!=files.get(i).getOriginalFilename()&&!files.get(i).getOriginalFilename().equals("")
-            		&&!exceptFile.contains(files.get(i).getOriginalFilename())){
+            if(null!=files.get(i).getOriginalFilename()&&!files.get(i).getOriginalFilename().equals("")){
                board.setRurl(savePath);
                String fType = "";
                if(files.get(i).getContentType().contains("video")){
