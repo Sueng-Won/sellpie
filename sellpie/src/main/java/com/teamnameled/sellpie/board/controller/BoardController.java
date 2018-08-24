@@ -49,6 +49,16 @@ public class BoardController {
       String bcontent = board.getBcontent();
       String email = board.getEmail();
       
+      if(board.getIsad()=='Y') {
+    	  board.setEmail("ad@ad.com");
+    	  email=board.getEmail();
+    	  board.setDelflag('Y');
+    	  board.setGcount(0);
+      }else {
+    	  board.setIsad('N');
+    	  board.setDelflag('N');
+      }
+      
       // 웹서버 컨테이너 경로 추출함
       String root = request.getSession().getServletContext().getRealPath("resources");
       //파일경로
@@ -65,7 +75,6 @@ public class BoardController {
       
       //insert form 넘어올 때 멤버 이메일,게시물 내용은 입력받은 내용 들어있음.
       board.setGcount(0);
-      board.setIsad('N');
       
       String errorMsg = "";
       
@@ -79,8 +88,7 @@ public class BoardController {
                
             UUID uuid = UUID.randomUUID();
    
-            if(null!=files.get(i).getOriginalFilename()&&!files.get(i).getOriginalFilename().equals("")
-            		&&!exceptFile.contains(files.get(i).getOriginalFilename())){
+            if(null!=files.get(i).getOriginalFilename()&&!files.get(i).getOriginalFilename().equals("")){
                board.setRurl(savePath);
                String fType = "";
                if(files.get(i).getContentType().contains("video")){
@@ -129,8 +137,12 @@ public class BoardController {
 //            }
             
       request.setAttribute("msg", errorMsg);
-      
-      return "redirect:searchFriendForm.do?email="+email;
+      if(board.getIsad()=='N')
+    	  return "redirect:searchFriendForm.do?email="+email;
+      else {
+    	  request.setAttribute("insertFlag", true);
+    	  return "member/applyAdForm";
+      }
    }
    
    @RequestMapping("selectBoardList.do")
@@ -352,5 +364,5 @@ public class BoardController {
      
       return "redirect:selectBoardList.do";
    }
-   
+
 }

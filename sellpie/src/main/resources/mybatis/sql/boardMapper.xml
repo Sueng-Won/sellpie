@@ -24,7 +24,7 @@
 
 	<insert id="insertBoard" parameterType="Board">
 		INSERT INTO BOARD VALUES(
-		SEQ_BOARD_BNO.NEXTVAL, #{email}, #{bcontent}, #{gcount}, #{rurl}, #{isad},'N')
+		SEQ_BOARD_BNO.NEXTVAL, #{email}, #{bcontent}, #{gcount}, #{rurl}, #{isad},#{delflag})
 	</insert>
 	
 	<select id="selectfList1" parameterType="string" resultType="string">
