@@ -150,6 +150,7 @@ $(function() {
         dataType : "json",
         url:'sellerCheck.do',
         success:function(data){
+        		$('#Demo1').append('<a class="w3-button w3-theme" onclick="purchasePage();">구매이력</a>');
         	if(data == 1){
         		$('#Demo1').append('<a class="w3-button w3-theme" onclick="productForm();">물품등록</a>');
         		$('#Demo1').append('<a class="w3-button w3-theme" onclick="javascript: location.href = '+"'salesList.do'"+'">판매관리</a>');
@@ -190,6 +191,9 @@ function productForm() {
 function sellerForm() {
 	saveUrl();
 	location.href = 'sellerForm.do';
+}
+function purchasePage() {
+	location.href = 'purchaseList.do';
 }
 </script>
 </body>

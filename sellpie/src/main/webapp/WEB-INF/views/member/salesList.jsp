@@ -31,6 +31,7 @@ cursor: pointer;
 					<div class="w3-col m12">
 					<div class="w3-card w3-round w3-white">
 						<div class="w3-container w3-padding">
+							<a class="w3-button w3-theme w3-right" onclick="productForm();">물품등록</a>
 							<h2>판매 물품</h2>
 							<hr>
 							<table class="table w3-striped w3-hoverable">

@@ -10,6 +10,8 @@
 <meta charset="UTF-8">
 <title>구매현황</title>
 <script src="resources/js/jquery-3.3.1.min.js"></script>
+<style type="text/css">
+</style>
 <script>
 $(document).ready(function(){
    var myKey = "nbeEbTsubouLt0cxAval8w"; // sweet tracker에서 발급받은 자신의 키 넣는다.
@@ -56,122 +58,61 @@ $(document).ready(function(){
             }
         });
 
-      // 배송정보와 배송추적 tracking-api
-        $("#myButton1").click(function() {
-           var t_code = $('#tekbeCompnayList option:selected').attr('value');
-           var t_invoice = $('#invoiceNumberText').val();
-            $.ajax({
-                type:"GET",
-                dataType : "json",
-                url:"http://info.sweettracker.co.kr/api/v1/trackingInfo?t_key="+myKey+"&t_code="+t_code+"&t_invoice="+t_invoice,
-                success:function(data){
-                   console.log(data);
-                   var myInvoiceData = "";
-                   if(data.status == false){
-                      myInvoiceData += ('<p>'+data.msg+'<p>');
-                   }else{
-                     myInvoiceData += ('<tr>');               
-                     myInvoiceData += ('<th>'+"보내는사람"+'</td>');                 
-                     myInvoiceData += ('<th>'+data.senderName+'</td>');                 
-                     myInvoiceData += ('</tr>');     
-                     myInvoiceData += ('<tr>');               
-                     myInvoiceData += ('<th>'+"제품정보"+'</td>');                 
-                     myInvoiceData += ('<th>'+data.itemName+'</td>');                 
-                     myInvoiceData += ('</tr>');     
-                     myInvoiceData += ('<tr>');               
-                     myInvoiceData += ('<th>'+"송장번호"+'</td>');                 
-                     myInvoiceData += ('<th>'+data.invoiceNo+'</td>');                 
-                     myInvoiceData += ('</tr>');     
-                     myInvoiceData += ('<tr>');               
-                     myInvoiceData += ('<th>'+"송장번호"+'</td>');                 
-                     myInvoiceData += ('<th>'+data.receiverAddr+'</td>');                 
-                     myInvoiceData += ('</tr>');                                    
-                   }
-                 
-                   
-                   $("#myPtag").html(myInvoiceData)
-                   
-                   var trackingDetails = data.trackingDetails;
-                   
-                   
-                  var myTracking="";
-                  var header ="";
-                  header += ('<tr>');               
-                  header += ('<th>'+"시간"+'</th>');
-                  header += ('<th>'+"장소"+'</th>');
-                  header += ('<th>'+"유형"+'</th>');
-                  header += ('<th>'+"전화번호"+'</th>');                 
-                 header += ('</tr>');     
-                  
-                  $.each(trackingDetails,function(key,value) {
-                     myTracking += ('<tr>');               
-                     myTracking += ('<td>'+value.timeString+'</td>');
-                     myTracking += ('<td>'+value.where+'</td>');
-                     myTracking += ('<td>'+value.kind+'</td>');
-                     myTracking += ('<td>'+value.telno+'</td>');                 
-                     myTracking += ('</tr>');                                
-                  });
-                  
-                  $("#myPtag2").html(header+myTracking);
-                   
-                }
-            });
-        });
       
-        $(".pList").click(function() {
+        $(".pList>td").not('.review').click(function() {
         	var thisObj = $(this);
         	console.log('태그리무브'+$(this).next('tr').hasClass('infoTag'));
-        	if($(this).next('tr').hasClass('infoTag')){
-        		$(this).next('tr').remove();
-        	}else{
-        		
-           var t_code = $(this).find('.tCode').text();
-           var t_invoice = $(this).find('.invNum').text();
-           console.log(t_code);
-                  var myTracking="";
-                  var header ="";
-            $.ajax({
-                type:"GET",
-                dataType : "json",
-                url:"http://info.sweettracker.co.kr/api/v1/trackingInfo?t_key="+myKey+"&t_code="+t_code+"&t_invoice="+t_invoice,
-                success:function(data){
-                   console.log(data);
-                   var myInvoiceData = "";
-                   if(data.status == false){
-                      myInvoiceData += ('<p>'+data.msg+'<p>');
-                   }else{
-                   var trackingDetails = data.trackingDetails;
-                   
-                   
-                  header += ('<tr class="infoTag"><td colspan="7">'); 
-                  header += ('<table>'); 
-                  header += ('<th>'+"시간"+'</th>');
-                  header += ('<th>'+"장소"+'</th>');
-                  header += ('<th>'+"유형"+'</th>');
-                  header += ('<th>'+"전화번호"+'</th>');                 
-                 header += ('</tr>');     
-                  
-                  $.each(trackingDetails,function(key,value) {
-                     myTracking += ('<tr>');               
-                     myTracking += ('<td>'+value.timeString+'</td>');
-                     myTracking += ('<td>'+value.where+'</td>');
-                     myTracking += ('<td>'+value.kind+'</td>');
-                     myTracking += ('<td>'+value.telno+'</td>');                 
-                     myTracking += ('</td></tr>');                                
-                  });
-                   myTracking += ('</table>');
-                  console.log(header+myTracking);
-                  thisObj.after(header+myTracking);
-                	   
-                   }
-                   
-                }
-            });
-        	}
+        	console.log(this.hasClass(".review"));
+	        	if($(this).next('tr').hasClass('infoTag')){
+	        		$(this).next('tr').remove();
+	        	}else{
+	        		
+	           var t_code = $(this).find('.tCode').text();
+	           var t_invoice = $(this).find('.invNum').text();
+	           console.log(t_code);
+	                  var myTracking="";
+	                  var header ="";
+	            $.ajax({
+	                type:"GET",
+	                dataType : "json",
+	                url:"http://info.sweettracker.co.kr/api/v1/trackingInfo?t_key="+myKey+"&t_code="+t_code+"&t_invoice="+t_invoice,
+	                success:function(data){
+	                   console.log(data);
+	                   var myInvoiceData = "";
+	                   if(data.status == false){
+	                      myInvoiceData += ('<p>'+data.msg+'<p>');
+	                   }else{
+	                   var trackingDetails = data.trackingDetails;
+	                   
+	                   
+	                  header += ('<tr class="infoTag"><td colspan="7">'); 
+	                  header += ('<table>'); 
+	                  header += ('<th>'+"시간"+'</th>');
+	                  header += ('<th>'+"장소"+'</th>');
+	                  header += ('<th>'+"유형"+'</th>');
+	                  header += ('<th>'+"전화번호"+'</th>');                 
+	                 header += ('</tr>');     
+	                  
+	                  $.each(trackingDetails,function(key,value) {
+	                     myTracking += ('<tr>');               
+	                     myTracking += ('<td>'+value.timeString+'</td>');
+	                     myTracking += ('<td>'+value.where+'</td>');
+	                     myTracking += ('<td>'+value.kind+'</td>');
+	                     myTracking += ('<td>'+value.telno+'</td>');                 
+	                     myTracking += ('</td></tr>');                                
+	                  });
+	                   myTracking += ('</table>');
+	                  console.log(header+myTracking);
+	                  thisObj.after(header+myTracking);
+	                	   
+	                   }
+	                   
+	                }
+	            });
+	        }
         });
       
 });
-
 
 </script>
 
@@ -204,6 +145,7 @@ $(document).ready(function(){
 							      <th scope="col">수량</th>
 							      <th scope="col">택배사</th>
 							      <th scope="col">송장번호</th>
+							      <th scope="col">리뷰등록</th>
 							    </tr>
 							  </thead>
 							  <tbody id="pTable">
@@ -216,10 +158,35 @@ $(document).ready(function(){
 							      <td class="delivName" id="delivTd${status.index}"></td>
 							      <td class="invNum"><c:out value="${pIndex.invNum}"/></td>
 							      <td style="display:none" class="tCode"><c:out value="${pIndex.delivCode}"/></td>
+							      <td class="review">
+							      	<button onclick="document.getElementById('id01').style.display='block'" class="review w3-theme w3-button w3-tiny w3-padding-small">리뷰등록</button>
+							      </td>
 							    </tr>
 							   </c:forEach>
 							  </tbody>
 							</table>
+							<!--상품평 등록 모달--------------------------------------------------------------------------------------->
+							  <div id="id01" class="w3-modal w3-animate-opacity">
+							    <div class="w3-modal-content w3-card-4">
+							      <header class="w3-container w3-theme"> 
+							        <span onclick="document.getElementById('id01').style.display='none'" 
+							        class="w3-button w3-large w3-display-topright">&times;</span>
+							        <h2>Modal Header</h2>
+							      </header>
+							      <div class="w3-container">
+							      	<input name="REVIEWSTAR" type="hidden" value="0"/>
+							      	<span id="star1" class="fa fa-star checked"></span>
+									<span id="star2" class="fa fa-star checked"></span>
+									<span id="star3" class="fa fa-star checked"></span>
+									<span id="star4" class="fa fa-star"></span>
+									<span id="star5" class="fa fa-star"></span>
+							      </div>
+							      <footer class="w3-container w3-theme">
+							        <button class="review w3-light-grey w3-button">리뷰등록</button>
+							      </footer>
+							    </div>
+							  </div>
+							<!-------------------------------------------------------------------------------------------------->
 							</div>
 						</div>
 					</div>
@@ -275,6 +242,29 @@ function openNav() {
     }
 }
 
+$(function() {
+	$('span[id^="star"]').hover(
+	function() {
+		console.log($(this).attr('id').replace('star',''));
+		//받아온 별점을 숫자로 변환
+		var starNum = Number($(this).attr('id').replace('star',''));
+		console.log(starNum);
+		for(var i=1; i <= 5; i++){
+			if(i <= starNum){
+				$('#star'+i).addClass('w3-theme');
+			}else{
+				$('#star'+i).removeClass('w3-theme');
+			}
+		}
+		this.click(){
+			
+		}
+	},
+	function() {
+		$('span[id^="star"]').removeClass('w3-theme');
+	});
+	
+});
 </script>
 </body>
 </html>
