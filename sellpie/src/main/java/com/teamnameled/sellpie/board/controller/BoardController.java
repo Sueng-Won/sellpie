@@ -3,6 +3,7 @@ package com.teamnameled.sellpie.board.controller;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -177,7 +178,27 @@ public class BoardController {
          bList.get(i).setRcount(rcount);
       }
       
-      mv.addObject("bList", bList);
+      List<BoardVo> adList = boardService.selectADList();
+      List<BoardVo> totalBList = new ArrayList<BoardVo>();
+      if(adList!=null && bList!=null){
+	      int bIdx = 0;
+	      int adIdx = 0;
+	      for(int j=0; j<bList.size()+adList.size(); j++){
+	    	  if(j%4==0&&j!=0){
+	    		  if(adIdx<adList.size()){
+	    			  totalBList.add(adList.get(adIdx));
+	    			  adIdx++;
+	    		  }
+	    	  }else{
+	    		  if(bIdx<bList.size()){
+	    			  totalBList.add(bList.get(bIdx));
+	    			  bIdx++;
+	    		  }
+	    	  }
+	      }
+      }
+      
+      mv.addObject("bList", totalBList);
       mv.setViewName("main");
       
       return mv;

@@ -66,5 +66,9 @@ public class BoardDao {
 		return sqlSession.update("boardMapper.boardDelflag",bno);
 	}
 
+	public List<BoardVo> selectADList() {
+		return sqlSession.selectList("boardMapper.selectADList");
+	}
+
 
 }
