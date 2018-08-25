@@ -24,14 +24,13 @@ public class Seller {
 	private String addrDetail;
 	private String pCategory;
 	private String reason;
-	
+	private char confirm;
+
 	public Seller() {
-		
 	}
 
 	public Seller(int sNo, String email, String acNum, String bank, String zipcode, String addr, String addrDetail,
-			String pCategory, String reason) {
-		super();
+			String pCategory, String reason, char confirm) {
 		this.sNo = sNo;
 		this.email = email;
 		this.acNum = acNum;
@@ -41,6 +40,7 @@ public class Seller {
 		this.addrDetail = addrDetail;
 		this.pCategory = pCategory;
 		this.reason = reason;
+		this.confirm = confirm;
 	}
 
 	public int getsNo() {
@@ -115,12 +115,19 @@ public class Seller {
 		this.reason = reason;
 	}
 
+	public char getConfirm() {
+		return confirm;
+	}
+
+	public void setConfirm(char confirm) {
+		this.confirm = confirm;
+	}
+
 	@Override
 	public String toString() {
 		return "Seller [sNo=" + sNo + ", email=" + email + ", acNum=" + acNum + ", bank=" + bank + ", zipcode="
 				+ zipcode + ", addr=" + addr + ", addrDetail=" + addrDetail + ", pCategory=" + pCategory + ", reason="
-				+ reason + "]";
+				+ reason + ", confirm=" + confirm + "]";
 	}
-	
 	
 }

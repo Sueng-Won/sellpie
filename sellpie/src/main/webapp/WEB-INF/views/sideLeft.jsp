@@ -144,6 +144,60 @@ function openNav() {
     
     <!-- End Left Column -->
     </div>
+<script type="text/javascript">
+//판매자 확인 후 마이페이지 버튼추가---------------------------------------------------------------------------
+$(function() {
+	$.ajax({
+        type:"GET",
+        dataType : "json",
+        url:'sellerCheck.do',
+        success:function(data){
+        	$('#Demo1').append('<a class="w3-button w3-theme" onclick="purchasePage();">구매이력</a>');
+        	if(data == 1){
+        		$('#Demo1').append('<a class="w3-button w3-theme" onclick="productForm();">물품등록</a>');
+        		$('#Demo1').append('<a class="w3-button w3-theme" onclick="javascript: location.href = '+"'salesList.do'"+'">판매관리</a>');
+        	}else if(data == 0){
+        		$('#Demo1').append('<a class="w3-button w3-theme" onclick="sellerForm();">판매자등록</a>');
+        	}else if(data == 2){
+        		$('#Demo1').append('<a class="w3-button w3-theme" disabled>판매자 신청진행중</a>');
+        	}
+        }
+	});
+	
+});
+//이전 경로가 필요할 경우 실행-----------------------------------------------------------------------------
+function saveUrl(){
+	var pathNames = $(location).attr('pathname').split('/');
+	var prams = $(location).attr('search');
+	var first = pathNames[1];
+	var presentUrl = pathNames[2] + prams;
+	console.log(first);
+	console.log(presentUrl);
+	$.ajax({
+		type:"GET",
+        dataType : "json",
+        data:{url:presentUrl},
+        url:'inputUrlToSession.do',
+        success:function(data){
+        	console.log(data);
+        }
+	});
+	return;
+}
+//판매등록 페이지이동-------------------------------------------------------------------------------------
+function productForm() {
+	saveUrl();
+	location.href = 'productForm.do';
+}
 
+function sellerForm() {
+	saveUrl();
+	location.href = 'sellerForm.do';
+}
+
+function purchasePage(){
+	location.href = 'purchaseList.do';
+}
+</script>
 </body>
 </html>

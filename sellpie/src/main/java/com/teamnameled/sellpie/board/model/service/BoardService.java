@@ -59,6 +59,14 @@ public class BoardService {
 		return dao.updateBoard(board);
 	}
 
+	public int boardDelflag(String bno) {
+		return dao.boardDelflag(bno);
+	}
+
+	public List<BoardVo> selectADList() {
+		return dao.selectADList();
+	}
+
 
 
 

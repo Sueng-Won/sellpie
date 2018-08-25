@@ -9,7 +9,7 @@
     연결의 착오를 줄인다. -->
 <mapper namespace="ContractMapper">
 	<select id="selectContractList" parameterType="String" resultType="Contract">
-		SELECT CNO, EMAIL, SNO, PNO, QUANTITY, DELIVCODE, INVNUM
+		SELECT CNO, EMAIL, SNO, PNO, QUANTITY, DELIVCODE, INVNUM, ADDR, ADDRDETAIL
 		FROM CONTRACT
 		WHERE EMAIL = #{email}
 	</select>
@@ -22,7 +22,9 @@
 			#{pNo},
 			#{quantity},
 			null,
-			null
+			null,
+			#{addr},
+			#{addrDetail}
 		)
 	</insert>
 	<update id="updateContract" parameterType="Contract">
@@ -46,7 +48,7 @@
 					SELECT PNAME
 					FROM PRODUCT
 					WHERE PNO = #{contract.pNo}
-				) AS PNAME,QUANTITY, DELIVCODE, INVNUM
+				) AS PNAME,QUANTITY, DELIVCODE, INVNUM, ADDR, ADDRDETAIL
 				FROM CONTRACT
 				WHERE CNO = #{contract.cNo}
 			</foreach>

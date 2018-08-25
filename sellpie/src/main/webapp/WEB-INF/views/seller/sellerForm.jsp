@@ -179,8 +179,46 @@
 <!-- header에 jquery-min 선언 되있음 -->
 
 <script>
-var imgIdx = 0;
-var videoIdx = 0;
+function validate(){
+    if($('#bank').val() == null){
+    	alert('은행을 입력해주세요');
+    	return false;
+    }else if($('#acNum').val().trim().length<12){
+    	alert('계좌를 정확히 입력해주세요');
+    	return false;
+    }else if($('#addr').val().trim().length==0){
+    	alert('주소를 입력해주세요');
+    	return false;
+    }else if($('#addrDetail').val().trim().length==0){
+    	alert('상세주소를 입력해주세요');
+    	return false;
+    }else if($('#pCategory').val().trim().length==0){
+    	alert('품목종류를 입력해주세요');
+    	return false;
+    }else if($('#reason').val().trim().length == 0){
+    	alert('신청이유를 등록해주세요');
+    	return false;
+    }
+    	return true;
+ }
+ 
+function openAddressPopup() {
+	var themeObj = {
+ 		   bgColor: "#162525", //바탕 배경색
+ 		   searchBgColor: "#162525", //검색창 배경색
+ 		   contentBgColor: "#162525", //본문 배경색(검색결과,결과없음,첫화면,검색서제스트)
+ 		   pageBgColor: "#162525", //페이지 배경색
+ 		   textColor: "#FFFFFF", //기본 글자색
+ 		   queryTextColor: "#FFFFFF", //검색창 글자색
+ 		   //postcodeTextColor: "", //우편번호 글자색
+ 		   //emphTextColor: "", //강조 글자색
+ 		   outlineColor: "#444444" //테두리
+ 		};
+	new daum.Postcode({
+ 	   theme: themeObj,
+        oncomplete: function(data) {
+            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
 
 function fileUpload(inputFiles, condition){
    var files = inputFiles.files; //선택된 파일들
@@ -242,8 +280,56 @@ function fileUpload(inputFiles, condition){
       $('#mask').fadeIn(1000);      
       $('#mask').fadeTo("slow",0.8);    
 
-      //윈도우 같은 거 띄운다.
-      $('.window').show();
+
+<!-- Page Container -->
+<div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">    
+  <!-- The Grid -->
+  <div class="w3-row">
+    <!-- Left Column -->
+    	<c:import url="../sideLeft.jsp"/>
+    <!-- End Left Column -->
+    <div id="midContent">
+	    <!--    입력폼 포커스온-->
+	    
+	    <!-- Middle Column -->
+	    <div class="w3-col m7" style="margin-left:25%;">
+    
+      <div class="w3-row-padding">
+        <div class="w3-col m12">
+          <div class="w3-card w3-round w3-white">
+            <div class="w3-container w3-padding">
+                  <form id="applyForm" action="applySeller.do" method="post" onsubmit="return validate();" enctype="multipart/form-data">
+                      <input type="hidden" id="email" name="email" value="${sessionScope.user.email}"/>
+                      <h2 class="w3-border-bottom">판매자 신청서</h2><br>
+						  <select class="w3-select w3-border w3-round" style="width: 50%;" id="bank" name="bank">
+						  	<option disabled selected>은행선택</option>
+						  	<option value="kb국민은행">KB국민은행</option>
+						  	<option value="한국씨티은행">한국씨티은행</option>
+						  	<option value="우리은행">우리은행</option>
+						  	<option value="신한은행">신한은행</option>
+						  	<option value="KEB하나은행">KEB하나은행</option>
+						  	<option value="수협은행">수협은행</option>
+						  	<option value="IBK기업은행">IBK기업은행</option>
+						  	<option value="SC제일은행">SC제일은행</option>
+						  </select>
+	                      <input class="w3-input w3-border w3-round" style="width: 50%;" type="number" id="acNum" name="acNum" placeholder="계좌번호"/>
+                      <br>
+                      <div class="w3-row">
+	                      <input class="w3-input w3-border w3-round w3-half" type="text" id="addr" name="addr" placeholder="주소" readonly/>
+	                      <a class="w3-button w3-theme w3-round-medium" onclick="openAddressPopup();">주소검색</a><br>
+                      </div>
+                      <input type="hidden" id="zipcode"name="zipcode"/>
+                      <input class="w3-input w3-border w3-round" type="text" style="width:50%" id="addrDetail" name="addrDetail" placeholder="상세주소"/><br>
+                      <input class="w3-input w3-border w3-round" type="text" style="width:50%" id="pCategory" name="pCategory" placeholder="품목 종류"/>
+                      <textarea class="w3-input w3-border w3-round" id="reason" name="reason" placeholder="신청이유" rows="20" style="resize: none;"></textarea><br>
+                    </form>
+              <button onclick="javascript: $('#applyForm').submit();" class="w3-button w3-theme"><i class="fa fa-pencil"></i> &nbsp;등록</button> 
+              <button onclick="javascript: history.back();" class="w3-button w3-theme"><i class="fa fa-close"></i> &nbsp;취소</button> 
+            </div>
+          </div>
+        </div>
+      </div>
+       
       
    }
    

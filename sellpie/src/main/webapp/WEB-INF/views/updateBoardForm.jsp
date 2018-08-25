@@ -10,6 +10,9 @@
 <script src="resources/js/jquery-3.3.1.min.js"></script>
 <meta charset="UTF-8">
 <title>메인페이지</title>
+<style type="text/css">
+.fa-close{cursor: pointer;}
+</style>
 <script>
 $(function(){
 	var msg = '<c:out value="${msg}"/>';
@@ -89,6 +92,10 @@ function fileUpload(inputFiles, condition){
          });
       }
    }
+   
+	function boardDelflag(bno){
+	    location.href="boardDelflag.do?bno="+bno;
+	 }
 </script>
 
 </head><body class="w3-theme-l5">
@@ -154,6 +161,9 @@ function fileUpload(inputFiles, condition){
 			</button>
 			<input type="file" name="file" id="videoFile" onchange="fileUpload(this,1);" accept="video/*" style="display:none"/>
 
+			<button type="button" class="w3-button w3-theme-d1 w3-margin-bottom w3-right w3-margin-left" onclick="boardDelflag('<c:out value='${board.bno }'/>');"><i class="glyphicon glyphicon-trash"></i> &nbsp;삭제
+            </button>
+            
 	        <button type="submit" class="w3-button w3-theme-d1 w3-margin-bottom w3-right"><i class="glyphicon glyphicon-pencil"></i> &nbsp;수정
 	        </button>
 	          <br><br><br>

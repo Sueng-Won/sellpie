@@ -207,17 +207,22 @@ $(document).ready(function(){
 							    </tr>
 							  </thead>
 							  <tbody id="pTable">
-							  <c:forEach var="pIndex" items="${pList}" varStatus="status">
-							    <tr class="pList" id="pList">
-							      <th scope="row">${status.count}</th>
-							      <td><c:out value="${pIndex.sName}"/></td>
-							      <td><c:out value="${pIndex.pName}"/></td>
-							      <td><c:out value="${pIndex.quantity}"/></td>
-							      <td class="delivName" id="delivTd${status.index}"></td>
-							      <td class="invNum"><c:out value="${pIndex.invNum}"/></td>
-							      <td style="display:none" class="tCode"><c:out value="${pIndex.delivCode}"/></td>
-							    </tr>
-							   </c:forEach>
+							  <c:if test="${empty pList }">
+							  	구매 이력이 없습니다.
+							  </c:if>
+							  <c:if test="${!empty pList}">
+								  <c:forEach var="pIndex" items="${pList}" varStatus="status">
+								    <tr class="pList" id="pList">
+								      <th scope="row">${status.count}</th>
+								      <td><c:out value="${pIndex.sName}"/></td>
+								      <td><c:out value="${pIndex.pName}"/></td>
+								      <td><c:out value="${pIndex.quantity}"/></td>
+								      <td class="delivName" id="delivTd${status.index}"></td>
+								      <td class="invNum"><c:out value="${pIndex.invNum}"/></td>
+								      <td style="display:none" class="tCode"><c:out value="${pIndex.delivCode}"/></td>
+								    </tr>
+								   </c:forEach>
+							   </c:if>
 							  </tbody>
 							</table>
 							</div>
