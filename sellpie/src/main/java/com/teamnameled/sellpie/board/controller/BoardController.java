@@ -336,20 +336,20 @@ public class BoardController {
          System.out.println("board update중 에러!!");
       }
    
-      return "redirect:selectBoardList.do";
+      return "redirect:searchFriendForm.do?email="+email;
    }
    
    @RequestMapping("boardDelflag.do")
-   public String boardDelflag(String bno){
+   public String boardDelflag(String bno, HttpSession session){
       int result = boardService.boardDelflag(bno);
-      
+      String email = ((Member)session.getAttribute("user")).getEmail();
          if(result > 0) {
             System.out.println("boardDelflag 성공");
          }else {
             System.out.println("boardDelflag 실패");
          }
      
-      return "redirect:selectBoardList.do";
+      return "redirect:searchFriendForm.do?email="+email;
    }
    
 }
