@@ -289,12 +289,11 @@ public class MemberController {
 			return "member/memberUpdate";
 		}
 	@RequestMapping("userImgUpload.do")
-	public @ResponseBody String userImgUpload(MultipartHttpServletRequest request, HttpServletRequest servletRequest, Member member){
+	public @ResponseBody String userImgUpload(MultipartHttpServletRequest request, HttpServletRequest servletRequest, Member member, HttpSession session){
 		// 저장 경로 설정
         String root = servletRequest.getSession().getServletContext().getRealPath("resources");
         System.out.println(root);
         String path = root+"\\images\\userImg";
-         
         String newFileName = ""; // 업로드 되는 파일명
          
         File dir = new File(path);
@@ -308,12 +307,21 @@ public class MemberController {
             MultipartFile mFile = request.getFile(uploadFile);
             String fileName = mFile.getOriginalFilename();
             System.out.println("실제 파일 이름 : " +fileName);
+            
+            
+            
             newFileName = System.currentTimeMillis()+"."
                     +fileName.substring(fileName.lastIndexOf(".")+1);
             try {
                 mFile.transferTo(new File(path+"\\"+newFileName));
-                member.setProfileImg(newFileName);
-                int result = memberService.updateImg(member);
+                Member userData = memberService.checkEmail(member.getEmail());
+                userData.setProfileImg(newFileName);
+                int result = memberService.updateImg(userData);
+                if(0<result){
+                	session.setAttribute("user", userData);
+                }else{
+                	System.out.println("사진 업로드 에러");
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }

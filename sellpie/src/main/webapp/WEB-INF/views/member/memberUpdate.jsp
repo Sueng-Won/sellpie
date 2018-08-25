@@ -117,7 +117,7 @@
                     </table>
                     &nbsp;
                     <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i> &nbsp;600</button>
-                    <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom" onclick="javascript:location.href="><i class="fa fa-comment"></i> &nbsp;128</button> 
+                     
                 </div>
 			</div>
 			</div>
