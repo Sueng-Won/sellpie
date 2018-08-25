@@ -7,25 +7,39 @@
     SQL에 접근할 때 사용하는 매퍼 파일의 별칭이다. 
     보통 서비스의 이름과 같게 설정하여
     연결의 착오를 줄인다. -->
-<mapper namespace="MemberMapper">
-	<select id="selectMemberId" parameterType="Member" resultType="Member">
-		SELECT USERID, PASSWORD, USERNAME, GENDER, AGE, EMAIL, PHONE, ADDRESS, HOBBY, ENROLLDATE
+<mapper namespace="memberMapper">
+	<select id="userLogin" parameterType="String"  resultType="Member">
+		SELECT EMAIL, PWD, NAME, GENDER, PHONE, BIRTH, PROFILE_IMG,
+			CASE WHEN SUBSTR(BIRTH,1,2) >= '50' 
+           		 THEN EXTRACT (YEAR FROM SYSDATE) -  EXTRACT(YEAR FROM (TO_DATE(SUBSTR('19'||BIRTH, 1,8))))
+           		 ELSE EXTRACT (YEAR FROM SYSDATE) -  EXTRACT(YEAR FROM (TO_DATE(SUBSTR('20'||BIRTH, 1,8))))
+            END AS AGE
 		FROM MEMBER
-		WHERE USERID = #{userId}
+		WHERE EMAIL = #{email}
+	</select>
+	<update id="keepLogin">
+		UPDATE MEMBER SET SESSIONKEY = #{sessionId} , SESSIONLIMIT =#{next} WHERE EMAIL = #{email}
+	</update>
+	<select id="checkUserSessionKey" resultType="Member">
+		SELECT EMAIL, PWD, NAME, GENDER, PHONE, BIRTH, PROFILE_IMG FROM MEMBER WHERE SESSIONKEY = #{sessionId} and SESSIONLIMIT > SYSDATE
 	</select>
 	<insert id="insertMember" parameterType="Member">
-		INSERT INTO MEMBER
-		VALUES(#{userId},#{password},#{userName},#{gender},#{age},#{email},#{phone},#{address},#{hobby},SYSDATE)
+		INSERT INTO MEMBER VALUES(#{email},#{pwd},#{name},#{gender},#{phone},#{birth}, NULL, DEFAULT, NULL )
 	</insert>
-	<update id="updateMember" parameterType="Member">
-		UPDATE MEMBER SET
-		PASSWORD = #{password},
-		GENDER = #{gender},
-		EMAIL = #{email},
-		PHONE = #{phone},
-		ADDRESS = #{address},
-		HOBBY = #{hobby}
-		WHERE USERID = #{userId}
+	<update id="updateMemberPwd" parameterType="Member">
+		UPDATE MEMBER SET PWD = #{pwd}
+		WHERE EMAIL = #{email}
+	</update>
+	<select id="searchMemberList" parameterType="String" resultType="Member">
+		SELECT EMAIL, PWD, NAME, GENDER, PHONE, BIRTH, PROFILE_IMG
+		FROM MEMBER
+		WHERE NAME LIKE '%'||#{searchText}||'%'
+	</select>
+	<update id="modifyUserInfo" parameterType="Member">
+		UPDATE MEMBER SET PWD =#{pwd}, NAME=#{name}, GENDER=#{gender}, PHONE=#{phone} WHERE EMAIL=#{email}
+	</update>
+	<update id="updateProfileImg" parameterType="Member">
+		UPDATE MEMBER SET PROFILE_IMG = #{profileImg} WHERE EMAIL = #{email}
 	</update>
 </mapper>
 

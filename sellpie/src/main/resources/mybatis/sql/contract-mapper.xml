@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- Namespace 는 실제 마이바티스를 통해
+    SQL에 접근할 때 사용하는 매퍼 파일의 별칭이다. 
+    보통 서비스의 이름과 같게 설정하여
+    연결의 착오를 줄인다. -->
+<mapper namespace="ContractMapper">
+	<select id="selectContractList" parameterType="String" resultType="Contract">
+		SELECT CNO, EMAIL, SNO, PNO, QUANTITY, DELIVCODE, INVNUM, ADDR, ADDRDETAIL
+		FROM CONTRACT
+		WHERE EMAIL = #{email}
+	</select>
+	<insert id="insertContract" parameterType="Contract">
+		INSERT INTO CONTRACT
+		VALUES(
+			SEQ_CONTRACT_CNO.NEXTVAL,
+			#{email},
+			#{sNo},
+			#{pNo},
+			#{quantity},
+			null,
+			null,
+			#{addr},
+			#{addrDetail}
+		)
+	</insert>
+	<update id="updateContract" parameterType="Contract">
+		UPDATE CONTRACT SET DELIVCODE = #{delivCode}, INVNUM = #{invNum} WHERE CNO = #{cNo}
+	</update>
+	<select id="selectContractListWithName" parameterType="java.util.List" resultType="ContractWithName">
+		<foreach collection="list" item="contract" separator="UNION ALL">
+			SELECT CNO, (
+				SELECT NAME
+				FROM MEMBER 
+				WHERE EMAIL = #{contract.email}
+				) AS NAME,(
+					SELECT NAME
+					FROM MEMBER
+					WHERE EMAIL = (
+						SELECT EMAIL
+						FROM SELLER
+						WHERE SNO = #{contract.sNo}
+					)
+				) AS SNAME,(
+					SELECT PNAME
+					FROM PRODUCT
+					WHERE PNO = #{contract.pNo}
+				) AS PNAME,QUANTITY, DELIVCODE, INVNUM, ADDR, ADDRDETAIL
+				FROM CONTRACT
+				WHERE CNO = #{contract.cNo}
+			</foreach>
+	</select>
+	<select id="selectSalesList" parameterType="SalesListVo" resultType="SalesListVo">
+		SELECT S.EMAIL,C.CNO, M.NAME AS BUYER, (SELECT NAME FROM MEMBER WHERE EMAIL = S.EMAIL) AS SELLER, P.PNAME AS PNAME, QUANTITY, DELIVCODE, INVNUM
+		FROM CONTRACT C
+		JOIN MEMBER M ON (C.EMAIL = M.EMAIL)
+		JOIN PRODUCT P ON (C.PNO = P.PNO)
+		JOIN SELLER S ON (C.SNO = S.SNO)
+		WHERE S.EMAIL = #{email}
+			<if test="pName != null">
+				AND P.PNAME LIKE '%'|| #{pName} ||'%'
+			</if>
+			<if test="buyer != null">
+				AND C.EMAIL IN (SELECT EMAIL FROM MEMBER WHERE NAME LIKE '%'|| #{buyer} ||'%')
+			</if>
+			<if test="isChecked != null">
+				AND C.INVNUM IS NULL
+				AND C.DELIVCODE IS NULL
+			</if>
+	</select>
+</mapper>
+

@@ -32,13 +32,20 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-				
+
 		<!-- AspectJ -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
 			<version>${org.aspectj-version}</version>
 		</dependency>	
+		<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+		<dependency>
+    		<groupId>org.aspectj</groupId>
+   			 <artifactId>aspectjweaver</artifactId>
+   			 <version>1.8.13</version>
+		</dependency>
+		
 		
 		<!-- Logging -->
 		<dependency>
@@ -162,6 +169,36 @@
 			<artifactId>commons-io</artifactId>
 			<version>2.6</version>
 		</dependency>
+		<!-- mail -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.7</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+		<!--스프링시큐리티 web 라이브러리-->
+	<dependency>
+   		 <groupId>org.springframework.security</groupId>
+  		  <artifactId>spring-security-web</artifactId>
+  		  <version>5.0.6.RELEASE</version>
+  	</dependency>
+  <!--스프링시큐리티 core 라이브러리-->
+ 	 <dependency>
+   		 <groupId>org.springframework.security</groupId>
+   		 <artifactId>spring-security-core</artifactId>
+    	 <version>5.0.6.RELEASE</version>
+  	</dependency>
+  <!--스프링시큐리티 config 라이브러리-->
+ 	 <dependency>
+  		  <groupId>org.springframework.security</groupId>
+  		  <artifactId>spring-security-config</artifactId>
+  		  <version>5.0.6.RELEASE</version>
+	</dependency>
+
 	</dependencies>
     <build>
         <plugins>

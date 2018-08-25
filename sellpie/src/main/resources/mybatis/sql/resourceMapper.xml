@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="resourceMapper">
+	<insert id="insertResource" parameterType="Resource">
+		INSERT INTO RESOURCES
+		VALUES(SEQ_RESOURCES_RNO.NEXTVAL, #{rsrc})
+	</insert>
+	<delete id="deleteResource" parameterType="string">
+		DELETE FROM RESOURCES WHERE RSRC = #{delfile}
+	</delete>
+</mapper>

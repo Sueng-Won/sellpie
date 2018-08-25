@@ -14,8 +14,18 @@
 	<!-- 마이바티스에서 사용하기 위한 
 	    VO 클래스의 별칭을 정의하는 태그 -->
 	<typeAliases>
-		<!-- <typeAlias type="com.kh.firstSpring.member.model.vo.Member" alias="Member"/>
-		<typeAlias type="com.kh.firstSpring.notice.model.vo.Notice" alias="Notice" /> -->
+		<typeAlias type="com.teamnameled.sellpie.product.model.vo.Product" alias="Product"/>
+		<typeAlias type="com.teamnameled.sellpie.member.model.vo.Member" alias="Member"/>
+		<typeAlias type="com.teamnameled.sellpie.board.model.vo.BoardVo" alias="Board"/>
+		<typeAlias type="com.teamnameled.sellpie.resource.model.vo.ResourceVo" alias="Resource"/>
+		<typeAlias type="com.teamnameled.sellpie.seller.model.vo.Seller" alias="Seller"/>
+		<typeAlias type="com.teamnameled.sellpie.seller.model.vo.SalesStatisticsVo" alias="SalesStatisticsVo"/>
+		<typeAlias type="com.teamnameled.sellpie.contract.model.vo.Contract" alias="Contract"/>
+		<typeAlias type="com.teamnameled.sellpie.contract.model.vo.ContractWithName" alias="ContractWithName"/>
+		<typeAlias type="com.teamnameled.sellpie.review.model.vo.Review" alias="Review"/>
+		<typeAlias type="com.teamnameled.sellpie.reply.model.vo.ReplyVo" alias="Reply"/>
+		<typeAlias type="com.teamnameled.sellpie.contract.model.vo.SalesListVo" alias="SalesListVo"/>
+		<typeAlias type="com.teamnameled.sellpie.admin.model.vo.Admin" alias="Admin"/>
 	</typeAliases>
 	
 	
@@ -25,8 +35,16 @@
 	    미처 완성되지 못한 Mapper를 등록할 경우
 	    에러가 발생한다. -->
 	<mappers>
-		<!-- <mapper resource="mybatis/sql/member-mapper.xml"/>
-		<mapper resource="mybatis/sql/notice-mapper.xml"/> -->
+		<mapper resource="mybatis/sql/member-mapper.xml"/>
+		<mapper resource="mybatis/sql/friendMapper.xml"/>
+		<mapper resource="mybatis/sql/product-mapper.xml"/>
+		<mapper resource="mybatis/sql/boardMapper.xml"/>
+		<mapper resource="mybatis/sql/resourceMapper.xml"/>
+		<mapper resource="mybatis/sql/seller-mapper.xml"/>
+		<mapper resource="mybatis/sql/contract-mapper.xml"/>
+		<mapper resource="mybatis/sql/review-mapper.xml"/>
+		<mapper resource="mybatis/sql/replyMapper.xml"/>
+		<mapper resource="mybatis/sql/admin-mapper.xml"/>
 	</mappers>
 
 </configuration>
