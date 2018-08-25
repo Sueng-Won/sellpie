@@ -379,4 +379,8 @@ public class MemberController {
 		session.setAttribute("url", url);
 		return result;
 	}
+	@RequestMapping("applyAdForm.do")
+	public String applyAdForm() {
+		return "member/applyAdForm";
+	}
 }
