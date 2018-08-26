@@ -17,7 +17,6 @@ import com.teamnameled.sellpie.board.model.vo.BoardVo;
 import com.teamnameled.sellpie.friend.model.service.FriendService;
 import com.teamnameled.sellpie.member.model.service.MemberService;
 import com.teamnameled.sellpie.member.model.vo.Member;
-import com.teamnameled.sellpie.reply.model.service.ReplyService;
 import com.teamnameled.sellpie.seller.model.service.SellerService;
 import com.teamnameled.sellpie.seller.model.vo.Seller;
 
@@ -36,9 +35,6 @@ public class FriendController {
    
    @Autowired
    SellerService sellerService;
-   
-   @Autowired
-   ReplyService replyService;
    
    @RequestMapping("friendForm.do")
    public ModelAndView friendForm(HttpSession session, ModelAndView mv) {
@@ -81,21 +77,6 @@ public class FriendController {
         
         String applyCheck = friendService.selectApplyCheck(emailMap);
         
-        for(int i=0; i<fblist.size(); i++){
-            BoardVo b = fblist.get(i);
-            List<String> lList = boardService.selectlList(b.getBno());
-            if(null!=lList && lList.size()!=0){
-               for(int j=0; j<lList.size(); j++){
-                  String str = lList.get(j);
-                  if(str.equals(email)){
-                     b.setLikeflag('T');
-                  }
-               }
-            }
-            
-            int rcount = replyService.selectRcount(b.getBno());
-            fblist.get(i).setRcount(rcount);
-         }
         
         
         fList.add(email2);

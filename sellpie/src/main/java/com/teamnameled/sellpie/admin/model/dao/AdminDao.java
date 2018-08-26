@@ -23,9 +23,4 @@ public class AdminDao {
 		return sqlSession.insert("adminMapper.insertAdmin", admin);
 	}
 
-
-	public int insertCount(String email) {
-		return sqlSession.insert("adminMapper.insertCount", email);
-	}
-
 }

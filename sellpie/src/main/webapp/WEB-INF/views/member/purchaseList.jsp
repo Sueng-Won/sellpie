@@ -149,10 +149,6 @@ $(document).ready(function(){
 							    </tr>
 							  </thead>
 							  <tbody id="pTable">
-								<c:if test="${empty pList }">
-							  	구매 이력이 없습니다.
-							  </c:if>
-							  <c:if test="${!empty pList}">
 							  <c:forEach var="pIndex" items="${pList}" varStatus="status">
 							    <tr class="pList" id="pList">
 							      <th scope="row">${status.count}</th>
@@ -167,9 +163,7 @@ $(document).ready(function(){
 							      </td>
 							    </tr>
 							   </c:forEach>
-							   </c:if>
 							  </tbody>
-							  
 							</table>
 							<!--상품평 등록 모달--------------------------------------------------------------------------------------->
 							  <div id="id01" class="w3-modal w3-animate-opacity">

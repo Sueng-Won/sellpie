@@ -20,7 +20,7 @@
 			<!-- End Left Column -->
 
 			<!-- Middle Column -->
-			<div class="w3-col m7" style="margin-left: 23%;">
+			<div class="w3-col m7" style="margin-left: 25%;">
 
 				<div class="w3-row-padding">
 					<div class="w3-col m12">
@@ -30,7 +30,7 @@
 							<div class="list-group">
 									<c:forEach var="member" items="${memberList}">
   											<a onclick="searchFriendForm('${member.email}');" class="list-group-item">
-  												<img src="resources/images/userImg/${(sessionScope.user.profileImg eq null)?'profile.png':sessionScope.user.profileImg}" class="w3-circle " style="height:50px;width:50px" alt="Avatar">
+  												<img src="resources/images/header/red1.jpg" class="w3-circle " style="height:50px;width:50px" alt="Avatar">
     											<b>${member.name}</b>
   											</a>
   									</c:forEach>
