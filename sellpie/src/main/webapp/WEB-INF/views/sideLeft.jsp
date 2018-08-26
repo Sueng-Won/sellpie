@@ -10,6 +10,15 @@
 <title>무제 문서</title>
 <script src="resources/js/jquery-3.3.1.min.js"></script>
 <script src="resources/js/popper.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<style>
+	.userImgArea{
+		cursor:pointer;
+	}
+	.userInfo{
+		margin-left:50px;
+	}
+</style>
 <script>
 
 function frientForm(){
@@ -37,6 +46,46 @@ function openNav() {
         x.className = x.className.replace(" w3-show", "");
     }
 }
+$(function(){
+	 $("#userImg").hide();
+		$(".userImgArea").click(function(){
+			$("#userImg").click();
+		});
+	$(".userInfo").click(function(){
+		location.href="/sellpie/updateUserInfo.do";
+	}); 
+});
+function printImage(obj){
+		if(obj.files && obj.files[0]){
+			var reader = new FileReader();
+			var formData = new FormData();
+			formData.set("img", obj.files[0]);
+			formData.set("email", "${sessionScope.user.email}");
+			console.log(formData.get("img"));
+			console.log(formData.get("email"));
+			reader.onload=function(e){
+				$(".userImgArea").attr("src", e.target.result);
+				$.ajax({
+					url : "/sellpie/userImgUpload.do",
+					type : "post",
+					data : formData,
+					processData : false,
+					contentType : false,
+					success : function(html) {
+						swal("사진 전송완료!", "회원님의 프로필 사진이 없데이트 되었습니다. ", "success");
+						setTimeout(function(){ location.href="/sellpie/selectBoardList.do" }, 2000); 
+		                
+		            },
+		            error : function(error) {
+		                alert("파일 업로드에 실패하였습니다.");
+		                console.log(error);
+		                console.log(error.status);
+		            }
+				});
+			}
+			reader.readAsDataURL(obj.files[0]); 
+		}
+	}
 </script>
 </head>
 
@@ -50,7 +99,11 @@ function openNav() {
         	<c:choose>
         	
         	<c:when test="${!empty sessionScope.user}">
-         	 <p class="w3-center"><img src="resources/images/userImg/${(sessionScope.user.profileImg eq null)?'profile.png':sessionScope.user.profileImg}" class="w3-circle" style="height:106px;width:106px" alt="Avatar"/></p>
+         	 <p class="w3-center"><img src="resources/images/userImg/${(sessionScope.user.profileImg eq null)?'profile.png':sessionScope.user.profileImg}" class="w3-circle userImgArea" style="height:106px;width:106px" alt="Avatar"/></p>
+         	 <button class="w3-btn w3-white w3-border w3-border-blue w3-round userInfo">정보 수정</button>
+         	 <form id="uploadForm" enctype="multipart/form-data" method="POST" action="/sellpie/userImgUpload.do">
+  						<input type="file" id="userImg" name="profileImg" onchange="printImage(this);"/>
+  			</form>
          	 <hr>
         	 <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i><c:out value="${sessionScope.user.email}"/></p>
        		 <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> 주 소</p>
@@ -192,7 +245,8 @@ function sellerForm() {
 	saveUrl();
 	location.href = 'sellerForm.do';
 }
-function purchasePage() {
+
+function purchasePage(){
 	location.href = 'purchaseList.do';
 }
 </script>

@@ -14,6 +14,9 @@
 	<insert id="insertAdmin" parameterType = "Admin" >
 		INSERT INTO ADMIN VALUES(#{adminId}, #{adminPwd})
 	</insert>
+	<insert id="insertCount" parameterType="String">
+		INSERT INTO STATS VALUES(SEQ_STATS_NUM.NEXTVAL, SYSDATE, #{email})
+	</insert>
 </mapper>
 
 

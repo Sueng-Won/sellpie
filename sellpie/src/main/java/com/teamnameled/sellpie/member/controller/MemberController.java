@@ -291,12 +291,11 @@ public class MemberController {
 			return "member/memberUpdate";
 		}
 	@RequestMapping("userImgUpload.do")
-	public @ResponseBody String userImgUpload(MultipartHttpServletRequest request, HttpServletRequest servletRequest, Member member){
+	public @ResponseBody String userImgUpload(MultipartHttpServletRequest request, HttpServletRequest servletRequest, Member member, HttpSession session){
 		// 저장 경로 설정
         String root = servletRequest.getSession().getServletContext().getRealPath("resources");
         System.out.println(root);
         String path = root+"\\images\\userImg";
-         
         String newFileName = ""; // 업로드 되는 파일명
          
         File dir = new File(path);
@@ -310,12 +309,21 @@ public class MemberController {
             MultipartFile mFile = request.getFile(uploadFile);
             String fileName = mFile.getOriginalFilename();
             System.out.println("실제 파일 이름 : " +fileName);
+            
+            
+            
             newFileName = System.currentTimeMillis()+"."
                     +fileName.substring(fileName.lastIndexOf(".")+1);
             try {
                 mFile.transferTo(new File(path+"\\"+newFileName));
-                member.setProfileImg(newFileName);
-                int result = memberService.updateImg(member);
+                Member userData = memberService.checkEmail(member.getEmail());
+                userData.setProfileImg(newFileName);
+                int result = memberService.updateImg(userData);
+                if(0<result){
+                	session.setAttribute("user", userData);
+                }else{
+                	System.out.println("사진 업로드 에러");
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -372,13 +380,6 @@ public class MemberController {
 		request.setAttribute("sList", sList);
 		return "member/salesList";
 	}
-	/*@RequestMapping("applySeller.do")
-	public String applySeller(Seller seller, HttpServletRequest request) {
-		//xml생성
-		StreamResult result = memberService.applySeller(seller);
-		System.out.println(result.toString());
-		return null;
-	}*/
 	@RequestMapping("inputUrlToSession.do")
 	public @ResponseBody int inputUrlToSession(HttpServletRequest request, String url) {
 		int result = 1;
@@ -386,5 +387,9 @@ public class MemberController {
 		HttpSession session = request.getSession();
 		session.setAttribute("url", url);
 		return result;
+	}
+	@RequestMapping("applyAdForm.do")
+	public String applyAdForm() {
+		return "member/applyAdForm";
 	}
 }

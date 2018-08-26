@@ -2543,7 +2543,7 @@ span + .signupNavbar__vingleLogo__3Ob {
         								<button type="button" class="solidButton__button__15V  signIn__loginButton__1dS" style="background-color: rgba(0, 0, 0, 0);">로그인</button>
         							</div>
         							<div class="signIn__bottomLinkWrapper__ndb">
-        								<a href="/sellpie/changePwd.do">비밀번호 찾기</a><a>|</a><a href="/sellpie/memberJoin.do">회원가입</a>
+        								<a href="/sellpie/changePwd.do">비밀번호 찾기</a><a>|</a><a href="/sellpie/memberJoin.do">회원가입</a><a>|</a><a href="/sellpie/applyAdForm.do" target="_blank" onclick="window.open(this.href, '', 'width=400, height=600'); return false;">광고신청</a>
         							</div>
         						</div><!-- div 00form -->
         					</div>

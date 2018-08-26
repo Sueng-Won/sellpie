@@ -63,6 +63,10 @@ public class BoardService {
 		return dao.boardDelflag(bno);
 	}
 
+	public List<BoardVo> selectADList() {
+		return dao.selectADList();
+	}
+
 
 
 
