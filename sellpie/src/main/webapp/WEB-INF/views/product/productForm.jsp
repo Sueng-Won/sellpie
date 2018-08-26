@@ -80,7 +80,8 @@ $(function() {
 	 $("#tagInput").keyup(function(e) {
          if(e.keyCode == 32 && $(this).val().trim().length!=0){
         	 if($('#selTag').val().indexOf('!@#$%'+$(this).val().trim()) == -1){
-        	 $('#sellTags').append('<div class="w3-button w3-theme w3-round-xxlarge" onclick="removeTag(this);">#'+$("#tagInput").val().replace(/ /g, '')+'<i class="fa fa-remove"></i></div>');
+        	 $('#sellTags').append('<div class="w3-button w3-theme w3-round-xxlarge" onclick="removeTag(this);">#'
+        	 						+$("#tagInput").val().replace(/ /g, '')+'<i class="fa fa-remove"></i></div>');
         	 $('#selTag').val($('#selTag').val() + '!@#$%'+$("#tagInput").val().replace(/ /g, '')) ;
         	 }
          	$('#tagInput').val('');
@@ -89,7 +90,8 @@ $(function() {
 	 $("#tagInput").focusout(function(e) {
          if($('#tagInput').val().trim().length!=0){
         	 if($('#selTag').val().indexOf('!@#$%'+$(this).val().trim()) == -1){
-        	 $('#sellTags').append('<div class="w3-button w3-theme w3-round-xxlarge" onclick="removeTag(this);">#'+$("#tagInput").val().replace(/ /g, '')+'<i class="fa fa-remove"></i></div>');
+        	 $('#sellTags').append('<div class="w3-button w3-theme w3-round-xxlarge" onclick="removeTag(this);">#'
+        	 						+$("#tagInput").val().replace(/ /g, '')+'<i class="fa fa-remove"></i></div>');
         	 $('#selTag').val($('#selTag').val() + '!@#$%'+$("#tagInput").val().replace(/ /g, '')) ;
         	 }
          	$('#tagInput').val('');
