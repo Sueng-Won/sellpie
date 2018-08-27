@@ -11,7 +11,7 @@
 <title>구매현황</title>
 <script src="resources/js/jquery-3.3.1.min.js"></script>
 <style type="text/css">
-i[id^="star"]{
+.glyphicon-star, .glyphicon-star-empty{
 color:orange;
 }
 </style>
@@ -162,7 +162,7 @@ $(document).ready(function(){
 							      <td class="invNum"><c:out value="${pIndex.invNum}"/></td>
 							      <td style="display:none" class="tCode"><c:out value="${pIndex.delivCode}"/></td>
 							      <td class="review">
-							      	<button onclick="selectProductReview(${pIndex.pNo},${pIndex.cNo});" class="review w3-theme w3-button w3-tiny w3-padding-small">리뷰등록</button>
+							      	<button onclick="selectProductReview(${pIndex.pNo},${pIndex.cNo});" class="reviewBtn w3-theme w3-button w3-tiny w3-padding-small">리뷰등록</button>
 							      </td>
 							      <td class="thisCno" style="display:none"><c:out value="${pIndex.cNo}"/></td>
 							    </tr>
@@ -188,7 +188,7 @@ $(document).ready(function(){
 							      	</h1>
 							      </div>
 							      <footer class="w3-container w3-theme">
-							        <button onclick="insertReview();" class="review w3-light-grey w3-button  w3-right">리뷰등록</button>
+							        <button onclick="insertReview();" class="w3-light-grey w3-button w3-right">리뷰등록</button>
 							      </footer>
 							    </div>
 							  </div>
@@ -247,21 +247,26 @@ function openNav() {
     }
 }
 
-var reveiwObj = 0;
+var reviewPno = 0;
+var reviewCno = 0;
 var checkStarNum = 0;
-function selectProductReview(pno) {
-	reviewObj = pno;
-	console.log(pno);
+//리뷰선택시 전역변수에 값 저장-----------------------------------------
+function selectProductReview(pno, cno) {
+	reviewPno = pno;
+	reviewCno = cno;
+	console.log(reviewPno);
+	console.log(reviewCno);
 	document.getElementById('id01').style.display='block';
 }
 
 //리뷰 등록---------------------------------------------------------------------
 function insertReview(){
-	console.log(reviewObj, checkStarNum);
+	console.log('reviewPno='+reviewPno);
+	console.log('checkStarNum='+checkStarNum);
 	$.ajax({
 		type:"GET",
         dataType : "json",
-        data:{pNo:reveiwObj, reviewStar:checkStarNum},
+        data:{pNo:reviewPno, reviewStar:checkStarNum, cNo:reviewCno},
         url:'insertReview.do',
         success:function(data){
         	if(data == 0){
@@ -279,23 +284,40 @@ function insertReview(){
 $(function() {
 //리뷰등록 여부검사---------------------------------------------------------------
 	$('.pList').each(function() {
-		var thisObj = $(this)
+		var checkResult = '';
+		var thisObj = $(this);
+		var reviewTag = $(thisObj).find('.review');
 		var thisCno = $(thisObj).find('.thisCno').text();
-		console.log(thisCno);
-		/* $.ajax({
+		console.log('thisObj='+thisObj+' / thisCno='+thisCno);
+		$.ajax({
 			type:"GET",
 	        dataType : "json",
 	        data:{checkCno:thisCno},
 	        url:'checkReview.do',
 	        success:function(data){
 	        	console.log(data);
+	        	if(data!=0){
+	        		$(reviewTag).find('.reviewBtn').remove();
+	        		checkResult = '<h5>';
+	        		for(var i=0; i<5; i++){
+	        			if(i<data){
+	        				checkResult+='<i class="glyphicon glyphicon-star"></i>'
+	        			}else{
+	        				checkResult+='<i class="glyphicon glyphicon-star-empty"></i>'
+	        			}
+	        		}
+	        		checkResult += '<h5>';
+	        	}
+	        	console.log(checkResult);
+	        	console.log(reviewTag);
+	       		$(reviewTag).append(checkResult);
 	        },
 	        error:function(e){
 	        	alert('review ajax 실패');
 	        }
-		}); */
+		});
 	});
-//별점등록 로직------------------------------------------------------------------------
+//별점선택 로직------------------------------------------------------------------------
 	$('i[id^="star"]').hover(
 	function() {
 		checkStarNum = 0;

@@ -22,7 +22,7 @@ public class ReviewService {
 		return reviewDao.insertReview(review);
 	}
 
-	public Review selectReview(int checkCno) {
-		return reviewDao.selectReview(checkCno);
+	public Review checkReview(int checkCno) {
+		return reviewDao.checkReview(checkCno);
 	}
 }

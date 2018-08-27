@@ -18,10 +18,10 @@
 	</select>
 	<insert id="insertReview" parameterType="Review">
 		INSERT INTO REVIEW
-		VALUES(SEQ_REVIEW_RNO.NEXTVAL, #{pNo}, #{reviewStar}, DEFAULT, #{cNo})
+		VALUES(SEQ_REVIEW_RNO.NEXTVAL, #{pNo}, #{reviewStar}, #{cNo})
 	</insert>
-	<select id="selectReview" parameterType="int">
-		SELECT * FROM REVIEW WHERE = #{cno}
+	<select id="checkReview" parameterType="int" resultType="Review">
+		SELECT RNO, PNO, REVIEWSTAR, CNO FROM REVIEW WHERE CNO = #{checkCno}
 	</select>
 </mapper>
 

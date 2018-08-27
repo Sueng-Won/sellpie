@@ -22,7 +22,7 @@ public class ReviewDao {
 		return sqlSession.insert("ReviewMapper.insertReview", review);
 	}
 
-	public Review selectReview(int checkCno) {
-		return sqlSession.selectOne("ReviewMapper.selectReview", checkCno);
+	public Review checkReview(int checkCno) {
+		return sqlSession.selectOne("ReviewMapper.checkReview", checkCno);
 	}
 }

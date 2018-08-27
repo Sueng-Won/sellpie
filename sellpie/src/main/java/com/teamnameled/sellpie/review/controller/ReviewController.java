@@ -37,9 +37,10 @@ public class ReviewController {
 	@RequestMapping("checkReview.do")
 	public @ResponseBody int checkReview(int checkCno) {
 		int result = 0;
-		Review review = reviewService.selectReview(checkCno);
+		System.out.println(checkCno);
+		Review review = reviewService.checkReview(checkCno);
 		if(review != null){
-			result = 1;
+			result = review.getReviewStar();
 		}
 		return result;
 	}
