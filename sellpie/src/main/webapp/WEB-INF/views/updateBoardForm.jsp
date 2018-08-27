@@ -112,27 +112,27 @@ function fileUpload(inputFiles, condition){
     <!-- Middle Column -->
     <div class="w3-col m7" style="margin-left:25%;" id="contentDiv">
     
-      <div class="w3-row-padding">
-        <div class="w3-col m12">
-          <div class="w3-card w3-round w3-white" onclick="javascript:location.href='#contentOpen'">
-            <div class="w3-container w3-padding">
-              <h6 class="w3-opacity">게시물 작성</h6>
-              <div contenteditable="true" class="w3-border w3-padding-16"> 
-              </div>
-              <button type="button" class="w3-button w3-theme"><i class="fa fa-pencil"></i> &nbsp; 게시</button> 
-            </div>
-          </div>
-        </div>
-      </div>
+<!--       <div class="w3-row-padding"> -->
+<!--         <div class="w3-col m12"> -->
+<!--           <div class="w3-card w3-round w3-white" onclick="javascript:location.href='#contentOpen'"> -->
+<!--             <div class="w3-container w3-padding"> -->
+<!--               <h6 class="w3-opacity">게시물 작성</h6> -->
+<!--               <div contenteditable="true" class="w3-border w3-padding-16">  -->
+<!--               </div> -->
+<!--               <button type="button" class="w3-button w3-theme"><i class="fa fa-pencil"></i> &nbsp; 게시</button>  -->
+<!--             </div> -->
+<!--           </div> -->
+<!--         </div> -->
+<!--       </div> -->
       
 
-	<div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+	<div class="w3-container w3-card w3-white w3-round" style="width:680px;"><br>
         <c:if test="${!empty board }">
         <form id="board" method="post" action="/sellpie/updateBoard.do" onsubmit="validate();" enctype="multipart/form-data">
 	        <input type="hidden" name="bno" value="<c:out value='${board.bno }'/>"/>
 	        <input type="hidden" name="bcontent" id="hiddenContent"/>
 	        <input type="hidden" name="delfile" id="hiddenDelfile"/>
-	        <img src='<c:out value="${board.profileImg }"/>' alt="Avatar" class="w3-left w3-circle w3-margin-right rounded-circle" style="width:60px; height:60px;">
+	        <img src='resources/images/userImg/<c:out value="${board.profileImg }"/>' alt="Avatar" class="w3-left w3-circle w3-margin-right rounded-circle" style="width:60px; height:60px;">
 	        <h4><c:out value="${board.name }"/></h4><br>
 	        <hr class="w3-clear">
 	        <div contenteditable="true" class="w3-border w3-round" style="width:650px;" id="bcontent"><c:out value="${board.bcontent }"/></div>
@@ -178,7 +178,7 @@ function fileUpload(inputFiles, condition){
    
     <!-- Right Column -->
     
-      <c:import url="sideRight.jsp"></c:import>
+<%--       <c:import url="sideRight.jsp"></c:import> --%>
     <!-- End Right Column -->
   <!-- End Grid -->
   </div>

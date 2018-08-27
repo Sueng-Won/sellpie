@@ -16,7 +16,7 @@
 		cursor:pointer;
 	}
 	.userInfo{
-		margin-left:50px;
+		margin-left:80px;
 	}
 </style>
 <script>

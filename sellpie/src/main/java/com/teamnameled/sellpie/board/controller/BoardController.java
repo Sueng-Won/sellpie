@@ -42,7 +42,7 @@ public class BoardController {
    ReplyService replyService;
    
    @RequestMapping("insertBoard.do")
-   public String insertBoard(MultipartHttpServletRequest multipartHttpServletRequest, BoardVo board, HttpServletRequest request){
+   public String insertBoard(MultipartHttpServletRequest multipartHttpServletRequest, BoardVo board, HttpServletRequest request, String delfile){
       int boardResult = -1;
       int resourceResult = 0;
       Date today = new Date();

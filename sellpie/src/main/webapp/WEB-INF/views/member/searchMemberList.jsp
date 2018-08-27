@@ -30,7 +30,7 @@
 							<div class="list-group">
 									<c:forEach var="member" items="${memberList}">
   											<a onclick="searchFriendForm('${member.email}');" class="list-group-item">
-  												<img src="resources/images/userImg/${(sessionScope.user.profileImg eq null)?'profile.png':sessionScope.user.profileImg}" class="w3-circle " style="height:50px;width:50px" alt="Avatar">
+  												<img src="resources/images/userImg/${(member.profileImg eq null)?'profile.png':member.profileImg}" class="w3-circle " style="height:50px;width:50px" alt="Avatar">
     											<b>${member.name}</b>
   											</a>
   									</c:forEach>
@@ -44,7 +44,7 @@
 
 
 			<!-- Right Column -->
-			<c:import url="../sideRight.jsp"></c:import>
+			<%-- <c:import url="../sideRight.jsp"></c:import> --%>
 			<!-- End Right Column -->
 
 			<!-- End Grid -->
