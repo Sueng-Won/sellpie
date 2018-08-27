@@ -182,11 +182,11 @@
 									                        		<img src="resources/images/header/nextLeft.png" style="width:28%; height:23%;">
 									                        	</div>
 									                        	<div class="w3-col" style="width:77%; height:95%; text-align:center;" id="fileview">
-										                        	 <img src="resources/images/header/twice2.png" style="width:90%; height:95%;" class="w3-margin-bottom mySlides">
+										                        	 <img src="${product.resource[0].rsrc }" style="width:90%; height:95%;" class="w3-margin-bottom mySlides">
 									                        	</div>
 									                        	<div class="w3-col" style="width:10%; height:95%;" onclick="plusDivs(1);">
 									                        		<br><br><br><br><br>
-									                        		<img src="${product.resource[0].rsrc}" style="width:28%; height:23%;">
+									                        		<img src="resources/images/header/nextRight.png" style="width:28%; height:23%;">
 									                        	</div>
 									                        </div>                             
 									                        <div style="text-align:center">
