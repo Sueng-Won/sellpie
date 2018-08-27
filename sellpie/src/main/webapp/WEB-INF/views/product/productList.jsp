@@ -40,29 +40,18 @@
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
                 $("#addrLabel").text(fullRoadAddr);
                 $("#addr").val(fullRoadAddr);
-	        },
-		    onclose: function(state) {
-	            //state는 우편번호 찾기 화면이 어떻게 닫혔는지에 대한 상태 변수 이며, 상세 설명은 아래 목록에서 확인하실 수 있습니다.
-	            if(state === 'COMPLETE_CLOSE'){
-	                //사용자가 검색결과를 선택하여 팝업창이 닫혔을 경우, 실행될 코드를 작성하는 부분입니다.
-	                //oncomplete 콜백 함수가 실행 완료된 후에 실행됩니다.
-	            	var addrDetail = window.prompt("상세주소를 입력해주세요.");
-	        		$("#addrLabel").append(", "+addrDetail);
-	        		$("#addrDetail").val(addrDetail);
-	            }
-		    }
+	        }
 	    }).open();
 	}
 	
 	function insertContract(pNo){
 		if($("#addrDetail").val() == ""){
-			alert("상세주소를 입력해주세요");
-			return false;
+			var addrDetail = window.prompt("상세주소를 입력해주세요.");
+    		$("#addrLabel").append(", "+addrDetail);
+    		$("#addrDetail").val(addrDetail);
 		}
-		else{
 			alert("구매가 완료되었습니다.");
 			$("#contractFrm"+pNo).submit();
-		}
 	}
 </script>
 <style type="text/css">
@@ -188,11 +177,6 @@
 									                        		<br><br><br><br><br>
 									                        		<img src="resources/images/header/nextRight.png" style="width:28%; height:23%;">
 									                        	</div>
-									                        </div>                             
-									                        <div style="text-align:center">
-									                                <img src="resources/images/header/twice1.png" style="width:7%; height:6%;" class="w3-margin-bottom mySlides">
-									                                <img src="resources/images/header/twice2.JPG" style="width:7%; height:6%;" class="w3-margin-bottom mySlides">
-									                                <img src="resources/images/header/twice2.png" style="width:7%; height:6%;" class="w3-margin-bottom mySlides">
 									                        </div>
 								                        </div>
 								                        <div class="w3-col m4" style="width:36%;">

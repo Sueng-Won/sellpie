@@ -45,8 +45,8 @@
 }
 .detail_content > div {
    position: absolute;
-   top: 9%;
-   left: 15%;
+   top: 20%;
+   left: 27%;
    width: 890px;
    height: 520px;
    padding: 16px;
@@ -76,8 +76,8 @@
 
 .detail_content2 > div {
    position: absolute;
-   top: 13%;
-   left: 22%;
+   top: 20%;
+   left: 27%;
    width: 800px;
    height: 400px;
    padding: 16px;
@@ -91,7 +91,7 @@
     font-size: 35px;
     font-weight: normal;
    position: absolute;
-   width: 350px;
+   width: 360px;
    height: 240px;
    -webkit-margin-before: -6.9em;
 }
@@ -212,11 +212,8 @@ function fileUpload(inputFiles, condition){
    
 	var delfile = "";
 	function deleteFile(delBtn,image){
-	         console.log(delBtn);
-	      var rsrc = $(delBtn).parent().next().attr("src");
-	      delfile += rsrc + ",";
 	      $(delBtn).parent().parent().remove();
-	      
+	     
 	      $("#img"+image).remove();
 	}
 
@@ -227,11 +224,17 @@ function fileUpload(inputFiles, condition){
          data:{"bno":bno},
          success:function(data){
             for(var i=0; i<data.length; i++){
+            	var profile = '';
+                if(data[i].profileImg==null||data[i].profileImg.length==0||data[i].profileImg ==''){
+                	profile = 'resources/images/userImg/profile.png';
+                }else{
+                	profile = 'resources/images/userImg/'+data[i].profileImg;
+                }
                var div = $("<div>");
                div.css({"height":"auto","width":"100%","margin-top":"5px"});
                var innerDiv1 = $("<div>");
                innerDiv1.css({"display":"inline-block","width":"28%"});   
-               var img = '<img src="'+data[i].profileImg+'" alt="Avatar" class="w3-left w3-circle rounded-circle" style="width:20px; height:20px;">';
+               var img = '<img src="'+profile+'" alt="Avatar" class="w3-left w3-circle rounded-circle" style="width:20px; height:20px;">';
                innerDiv1.append(img);
                innerDiv1.append('&nbsp;<b style="font-size: 11px;">'+data[i].name+'</b>');
                div.append(innerDiv1);
@@ -261,11 +264,16 @@ function fileUpload(inputFiles, condition){
          type:"get",
          data:{"bno":bno},
          success:function(data){
-        	 
             var srcArr = data.resource;
+            var profile = '';
+            if(data.profileImg==null||data.profileImg.length==0||data.profileImg ==''){
+            	profile = 'resources/images/userImg/profile.png';
+            }else{
+            	profile = 'resources/images/userImg/'+data.profileImg;
+            }
             var detailInfo = $("<div class='w3-border-bottom'>");
             detailInfo.css({"height":"60px"});
-            var profile = '<img src="'+data.profileImg+'" alt="Avatar" class="w3-left w3-circle w3-margin-right rounded-circle" style="width:50px; height:50px;">';
+            var profile = '<img src="'+profile+'" alt="Avatar" class="w3-left w3-circle w3-margin-right rounded-circle" style="width:36px; height:36px;">';
             var name = '<span class="w3-large w3-margin-top">'+data.name+'</span><br>';
             detailInfo.append("<br>");
             detailInfo.append(profile);
@@ -339,7 +347,6 @@ function fileUpload(inputFiles, condition){
    $(document).ready(function(){
         //취소버튼
        $(".divC").click(function(){
-             $("#uploadFile").empty();
              $("#content").html("");
        });
         
@@ -471,7 +478,7 @@ function fileUpload(inputFiles, condition){
     <!-- End Left Column -->
     
     <!-- Middle Column -->
-    <div class="w3-col m7" style="margin-left:25%;" id="contentDiv">
+    <div class="w3-col m7" style="margin-left:23%;" id="contentDiv">
     
       <div class="w3-row-padding">
         <div class="w3-col m12">
@@ -503,10 +510,10 @@ function fileUpload(inputFiles, condition){
                      <div class="w3-row-padding">
                        <div class="w3-col m12">
                          <div class="w3-card w3-round w3-white">
-                           <div class="w3- container w3-padding">
-                               <ul class="w3-ul" style="-webkit-margin-before: 0em; -webkit-margin-after: 0em; -webkit-margin-start: -30px; -webkit-margin-end: 0px;">
+                           <div class="w3-padding">
+                               <ul class="w3-ul" style="-webkit-margin-start: -30px;">
                                  <li class="w3-bar">
-                                     <img src="<c:out value='${sessionScope.user.profileImg }'/>" width="70" height="70" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
+                                     <img src="resources/images/userImg/${(sessionScope.user.profileImg eq null)?'profile.png':sessionScope.user.profileImg}" width="70" height="70" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
                                         <div class="w3-bar-item w3-padding-24">
                                            <span class="w3-large"><c:out value="${sessionScope.user.name }"></c:out></span><br>
                                         </div>
@@ -515,7 +522,7 @@ function fileUpload(inputFiles, condition){
                                  <br>
                                  
                                 <div>
-                                   <div class="w3-padding-16" id="bcontent" aria-autocomplete="list" aria-controls="js_2ne" aria-describedby="placeholder-a0ec5" aria-multiline="true"  contenteditable="true" data-testid="status-attachment-mentions-input" role="textbox" spellcheck="true" style="/* outline: none; */ user-select: text; /* white-space: pre-wrap; */ word-wrap: break-word;">
+                                   <div class="w3-padding-16" id="bcontent" aria-autocomplete="list" aria-controls="js_2ne" aria-describedby="placeholder-a0ec5" aria-multiline="true"  contenteditable="true" data-testid="status-attachment-mentions-input" role="textbox" spellcheck="true" style="user-select: text; word-wrap: break-word;">
                                    </div>
                                 </div>
                                    <div class="uploadFile background-white" id="uploadFile">
@@ -573,9 +580,9 @@ function fileUpload(inputFiles, condition){
                                <div style="height:120px; width:100%; overflow-y:scroll;" id="replyInfo">
    <!--                                getReply에서 댓글 가져옴 -->
                                </div>
-                               <div class="w3-row w3-cell-bottom w3-margin-bottom">
+                               <div class="w3-row w3-cell-bottom w3-margin-bottom w3-margin-top">
                                    <div class="w3-col m1">
-                                  <img src="<c:out value='${sessionScope.user.profileImg}'/>" alt="Avatar" class="w3-left w3-circle rounded-circle w3-block" style="width:20px; height:20px;">
+                                  <img src="resources/images/userImg/${(sessionScope.user.profileImg eq null)?'profile.png':sessionScope.user.profileImg}" alt="Avatar" class="w3-left w3-circle rounded-circle w3-block" style="width:20px; height:20px;">
                                    </div>
                                    <div contenteditable="true" class="w3-border w3-col m9 w3-round" id="inputReply"></div>
                                    <div class="w3-col m1" style="border-radius: 17px;  width:22px; height:22px; text-align: center;">
@@ -593,7 +600,7 @@ function fileUpload(inputFiles, condition){
       <div class="w3-container w3-card w3-white w3-round w3-margin LoadMore"><br>
          <input type="hidden" name="bno" />
          
-           <img src="<c:out value='${board.profileImg }'/>" alt="Avatar" class="w3-left w3-circle w3-margin-right rounded-circle" style="width:60px; height:60px;">
+           <img src="resources/images/userImg/${(board.profileImg eq null)?'profile.png':board.profileImg}" alt="Avatar" class="w3-left w3-circle w3-margin-right rounded-circle" style="width:60px; height:60px;">
            <span class="w3-right w3-opacity">
              <c:if test="${sessionScope.user.email eq board.email }">
               <button type="button" class="btn btn-default" aria-label="Left Align" onclick="javascript:location.href='updateForm.do?bno='+<c:out value='${board.bno }'/>">
@@ -633,12 +640,12 @@ function fileUpload(inputFiles, condition){
                         <c:if test="${st.count eq 1}">
                         <tr>
                             <td>
-                                 <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:500px;">
+                                 <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:360px; height:500px;">
                              </td>
                         </c:if>
                         <c:if test="${st.count eq 2}">
                             <td>
-                                 <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:500px;">
+                                 <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:360px; height:500px;">
                              </td>
                         </tr>
                         </c:if>
@@ -657,12 +664,12 @@ function fileUpload(inputFiles, condition){
                             <c:if test="${st.count eq 2}">
                             <tr>
                                     <td>
-                                       <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
+                                       <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:360px; height:240px;">
                                    </td>
                               </c:if>
                               <c:if test="${st.count eq 3}">
                                      <td>
-                                         <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
+                                         <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:360px; height:240px;">
                                      </td>
                               </tr>
                                </c:if>
@@ -675,12 +682,12 @@ function fileUpload(inputFiles, condition){
                             <c:if test="${st.count eq 1}">
                             <tr>
                                     <td>
-                                       <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
+                                       <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:360px; height:240px;">
                                    </td>
                               </c:if>
                               <c:if test="${st.count eq 2}">
                                      <td>
-                                         <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
+                                         <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:360px; height:240px;">
                                      </td>
                               </tr>
                                </c:if>
@@ -689,12 +696,12 @@ function fileUpload(inputFiles, condition){
                             <c:if test="${st.count eq 3}">
                             <tr>
                                     <td>
-                                       <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
+                                       <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:360px; height:240px;">
                                    </td>
                               </c:if>
                               <c:if test="${st.count eq 4}">
                                      <td>
-                                         <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
+                                         <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:360px; height:240px;">
                                      </td>
                               </tr>
                               </c:if>
@@ -707,12 +714,12 @@ function fileUpload(inputFiles, condition){
                             <c:if test="${st.count eq 1}">
                             <tr>
                                     <td>
-                                       <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
+                                       <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:360px; height:240px;">
                                    </td>
                               </c:if>
                               <c:if test="${st.count eq 2}">
                                      <td>
-                                         <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
+                                         <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:360px; height:240px;">
                                      </td>
                               </tr>
                                </c:if>
@@ -721,12 +728,12 @@ function fileUpload(inputFiles, condition){
                             <c:if test="${st.count eq 3}">
                             <tr>
                                     <td>
-                                       <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
+                                       <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:360px; height:240px;">
                                    </td>
                               </c:if>
                               <c:if test="${st.count eq 4}">
                                      <td>
-                                         <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:350px; height:240px;">
+                                         <img src="<c:out value='${resource.rsrc}'></c:out>" style="width:360px; height:240px;">
                                          <div class="image_hide1">
                                            <div class="image_hide2">
                                               <div class="image_hide3"><c:out value='${board.resource.size()-4}'></c:out>장+
@@ -734,9 +741,7 @@ function fileUpload(inputFiles, condition){
                                            </div>
                                            </div>
                                      </td>
-                                     
                               </tr>
-                              
                               </c:if>
                         </c:if>
                      </c:if>
@@ -769,7 +774,7 @@ function fileUpload(inputFiles, condition){
    
     <!-- Right Column -->
     
-      <c:import url="sideRight.jsp"></c:import>
+<%--       <c:import url="sideRight.jsp"></c:import> --%>
     <!-- End Right Column -->
   <!-- End Grid -->
   </div>
