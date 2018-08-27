@@ -339,7 +339,7 @@ public class MemberController {
 			try {
 				int result = memberService.modifyUserInfo(member);
 				if(0<result){
-					mav.setViewName("member/memberUpdate");
+					mav.setViewName("redirect:selectBoardList.do");
 				}
 				
 			} catch (Exception e) {
