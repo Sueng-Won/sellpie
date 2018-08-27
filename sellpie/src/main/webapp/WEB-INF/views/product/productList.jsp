@@ -55,7 +55,14 @@
 	}
 	
 	function insertContract(pNo){
-		$("#contractFrm"+pNo).submit();
+		if($("#addrDetail").val() == ""){
+			alert("상세주소를 입력해주세요");
+			return false;
+		}
+		else{
+			alert("구매가 완료되었습니다.");
+			$("#contractFrm"+pNo).submit();
+		}
 	}
 </script>
 <style type="text/css">
@@ -265,7 +272,6 @@
 
 			<!-- Right Column -->
 
-			<c:import url="../sideRight.jsp"></c:import>
 			<!-- End Right Column -->
 
 			<!-- End Grid -->

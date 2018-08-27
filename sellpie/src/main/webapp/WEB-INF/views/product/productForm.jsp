@@ -216,7 +216,6 @@ function validate(){
                       <input class="w3-input w3-border w3-round" type="text" id="pName" name="pName" placeholder="판매게시물명"><br>
                       <input type="hidden" name="sNo" value="${sessionScope.sNo}" />
                       <input type="hidden" name="selTag" id="selTag">
-                      <input type="hidden" name="email" value="test4@naver.com"/>
                       <div id="sellTags">
                       </div>
                       

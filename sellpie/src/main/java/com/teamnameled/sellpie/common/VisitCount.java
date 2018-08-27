@@ -22,9 +22,6 @@ public class VisitCount implements HttpSessionAttributeListener, HttpSessionList
 	@Override
 	public void attributeAdded(HttpSessionBindingEvent arg0) {
 		
-		
-		
-		
 	}
 
 	@Override
@@ -35,8 +32,6 @@ public class VisitCount implements HttpSessionAttributeListener, HttpSessionList
 
 	@Override
 	public void attributeReplaced(HttpSessionBindingEvent arg0) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
