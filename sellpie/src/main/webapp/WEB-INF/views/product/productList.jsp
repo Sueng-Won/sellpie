@@ -55,6 +55,10 @@
 	}
 	
 	function insertContract(pNo){
+		if($("#addrDetail").val() == ""){
+			alert("상세주소를 입력해주세요");
+			return false;
+		}
 		$("#contractFrm"+pNo).submit();
 	}
 </script>
