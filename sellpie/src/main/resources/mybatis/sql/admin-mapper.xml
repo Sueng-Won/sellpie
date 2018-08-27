@@ -17,6 +17,13 @@
 	<insert id="insertCount" parameterType="String">
 		INSERT INTO STATS VALUES(SEQ_STATS_NUM.NEXTVAL, SYSDATE, #{email})
 	</insert>
+	<select id="selectWeeklyData" resultType="Admin">
+		 SELECT COUNT(*) AS COUNT, TO_CHAR(STATS_DATE,'YY-MM-DD') AS DATECOUNT 
+        FROM STATS 
+        WHERE SYSDATE-7<![CDATA[<]]> STATS_DATE 
+        GROUP BY STATS_DATE
+        ORDER BY STATS_DATE
+	</select>
 </mapper>
 
 

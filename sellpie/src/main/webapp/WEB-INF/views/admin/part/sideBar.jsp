@@ -15,7 +15,7 @@
             </div>
             <div class="profile_info">
               <span>Welcome,</span>
-              <h2><c:out value="${sessionScope.admin.adminId }"/></h2>
+              <h2><%-- <c:out value="${sessionScope.admin.adminId }"/> --%>??</h2>
             </div>
           </div>
           <!-- /menu prile quick info -->

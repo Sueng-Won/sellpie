@@ -1,5 +1,8 @@
 package com.teamnameled.sellpie.admin.model.dao;
 
+import java.util.List;
+
+import org.apache.ibatis.session.ResultHandler;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -26,6 +29,12 @@ public class AdminDao {
 
 	public int insertCount(String email) {
 		return sqlSession.insert("adminMapper.insertCount", email);
+	}
+
+
+	public List<Admin> selectWeeklyDate() {
+		return sqlSession.selectList("adminMapper.selectWeeklyData");
+		
 	}
 
 }

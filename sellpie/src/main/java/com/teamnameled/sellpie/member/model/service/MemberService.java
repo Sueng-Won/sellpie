@@ -1,6 +1,7 @@
 package com.teamnameled.sellpie.member.model.service;
 
 import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,6 +79,11 @@ public class MemberService  {
 		System.out.println(member);
 		return dao.updateImg(member);
 	}
+
+	public int selectMemberCount() {
+		return dao.selectMemberCount();
+	}
+
 
 
 }
