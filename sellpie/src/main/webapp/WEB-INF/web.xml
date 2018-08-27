@@ -16,6 +16,10 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+	
+	<listener>
+    	<listener-class>com.teamnameled.sellpie.common.VisitCount</listener-class>
+	</listener>
 
 	<!-- Processes application requests -->
 	<servlet>

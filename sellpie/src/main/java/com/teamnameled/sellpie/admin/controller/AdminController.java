@@ -83,12 +83,4 @@ public class AdminController {
 		
 		return mav;
 	}
-	@RequestMapping("applyAd.do")
-	public String applyAd(BoardVo board, HttpServletRequest request) {
-		String root = request.getSession().getServletContext().getRealPath("resources");
-		//xml생성
-		StreamResult result = adminService.applyAd(board,root);
-		System.out.println(result.getWriter());
-		return "redirect:userLogin.do";
-	}
 }

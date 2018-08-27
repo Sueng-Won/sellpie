@@ -3,6 +3,7 @@ package com.teamnameled.sellpie.board.controller;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -41,13 +42,23 @@ public class BoardController {
    ReplyService replyService;
    
    @RequestMapping("insertBoard.do")
-   public String insertBoard(MultipartHttpServletRequest multipartHttpServletRequest, BoardVo board, HttpServletRequest request, String exceptFile){
+   public String insertBoard(MultipartHttpServletRequest multipartHttpServletRequest, BoardVo board, HttpServletRequest request){
       int boardResult = -1;
       int resourceResult = 0;
       Date today = new Date();
       SimpleDateFormat sdf = new SimpleDateFormat("yyMMddHHmmssZ");
       String bcontent = board.getBcontent();
       String email = board.getEmail();
+      
+      if(board.getIsad()=='Y') {
+    	  board.setEmail("ad@ad.com");
+    	  email=board.getEmail();
+    	  board.setDelflag('Y');
+    	  board.setGcount(0);
+      }else {
+    	  board.setIsad('N');
+    	  board.setDelflag('N');
+      }
       
       // 웹서버 컨테이너 경로 추출함
       String root = request.getSession().getServletContext().getRealPath("resources");
@@ -65,7 +76,6 @@ public class BoardController {
       
       //insert form 넘어올 때 멤버 이메일,게시물 내용은 입력받은 내용 들어있음.
       board.setGcount(0);
-      board.setIsad('N');
       
       String errorMsg = "";
       
@@ -79,8 +89,7 @@ public class BoardController {
                
             UUID uuid = UUID.randomUUID();
    
-            if(null!=files.get(i).getOriginalFilename()&&!files.get(i).getOriginalFilename().equals("")
-            		&&!exceptFile.contains(files.get(i).getOriginalFilename())){
+            if(null!=files.get(i).getOriginalFilename()&&!files.get(i).getOriginalFilename().equals("")){
                board.setRurl(savePath);
                String fType = "";
                if(files.get(i).getContentType().contains("video")){
@@ -129,8 +138,12 @@ public class BoardController {
 //            }
             
       request.setAttribute("msg", errorMsg);
-      
-      return "redirect:searchFriendForm.do?email="+email;
+      if(board.getIsad()=='N')
+    	  return "redirect:searchFriendForm.do?email="+email;
+      else {
+    	  request.setAttribute("insertFlag", true);
+    	  return "member/applyAdForm";
+      }
    }
    
    @RequestMapping("selectBoardList.do")
@@ -165,7 +178,27 @@ public class BoardController {
          bList.get(i).setRcount(rcount);
       }
       
-      mv.addObject("bList", bList);
+      List<BoardVo> adList = boardService.selectADList();
+      List<BoardVo> totalBList = new ArrayList<BoardVo>();
+      if(adList!=null && bList!=null){
+	      int bIdx = 0;
+	      int adIdx = 0;
+	      for(int j=0; j<bList.size()+adList.size(); j++){
+	    	  if(j%4==0&&j!=0){
+	    		  if(adIdx<adList.size()){
+	    			  totalBList.add(adList.get(adIdx));
+	    			  adIdx++;
+	    		  }
+	    	  }else{
+	    		  if(bIdx<bList.size()){
+	    			  totalBList.add(bList.get(bIdx));
+	    			  bIdx++;
+	    		  }
+	    	  }
+	      }
+      }
+      
+      mv.addObject("bList", totalBList);
       mv.setViewName("main");
       
       return mv;
@@ -352,5 +385,5 @@ public class BoardController {
      
       return "redirect:searchFriendForm.do?email="+email;
    }
-   
+
 }
