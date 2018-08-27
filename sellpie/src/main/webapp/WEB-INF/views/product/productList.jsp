@@ -59,7 +59,10 @@
 			alert("상세주소를 입력해주세요");
 			return false;
 		}
-		$("#contractFrm"+pNo).submit();
+		else{
+			alert("구매가 완료되었습니다.");
+			$("#contractFrm"+pNo).submit();
+		}
 	}
 </script>
 <style type="text/css">
