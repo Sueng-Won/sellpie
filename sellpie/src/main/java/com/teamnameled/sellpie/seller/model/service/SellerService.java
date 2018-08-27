@@ -29,8 +29,4 @@ public class SellerService {
 	public int insertSeller(Seller seller) {
 		return sellerDao.insertSeller(seller);
 	}
-<<<<<<< HEAD
-	
-=======
->>>>>>> refs/heads/master
 }

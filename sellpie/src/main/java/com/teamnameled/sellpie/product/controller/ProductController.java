@@ -151,14 +151,6 @@ public class ProductController {
 	    	  returnUrl = "salesList.do";
 	      }
 		
-<<<<<<< HEAD
-		String returnUrl = (String) request.getSession().getAttribute("url");
-	      if(null == returnUrl){
-	    	  returnUrl = "salesList.do";
-	      }
-		
-=======
->>>>>>> refs/heads/master
 		return "redirect:"+returnUrl;
 	}
 	
@@ -171,10 +163,6 @@ public class ProductController {
 		return mv;
 	}
 	
-<<<<<<< HEAD
-=======
-	
->>>>>>> refs/heads/master
 	@RequestMapping("productUpdate.do")
 	   public String updateBoard(MultipartHttpServletRequest multipartHttpServletRequest, Product product, String delfile, HttpServletRequest request){
 		  HttpSession session = request.getSession();

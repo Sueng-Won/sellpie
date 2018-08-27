@@ -28,9 +28,4 @@ public class ProductService {
 	public int deleteProduct(int pNo) {
 		return productDao.deleteProduct(pNo);
 	}
-<<<<<<< HEAD
-=======
-
->>>>>>> refs/heads/master
-
 }

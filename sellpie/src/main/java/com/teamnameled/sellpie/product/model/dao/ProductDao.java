@@ -35,8 +35,4 @@ public class ProductDao {
 		return sqlSession.update("ProductMapper.deleteProduct", pNo);
 	}
 
-	public int deleteProduct(int pNo) {
-		return sqlSession.update("ProductMapper.deleteProduct", pNo);
-	}
-
 }
