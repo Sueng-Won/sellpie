@@ -1,5 +1,8 @@
 package com.teamnameled.sellpie.admin.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.xml.transform.stream.StreamResult;
@@ -83,4 +86,11 @@ public class AdminController {
 		
 		return mav;
 	}
+	//db 데이터 조회
+	@RequestMapping("getStatsInfo.do")
+	public HashMap<String, Admin> getStatsInfo(){
+		HashMap<String, Admin> statsInfo = new HashMap<String, Admin>();
+		return statsInfo;
+	}
+	
 }
