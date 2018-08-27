@@ -22,7 +22,7 @@
 		)
 	</select>
 	<select id="selectSellersInfo" parameterType="java.util.List" resultType="Seller">
-		SELECT SNO, EMAIL, ACNUM, BANK, ZIPCODE, ADDR, ADDRDETAIL, PCATEGORY, REASON
+		SELECT SNO, EMAIL, ACNUM, BANK, ZIPCODE, ADDR, ADDRDETAIL, PCATEGORY, REASON, CONFIRM
 		FROM SELLER
 		WHERE EMAIL IN 
 		<foreach collection="list" item="seller" open="(" separator="," close=")">
