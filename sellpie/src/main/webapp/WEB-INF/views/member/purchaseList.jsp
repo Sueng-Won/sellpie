@@ -234,7 +234,6 @@ $(document).ready(function(){
 
 
 			<!-- Right Column -->
-			<c:import url="../sideRight.jsp"></c:import>
 			<!-- End Right Column -->
 
 			<!-- End Grid -->
