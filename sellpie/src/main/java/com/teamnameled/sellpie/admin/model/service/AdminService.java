@@ -3,6 +3,7 @@ package com.teamnameled.sellpie.admin.model.service;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -68,6 +69,11 @@ public class AdminService {
 	public int insertCount(String email) {
 		return dao.insertCount(email);
 		
+	}
+
+
+	public List<Admin> selectWeeklyDate() {
+		return dao.selectWeeklyDate();
 	}
 
 }

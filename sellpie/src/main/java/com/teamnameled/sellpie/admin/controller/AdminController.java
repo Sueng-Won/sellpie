@@ -1,6 +1,7 @@
 package com.teamnameled.sellpie.admin.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.teamnameled.sellpie.admin.model.service.AdminService;
 import com.teamnameled.sellpie.admin.model.vo.Admin;
 import com.teamnameled.sellpie.board.model.vo.BoardVo;
+import com.teamnameled.sellpie.member.model.service.MemberService;
 import com.teamnameled.sellpie.seller.model.vo.Seller;
 
 
@@ -26,6 +28,9 @@ import com.teamnameled.sellpie.seller.model.vo.Seller;
 public class AdminController {
 	@Autowired
 	AdminService adminService;
+	
+	@Autowired
+	MemberService memberSerivce;
 	
 	
 	/*
@@ -88,9 +93,22 @@ public class AdminController {
 	}
 	//db 데이터 조회
 	@RequestMapping("getStatsInfo.do")
-	public HashMap<String, Admin> getStatsInfo(){
-		HashMap<String, Admin> statsInfo = new HashMap<String, Admin>();
-		return statsInfo;
+	public ModelAndView getStatsInfo(ModelAndView mav){
+		HashMap<String, Object> statsInfo = new HashMap<String, Object>();
+		
+		List<Admin> weeklyDate = adminService.selectWeeklyDate();
+		int todayUser = memberSerivce.selectMemberCount();
+		
+		
+		System.out.println(weeklyDate);
+		statsInfo.put("todayUser", todayUser);
+		statsInfo.put("weeklyDate", weeklyDate);
+		
+		mav.addObject("adminData", statsInfo);
+		
+		mav.setViewName("admin/adminIndex");
+		
+		return mav;
 	}
 	
 }
