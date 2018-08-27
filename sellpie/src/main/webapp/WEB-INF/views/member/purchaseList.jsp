@@ -62,17 +62,19 @@ $(document).ready(function(){
         });
 
       
-        $(".pList>td").not('.review').click(function() {
+        $(".pList").not('.review').click(function() {
         	var thisObj = $(this);
-        	console.log('태그리무브'+$(this).next('tr').hasClass('infoTag'));
-        	console.log(this.hasClass(".review"));
+        	//console.log($(thisObj).text());
+        	//console.log('태그리무브'+$(this).next('tr').hasClass('infoTag'));
+        	//console.log($(this).hasClass(".review"));
 	        	if($(this).next('tr').hasClass('infoTag')){
 	        		$(this).next('tr').remove();
 	        	}else{
 	        		
-	           var t_code = $(this).find('.tCode').text();
-	           var t_invoice = $(this).find('.invNum').text();
+	           var t_code = $(thisObj).find('.tCode').text();
+	           var t_invoice = $(thisObj).find('.invNum').text();
 	           console.log(t_code);
+	           console.log(t_invoice);
 	                  var myTracking="";
 	                  var header ="";
 	            $.ajax({
@@ -110,6 +112,9 @@ $(document).ready(function(){
 	                	   
 	                   }
 	                   
+	                },
+	                error:function(e){
+	                	alert('택배정보조회 실패');
 	                }
 	            });
 	        }
