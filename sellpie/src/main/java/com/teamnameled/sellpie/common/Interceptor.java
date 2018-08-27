@@ -91,6 +91,12 @@ public class Interceptor extends HandlerInterceptorAdapter {
 					}else if(request.getRequestURI().equals("/sellpie/updateUserPwd.do")){
 						System.out.println("세션값 존재 X, loginCookie ==null");
 						return true;
+					}else if(request.getRequestURI().equals("/sellpie/applyAdForm.do")) {
+						System.out.println("세션값 존재 X, loginCookie ==null");
+						return true;
+					}else if(request.getRequestURI().equals("/sellpie/insertBoard.do")) {
+						System.out.println("세션값 존재 X, loginCookie ==null");
+						return true;
 					}else{
 						System.out.println("나머지 페이지들 처리");
 						response.sendRedirect("/sellpie/errorPage.do");

@@ -35,7 +35,7 @@
 	 
 	 $(function(){
 		 $(".cancel").click(function(){
-			location.href="/sellpie/updateMember.do";	 
+			location.href="/sellpie/selectBoardList.do";	 
 		 });
 	 });
 	 $(function(){

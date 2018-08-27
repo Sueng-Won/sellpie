@@ -29,7 +29,7 @@
       <div class="col-md-3 left_col">
         <div class="left_col scroll-view">
           <div class="navbar nav_title" style="border: 0;">
-            <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentellela Alela!</span></a>
+            <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>SellPie!</span></a>
           </div>
           <div class="clearfix"></div>
 			
@@ -51,43 +51,13 @@
         <div class="">
 
           <div class="row top_tiles">
-            <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="animated flipInY col-lg-12 col-md-12 col-sm-12 col-xs-12">
               <div class="tile-stats">
-                <div class="icon"><i class="fa fa-caret-square-o-right"></i>
+                <div class="icon"><i class="fa fa-check-square-o" style="padding-top:20px"></i>
                 </div>
-                <div class="count">179</div>
+                <div class="count" >179</div>
 
-                <h3>New Sign ups</h3>
-                <p>Lorem ipsum psdea itgum rixt.</p>
-              </div>
-            </div>
-            <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-              <div class="tile-stats">
-                <div class="icon"><i class="fa fa-comments-o"></i>
-                </div>
-                <div class="count">179</div>
-
-                <h3>New Sign ups</h3>
-                <p>Lorem ipsum psdea itgum rixt.</p>
-              </div>
-            </div>
-            <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-              <div class="tile-stats">
-                <div class="icon"><i class="fa fa-sort-amount-desc"></i>
-                </div>
-                <div class="count">179</div>
-
-                <h3>New Sign ups</h3>
-                <p>Lorem ipsum psdea itgum rixt.</p>
-              </div>
-            </div>
-            <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-              <div class="tile-stats">
-                <div class="icon"><i class="fa fa-check-square-o"></i>
-                </div>
-                <div class="count">179</div>
-
-                <h3>New Sign ups</h3>
+                <h3>새로 가입한 회원</h3>
                 <p>Lorem ipsum psdea itgum rixt.</p>
               </div>
             </div>
@@ -97,7 +67,7 @@
             <div class="col-md-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2>Transaction Summary <small>Weekly progress</small></h2>
+                  <h2>접속자 수 증감<small>Weekly</small></h2>
                   
                   <div class="clearfix"></div>
                 </div>
@@ -113,7 +83,7 @@
                   <div class="col-md-3 col-sm-12 col-xs-12">
                     <div>
                       <div class="x_title">
-                        <h2>Top Profiles</h2>
+                        <h2>활동 순위</h2>
                         <ul class="nav navbar-right panel_toolbox">
                           <li><a href="#"><i class="fa fa-chevron-up"></i></a>
                           </li>

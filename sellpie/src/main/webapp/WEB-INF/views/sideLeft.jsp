@@ -10,6 +10,15 @@
 <title>무제 문서</title>
 <script src="resources/js/jquery-3.3.1.min.js"></script>
 <script src="resources/js/popper.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<style>
+	.userImgArea{
+		cursor:pointer;
+	}
+	.userInfo{
+		margin-left:50px;
+	}
+</style>
 <script>
 
 function frientForm(){
@@ -37,6 +46,46 @@ function openNav() {
         x.className = x.className.replace(" w3-show", "");
     }
 }
+$(function(){
+	 $("#userImg").hide();
+		$(".userImgArea").click(function(){
+			$("#userImg").click();
+		});
+	$(".userInfo").click(function(){
+		location.href="/sellpie/updateUserInfo.do";
+	}); 
+});
+function printImage(obj){
+		if(obj.files && obj.files[0]){
+			var reader = new FileReader();
+			var formData = new FormData();
+			formData.set("img", obj.files[0]);
+			formData.set("email", "${sessionScope.user.email}");
+			console.log(formData.get("img"));
+			console.log(formData.get("email"));
+			reader.onload=function(e){
+				$(".userImgArea").attr("src", e.target.result);
+				$.ajax({
+					url : "/sellpie/userImgUpload.do",
+					type : "post",
+					data : formData,
+					processData : false,
+					contentType : false,
+					success : function(html) {
+						swal("사진 전송완료!", "회원님의 프로필 사진이 없데이트 되었습니다. ", "success");
+						setTimeout(function(){ location.href="/sellpie/selectBoardList.do" }, 2000); 
+		                
+		            },
+		            error : function(error) {
+		                alert("파일 업로드에 실패하였습니다.");
+		                console.log(error);
+		                console.log(error.status);
+		            }
+				});
+			}
+			reader.readAsDataURL(obj.files[0]); 
+		}
+	}
 </script>
 </head>
 
@@ -50,7 +99,11 @@ function openNav() {
         	<c:choose>
         	
         	<c:when test="${!empty sessionScope.user}">
-         	 <p class="w3-center"><img src="resources/images/userImg/${(sessionScope.user.profileImg eq null)?'profile.png':sessionScope.user.profileImg}" class="w3-circle" style="height:106px;width:106px" alt="Avatar"/></p>
+         	 <p class="w3-center"><img src="resources/images/userImg/${(sessionScope.user.profileImg eq null)?'profile.png':sessionScope.user.profileImg}" class="w3-circle userImgArea" style="height:106px;width:106px" alt="Avatar"/></p>
+         	 <button class="w3-btn w3-white w3-border w3-border-blue w3-round userInfo">정보 수정</button>
+         	 <form id="uploadForm" enctype="multipart/form-data" method="POST" action="/sellpie/userImgUpload.do">
+  						<input type="file" id="userImg" name="profileImg" onchange="printImage(this);"/>
+  			</form>
          	 <hr>
         	 <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i><c:out value="${sessionScope.user.email}"/></p>
        		 <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> 주 소</p>
@@ -144,6 +197,60 @@ function openNav() {
     
     <!-- End Left Column -->
     </div>
+<script type="text/javascript">
+//판매자 확인 후 마이페이지 버튼추가---------------------------------------------------------------------------
+$(function() {
+	$.ajax({
+        type:"GET",
+        dataType : "json",
+        url:'sellerCheck.do',
+        success:function(data){
+        	$('#Demo1').append('<a class="w3-button w3-theme" onclick="purchasePage();">구매이력</a>');
+        	if(data == 1){
+        		$('#Demo1').append('<a class="w3-button w3-theme" onclick="productForm();">물품등록</a>');
+        		$('#Demo1').append('<a class="w3-button w3-theme" onclick="javascript: location.href = '+"'salesList.do'"+'">판매관리</a>');
+        	}else if(data == 0){
+        		$('#Demo1').append('<a class="w3-button w3-theme" onclick="sellerForm();">판매자등록</a>');
+        	}else if(data == 2){
+        		$('#Demo1').append('<a class="w3-button w3-theme" disabled>판매자 신청진행중</a>');
+        	}
+        }
+	});
+	
+});
+//이전 경로가 필요할 경우 실행-----------------------------------------------------------------------------
+function saveUrl(){
+	var pathNames = $(location).attr('pathname').split('/');
+	var prams = $(location).attr('search');
+	var first = pathNames[1];
+	var presentUrl = pathNames[2] + prams;
+	console.log(first);
+	console.log(presentUrl);
+	$.ajax({
+		type:"GET",
+        dataType : "json",
+        data:{url:presentUrl},
+        url:'inputUrlToSession.do',
+        success:function(data){
+        	console.log(data);
+        }
+	});
+	return;
+}
+//판매등록 페이지이동-------------------------------------------------------------------------------------
+function productForm() {
+	saveUrl();
+	location.href = 'productForm.do';
+}
 
+function sellerForm() {
+	saveUrl();
+	location.href = 'sellerForm.do';
+}
+
+function purchasePage(){
+	location.href = 'purchaseList.do';
+}
+</script>
 </body>
 </html>

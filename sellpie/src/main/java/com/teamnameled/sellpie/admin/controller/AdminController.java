@@ -1,6 +1,11 @@
 package com.teamnameled.sellpie.admin.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.xml.transform.stream.StreamResult;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.teamnameled.sellpie.admin.model.service.AdminService;
 import com.teamnameled.sellpie.admin.model.vo.Admin;
+import com.teamnameled.sellpie.board.model.vo.BoardVo;
+import com.teamnameled.sellpie.seller.model.vo.Seller;
 
 
 
@@ -79,4 +86,11 @@ public class AdminController {
 		
 		return mav;
 	}
+	//db 데이터 조회
+	@RequestMapping("getStatsInfo.do")
+	public HashMap<String, Admin> getStatsInfo(){
+		HashMap<String, Admin> statsInfo = new HashMap<String, Admin>();
+		return statsInfo;
+	}
+	
 }
