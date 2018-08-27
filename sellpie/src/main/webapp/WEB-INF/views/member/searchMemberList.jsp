@@ -30,7 +30,7 @@
 							<div class="list-group">
 									<c:forEach var="member" items="${memberList}">
   											<a onclick="searchFriendForm('${member.email}');" class="list-group-item">
-  												<img src="resources/images/header/red1.jpg" class="w3-circle " style="height:50px;width:50px" alt="Avatar">
+  												<img src="resources/images/userImg/${(member.profileImg eq null)?'profile.png':member.profileImg}" class="w3-circle " style="height:50px;width:50px" alt="Avatar">
     											<b>${member.name}</b>
   											</a>
   									</c:forEach>
