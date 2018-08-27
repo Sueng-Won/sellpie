@@ -16,5 +16,12 @@
 			#{product.pNo}
 		</foreach>
 	</select>
+	<insert id="insertReview" parameterType="Review">
+		INSERT INTO REVIEW
+		VALUES(SEQ_REVIEW_RNO.NEXTVAL, #{pNo}, #{reviewStar}, DEFAULT, #{cNo})
+	</insert>
+	<select id="selectReview" parameterType="int">
+		SELECT * FROM REVIEW WHERE = #{cno}
+	</select>
 </mapper>
 
