@@ -26,7 +26,12 @@
 					<div class="w3-col m12">
 						<div class="w3-card w3-round w3-white">
 							<div class="w3-container w3-padding">
-							#"${selTag}" 로 검색한 판매자 결과입니다.
+							<c:if test="${empty sellerInfo}">
+								#"${selTag}" 로 검색한 판매자 결과가 없습니다.
+							</c:if>
+							<c:if test="${!empty sellerInfo}">
+								#"${selTag}" 로 검색한 판매자 결과입니다.
+							</c:if>
 							<div class="list-group">
 									<c:forEach var="member" items="${sellerList}" varStatus="status">
 										<c:forEach var="info" items="${sellerInfo}">

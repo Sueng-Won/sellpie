@@ -24,7 +24,10 @@ public class SellerController {
 		String selTag = searchText;
 		request.setAttribute("selTag", selTag);
 		List<Member> sellerList = sellerService.selectSellerList(selTag);
-		List<Seller> sellerInfo = sellerService.selectSellersInfo(sellerList);
+		List<Seller> sellerInfo = null;
+		if(!sellerList.isEmpty()) {
+			sellerInfo = sellerService.selectSellersInfo(sellerList);
+		}
 		request.setAttribute("sellerList", sellerList);
 		request.setAttribute("sellerInfo", sellerInfo);
 		return "seller/sellerList";
