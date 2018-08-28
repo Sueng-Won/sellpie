@@ -31,8 +31,6 @@
                 <li><a><i class="fa fa-home"></i>홈</a>
                   
                 </li>
-                
-                
                 <li><a><i class="fa fa-table"></i> 광고 및 판매 관리 <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="display: none">
                     <li><a href="/sellpie/admin/adminSell.do">판매 관리</a>

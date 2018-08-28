@@ -24,7 +24,7 @@
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
                   
-                  <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> 로그 아웃</a>
+                  <li><a href="/sellpie/admin/adminLogout.do"><i class="fa fa-sign-out pull-right"></i> 로그 아웃</a>
                   </li>
                 </ul>
               </li>

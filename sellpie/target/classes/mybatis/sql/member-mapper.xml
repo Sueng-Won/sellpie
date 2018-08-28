@@ -24,7 +24,7 @@
 		SELECT EMAIL, PWD, NAME, GENDER, PHONE, BIRTH, PROFILE_IMG FROM MEMBER WHERE SESSIONKEY = #{sessionId} and SESSIONLIMIT > SYSDATE
 	</select>
 	<insert id="insertMember" parameterType="Member">
-		INSERT INTO MEMBER VALUES(#{email},#{pwd},#{name},#{gender},#{phone},#{birth}, NULL, NULL, DEFAULT, SYSDATE )
+		INSERT INTO MEMBER VALUES(#{email},#{pwd},#{name},#{gender},#{phone},#{birth}, NULL, DEFAULT, NULL, SYSDATE )
 	</insert>
 	<update id="updateMemberPwd" parameterType="Member">
 		UPDATE MEMBER SET PWD = #{pwd}

@@ -20,7 +20,7 @@
 	<select id="selectWeeklyData" resultType="Admin">
         SELECT COUNT(*) AS COUNT, TO_CHAR(STATS_DATE,'YY-MM-DD') AS DATECOUNT
         FROM STATS 
-        WHERE SYSDATE-7<![CDATA[<]]> STATS_DATE 
+        WHERE SYSDATE <![CDATA[>=]]>STATS_DATE AND SYSDATE-7<![CDATA[<=]]> STATS_DATE 
         GROUP BY TO_CHAR(STATS_DATE,'YY-MM-DD')
         ORDER BY TO_CHAR(STATS_DATE,'YY-MM-DD')
         </select>

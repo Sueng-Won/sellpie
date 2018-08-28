@@ -367,7 +367,10 @@ public class MemberController {
 		HttpSession session = request.getSession();
 		Member user = (Member)session.getAttribute("user");
 		List<Contract> purchaseList = contractService.selectContractList(user.getEmail());
-		List<ContractWithName> purchaseListWithName = contractService.selectContractListWithName(purchaseList);
+		List<ContractWithName> purchaseListWithName = null;
+		if(!purchaseList.isEmpty()){
+			purchaseListWithName = contractService.selectContractListWithName(purchaseList);
+		}
 		request.setAttribute("cList", purchaseList);
 		request.setAttribute("pList", purchaseListWithName);
 		return "member/purchaseList";

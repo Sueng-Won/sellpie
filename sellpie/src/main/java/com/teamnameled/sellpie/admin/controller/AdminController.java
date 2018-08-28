@@ -19,6 +19,7 @@ import com.teamnameled.sellpie.admin.model.vo.Admin;
 import com.teamnameled.sellpie.board.model.service.BoardService;
 import com.teamnameled.sellpie.board.model.vo.BoardVo;
 import com.teamnameled.sellpie.member.model.service.MemberService;
+import com.teamnameled.sellpie.member.model.vo.Member;
 import com.teamnameled.sellpie.seller.model.vo.Seller;
 
 
@@ -116,6 +117,15 @@ public class AdminController {
 		
 		return mav;
 	}
+	@RequestMapping("adminLogout.do")
+	public String logoutAdmin(HttpSession session){
+	
+		if(null!=session.getAttribute("admin")){
+			session.removeAttribute("admin");	
+			}
+		
+		return "redirect:../signIn.do";
+		}
 	//db 데이터 조회
 	@RequestMapping("getStatsInfo.do")
 	public ModelAndView getStatsInfo(ModelAndView mav){

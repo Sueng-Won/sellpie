@@ -137,8 +137,13 @@ $(document).ready(function(){
 			<!-- End Left Column -->
 
 			<!-- Middle Column -->
+			
+			
 			<div class="w3-col m7" style="margin-left: 25%;">
-
+			<c:if test="${empty pList }">
+				구매 이력이 없습니다.
+			</c:if>
+				<c:if test="${!empty pList}">
 				<div class="w3-row-padding">
 					<div class="w3-col m12">
 						<div class="w3-card w3-round w3-white">
@@ -202,6 +207,7 @@ $(document).ready(function(){
 						</div>
 					</div>
 				</div>
+			</c:if>
 			</div>
 			
 
