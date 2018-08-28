@@ -63,6 +63,19 @@ public class BoardService {
 		return dao.boardDelflag(bno);
 	}
 
+	public List<BoardVo> selectADList() {
+		return dao.selectADList();
+	}
+
+	public List<BoardVo> selectADList2() {
+		return dao.selectADList2();
+	}
+
+	public int updateSellerAu(BoardVo seller) {
+		// TODO Auto-generated method stub
+		/*return dao.updateSellerState(seller);*/
+		return 0;
+	}
 
 
 

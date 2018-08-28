@@ -35,7 +35,7 @@
     <div id="wrapper">
       <div id="login" class="animate form">
         <section class="login_content">
-          <form id="adminForm" action="/sellpie/admin/adminLogin.do" method="post">
+          <form id="adminForm" action="/sellpie/admin/getStatsInfo.do" method="post">
             <h1>일하러 왔나요?</h1>
             <div>
               <input type="text" class="form-control" name="adminId" placeholder="아이디" required="" />
