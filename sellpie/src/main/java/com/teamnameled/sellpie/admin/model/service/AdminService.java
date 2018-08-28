@@ -70,4 +70,9 @@ public class AdminService {
 		return dao.selectWeeklyDate();
 	}
 
+
+	public int insertCount(String email) {
+		return dao.insertCount(email);
+	}
+
 }

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.teamnameled.sellpie.board.model.dao.BoardDao;
 import com.teamnameled.sellpie.board.model.vo.BoardVo;
-import com.teamnameled.sellpie.seller.model.vo.Seller;
 
 @Service
 public class BoardService {
@@ -64,7 +63,6 @@ public class BoardService {
 		return dao.boardDelflag(bno);
 	}
 
-<<<<<<< HEAD
 	public List<BoardVo> selectADList() {
 		return dao.selectADList();
 	}
@@ -78,9 +76,6 @@ public class BoardService {
 		/*return dao.updateSellerState(seller);*/
 		return 0;
 	}
-
-=======
->>>>>>> refs/heads/master
 
 
 

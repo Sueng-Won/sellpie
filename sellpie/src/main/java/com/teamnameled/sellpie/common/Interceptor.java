@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.util.WebUtils;
 
+import com.teamnameled.sellpie.admin.model.service.AdminService;
 import com.teamnameled.sellpie.member.model.service.MemberService;
 import com.teamnameled.sellpie.member.model.vo.Member;
 
@@ -22,6 +23,9 @@ public class Interceptor extends HandlerInterceptorAdapter {
 	
 	@Autowired
 	MemberService service;
+	@Autowired
+	AdminService adminService;
+	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handle){ 
 
@@ -38,11 +42,9 @@ public class Interceptor extends HandlerInterceptorAdapter {
 						Member member = service.checkUserSessionKey(sessionId);
 						if(member!=null){
 							session.setAttribute("user", member);
-<<<<<<< HEAD
 							int result = adminService.insertCount(member.getEmail());
 							System.out.println("카운트를 넣을꺼에요" + result);
-=======
->>>>>>> refs/heads/master
+
 							response.sendRedirect("/sellpie/signIn.do");
 							return true;
 						}
@@ -75,14 +77,11 @@ public class Interceptor extends HandlerInterceptorAdapter {
 					}else if(request.getRequestURI().equals("/sellpie/updateMember.do")){
 						return true;
 					}else if(request.getRequestURI().equals("/sellpie/updateUserPwd.do")){
-<<<<<<< HEAD
 						return true;
 					}else if(request.getRequestURI().equals("/sellpie/applyAdForm.do")) {
 						return true;
 					}else if(request.getRequestURI().equals("/sellpie/insertBoard.do")) {
-=======
 						System.out.println("세션값 존재 X, loginCookie ==null");
->>>>>>> refs/heads/master
 						return true;
 					}else{
 						System.out.println("나머지 페이지들 처리");

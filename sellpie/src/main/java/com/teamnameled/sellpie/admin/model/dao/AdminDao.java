@@ -37,4 +37,14 @@ public class AdminDao {
 		return sqlSession.update("SellerMapper.confirmSeller", sNo);
 	}
 
+
+	public int insertCount(String email) {
+		return sqlSession.insert("adminMapper.insertCount", email);
+	}
+
+
+	public List<Admin> selectWeeklyDate() {
+		return sqlSession.selectList("adminMapper.selectWeeklyData");
+	}
+
 }

@@ -23,6 +23,7 @@
         WHERE SYSDATE-7<![CDATA[<]]> STATS_DATE 
         GROUP BY TO_CHAR(STATS_DATE,'YY-MM-DD')
         ORDER BY TO_CHAR(STATS_DATE,'YY-MM-DD')
+        </select>
 	<select id="selectSellerList" resultType="Seller">
 		SELECT * FROM SELLER WHERE CONFIRM = 'N'
 	</select>
