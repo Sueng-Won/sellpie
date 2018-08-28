@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.teamnameled.sellpie.admin.model.service.AdminService;
 import com.teamnameled.sellpie.admin.model.vo.Admin;
+import com.teamnameled.sellpie.board.model.service.BoardService;
 import com.teamnameled.sellpie.board.model.vo.BoardVo;
 import com.teamnameled.sellpie.member.model.service.MemberService;
 import com.teamnameled.sellpie.seller.model.service.SellerService;
@@ -29,7 +30,7 @@ import com.teamnameled.sellpie.seller.model.vo.Seller;
 public class AdminController {
 	
 	@Autowired
-	SellerService sellerService;
+	BoardService boardService;
 	
 	@Autowired
 	AdminService adminService;
@@ -75,17 +76,17 @@ public class AdminController {
 	@RequestMapping("adminAd.do")
 	public ModelAndView adminAdPage(ModelAndView mav){
 		//광고 페이지로 이동
-		List<Seller> sellerApprovalList = sellerService.selectApprovalList();
+		List<BoardVo> sellerApprovalList = boardService.selectADList2();
 		mav.addObject("sellerList", sellerApprovalList);
 		mav.setViewName("admin/adminAd");
 		
 		return mav;
 	}
-	@RequestMapping(value="approveAdmin.do", method=RequestMethod.POST)
-	public @ResponseBody String approveAdmin(Seller seller){
+	/*@RequestMapping(value="approveAdmin.do", method=RequestMethod.POST)
+	public @ResponseBody String approveAdmin(BoardVo seller){
 		System.out.println(seller);
 		String msg = "";
-		int result = sellerService.updateSellerAu(seller);
+		int result = boardService.updateSellerAu(seller);
 		if(0<result){
 			msg="처리 완료!";
 		}else{
@@ -93,7 +94,7 @@ public class AdminController {
 		}
 		
 		return msg;
-	}
+	}*/
 	@RequestMapping("adminSell.do")
 	public String adminSellPage(){
 		return "admin/adminSell";

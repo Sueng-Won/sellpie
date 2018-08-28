@@ -12,14 +12,14 @@ import com.teamnameled.sellpie.resource.model.vo.ResourceVo;
 public class BoardVo {
 	private int bno;
 	private String email;
-	private String bcontent;
+	private String bcontent; 
 	private int gcount;
 	private String rurl;
-	private char isad;
-	private char delflag;
+	private char isad; 
+	private char delflag; 
 	private char likeflag = 'F';
 	private List<ResourceVo> resource;
-	private String name;
+	private String name; 
 	private String profileImg;
 	private int rcount;
 	

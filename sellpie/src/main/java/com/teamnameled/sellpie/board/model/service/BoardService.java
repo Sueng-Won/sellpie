@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.teamnameled.sellpie.board.model.dao.BoardDao;
 import com.teamnameled.sellpie.board.model.vo.BoardVo;
+import com.teamnameled.sellpie.seller.model.vo.Seller;
 
 @Service
 public class BoardService {
@@ -65,6 +66,16 @@ public class BoardService {
 
 	public List<BoardVo> selectADList() {
 		return dao.selectADList();
+	}
+
+	public List<BoardVo> selectADList2() {
+		return dao.selectADList2();
+	}
+
+	public int updateSellerAu(BoardVo seller) {
+		// TODO Auto-generated method stub
+		/*return dao.updateSellerState(seller);*/
+		return 0;
 	}
 
 

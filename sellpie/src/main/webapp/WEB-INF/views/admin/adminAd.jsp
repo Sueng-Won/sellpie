@@ -116,8 +116,8 @@
                     	<c:forEach items="${sellerList}" var="sellerList">
                       <tr>
                         <td><c:out value="${sellerList.email}"/></td>
-                        <td><c:out value="${sellerList.sNo}"/></td>
-                        <td><c:out value="${sellerList.acNum}"/></td>
+                        <td><c:out value="${sellerList.name}"/></td>
+                        <td><c:out value="${sellerList.isad}"/></td>
                         <td>61</td>
                         <td>2011/04/25</td>
                         <td align="center">

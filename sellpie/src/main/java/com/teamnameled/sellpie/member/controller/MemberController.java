@@ -171,7 +171,7 @@ public class MemberController {
 			result =  memberService.insertMember(member);
 			if(result>0){
 				session.setAttribute("user", member);
-				
+				int result2 = adminService.insertCount(member.getEmail());
 				mav.setViewName("redirect:selectBoardList.do");
 			}else{
 				mav.addObject("msg", "회원 가입 처리중 에러 발생!");

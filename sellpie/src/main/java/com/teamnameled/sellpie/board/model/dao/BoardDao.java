@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.teamnameled.sellpie.board.model.vo.BoardVo;
+import com.teamnameled.sellpie.seller.model.vo.Seller;
 
 @Repository
 public class BoardDao {
@@ -68,6 +69,10 @@ public class BoardDao {
 
 	public List<BoardVo> selectADList() {
 		return sqlSession.selectList("boardMapper.selectADList");
+	}
+
+	public List<BoardVo> selectADList2() {
+		return sqlSession.selectList("boardMapper.selectADList2");
 	}
 
 
