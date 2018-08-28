@@ -9,7 +9,7 @@
     연결의 착오를 줄인다. -->
 <mapper namespace="ReviewMapper">
 	<select id="selectReviewList" parameterType="java.util.List" resultType="Review">
-		SELECT RNO, PNO, REVIEWSTAR
+		SELECT RNO, PNO, REVIEWSTAR, CNO
 		FROM REVIEW
 		WHERE PNO IN
 		<foreach collection="list" item="product" separator="," open="(" close=")">

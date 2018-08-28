@@ -147,7 +147,7 @@
 									<div class="sellList">
 										<c:forEach var="product" items="${productList}" varStatus="status">
 											<div class="card"  onclick="javascript:location.href='#${product.pNo}open'">
-												<img class="sellImg" src="#" alt="${product.pName}" >
+												<img class="sellImg" src="${product.resource[0].rsrc }" alt="${product.pName}" width=98%>
 												<div class="container">
 													<h4>
 														<b>${product.pName}</b>
