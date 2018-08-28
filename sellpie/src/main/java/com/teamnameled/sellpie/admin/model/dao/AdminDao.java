@@ -1,10 +1,14 @@
 package com.teamnameled.sellpie.admin.model.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.teamnameled.sellpie.admin.model.vo.Admin;
+import com.teamnameled.sellpie.seller.model.vo.Seller;
 
 @Repository
 public class AdminDao {
@@ -24,8 +28,13 @@ public class AdminDao {
 	}
 
 
-	public int insertCount(String email) {
-		return sqlSession.insert("adminMapper.insertCount", email);
+	public List<Seller> selectSellerList() {
+		return sqlSession.selectList("adminMapper.selectSellerList");
+	}
+
+
+	public int confirmSeller(int sNo) {
+		return sqlSession.update("SellerMapper.confirmSeller", sNo);
 	}
 
 }

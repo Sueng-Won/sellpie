@@ -17,4 +17,12 @@ public class ReviewService {
 	public List<Review> selectReviewList(List<Product> productList) {
 		return reviewDao.selectReviewList(productList);
 	}
+
+	public int insertReview(Review review) {
+		return reviewDao.insertReview(review);
+	}
+
+	public Review checkReview(int checkCno) {
+		return reviewDao.checkReview(checkCno);
+	}
 }

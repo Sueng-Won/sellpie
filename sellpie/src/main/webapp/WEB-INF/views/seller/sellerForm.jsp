@@ -5,180 +5,65 @@
 <!DOCTYPE html>
 <html>
 <head>
+<c:import url="../header.jsp"></c:import>
+<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 <meta charset="UTF-8">
 <title>판매자 신청</title>
 <style>
-   div{
-      border:1px solid gray;
-   }
-   .wrap{
-      width:1200px;
-      height:auto;
-      margin-left:auto;
-      margin-right:auto;
-   }
-   .wrap>div{
-      float:left;
-      height:auto;
-      background:white;
-   }
-   .side{
-      width:269px;
-      margin:5px;
-      padding:30px;
-      padding-top:65px;
-      position:fixed;
-      top:75px;
-   }
-   .left{
-      text-align:center;
-      left:130px;
-   }
-   
-   .right{
-      text-align:center;
-      left:1170px;
-   }
-   .center{
-      width:620px;
-      margin:10px;
-      position:relative;
-      left:280px;
-   }
-   .boardOne{
-      width:600px;
-      height:350px;
-      margin-left:auto;
-      margin-right:auto;
-      margin:10px;
-   }
-   
-   .boardForm{
-      width:600px;
-      height:auto;
-      margin-left:auto;
-      margin-right:auto;
-      margin:10px;
-   }
-   
-   .sellerForm{
-      width:600px;
-      height:600px;
-      margin-left:auto;
-      margin-right:auto;
-      margin:10px;
-   }
-   .fileLink{
-      height:34px;
-   }
-   .fileLInk>img{
-      cursor:pointer;
-   }
-   .uploadFile{
-      padding-left:5px;
-   }
-   .insertBtn{
-      width:50px;
-      height:30px;
-   }
-   
-   /*  [role="button"] {
-      padding:3px;
-      border: 1px solid #CCC;
-        }  */
-     
-     [class="boardFormO"] {
-           width: 600px;
-          height: 250px;
-          margin-left: auto;
-          margin-right: auto;
-          margin: 10px;
-     }
 
-   #content{
-          width: 598px;
-          height: 80px;
-          color: rgb(73, 73, 73);
-          padding: 10px;
-            font: 14px 맑은고딕, "Malgun Gothic", Dotum, 돋움, sans-serif;
-          resize: none;
-   } 
-   
-   .boardForm .board .btnA{
-       visibility: hidden;
-       display: none !important;
-   }
-   
-   .boardForm .board .btnC{
-       visibility: hidden;
-       display: none !important;
-   }
-   
-   .btnA{
-       display: inline-block;
-       width: 220px;
-       height: 25px;
-       text-align: center;
-       vertical-align: middle;
-       font: bold 16px/20px 맑은고딕, "Malgun Gothic", Dotum, 돋움, sans-serif;
-       border-width: 1px;
-       border-style: solid;
-       border-image: initial;
-       border-radius: 2px;
-       text-decoration: none;
-       background-color: #4267b2;
-       border-color: #4267b2;
-       -webkit-margin-before: 0.3em;
-       -webkit-margin-after: 0.5em;
-       -webkit-margin-start: 40px;
-       -webkit-margin-end: 10px;
-       cursor: pointer;
-   }
-   
-   .btnC{
-       display: inline-block;
-       width: 220px;
-       height: 25px;
-       text-align: center;
-       vertical-align: middle;
-       font: bold 16px/20px 맑은고딕, "Malgun Gothic", Dotum, 돋움, sans-serif;
-       border-width: 1px;
-       border-style: solid;
-       border-image: initial;
-       border-radius: 2px;
-       text-decoration: none;
-       background: rgb(245, 248, 250);
-       border-color: rgb(221, 221, 221);
-       -webkit-margin-before: 0.3em;
-       -webkit-margin-after: 0.5em;
-       -webkit-margin-start: 70px;
-       -webkit-margin-end: 10px;
-       cursor: pointer;
-   }
-   
-/*    #mask {  
-     position:absolute;  
-     z-index:9000;  
-     background-color:#000;  
-     display:none;  
-     left:0;
-     top:0;
-   }
-   .window{
-     display: none;
-     position:absolute;  
-     left:100px;
-     top:100px;
-     z-index:10000;
-   }    */
-   
-   /* ---------------------------------- */
-   
-   
+    #bcontent{
+        width:100%;
+        height:70px;
+        overflow-y: scroll;
+    }
+    
+    #fileTb{
+        width:98%;
+        height:98%;
+    }
+    
+
+.detail_content {
+    position: fixed;
+    z-index:3;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.7);
+    opacity:0;
+    -webkit-transition: opacity 400ms ease-in;
+    -moz-transition: opacity 400ms ease-in;
+    transition: opacity 400ms ease-in;
+    pointer-events: none;
+}
+.detail_content:target {
+    opacity:1;
+    pointer-events: auto;
+}
+.detail_content > div {
+	position: absolute;
+	top: 9%;
+	left: 15%;
+	width: 890px;
+	height: 520px;
+	padding: 16px;
+	background-color: rgba(0, 0, 0, 0.8);
+	overflow: auto;	
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 </style>
-<!-- header에 jquery-min 선언 되있음 -->
 
 <script>
+$(function(){
+  $("#insertForm").click(function(){
+    location.href="applySeller.do";
+  });
+});   
 function validate(){
     if($('#bank').val() == null){
     	alert('은행을 입력해주세요');
@@ -199,6 +84,7 @@ function validate(){
     	alert('신청이유를 등록해주세요');
     	return false;
     }
+	$('#reason').val($('#reason').val().split(/\n/g).join(' '));
     	return true;
  }
  
@@ -219,66 +105,47 @@ function openAddressPopup() {
         oncomplete: function(data) {
             // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
+            // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+            var fullAddr = ''; // 최종 주소 변수
+            var extraAddr = ''; // 조합형 주소 변수
 
-function fileUpload(inputFiles, condition){
-   var files = inputFiles.files; //선택된 파일들
-   var filesArr = Array.prototype.slice.call(files); //files 배열로 담음
-   
-   if(files!=null && filesArr.length!=0){//선택된 파일이 없거나 , 배열에 담긴 파일이 없을 때
-         
-         filesArr.forEach(function(f){//배열에 담긴 파일 하나씩 올리기
-            var reader = new FileReader();
-   			console.log(f);
-            reader.onload = function (e) {
-               var fileTag;//이미지나 비디오 태그 생성할 변수
-               var newTag;//새로운 input file태그 생성할 변수
-               
-               if(condition == 0){//이미지버튼 클릭 후  파일 선택시 이미지 파일인지 확인
-                  if(!(f.type.match("image.*"))){
-                     alert('이미지파일을 선택해 주세요.');
-                     return;
-                  }
-                  fileTag = $("<img/>");
-                  imgIdx = imgIdx+1;
-                  $("#imageFile").attr("id","img"+imgIdx);
-                  newTag = '<input type="file" name="file" id="imageFile" onchange="fileUpload(this,0);" accept="image/*" hidden multiple/>';
-               }else{
-                  if(!(f.type.match("video.*"))){//동영상버튼 클릭 후  파일 선택시 동영상 파일인지 확인
-                     alert('동영상파일을 선택해 주세요.');
-                     return;
-                  }
-                  fileTag = $("<video/>");
-                  fileTag.attr("controll","true");
-                  videoIdx = videoIdx+1;
-                  $("#videoFile").attr("id","video"+videoIdx);
-                  newTag = '<input type="file" name="file" id="videoFile" onchange="fileUpload(this,1);" accept="video/*" hidden/>';
-               }            
-               fileTag.css({"width":"100%","height":"100%"});
-               fileTag.attr('src', e.target.result); //image or video 담긴 태그 생성
-               //크기 같은 div에 담음
-               var div = $("<div>").css({"width":"80","height":"80","display":"inline-block","background":"black"});
-               div.append(fileTag);
-               $('#uploadFile').append(div); 
-               
-               $("#board").append(newTag);
+            // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                fullAddr = data.roadAddress;
+
+            } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                fullAddr = data.jibunAddress;
             }
-            //이미지를 data URL형태로 onload이벤트 콜백을 통해 생성한 파일태그의 src에 넣어줌
-            reader.readAsDataURL(f); //file내용을 읽어 data URL형식의 문자열로 저장
-         });
-      }
-   }
-   
-   function wrapWindowByMask(){
-      //화면의 높이와 너비를 구한다.
-      var maskHeight = $(document).height();  
-      var maskWidth = $(window).width();  
 
-      //마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채운다.
-      $('#mask').css({'width':maskWidth,'height':maskHeight});  
+            // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
+            if(data.userSelectedType === 'R'){
+                //법정동명이 있을 경우 추가한다.
+                if(data.bname !== ''){
+                    extraAddr += data.bname;
+                }
+                // 건물명이 있을 경우 추가한다.
+                if(data.buildingName !== ''){
+                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+                fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+            }
+            
+            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+            $("#zipcode").val(data.zonecode);//5자리 새우편번호 사용
+            $("#addr").val(fullAddr);
 
-      //애니메이션 효과 - 일단 1초동안 까맣게 됐다가 80% 불투명도로 간다.
-      $('#mask').fadeIn(1000);      
-      $('#mask').fadeTo("slow",0.8);    
+            // 커서를 상세주소 필드로 이동한다.
+            $("#addrDetail").focus();
+            searchAddr = fullAddr;
+        }
+        
+    }).open();
+	
+}
+</script>
+</head><body class="w3-theme-l5">
 
 
 <!-- Page Container -->
@@ -298,8 +165,8 @@ function fileUpload(inputFiles, condition){
         <div class="w3-col m12">
           <div class="w3-card w3-round w3-white">
             <div class="w3-container w3-padding">
-                  <form id="applyForm" action="applySeller.do" method="post" onsubmit="return validate();" enctype="multipart/form-data">
-                      <input type="hidden" id="email" name="email" value="${sessionScope.user.email}"/>
+                  <form id="applyForm" action="sellerApply.do" method="post" onsubmit="return validate();" enctype="multipart/form-data">
+                      <input type="hidden" id="email" name="email" value="${sessionScope.email}"/>
                       <h2 class="w3-border-bottom">판매자 신청서</h2><br>
 						  <select class="w3-select w3-border w3-round" style="width: 50%;" id="bank" name="bank">
 						  	<option disabled selected>은행선택</option>
@@ -331,82 +198,57 @@ function fileUpload(inputFiles, condition){
       </div>
        
       
-   }
-   
-    //게시물 
-      function board_view() {
-         if($("#board").hasClass("hide")) {
-            $("#board").removeClass("hide");
-            
-           //클릭시 설정해 둿던 아이디 값에 hide 값 삭제
-            $("#board_area").attr("class","boardFormO");
-           //초기값 hide로 만든 boardFormO 값 띄워줌
-           
-           $("#uploadFile").css("height","90px");
-         }
-         
-         if($("#btnH").hasClass("hide")){
-            $("#btnH").removeClass("hide");
-         }/* else{
-            $("#btnH").addClass("hide");
-         } */
-         
-         if($("#btnC").hasClass("hide")){
-            $("#btnC").removeClass("hide");
-         }/* else{
-            $("#btnC").addClass("hide");
-         } */
-         
-      }
-
-      /* $(function () {
-           $('.boardForm').on("click", function () {
-              
-               $(this).toggleClass('on');
-               // .boardForm 클래스를 클릭 했을때 .boardForm 옆에 on을 붙임
-               $(this).siblings().removeClass('on');
-               // .boardForm 클래스가 닫힐때 on을 뗌
-           });
-       });  */
-       
-     
-</script>
-</head>
-<body>
-
-<div>
-<c:import url="../header.jsp"/>
-
-<!-- <button role="button" onclick="handleBtnClick(event)" onKeyUp="handleBtnKeyUp(event)" aria-pressed="false"> 안녕</button> -->
-   <div class="wrap">
-      <div class="left side" style="height:600px;">
-      <c:import url="../sideLeft.jsp"/>
-      </div>
-      
-      <div class="center" >
-         <div class="sellerForm">
-         	<h1>판매자 신청</h1><br><br>
-         	<label for="#bank">은행 : </label>
-         	<select id="bank">
-         		<option>NH 채움</option>
-         		<option>신한</option>
-         		<option>우리</option>
-         		<option>하나</option>
-         	</select>
-         	<label for="bankNum">계좌번호 : </label>
-         	<input type="text" placeholder="계좌번호(-없이 입력)"/><br>
-         	<input type="text" placeholder="주소" readonly/><br>
-         	<input type="text" placeholder="상세주소"/>
-         	<textarea rows="10" cols="70" placeholder="품목 종류 : &#10;신청사유 : "></textarea>
-         </div>
-         
-         
-      </div>
-      <div class="right side" style="height:600px;">
-      <c:import url="../sideRight.jsp"/>
-   </div>
-   </div>
-
+    <!-- End Middle Column -->
+    </div>
+    </div>
+    
+    <!-- Right Column -->
+    
+      <c:import url="../sideRight.jsp"></c:import>
+    <!-- End Right Column -->
+    
+  <!-- End Grid -->
+  </div>
+  
+<!-- End Page Container -->
 </div>
-</body>
-</html>
+<br>
+
+<!-- Footer -->
+<footer class="w3-container w3-theme-d3 w3-padding-16">
+  <h5>Footer</h5>
+</footer>
+
+<footer class="w3-container w3-theme-d5">
+  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+</footer>
+ 
+<script>
+// Accordion
+function myFunction(id) {
+    var x = document.getElementById(id);
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+        x.previousElementSibling.className += " w3-theme-d1";
+    } else { 
+        x.className = x.className.replace("w3-show", "");
+        x.previousElementSibling.className = 
+        x.previousElementSibling.className.replace(" w3-theme-d1", "");
+    }
+}
+
+// Used to toggle the menu on smaller screens when clicking on the menu button
+function openNav() {
+    var x = document.getElementById("navDemo");
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+    } else { 
+        x.className = x.className.replace(" w3-show", "");
+    }
+}
+
+</script>
+
+
+ 
+</body></html>

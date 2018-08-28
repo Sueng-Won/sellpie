@@ -80,7 +80,8 @@ $(function() {
 	 $("#tagInput").keyup(function(e) {
          if(e.keyCode == 32 && $(this).val().trim().length!=0){
         	 if($('#selTag').val().indexOf('!@#$%'+$(this).val().trim()) == -1){
-        	 $('#sellTags').append('<div class="w3-button w3-theme w3-round-xxlarge" onclick="removeTag(this);">#'+$("#tagInput").val().replace(/ /g, '')+'<i class="fa fa-remove"></i></div>');
+        	 $('#sellTags').append('<div class="w3-button w3-theme w3-round-xxlarge" onclick="removeTag(this);">#'
+        	 						+$("#tagInput").val().replace(/ /g, '')+'<i class="fa fa-remove"></i></div>');
         	 $('#selTag').val($('#selTag').val() + '!@#$%'+$("#tagInput").val().replace(/ /g, '')) ;
         	 }
          	$('#tagInput').val('');
@@ -89,7 +90,8 @@ $(function() {
 	 $("#tagInput").focusout(function(e) {
          if($('#tagInput').val().trim().length!=0){
         	 if($('#selTag').val().indexOf('!@#$%'+$(this).val().trim()) == -1){
-        	 $('#sellTags').append('<div class="w3-button w3-theme w3-round-xxlarge" onclick="removeTag(this);">#'+$("#tagInput").val().replace(/ /g, '')+'<i class="fa fa-remove"></i></div>');
+        	 $('#sellTags').append('<div class="w3-button w3-theme w3-round-xxlarge" onclick="removeTag(this);">#'
+        	 						+$("#tagInput").val().replace(/ /g, '')+'<i class="fa fa-remove"></i></div>');
         	 $('#selTag').val($('#selTag').val() + '!@#$%'+$("#tagInput").val().replace(/ /g, '')) ;
         	 }
          	$('#tagInput').val('');
@@ -212,9 +214,8 @@ function validate(){
                   <form id="applyForm" action="productApply.do" method="post" onsubmit="return validate();" enctype="multipart/form-data">
                       <h2 class="w3-border-bottom">판매등록</h2><br>
                       <input class="w3-input w3-border w3-round" type="text" id="pName" name="pName" placeholder="판매게시물명"><br>
-                      <input type="hidden" name="sNo" value="1" />
+                      <input type="hidden" name="sNo" value="${sessionScope.sNo}" />
                       <input type="hidden" name="selTag" id="selTag">
-                      <input type="hidden" name="email" value="test4@naver.com"/>
                       <div id="sellTags">
                       </div>
                       

@@ -64,7 +64,7 @@ function friendRefuseDelete(AfList){
               <div class="w3-container w3-padding-16 w3-row">
                  <c:forEach var="fList" items="${fList }">
                    <div class="w3-col m6 w3-container" >
-                      <img src="resources/images/userImg/${(sessionScope.user.profileImg eq null)?'profile.png':sessionScope.user.profileImg}" alt="Avatar" class="w3-left w3-circle w3-margin-right rounded-circle" style="width:60px; height:60px;">
+                      <img src="resources/images/userImg/${(fList.profileImg eq null)?'profile.png':fList.profileImg}" alt="Avatar" class="w3-left w3-circle w3-margin-right rounded-circle" style="width:60px; height:60px;">
                        <button class="w3-btn w3-white w3-border w3-border-blue w3-round w3-right" style="margin-top:10px;" onclick="friendDelect('<c:out value='${fList.email }'/>');">친구 삭제</button>
                        <br><h5><c:out value="${fList.name }"></c:out></h5>
                    </div>
@@ -84,7 +84,7 @@ function friendRefuseDelete(AfList){
               
                  <c:forEach var="AfList" items="${AfList }">
                    <div class="w3-col m6 w3-container" >
-                      <img src="resources/images/userImg/${(sessionScope.user.profileImg eq null)?'profile.png':sessionScope.user.profileImg}" alt="Avatar" class="w3-left w3-circle w3-margin-right rounded-circle" style="width:60px; height:60px;">
+                      <img src="resources/images/userImg/${(AfList.profileImg eq null)?'profile.png':AfList.profileImg}" alt="Avatar" class="w3-left w3-circle w3-margin-right rounded-circle" style="width:60px; height:60px;">
                        <button class="w3-btn w3-white w3-border w3-border-blue w3-round w3-right w3-margin-left" style="margin-top:10px;" onclick="friendRefuseDelete('<c:out value='${AfList.email }'/>');">거절</button> 
                        <button class="w3-btn w3-white w3-border w3-border-blue w3-round w3-right" style="margin-top:10px;" onclick="friendAcceptUpdate('<c:out value='${AfList.email }'/>');">수락</button>
                        <br><h5><c:out value="${AfList.name }"></c:out></h5>
@@ -96,7 +96,7 @@ function friendRefuseDelete(AfList){
         </div>
       </div>
       <!-- Right Column -->
-      <c:import url="../sideRight.jsp"></c:import>
+<%--       <c:import url="../sideRight.jsp"></c:import> --%>
     <!-- End Right Column -->
     <!-- End Middle Column -->
     </div>

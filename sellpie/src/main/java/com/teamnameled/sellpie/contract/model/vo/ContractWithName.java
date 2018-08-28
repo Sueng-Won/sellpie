@@ -2,6 +2,7 @@ package com.teamnameled.sellpie.contract.model.vo;
 
 public class ContractWithName {
 	private int cNo;
+	private int pNo;
 	private String name;
 	private String sName;
 	private String pName;
@@ -15,10 +16,11 @@ public class ContractWithName {
 		
 	}
 
-	public ContractWithName(int cNo, String name, String sName, String pName, int quantity, String delivCode,
+	public ContractWithName(int cNo, int pNo, String name, String sName, String pName, int quantity, String delivCode,
 			String invNum, String addr, String addrDetail) {
 		super();
 		this.cNo = cNo;
+		this.pNo = pNo;
 		this.name = name;
 		this.sName = sName;
 		this.pName = pName;
@@ -27,6 +29,15 @@ public class ContractWithName {
 		this.invNum = invNum;
 		this.addr = addr;
 		this.addrDetail = addrDetail;
+	}
+
+	
+	public int getpNo() {
+		return pNo;
+	}
+
+	public void setpNo(int pNo) {
+		this.pNo = pNo;
 	}
 
 	public int getcNo() {

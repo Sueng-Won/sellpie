@@ -37,10 +37,13 @@
 		WHERE P.DELFLAG = 'N'
 		ORDER BY P.PNO DESC
 	</select>
-	<select id="selectProduct" parameterType="int" resultType="Product">
-		SELECT PNO, SNO, PNAME, SELTAG, RURL, PQUANTITY, ISCRAFT, PRICE, PDETAIL, DELFLAG
-		FROM PRODUCT
-		WHERE PNO = #{pNo}
+	<select id="selectProduct" parameterType="int" resultMap="resultProduct">
+		SELECT P.PNO, P.SNO, P.PNAME, P.SELTAG, P.RURL, P.PQUANTITY, P.ISCRAFT, P.PRICE, P.PDETAIL, P.DELFLAG, R.RNO, R.RSRC
+		FROM (SELECT * FROM PRODUCT JOIN (SELECT * FROM SELLER S JOIN MEMBER USING(EMAIL)) USING(SNO)) P
+		LEFT JOIN RESOURCES R
+		ON(P.RURL = SUBSTR(R.RSRC,1,INSTR(R.RSRC,'/',-1,1)-1))
+		WHERE P.DELFLAG = 'N'
+        AND P.PNO = #{pNo}
 	</select>
 	<!-- -->
 	<insert id="insertProduct" parameterType="Product">
@@ -50,6 +53,11 @@
 	<update id="updateProduct" parameterType="Product">
 		UPDATE PRODUCT 
 		SET PNAME = #{pName}, SELTAG = #{selTag}, RURL = #{rUrl}, PQUANTITY =  #{pQuantity}, ISCRAFT = #{isCraft}, PRICE = #{price}, PDETAIL = #{pDetail}
+		WHERE PNO = #{pNo}
+	</update>
+	<update id="deleteProduct" parameterType="int">
+		UPDATE PRODUCT
+		SET DELFLAG = 'Y'
 		WHERE PNO = #{pNo}
 	</update>
 </mapper>

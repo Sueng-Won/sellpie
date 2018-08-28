@@ -1,5 +1,9 @@
 package com.teamnameled.sellpie.admin.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.xml.transform.stream.StreamResult;
@@ -64,8 +68,11 @@ public class AdminController {
 		return "admin/adminAd";
 	}
 	@RequestMapping("adminSell.do")
-	public String adminSellPage(){
-		return "admin/adminSell";
+	public ModelAndView adminSellPage(HttpServletRequest request, ModelAndView mv){
+		ArrayList<Seller> list = (ArrayList<Seller>) adminService.selectSellerList();
+		mv.addObject("list", list);
+		mv.setViewName("admin/adminSell");
+		return mv;
 	}
 	@RequestMapping(value="adminLogin.do", method=RequestMethod.POST)
 	public ModelAndView adminIndex(Admin admin, HttpSession session, ModelAndView mav ){
@@ -82,5 +89,18 @@ public class AdminController {
 		
 		
 		return mav;
+	}
+	//db 데이터 조회
+	@RequestMapping("getStatsInfo.do")
+	public HashMap<String, Admin> getStatsInfo(){
+		HashMap<String, Admin> statsInfo = new HashMap<String, Admin>();
+		return statsInfo;
+	}
+	
+	@RequestMapping("confirmSeller.do")
+	public @ResponseBody int confirmSeller(int sNo) {
+		int result = 0;
+		result = adminService.confirmSeller(sNo);
+		return result;
 	}
 }
