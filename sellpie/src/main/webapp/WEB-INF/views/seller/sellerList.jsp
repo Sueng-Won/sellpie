@@ -32,7 +32,7 @@
 										<c:forEach var="info" items="${sellerInfo}">
   											<c:if test="${info.email eq member.email}">
   											<a href="productList.do?sNo=${info.sNo}" class="list-group-item">
-  												<img src="resources/images/header/red1.jpg" class="w3-circle" style="height:50px;width:50px" alt="Avatar">
+  												<img src="${member.resource[0].rurl }" class="w3-circle" style="height:50px;width:50px" alt="Avatar">
     											<b>${member.name}</b>
     											<span class="pull-right block">
     												판매 분야 : ${info.pCategory}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
