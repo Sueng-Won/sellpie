@@ -1,12 +1,11 @@
 package com.teamnameled.sellpie.admin.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.xml.transform.stream.StreamResult;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +19,6 @@ import com.teamnameled.sellpie.admin.model.vo.Admin;
 import com.teamnameled.sellpie.board.model.service.BoardService;
 import com.teamnameled.sellpie.board.model.vo.BoardVo;
 import com.teamnameled.sellpie.member.model.service.MemberService;
-import com.teamnameled.sellpie.seller.model.service.SellerService;
 import com.teamnameled.sellpie.seller.model.vo.Seller;
 
 
@@ -96,8 +94,11 @@ public class AdminController {
 		return msg;
 	}*/
 	@RequestMapping("adminSell.do")
-	public String adminSellPage(){
-		return "admin/adminSell";
+	public ModelAndView adminSellPage(HttpServletRequest request, ModelAndView mv){
+		ArrayList<Seller> list = (ArrayList<Seller>) adminService.selectSellerList();
+		mv.addObject("list", list);
+		mv.setViewName("admin/adminSell");
+		return mv;
 	}
 	@RequestMapping(value="adminLogin.do", method=RequestMethod.POST)
 	public ModelAndView adminIndex(Admin admin, HttpSession session, ModelAndView mav ){
@@ -135,4 +136,10 @@ public class AdminController {
 		return mav;
 	}
 	
+	@RequestMapping("confirmSeller.do")
+	public @ResponseBody int confirmSeller(int sNo) {
+		int result = 0;
+		result = adminService.confirmSeller(sNo);
+		return result;
+	}
 }

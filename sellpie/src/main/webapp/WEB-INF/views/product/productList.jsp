@@ -40,22 +40,18 @@
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
                 $("#addrLabel").text(fullRoadAddr);
                 $("#addr").val(fullRoadAddr);
-	        },
-		    onclose: function(state) {
-	            //state는 우편번호 찾기 화면이 어떻게 닫혔는지에 대한 상태 변수 이며, 상세 설명은 아래 목록에서 확인하실 수 있습니다.
-	            if(state === 'COMPLETE_CLOSE'){
-	                //사용자가 검색결과를 선택하여 팝업창이 닫혔을 경우, 실행될 코드를 작성하는 부분입니다.
-	                //oncomplete 콜백 함수가 실행 완료된 후에 실행됩니다.
-	            	var addrDetail = window.prompt("상세주소를 입력해주세요.");
-	        		$("#addrLabel").append(", "+addrDetail);
-	        		$("#addrDetail").val(addrDetail);
-	            }
-		    }
+	        }
 	    }).open();
 	}
 	
 	function insertContract(pNo){
-		$("#contractFrm"+pNo).submit();
+		if($("#addrDetail").val() == ""){
+			var addrDetail = window.prompt("상세주소를 입력해주세요.");
+    		$("#addrLabel").append(", "+addrDetail);
+    		$("#addrDetail").val(addrDetail);
+		}
+			alert("구매가 완료되었습니다.");
+			$("#contractFrm"+pNo).submit();
 	}
 </script>
 <style type="text/css">
@@ -151,7 +147,7 @@
 									<div class="sellList">
 										<c:forEach var="product" items="${productList}" varStatus="status">
 											<div class="card"  onclick="javascript:location.href='#${product.pNo}open'">
-												<img class="sellImg" src="#" alt="${product.pName}" >
+												<img class="sellImg" src="${product.resource[0].rsrc }" alt="${product.pName}" width=98%>
 												<div class="container">
 													<h4>
 														<b>${product.pName}</b>
@@ -175,24 +171,20 @@
 									                        		<img src="resources/images/header/nextLeft.png" style="width:28%; height:23%;">
 									                        	</div>
 									                        	<div class="w3-col" style="width:77%; height:95%; text-align:center;" id="fileview">
-										                        	 <img src="${product.resource[0].rsrc}" style="width:90%; height:95%;" class="w3-margin-bottom mySlides">
+										                        	 <img src="${product.resource[0].rsrc }" style="width:90%; height:95%;" class="w3-margin-bottom mySlides">
 									                        	</div>
 									                        	<div class="w3-col" style="width:10%; height:95%;" onclick="plusDivs(1);">
 									                        		<br><br><br><br><br>
 									                        		<img src="resources/images/header/nextRight.png" style="width:28%; height:23%;">
 									                        	</div>
-									                        </div>                             
-									                        <div style="text-align:center">
-									                                <img src="resources/images/header/twice1.png" style="width:7%; height:6%;" class="w3-margin-bottom mySlides">
-									                                <img src="resources/images/header/twice2.JPG" style="width:7%; height:6%;" class="w3-margin-bottom mySlides">
-									                                <img src="resources/images/header/twice2.png" style="width:7%; height:6%;" class="w3-margin-bottom mySlides">
 									                        </div>
 								                        </div>
 								                        <div class="w3-col m4" style="width:36%;">
 								                            <div class="w3-container w3-card w3-white w3-round"><br>
 								                              <div class="w3-border-bottom" style="height:10%;">
-								                                   <img src="resources/images/header/twice2.png" alt="Avatar" class="w3-left w3-circle w3-margin-right rounded-circle" style="width:40px; height:40px;">
-								                                    <button class="w3-button w3-theme w3-right" onclick="javascript: location.href = 'productUpdateForm.do?pNo='+${product.pNo}">수정</button>
+								                                   <c:if test="${sessionScope.sNo == product.sNo}">
+									                                    <button class="w3-button w3-theme w3-right" onclick="javascript: location.href = 'productUpdateForm.do?pNo='+${product.pNo}">수정</button>
+								                                   </c:if>
 								                                    <h4>${product.pName}</h4><br>
 								                              </div>
 								                               <div class="w3-margin-bottom" style="height:27%; overflow-y:scroll;"> 
@@ -263,7 +255,6 @@
 
 			<!-- Right Column -->
 
-			<c:import url="../sideRight.jsp"></c:import>
 			<!-- End Right Column -->
 
 			<!-- End Grid -->

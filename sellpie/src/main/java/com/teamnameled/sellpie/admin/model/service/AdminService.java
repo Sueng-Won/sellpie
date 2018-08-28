@@ -4,17 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -66,9 +56,13 @@ public class AdminService {
 	}
 
 
-	public int insertCount(String email) {
-		return dao.insertCount(email);
-		
+	public List<Seller> selectSellerList() {
+		return dao.selectSellerList();
+	}
+
+
+	public int confirmSeller(int sNo) {
+		return dao.confirmSeller(sNo);
 	}
 
 

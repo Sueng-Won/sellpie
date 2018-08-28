@@ -67,6 +67,7 @@ public class BoardDao {
 		return sqlSession.update("boardMapper.boardDelflag",bno);
 	}
 
+<<<<<<< HEAD
 	public List<BoardVo> selectADList() {
 		return sqlSession.selectList("boardMapper.selectADList");
 	}
@@ -75,5 +76,7 @@ public class BoardDao {
 		return sqlSession.selectList("boardMapper.selectADList2");
 	}
 
+=======
+>>>>>>> refs/heads/master
 
 }

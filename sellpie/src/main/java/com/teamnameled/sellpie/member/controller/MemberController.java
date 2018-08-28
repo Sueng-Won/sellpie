@@ -12,6 +12,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.xml.transform.stream.StreamResult;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -37,6 +38,7 @@ import com.teamnameled.sellpie.member.model.service.MemberService;
 import com.teamnameled.sellpie.member.model.vo.Member;
 import com.teamnameled.sellpie.seller.model.service.SellerService;
 import com.teamnameled.sellpie.seller.model.vo.SalesStatisticsVo;
+import com.teamnameled.sellpie.seller.model.vo.Seller;
 
 @Controller
 public class MemberController {
@@ -292,56 +294,56 @@ public class MemberController {
 		public String updateMember(){
 			return "member/memberUpdate";
 		}
-	@RequestMapping("userImgUpload.do")
-	public @ResponseBody String userImgUpload(MultipartHttpServletRequest request, HttpServletRequest servletRequest, Member member, HttpSession session){
-		// 저장 경로 설정
-        String root = servletRequest.getSession().getServletContext().getRealPath("resources");
-        System.out.println(root);
-        String path = root+"\\images\\userImg";
-        String newFileName = ""; // 업로드 되는 파일명
-         
-        File dir = new File(path);
-        if(!dir.isDirectory()){
-            dir.mkdirs();
-        }
-         
-        	Iterator<String> file = request.getFileNames();
-            String uploadFile = file.next();
-                         
-            MultipartFile mFile = request.getFile(uploadFile);
-            String fileName = mFile.getOriginalFilename();
-            System.out.println("실제 파일 이름 : " +fileName);
-            
-            
-            
-            newFileName = System.currentTimeMillis()+"."
-                    +fileName.substring(fileName.lastIndexOf(".")+1);
-            try {
-                mFile.transferTo(new File(path+"\\"+newFileName));
-                Member userData = memberService.checkEmail(member.getEmail());
-                userData.setProfileImg(newFileName);
-                int result = memberService.updateImg(userData);
-                if(0<result){
-                	session.setAttribute("user", userData);
-                }else{
-                	System.out.println("사진 업로드 에러");
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-         
-        System.out.println("id : " + request.getParameter("id"));
-        System.out.println("pw : " + request.getParameter("pw"));
-        
-		return "msg";
-	}
+		@RequestMapping("userImgUpload.do")
+		public @ResponseBody String userImgUpload(MultipartHttpServletRequest request, HttpServletRequest servletRequest, Member member, HttpSession session){
+			// 저장 경로 설정
+	        String root = servletRequest.getSession().getServletContext().getRealPath("resources");
+	        System.out.println(root);
+	        String path = root+"\\images\\userImg";
+	        String newFileName = ""; // 업로드 되는 파일명
+	         
+	        File dir = new File(path);
+	        if(!dir.isDirectory()){
+	            dir.mkdirs();
+	        }
+	         
+	        	Iterator<String> file = request.getFileNames();
+	            String uploadFile = file.next();
+	                         
+	            MultipartFile mFile = request.getFile(uploadFile);
+	            String fileName = mFile.getOriginalFilename();
+	            System.out.println("실제 파일 이름 : " +fileName);
+	            
+	            
+	            
+	            newFileName = System.currentTimeMillis()+"."
+	                    +fileName.substring(fileName.lastIndexOf(".")+1);
+	            try {
+	                mFile.transferTo(new File(path+"\\"+newFileName));
+	                Member userData = memberService.checkEmail(member.getEmail());
+	                userData.setProfileImg(newFileName);
+	                int result = memberService.updateImg(userData);
+	                if(0<result){
+	                	session.setAttribute("user", userData);
+	                }else{
+	                	System.out.println("사진 업로드 에러");
+	                }
+	            } catch (Exception e) {
+	                e.printStackTrace();
+	            }
+	         
+	        System.out.println("id : " + request.getParameter("id"));
+	        System.out.println("pw : " + request.getParameter("pw"));
+	        
+			return "msg";
+		}
 	@RequestMapping(value = "modifyUserInfo.do", method=RequestMethod.POST)
 	public ModelAndView modifyUserInfo(Member member, ModelAndView mav){
 		System.out.println(member);
 			try {
 				int result = memberService.modifyUserInfo(member);
 				if(0<result){
-					mav.setViewName("member/memberUpdate");
+					mav.setViewName("redirect:selectBoardList.do");
 				}
 				
 			} catch (Exception e) {
@@ -382,7 +384,13 @@ public class MemberController {
 		request.setAttribute("sList", sList);
 		return "member/salesList";
 	}
-	
+	/*@RequestMapping("applySeller.do")
+	public String applySeller(Seller seller, HttpServletRequest request) {
+		//xml생성
+		StreamResult result = memberService.applySeller(seller);
+		System.out.println(result.toString());
+		return null;
+	}*/
 	@RequestMapping("inputUrlToSession.do")
 	public @ResponseBody int inputUrlToSession(HttpServletRequest request, String url) {
 		int result = 1;
@@ -390,9 +398,5 @@ public class MemberController {
 		HttpSession session = request.getSession();
 		session.setAttribute("url", url);
 		return result;
-	}
-	@RequestMapping("applyAdForm.do")
-	public String applyAdForm() {
-		return "member/applyAdForm";
 	}
 }

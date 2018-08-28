@@ -26,6 +26,7 @@ public class SellerService {
 	public List<SalesStatisticsVo> selectSalesStatisticsList(String email) {
 		return sellerDao.selectSalesStatisticsList(email);
 	}
+<<<<<<< HEAD
 	public List<Seller> selectApprovalList() {
 		//승인 대기중인 셀러를 조회하는 로직
 		return sellerDao.selectApprovalList();
@@ -35,4 +36,9 @@ public class SellerService {
 		return sellerDao.updateSellerAu(seller);
 	}
 	
+=======
+	public int insertSeller(Seller seller) {
+		return sellerDao.insertSeller(seller);
+	}
+>>>>>>> refs/heads/master
 }

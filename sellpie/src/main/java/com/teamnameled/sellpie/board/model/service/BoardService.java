@@ -64,6 +64,7 @@ public class BoardService {
 		return dao.boardDelflag(bno);
 	}
 
+<<<<<<< HEAD
 	public List<BoardVo> selectADList() {
 		return dao.selectADList();
 	}
@@ -78,6 +79,8 @@ public class BoardService {
 		return 0;
 	}
 
+=======
+>>>>>>> refs/heads/master
 
 
 

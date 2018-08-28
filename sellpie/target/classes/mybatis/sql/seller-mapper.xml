@@ -51,5 +51,13 @@
 		UPDATE SELLER SET CONFIRM ='Y'	
 		WHERE EMAIL =#{email} AND SNO =#{sNo}
 	</update>
+	<insert id="insertSeller" parameterType="Seller">
+		INSERT INTO SELLER VALUES(SEQ_SELLER_SNO.NEXTVAL, #{email}, #{acNum}, #{bank}, #{zipcode}, #{addr}, #{addrDetail}, #{pCategory}, #{reason}, 'N')
+	</insert>
+	<update id="confirmSeller" parameterType="int">
+		UPDATE SELLER
+		SET CONFIRM = 'Y'
+		WHERE SNO = #{sno}
+	</update>
 </mapper>
 

@@ -13,15 +13,18 @@ public class Review {
 	private int rNo;
 	private int pNo;
 	private int reviewStar;
+	private int cNo;
 	
 	public Review() {
 
 	}
 
-	public Review(int rNo, int pNo, int reviewStar) {
+	public Review(int rNo, int pNo, int reviewStar, int cNo) {
+		super();
 		this.rNo = rNo;
 		this.pNo = pNo;
 		this.reviewStar = reviewStar;
+		this.cNo = cNo;
 	}
 
 	public int getrNo() {
@@ -48,9 +51,17 @@ public class Review {
 		this.reviewStar = reviewStar;
 	}
 
+	public int getcNo() {
+		return cNo;
+	}
+
+	public void setcNo(int cNo) {
+		this.cNo = cNo;
+	}
+
 	@Override
 	public String toString() {
-		return "Review [rNo=" + rNo + ", pNo=" + pNo + ", reviewStar=" + reviewStar + "]";
+		return "Review [rNo=" + rNo + ", pNo=" + pNo + ", reviewStar=" + reviewStar + ", cNo=" + cNo + "]";
 	}
-	
+
 }

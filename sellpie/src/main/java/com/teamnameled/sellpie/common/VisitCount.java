@@ -21,6 +21,7 @@ public class VisitCount implements HttpSessionAttributeListener, HttpSessionList
 	
 	@Override
 	public void attributeAdded(HttpSessionBindingEvent arg0) {
+<<<<<<< HEAD
 		HttpSession session = arg0.getSession();
 		System.out.println("세션생성시 호출됩니까?");
 		Enumeration<String> sessionName = session.getAttributeNames();
@@ -38,6 +39,9 @@ public class VisitCount implements HttpSessionAttributeListener, HttpSessionList
 				dao.insertCount(email);*/
 			}
 		}
+=======
+		
+>>>>>>> refs/heads/master
 	}
 
 	@Override
@@ -48,8 +52,6 @@ public class VisitCount implements HttpSessionAttributeListener, HttpSessionList
 
 	@Override
 	public void attributeReplaced(HttpSessionBindingEvent arg0) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
