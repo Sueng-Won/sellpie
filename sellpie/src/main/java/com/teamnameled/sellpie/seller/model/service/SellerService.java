@@ -26,5 +26,13 @@ public class SellerService {
 	public List<SalesStatisticsVo> selectSalesStatisticsList(String email) {
 		return sellerDao.selectSalesStatisticsList(email);
 	}
+	public List<Seller> selectApprovalList() {
+		//승인 대기중인 셀러를 조회하는 로직
+		return sellerDao.selectApprovalList();
+	}
+	public int updateSellerAu(Seller seller) {
+		// 판매자 승인
+		return sellerDao.updateSellerAu(seller);
+	}
 	
 }

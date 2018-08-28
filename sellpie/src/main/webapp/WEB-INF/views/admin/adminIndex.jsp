@@ -339,11 +339,7 @@
   	dateList.push("<c:out value="${date.dateCount}"/>");
   	count.push(<c:out value="${date.count}"/>);
 </c:forEach>
-/*   var d1 = [];
-  for (var i = 0; i <8; i++) {
-      d1.unshift([new Date(Date.today().add(i).days()).getTime()]);
-    } */
-  console.log("날짜",dateList);
+    console.log("날짜",dateList);
     console.log("카운트수 ",count);
   
   
@@ -353,7 +349,7 @@
   var speedData = {
     labels: dateList,
     datasets: [{
-      label: "접속자 수 증감",
+      label: "접속자 수",
       data: count,
       lineTension: 0,
       fill: false,
@@ -400,7 +396,11 @@
           display: true,
           labelString: "접속자 수",
           fontColor: "green"
-        }
+        },
+        ticks: {
+            beginAtZero: true,
+            callback: function(value) {if (value % 1 === 0) {return value;}}
+          }
       }]
     }
   };

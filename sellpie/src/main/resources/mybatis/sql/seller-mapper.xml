@@ -42,5 +42,14 @@
 		JOIN SELLER S ON (S.SNO = P.SNO)
 		WHERE S.EMAIL = #{email}
 	</select>
+	<select id="selectApprovalList" resultType="Seller">
+		SELECT SNO, EMAIL, ACNUM, BANK, ZIPCODE, ADDR, ADDRDETAIL, PCATEGORY, REASON, CONFIRM
+		FROM SELLER
+		WHERE CONFIRM = 'N'
+	</select>
+	<update id="updateSellerAu" parameterType="Seller">
+		UPDATE SELLER SET CONFIRM ='Y'	
+		WHERE EMAIL =#{email} AND SNO =#{sNo}
+	</update>
 </mapper>
 

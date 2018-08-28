@@ -19,6 +19,7 @@ import com.teamnameled.sellpie.admin.model.service.AdminService;
 import com.teamnameled.sellpie.admin.model.vo.Admin;
 import com.teamnameled.sellpie.board.model.vo.BoardVo;
 import com.teamnameled.sellpie.member.model.service.MemberService;
+import com.teamnameled.sellpie.seller.model.service.SellerService;
 import com.teamnameled.sellpie.seller.model.vo.Seller;
 
 
@@ -26,6 +27,10 @@ import com.teamnameled.sellpie.seller.model.vo.Seller;
 @Controller
 @RequestMapping("admin")
 public class AdminController {
+	
+	@Autowired
+	SellerService sellerService;
+	
 	@Autowired
 	AdminService adminService;
 	
@@ -68,8 +73,26 @@ public class AdminController {
 		return mav;
 	}
 	@RequestMapping("adminAd.do")
-	public String adminAdPage(){
-		return "admin/adminAd";
+	public ModelAndView adminAdPage(ModelAndView mav){
+		//광고 페이지로 이동
+		List<Seller> sellerApprovalList = sellerService.selectApprovalList();
+		mav.addObject("sellerList", sellerApprovalList);
+		mav.setViewName("admin/adminAd");
+		
+		return mav;
+	}
+	@RequestMapping(value="approveAdmin.do", method=RequestMethod.POST)
+	public @ResponseBody String approveAdmin(Seller seller){
+		System.out.println(seller);
+		String msg = "";
+		int result = sellerService.updateSellerAu(seller);
+		if(0<result){
+			msg="처리 완료!";
+		}else{
+			msg = "처리 중 에러 발생!";
+		}
+		
+		return msg;
 	}
 	@RequestMapping("adminSell.do")
 	public String adminSellPage(){

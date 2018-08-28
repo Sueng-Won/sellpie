@@ -28,8 +28,8 @@ public class Interceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handle){ 
 
-		System.out.println("인터셉터 호출");
-		System.out.println(request.getRequestURI());
+		
+		
 		HttpSession session = request.getSession();
 		Object obj = session.getAttribute("user");
 			try {
@@ -41,8 +41,8 @@ public class Interceptor extends HandlerInterceptorAdapter {
 						Member member = service.checkUserSessionKey(sessionId);
 						if(member!=null){
 							session.setAttribute("user", member);
-							/*int result = adminService.insertCount(member.getEmail());
-							System.out.println("카운트를 넣을꺼에요" + result);*/
+							int result = adminService.insertCount(member.getEmail());
+							System.out.println("카운트를 넣을꺼에요" + result);
 							response.sendRedirect("/sellpie/signIn.do");
 							return true;
 						}

@@ -34,5 +34,14 @@ public class SellerDao {
 	public int insertSeller(Seller seller) {
 		return sqlSession.insert("SellerMapper.insertSeller", seller);
 	}
+
+	public List<Seller> selectApprovalList() {
+		return sqlSession.selectList("SellerMapper.selectApprovalList");
+	}
+
+	public int updateSellerAu(Seller seller) {
+		
+		return sqlSession.update("SellerMapper.updateSellerAu", seller);
+	}
 	
 }
