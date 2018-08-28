@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>광고 관리</title>
+<title>판매 관리</title>
 <!-- Bootstrap core CSS -->
 
   <link href="../resources/adminCss/css/bootstrap.min.css" rel="stylesheet">

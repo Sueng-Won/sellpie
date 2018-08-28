@@ -1,6 +1,5 @@
 package com.teamnameled.sellpie.board.model.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -64,6 +63,14 @@ public class BoardDao {
 
 	public int boardDelflag(String bno) {
 		return sqlSession.update("boardMapper.boardDelflag",bno);
+	}
+
+	public List<BoardVo> selectADList() {
+		return sqlSession.selectList("boardMapper.selectADList");
+	}
+
+	public List<BoardVo> selectADList2() {
+		return sqlSession.selectList("boardMapper.selectADList2");
 	}
 
 

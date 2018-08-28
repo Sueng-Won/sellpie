@@ -61,4 +61,9 @@ public class MemberDao {
 		return sqlSession.update("memberMapper.updateProfileImg", member);
 	}
 
+	public int selectMemberCount() {
+		return sqlSession.selectOne("memberMapper.selectMemberCount");
+	}
+
+
 }

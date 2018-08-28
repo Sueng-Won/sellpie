@@ -50,6 +50,13 @@
 		</foreach>
 		 ORDER BY BNO DESC
 	</select>
+	<select id="selectADList2" resultMap="resultBoard">
+		SELECT B.BNO, B.EMAIL, B.BCONTENT, B.GCOUNT, B.RURL, B.ISAD, B.DELFLAG, B.NAME, B.PROFILE_IMG, R.RSRC
+		FROM (SELECT * FROM BOARD JOIN MEMBER USING(EMAIL)) B
+		LEFT JOIN RESOURCES R
+		ON(B.RURL = SUBSTR(R.RSRC,1,INSTR(R.RSRC,'/',-1,1)-1))
+		WHERE B.DELFLAG = 'Y' AND B.ISAD = 'Y'
+	</select>
 	
 	<select id="selectlList" parameterType="_int" resultType="string">
 		SELECT EMAIL
