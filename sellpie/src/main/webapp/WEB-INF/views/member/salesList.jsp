@@ -56,7 +56,7 @@ cursor: pointer;
 												<td><c:out value="${item.pQuantity}"/></td>
 											</c:if>
 											<td align="right">
-											<button onclick="javascript: location.href = 'productUpdateForm.do?pNo='+${item.pNo}"
+											<button onclick="updateProduct(${item.pNo});"
 													class="w3-theme w3-button w3-tiny w3-padding-small">수정</button>
 											<button onclick="deleteProduct('${item.pName}',${item.pNo});"
 													class="w3-theme w3-button w3-tiny w3-padding-small">삭제</button>
@@ -174,6 +174,11 @@ cursor: pointer;
 	</footer> -->
 </body>
 <script>
+//물품 수정---------------------------------------------------------------
+function updateProduct(pNum) {
+	saveUrl();
+	location.href = 'productUpdateForm.do?pNo='+pNum;
+}
 //물품 삭제------------------------------------------------------------
 function deleteProduct(pName,pNo){
 	console.log(pNo);

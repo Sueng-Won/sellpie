@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE>
 <html>
 <head>
@@ -49,16 +50,16 @@
 
         <br />
         <div class="">
-
+		
           <div class="row top_tiles">
             <div class="animated flipInY col-lg-12 col-md-12 col-sm-12 col-xs-12">
               <div class="tile-stats">
                 <div class="icon"><i class="fa fa-check-square-o" style="padding-top:20px"></i>
                 </div>
-                <div class="count" >179</div>
+                <div class="count" ><c:out value="${adminData.todayUser }"/></div>
 
                 <h3>새로 가입한 회원</h3>
-                <p>Lorem ipsum psdea itgum rixt.</p>
+                <p></p>
               </div>
             </div>
           </div>
@@ -74,7 +75,9 @@
                 <div class="x_content">
                   <div class="col-md-9 col-sm-12 col-xs-12">
                     <div class="demo-container" style="height:280px">
-                      <div id="placeholder33x" class="demo-placeholder"></div>
+                      <div id="placeholder33x" class="demo-placeholder">
+                      	<canvas id="speedChart" width="813" height="280" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 813px; height: 280px;"></canvas>
+                      </div>
                     </div>
                     
 
@@ -154,13 +157,13 @@
                             <a class="title" href="#">Ms. Mary Jane</a>
                             <p><strong>$2300. </strong> Agent Avarage Sales </p>
                             <p> <small>12 Sales Today</small>
+                            	
                             </p>
                           </div>
                         </li>
                       </ul>
                     </div>
                   </div>
-
                 </div>
               </div>
             </div>
@@ -225,7 +228,7 @@
   <!-- pace -->
   <script src="../resources/adminCss/js/pace/pace.min.js"></script>
   <!-- flot -->
-  <script type="text/javascript">
+  <!-- <script type="text/javascript">
     //define chart clolors ( you maybe add more colors if you want or flot will add it automatic )
     var chartColours = ['#96CA59', '#3F97EB', '#72c380', '#6f7a8a', '#f7cb38', '#5a8022', '#2c7282'];
 
@@ -236,14 +239,15 @@
 
     $(function() {
       var d1 = [];
-      //var d2 = [];
+      var d2 = [];
 
       //here we generate data for chart
-      for (var i = 0; i < 30; i++) {
+      for (var i = 0; i < 8; i++) {
         d1.push([new Date(Date.today().add(i).days()).getTime(), randNum() + i + i + 10]);
-        //    d2.push([new Date(Date.today().add(i).days()).getTime(), randNum()]);
+            d2.push([new Date(Date.today().add(i).days()).getTime(), randNum()]);
       }
       var chartMinDate = d1[0][0]; //first day
+      
       var chartMaxDate = d1[7][0]; //last day
 
       var tickSize = [1, "day"];
@@ -325,6 +329,87 @@
         }
       }], options);
     });
+  </script> -->
+  <script>
+  var speedCanvas = document.getElementById("speedChart");
+  	var dateList = [];
+  	var count =[];
+  <c:forEach items="${adminData.weeklyDate}" var="date" varStatus="status">
+  	console.log(<c:out value="${status.count}"/>,"<c:out value="${date.dateCount}"/>");
+  	dateList.push("<c:out value="${date.dateCount}"/>");
+  	count.push(<c:out value="${date.count}"/>);
+</c:forEach>
+    console.log("날짜",dateList);
+    console.log("카운트수 ",count);
+  
+  
+  Chart.defaults.global.defaultFontFamily = "Lato";
+  Chart.defaults.global.defaultFontSize = 18;
+	
+  var speedData = {
+    labels: dateList,
+    datasets: [{
+      label: "접속자 수",
+      data: count,
+      lineTension: 0,
+      fill: false,
+      borderColor: 'orange',
+      backgroundColor: 'transparent',
+      pointBorderColor: 'orange',
+      pointBackgroundColor: 'rgba(255,150,0,0.5)',
+      borderDash: [5, 5],
+      pointRadius: 5,
+      pointHoverRadius: 10,
+      pointHitRadius: 30,
+      pointBorderWidth: 2,
+      pointStyle: 'rectRounded'
+    }]
+  };
+
+  var chartOptions = {
+    legend: {
+      display: true,
+      position: 'top',
+      labels: {
+        boxWidth: 80,
+        fontColor: 'black'
+      }
+    },
+    scales: {
+      xAxes: [{
+        gridLines: {
+          display: false,
+          color: "black"
+        },
+        scaleLabel: {
+          display: true,
+          labelString: "날짜",
+          fontColor: "red"
+        }
+      }],
+      yAxes: [{
+        gridLines: {
+          color: "black",
+          borderDash: [2, 5],
+        },
+        scaleLabel: {
+          display: true,
+          labelString: "접속자 수",
+          fontColor: "green"
+        },
+        ticks: {
+            beginAtZero: true,
+            callback: function(value) {if (value % 1 === 0) {return value;}}
+          }
+      }]
+    }
+  };
+
+  var lineChart = new Chart(speedCanvas, {
+    type: 'line',
+    data: speedData,
+    options: chartOptions
+  });
   </script>
   <!-- /flot -->
   <!--  -->

@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.util.WebUtils;
 
+import com.teamnameled.sellpie.admin.model.service.AdminService;
 import com.teamnameled.sellpie.member.model.service.MemberService;
 import com.teamnameled.sellpie.member.model.vo.Member;
 
@@ -22,11 +23,14 @@ public class Interceptor extends HandlerInterceptorAdapter {
 	
 	@Autowired
 	MemberService service;
+	@Autowired
+	AdminService adminService;
+	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handle){ 
 
-		System.out.println("인터셉터 호출");
-		System.out.println(request.getRequestURI());
+		
+		
 		HttpSession session = request.getSession();
 		Object obj = session.getAttribute("user");
 			try {
@@ -38,52 +42,45 @@ public class Interceptor extends HandlerInterceptorAdapter {
 						Member member = service.checkUserSessionKey(sessionId);
 						if(member!=null){
 							session.setAttribute("user", member);
+							int result = adminService.insertCount(member.getEmail());
+							System.out.println("카운트를 넣을꺼에요" + result);
+
 							response.sendRedirect("/sellpie/signIn.do");
 							return true;
 						}
 					}else if(request.getRequestURI().equals("/sellpie/signIn.do")){
-						System.out.println("세션값 존재 X, loginCookie ==null");
 						return true;
 					}else if(request.getRequestURI().equals("/sellpie/signUp.do")){
-						System.out.println("세션값 존재 X, loginCookie ==null");
 						return true;
 					}else if(request.getRequestURI().equals("/sellpie/login.do")){
-						System.out.println("세션값 존재 X, loginCookie ==null");
 						return true;
 					}else if(request.getRequestURI().equals("/sellpie/memberJoin.do")){
-						System.out.println("세션값 존재 X, loginCookie ==null");
 						return true;
 					}else if(request.getRequestURI().equals("/sellpie/getName.do")){
-						System.out.println("세션값 존재 X, loginCookie ==null");
 						return true;
 					}else if(request.getRequestURI().equals("/sellpie/getGender.do")){
-						System.out.println("세션값 존재 X, loginCookie ==null");
 						return true;
 					}else if(request.getRequestURI().equals("/sellpie/getPhone.do")){
-						System.out.println("세션값 존재 X, loginCookie ==null");
 						return true;
 					}else if(request.getRequestURI().equals("/sellpie/getBirth.do")){
-						System.out.println("세션값 존재 X, loginCookie ==null");
 						return true;
 					}else if(request.getRequestURI().equals("/sellpie/checkEmail.do")){
-						System.out.println("세션값 존재 X, loginCookie ==null");
 						return true;
 					}else if(request.getRequestURI().equals("/sellpie/changePwdAu.do")){
-						System.out.println("세션값 존재 X, loginCookie ==null");
 						return true;
 					}else if(request.getRequestURI().equals("/sellpie/changePwd.do")){
-						System.out.println("세션값 존재 X, loginCookie ==null");
 						return true;
 					}else if(request.getRequestURI().equals("/sellpie/userLogin.do")){
-						System.out.println("세션값 존재 X, loginCookie ==null");
 						return true;
 					}else if(request.getRequestURI().equals("/sellpie/changeUserPwd.do")){
-						System.out.println("세션값 존재 X, loginCookie ==null");
 						return true;
 					}else if(request.getRequestURI().equals("/sellpie/updateMember.do")){
-						System.out.println("세션값 존재 X, loginCookie ==null");
 						return true;
 					}else if(request.getRequestURI().equals("/sellpie/updateUserPwd.do")){
+						return true;
+					}else if(request.getRequestURI().equals("/sellpie/applyAdForm.do")) {
+						return true;
+					}else if(request.getRequestURI().equals("/sellpie/insertBoard.do")) {
 						System.out.println("세션값 존재 X, loginCookie ==null");
 						return true;
 					}else{

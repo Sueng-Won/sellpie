@@ -22,7 +22,7 @@
 		)
 	</select>
 	<select id="selectSellersInfo" parameterType="java.util.List" resultType="Seller">
-		SELECT SNO, EMAIL, ACNUM, BANK, ZIPCODE, ADDR, ADDRDETAIL, PCATEGORY, REASON, CONFIRM
+		SELECT SNO, EMAIL, ACNUM, BANK, ZIPCODE, ADDR, ADDRDETAIL, PCATEGORY, REASON
 		FROM SELLER
 		WHERE EMAIL IN 
 		<foreach collection="list" item="seller" open="(" separator="," close=")">
@@ -31,7 +31,7 @@
 	</select>
 	
 	<select id="selectSeller" parameterType="string" resultType="Seller">
-		SELECT SNO, EMAIL, ACNUM, BANK, ZIPCODE, ADDR, ADDRDETAIL, PCATEGORY, REASON, CONFIRM
+		SELECT SNO, EMAIL, ACNUM, BANK, ZIPCODE, ADDR, ADDRDETAIL, PCATEGORY, REASON
 		FROM SELLER
 		WHERE EMAIL = #{email}
 	</select>
@@ -40,10 +40,24 @@
 		SELECT P.PNO, PNAME, PRICE, PQUANTITY, ISCRAFT, (SELECT SUM(C.QUANTITY) FROM CONTRACT C WHERE C.PNO = P.PNO) AS SALESRATE
 		FROM PRODUCT P
 		JOIN SELLER S ON (S.SNO = P.SNO)
-		WHERE P.DELFLAG = 'N' AND S.EMAIL = #{email}
+		WHERE S.EMAIL = #{email}
 	</select>
+	<select id="selectApprovalList" resultType="Seller">
+		SELECT SNO, EMAIL, ACNUM, BANK, ZIPCODE, ADDR, ADDRDETAIL, PCATEGORY, REASON, CONFIRM
+		FROM SELLER
+		WHERE CONFIRM = 'N'
+	</select>
+	<update id="updateSellerAu" parameterType="Seller">
+		UPDATE SELLER SET CONFIRM ='Y'	
+		WHERE EMAIL =#{email} AND SNO =#{sNo}
+	</update>
 	<insert id="insertSeller" parameterType="Seller">
 		INSERT INTO SELLER VALUES(SEQ_SELLER_SNO.NEXTVAL, #{email}, #{acNum}, #{bank}, #{zipcode}, #{addr}, #{addrDetail}, #{pCategory}, #{reason}, 'N')
 	</insert>
+	<update id="confirmSeller" parameterType="int">
+		UPDATE SELLER
+		SET CONFIRM = 'Y'
+		WHERE SNO = #{sno}
+	</update>
 </mapper>
 

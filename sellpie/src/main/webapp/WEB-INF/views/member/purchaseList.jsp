@@ -11,6 +11,9 @@
 <title>구매현황</title>
 <script src="resources/js/jquery-3.3.1.min.js"></script>
 <style type="text/css">
+.glyphicon-star, .glyphicon-star-empty{
+color:orange;
+}
 </style>
 <script>
 $(document).ready(function(){
@@ -59,17 +62,19 @@ $(document).ready(function(){
         });
 
       
-        $(".pList>td").not('.review').click(function() {
+        $(".pList").not('.review').click(function() {
         	var thisObj = $(this);
-        	console.log('태그리무브'+$(this).next('tr').hasClass('infoTag'));
-        	console.log(this.hasClass(".review"));
+        	//console.log($(thisObj).text());
+        	//console.log('태그리무브'+$(this).next('tr').hasClass('infoTag'));
+        	//console.log($(this).hasClass(".review"));
 	        	if($(this).next('tr').hasClass('infoTag')){
 	        		$(this).next('tr').remove();
 	        	}else{
 	        		
-	           var t_code = $(this).find('.tCode').text();
-	           var t_invoice = $(this).find('.invNum').text();
+	           var t_code = $(thisObj).find('.tCode').text();
+	           var t_invoice = $(thisObj).find('.invNum').text();
 	           console.log(t_code);
+	           console.log(t_invoice);
 	                  var myTracking="";
 	                  var header ="";
 	            $.ajax({
@@ -107,6 +112,9 @@ $(document).ready(function(){
 	                	   
 	                   }
 	                   
+	                },
+	                error:function(e){
+	                	alert('택배정보조회 실패');
 	                }
 	            });
 	        }
@@ -159,30 +167,33 @@ $(document).ready(function(){
 							      <td class="invNum"><c:out value="${pIndex.invNum}"/></td>
 							      <td style="display:none" class="tCode"><c:out value="${pIndex.delivCode}"/></td>
 							      <td class="review">
-							      	<button onclick="document.getElementById('id01').style.display='block'" class="review w3-theme w3-button w3-tiny w3-padding-small">리뷰등록</button>
+							      	<button onclick="selectProductReview(${pIndex.pNo},${pIndex.cNo});" class="reviewBtn w3-theme w3-button w3-tiny w3-padding-small">리뷰등록</button>
 							      </td>
+							      <td class="thisCno" style="display:none"><c:out value="${pIndex.cNo}"/></td>
 							    </tr>
 							   </c:forEach>
 							  </tbody>
 							</table>
 							<!--상품평 등록 모달--------------------------------------------------------------------------------------->
 							  <div id="id01" class="w3-modal w3-animate-opacity">
-							    <div class="w3-modal-content w3-card-4">
+							    <div class="w3-modal-content w3-card-4" style="width:300px">
 							      <header class="w3-container w3-theme"> 
 							        <span onclick="document.getElementById('id01').style.display='none'" 
 							        class="w3-button w3-large w3-display-topright">&times;</span>
-							        <h2>Modal Header</h2>
+							        <h2 align="center">별점 등록</h2>
 							      </header>
 							      <div class="w3-container">
 							      	<input name="REVIEWSTAR" type="hidden" value="0"/>
-							      	<span id="star1" class="fa fa-star checked"></span>
-									<span id="star2" class="fa fa-star checked"></span>
-									<span id="star3" class="fa fa-star checked"></span>
-									<span id="star4" class="fa fa-star"></span>
-									<span id="star5" class="fa fa-star"></span>
+							      	<h1 align="center">
+								      	<i id="star1" class="glyphicon glyphicon-star-empty"></i>
+										<i id="star2" class="glyphicon glyphicon-star-empty"></i>
+										<i id="star3" class="glyphicon glyphicon-star-empty"></i>
+										<i id="star4" class="glyphicon glyphicon-star-empty"></i>
+										<i id="star5" class="glyphicon glyphicon-star-empty"></i>
+							      	</h1>
 							      </div>
 							      <footer class="w3-container w3-theme">
-							        <button class="review w3-light-grey w3-button">리뷰등록</button>
+							        <button onclick="insertReview();" class="w3-light-grey w3-button w3-right">리뷰등록</button>
 							      </footer>
 							    </div>
 							  </div>
@@ -241,26 +252,103 @@ function openNav() {
     }
 }
 
+var reviewPno = 0;
+var reviewCno = 0;
+var checkStarNum = 0;
+//리뷰선택시 전역변수에 값 저장-----------------------------------------
+function selectProductReview(pno, cno) {
+	reviewPno = pno;
+	reviewCno = cno;
+	console.log(reviewPno);
+	console.log(reviewCno);
+	document.getElementById('id01').style.display='block';
+}
+
+//리뷰 등록---------------------------------------------------------------------
+function insertReview(){
+	console.log('reviewPno='+reviewPno);
+	console.log('checkStarNum='+checkStarNum);
+	$.ajax({
+		type:"GET",
+        dataType : "json",
+        data:{pNo:reviewPno, reviewStar:checkStarNum, cNo:reviewCno},
+        url:'insertReview.do',
+        success:function(data){
+        	if(data == 0){
+        	alert('리뷰 등록 실패');
+        	}else{
+        	alert('리뷰 등록 완료');
+        	}
+        	purchasePage();
+        },
+        error:function(e){
+        	alert('review ajax 실패');
+        }
+	});
+}
 $(function() {
-	$('span[id^="star"]').hover(
+//리뷰등록 여부검사---------------------------------------------------------------
+	$('.pList').each(function() {
+		var checkResult = '';
+		var thisObj = $(this);
+		var reviewTag = $(thisObj).find('.review');
+		var thisCno = $(thisObj).find('.thisCno').text();
+		console.log('thisObj='+thisObj+' / thisCno='+thisCno);
+		$.ajax({
+			type:"GET",
+	        dataType : "json",
+	        data:{checkCno:thisCno},
+	        url:'checkReview.do',
+	        success:function(data){
+	        	console.log(data);
+	        	if(data!=0){
+	        		$(reviewTag).find('.reviewBtn').remove();
+	        		checkResult = '<h5>';
+	        		for(var i=0; i<5; i++){
+	        			if(i<data){
+	        				checkResult+='<i class="glyphicon glyphicon-star"></i>'
+	        			}else{
+	        				checkResult+='<i class="glyphicon glyphicon-star-empty"></i>'
+	        			}
+	        		}
+	        		checkResult += '<h5>';
+	        	}
+	        	console.log(checkResult);
+	        	console.log(reviewTag);
+	       		$(reviewTag).append(checkResult);
+	        },
+	        error:function(e){
+	        	alert('review ajax 실패');
+	        }
+		});
+	});
+//별점선택 로직------------------------------------------------------------------------
+	$('i[id^="star"]').hover(
 	function() {
+		checkStarNum = 0;
 		console.log($(this).attr('id').replace('star',''));
 		//받아온 별점을 숫자로 변환
 		var starNum = Number($(this).attr('id').replace('star',''));
 		console.log(starNum);
 		for(var i=1; i <= 5; i++){
 			if(i <= starNum){
-				$('#star'+i).addClass('w3-theme');
+				$('#star'+i).addClass('glyphicon-star');
+				$('#star'+i).removeClass('glyphicon-star-empty');
 			}else{
-				$('#star'+i).removeClass('w3-theme');
+				$('#star'+i).removeClass('glyphicon-star');
+				$('#star'+i).addClass('glyphicon-star-empty');
 			}
 		}
-		this.click(){
-			
-		}
+			$('#star'+starNum).click(function(){
+				console.log('별점클릭');
+				checkStarNum = starNum;
+			});
 	},
 	function() {
-		$('span[id^="star"]').removeClass('w3-theme');
+		if(checkStarNum == 0){
+			$('i[id^="star"]').addClass('glyphicon-star-empty');
+			$('i[id^="star"]').removeClass('glyphicon-star');
+		}
 	});
 	
 });

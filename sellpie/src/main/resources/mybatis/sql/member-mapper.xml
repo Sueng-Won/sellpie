@@ -24,7 +24,7 @@
 		SELECT EMAIL, PWD, NAME, GENDER, PHONE, BIRTH, PROFILE_IMG FROM MEMBER WHERE SESSIONKEY = #{sessionId} and SESSIONLIMIT > SYSDATE
 	</select>
 	<insert id="insertMember" parameterType="Member">
-		INSERT INTO MEMBER VALUES(#{email},#{pwd},#{name},#{gender},#{phone},#{birth}, NULL, DEFAULT, NULL )
+		INSERT INTO MEMBER VALUES(#{email},#{pwd},#{name},#{gender},#{phone},#{birth}, NULL, NULL, DEFAULT, SYSDATE )
 	</insert>
 	<update id="updateMemberPwd" parameterType="Member">
 		UPDATE MEMBER SET PWD = #{pwd}
@@ -41,6 +41,11 @@
 	<update id="updateProfileImg" parameterType="Member">
 		UPDATE MEMBER SET PROFILE_IMG = #{profileImg} WHERE EMAIL = #{email}
 	</update>
+	<select id="selectMemberCount" resultType="int">
+		SELECT COUNT(*) 
+		FROM MEMBER
+		WHERE ENROLLDATE LIKE SYSDATE
+	</select>
 </mapper>
 
 

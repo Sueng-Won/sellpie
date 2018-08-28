@@ -147,7 +147,7 @@
 									<div class="sellList">
 										<c:forEach var="product" items="${productList}" varStatus="status">
 											<div class="card"  onclick="javascript:location.href='#${product.pNo}open'">
-												<img class="sellImg" src="#" alt="${product.pName}" >
+												<img class="sellImg" src="${product.resource[0].rsrc }" alt="${product.pName}" width=98%>
 												<div class="container">
 													<h4>
 														<b>${product.pName}</b>
@@ -171,7 +171,7 @@
 									                        		<img src="resources/images/header/nextLeft.png" style="width:28%; height:23%;">
 									                        	</div>
 									                        	<div class="w3-col" style="width:77%; height:95%; text-align:center;" id="fileview">
-										                        	 <img src="${product.resource[0].rsrc}" style="width:90%; height:95%;" class="w3-margin-bottom mySlides">
+										                        	 <img src="${product.resource[0].rsrc }" style="width:90%; height:95%;" class="w3-margin-bottom mySlides">
 									                        	</div>
 									                        	<div class="w3-col" style="width:10%; height:95%;" onclick="plusDivs(1);">
 									                        		<br><br><br><br><br>

@@ -14,6 +14,19 @@
 	<insert id="insertAdmin" parameterType = "Admin" >
 		INSERT INTO ADMIN VALUES(#{adminId}, #{adminPwd})
 	</insert>
+	<insert id="insertCount" parameterType="String">
+		INSERT INTO STATS VALUES(SEQ_STATS_NUM.NEXTVAL, SYSDATE, #{email})
+	</insert>
+	<select id="selectWeeklyData" resultType="Admin">
+        SELECT COUNT(*) AS COUNT, TO_CHAR(STATS_DATE,'YY-MM-DD') AS DATECOUNT
+        FROM STATS 
+        WHERE SYSDATE-7<![CDATA[<]]> STATS_DATE 
+        GROUP BY TO_CHAR(STATS_DATE,'YY-MM-DD')
+        ORDER BY TO_CHAR(STATS_DATE,'YY-MM-DD')
+        </select>
+	<select id="selectSellerList" resultType="Seller">
+		SELECT * FROM SELLER WHERE CONFIRM = 'N'
+	</select>
 </mapper>
 
 

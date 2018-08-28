@@ -84,6 +84,7 @@ function validate(){
     	alert('신청이유를 등록해주세요');
     	return false;
     }
+	$('#reason').val($('#reason').val().split(/\n/g).join(' '));
     	return true;
  }
  

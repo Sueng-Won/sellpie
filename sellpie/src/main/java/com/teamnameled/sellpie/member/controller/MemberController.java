@@ -30,6 +30,7 @@ import org.springframework.web.util.WebUtils;
 import com.teamnameled.sellpie.contract.controller.ContractController;
 import com.teamnameled.sellpie.contract.model.service.ContractService;
 import com.teamnameled.sellpie.contract.model.vo.Contract;
+import com.teamnameled.sellpie.admin.model.service.AdminService;
 import com.teamnameled.sellpie.common.GenerateCertNumber;
 import com.teamnameled.sellpie.contract.model.vo.ContractWithName;
 import com.teamnameled.sellpie.contract.model.vo.SalesListVo;
@@ -41,6 +42,8 @@ import com.teamnameled.sellpie.seller.model.vo.Seller;
 
 @Controller
 public class MemberController {
+	@Autowired
+	AdminService adminService;
 	
 	@Autowired
 	MemberService memberService;
@@ -170,7 +173,7 @@ public class MemberController {
 			result =  memberService.insertMember(member);
 			if(result>0){
 				session.setAttribute("user", member);
-				
+				int result2 = adminService.insertCount(member.getEmail());
 				mav.setViewName("redirect:selectBoardList.do");
 			}else{
 				mav.addObject("msg", "회원 가입 처리중 에러 발생!");
@@ -213,7 +216,7 @@ public class MemberController {
 	//로그인하기
 	@RequestMapping(value="userLogin.do", method= RequestMethod.POST)
 	public @ResponseBody HashMap<String, String> loginUser(String email, String pwd, boolean isUseCookie, HttpSession session, HttpServletResponse response){
-		System.out.println(isUseCookie);
+		
 		if(session.getAttribute("user")!=null){
 			session.removeAttribute("user");
 		}
@@ -224,6 +227,7 @@ public class MemberController {
 		HashMap<String, String> map = new HashMap<String, String>();
 		if(null!=user){
 			session.setAttribute("user", user);
+			int result = adminService.insertCount(email);
 			map.put("user", user.getName());
 			map.put("result", "1");
 			if(isUseCookie){
