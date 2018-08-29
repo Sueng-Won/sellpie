@@ -35,8 +35,8 @@
                   <ul class="nav child_menu" style="display: none">
                     <li><a href="/sellpie/admin/adminSell.do">판매 관리</a>
                     </li>
-                    <li><a href="/sellpie/admin/adminAd.do">광고 관리</a>
-                    </li>
+                    <!-- <li><a href="/sellpie/admin/adminAd.do">광고 관리</a>
+                    </li>  포기..................ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ-->
                   </ul>
                 </li>
                 

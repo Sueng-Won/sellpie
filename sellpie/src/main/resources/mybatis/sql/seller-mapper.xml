@@ -31,7 +31,7 @@
 	</select>
 	
 	<select id="selectSeller" parameterType="string" resultType="Seller">
-		SELECT SNO, EMAIL, ACNUM, BANK, ZIPCODE, ADDR, ADDRDETAIL, PCATEGORY, REASON
+		SELECT SNO, EMAIL, ACNUM, BANK, ZIPCODE, ADDR, ADDRDETAIL, PCATEGORY, REASON, CONFIRM
 		FROM SELLER
 		WHERE EMAIL = #{email}
 	</select>
